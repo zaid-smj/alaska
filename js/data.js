@@ -12,7 +12,7 @@ const batteryData = [
     p: 12,
     warranty: "6 Months",
     tech: "Graphite Enhanced Lead-Acid Battery",
-    image: "assets/batteries/automotive/a55.png`",
+    image: "assets/batteries/automotive/a55.png",
     categories: ["Automotive"], // Fixed filters
     uses: ["Small Hatchbacks, Generators"], // Updated uses
   },
