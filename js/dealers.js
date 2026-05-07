@@ -424,7 +424,16 @@ document.addEventListener("DOMContentLoaded", () => {
     const filtered = dealers.filter((d) => {
       const matchesSearch = d.name.toLowerCase().includes(term) || d.address.toLowerCase().includes(term) || d.city.toLowerCase().includes(term) || d.province.toLowerCase().includes(term);
       const dProv = (d.province || "").toLowerCase();
-      const matchesProv = prov === "All" || dProv === provNorm || (provNorm === "gilgit baltistan" && dProv.includes("gilgit"));
+      let matchesProv = false;
+      if (prov === "All") {
+        matchesProv = true;
+      } else if (provNorm === "ict") {
+        matchesProv = (d.city || "").toLowerCase().includes("islamabad") || dProv === provNorm;
+      } else if (provNorm === "gilgit baltistan") {
+        matchesProv = dProv.includes("gilgit");
+      } else {
+        matchesProv = dProv === provNorm;
+      }
       return matchesSearch && matchesProv;
     });
 
@@ -452,7 +461,16 @@ document.addEventListener("DOMContentLoaded", () => {
       .filter((d) => {
         const matchesSearch = d.name.toLowerCase().includes(term) || d.address.toLowerCase().includes(term) || d.city.toLowerCase().includes(term) || d.province.toLowerCase().includes(term);
         const dProv = (d.province || "").toLowerCase();
-        const matchesProv = prov === "All" || dProv === provNorm || (provNorm === "gilgit baltistan" && dProv.includes("gilgit"));
+        let matchesProv = false;
+        if (prov === "All") {
+          matchesProv = true;
+        } else if (provNorm === "ict") {
+          matchesProv = (d.city || "").toLowerCase().includes("islamabad") || dProv === provNorm;
+        } else if (provNorm === "gilgit baltistan") {
+          matchesProv = dProv.includes("gilgit");
+        } else {
+          matchesProv = dProv === provNorm;
+        }
         return matchesSearch && matchesProv;
       })
       .slice(0, 8);
