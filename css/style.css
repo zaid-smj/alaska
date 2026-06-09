@@ -491,6 +491,28 @@ img {
     font-size: 1.5rem !important;
     line-height: 1.05 !important;
   }
+
+  /* Reduce extra bottom spacing for Graphite features section */
+  .graphite-features {
+    padding-bottom: 0.5rem !important;
+  }
+
+  @media (min-width: 768px) {
+    .graphite-features {
+      padding-bottom: 0.75rem !important;
+    }
+  }
+
+  /* Tighter grid gap for graphite features to reduce image/text whitespace */
+  .graphite-features .grid {
+    gap: 1.25rem !important; /* row and column gap on mobile */
+  }
+
+  @media (min-width: 768px) {
+    .graphite-features .grid {
+      gap: 2rem !important; /* slightly larger on desktop but smaller than previous */
+    }
+  }
 }
 
 /* Utility: force mobile-only break for specific phrases */
@@ -1532,7 +1554,7 @@ a.btn-cta-alt.w-1\/2 {
 .nav-link {
   font-family: inherit;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: none;
   font-size: 100%;
   color: #1a1a1a;
   position: relative;
@@ -1540,6 +1562,11 @@ a.btn-cta-alt.w-1\/2 {
   transition: color 0.3s ease;
   position: relative;
   display: inline-block; /* Crucial for positioning pseudo-elements */
+}
+
+/* Keep dropdown / submenu items in normal title case (don't force ALL-CAPS) */
+.dropdown-item {
+  text-transform: none;
 }
 
 /* 1. Flash Icon (Favicon) - Top Left */
@@ -1628,9 +1655,10 @@ a.btn-cta-alt.w-1\/2 {
   right: 0;
 }
 
+/* Default: align dropdown panels to the left edge of their nav item */
 .nav-item .dropdown-panel {
-  left: auto;
-  right: 0;
+  left: 0;
+  right: auto;
 }
 
 .nav-item:hover .dropdown-panel {
@@ -1645,12 +1673,12 @@ a.btn-cta-alt.w-1\/2 {
   padding: 12px 25px;
   font-size: 90%;
   font-weight: bolder;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
+  text-transform: capitalize;
+  letter-spacing: 0.02em;
   color: black;
   text-decoration: none;
   transition: all 0.2s ease;
-  text-align: right;
+  text-align: left;
   white-space: nowrap;
 }
 
