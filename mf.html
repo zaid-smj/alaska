@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Maintenance Free Battery</title>
+    <link rel="icon" type="image/png" href="assets/favicon.png" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
+    <style>
+        .card {
+            text-align: center;
+            padding: 3rem;
+            border-radius: 12px;
+            background: linear-gradient(180deg, #ffffffcc, #ffffffcc);
+            box-shadow: 0 6px 24px rgba(16, 24, 40, .08);
+            max-width: 720px
+        }
+
+        .brand {
+            font-weight: 700;
+            font-size: 1rem;
+            color: #0f172a;
+            margin-bottom: .75rem
+        }
+
+        h1 {
+            font-size: 2rem;
+            margin: .25rem 0;
+            color: #0f172a
+        }
+
+        p {
+            margin: 0;
+            color: #475569
+        }
+
+        .dot {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #0ea5a4;
+            margin-left: .6rem;
+            vertical-align: middle
+        }
+
+        .pulse {
+            animation: pulse 1.6s infinite
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 1;
+                transform: scale(1)
+            }
+
+            50% {
+                opacity: .45;
+                transform: scale(.9)
+            }
+
+            100% {
+                opacity: 1;
+                transform: scale(1)
+            }
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col bg-gray-100 overflow-x-hidden">
+
+    <div id="header-placeholder"></div>
+
+    <main id="top" class="flex-1 flex items-center justify-center">
+        <section class="w-full flex items-center justify-center py-8">
+            <div class="card" role="status" aria-live="polite">
+                <div class="brand">Maintenance Free Battery <span class="dot pulse" aria-hidden="true"></span></div>
+                <h1>Coming Soon</h1>
+                <p>We're working to bring this page online. Check back soon.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-placeholder"></div>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/animations.js"></script>
+
+</body>
+
+</html>

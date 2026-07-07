@@ -1055,12 +1055,43 @@ img {
     align-items: center;
     justify-content: center;
   }
+
+  .banner-overlay-graphite {
+    top: 1.5rem !important;
+    height: 75px !important;
+    max-height: 75px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+@media (min-width: 1024px) {
+  .banner-overlay-graphite {
+    bottom: auto;
+    top: 10rem !important; /* matches md:top-20 used in markup */
+    max-height: fit-content !important;
+    max-width: fit-content !important;
+    border-radius: 0 10px 10px 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+  }
+}
+@media (min-width: 768px) {
+  .banner-overlay-graphite {
+    bottom: auto;
+    top: 8rem !important; /* matches md:top-20 used in markup */
+    max-height: fit-content !important;
+    max-width: fit-content !important;
+    border-radius: 0 10px 10px 0;
+    padding: 2rem;
+    background: rgba(0, 0, 0, 0.8);
+  }
 }
 @media (min-width: 768px) {
   .banner-overlay {
     bottom: auto;
     top: 10rem !important; /* matches md:top-20 used in markup */
-    max-height: fix-content !important;
+    max-height: fit-content !important;
     max-width: fit-content !important;
     border-radius: 0 10px 10px 0;
     padding: 2rem;
@@ -2941,6 +2972,11 @@ body.urdu-mode .header-ur {
   }
   .hero-fold .banner-wrapper2 {
     height: 92vh;
+    width: 100%;
+  }
+
+  .hero-fold .banner-wrapper3 {
+    height: 100%;
     width: 100%;
   }
 

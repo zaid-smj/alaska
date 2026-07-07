@@ -13,13 +13,28 @@ const headerHTML = /* HTML */ `
         <nav class="hidden lg:block w-3/4 h-full">
           <ul class="flex h-full items-center justify-end">
             <li class="nav-item">
+              <a href="index.html" class="nav-link">Home</a>
+            </li>
+
+            <li class="nav-item">
               <a href="dry-charge.html" class="nav-link">Solutions</a>
               <div class="dropdown-panel">
                 <a href="dry-charge.html" class="dropdown-item">Dry Charge</a>
+                <a href="mf.html" class="dropdown-item">Maintenance Free</a>
+                <a href="l-ion.html" class="dropdown-item">Lithium-ion</a>
+                <a href="inverters.html" class="dropdown-item">Inverters</a>
+                <!--<a href="tubular.html" class="dropdown-item">Tubular</a>-->
+                <!--<a href="mcb.html" class="dropdown-item">Motorcycle</a>-->
+                <!--<a href="vrla.html" class="dropdown-item">VRLA</a>-->
+              </div>
+            </li>
+
             <li class="nav-item">
               <a href="graphite.html" class="nav-link">Technology</a>
               <div class="dropdown-panel">
-                <a href="graphite.html" class="dropdown-item">Graphite Tech</a>
+                <a href="graphite.html" class="dropdown-item">Graphite Lead-Acid</a>
+                <a href="CaAg.html" class="dropdown-item">Calcium Silver</a>
+                <a href="FePO.html" class="dropdown-item">Lithium ion</a>
               </div>
             </li>
 
@@ -44,16 +59,10 @@ const headerHTML = /* HTML */ `
 
             <li class="nav-item">
               <a href="about.html" class="nav-link">About Us</a>
-              <div class="dropdown-panel">
-                <div class="dropdown-quote">Get to know the mind <br />behind Alaska Batteries</div>
-              </div>
             </li>
 
             <li class="nav-item">
               <a href="support.html" class="nav-link">Contact Us</a>
-              <div class="dropdown-panel">
-                <div class="dropdown-quote">Always there when <br /> you need a charge</div>
-              </div>
             </li>
           </ul>
         </nav>
