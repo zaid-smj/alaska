@@ -83,8 +83,9 @@ const footerHTML = /* HTML */ `
     <div class="container mx-auto px-6">
       <div class="flex flex-col md:flex-row md:justify-between gap-8 items-center md:items-start mb-4">
         <!-- Logo Column -->
-        <div class="flex justify-center md:justify-start">
+        <div class="flex flex-col justify-center md:justify-start">
           <img src="assets/technology/tech.png" alt="Graphite Technology" class="h-14 md:h-16 w-auto object-contain" />
+          <img src="assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 w-auto object-contain" />
         </div>
 
         <!-- Address Column -->
