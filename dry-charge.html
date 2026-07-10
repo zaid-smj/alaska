@@ -33,7 +33,85 @@
         </div>
       </div>
     </section>
+
     <section id="search-section" class="top-0 z-10 backdrop-blur-xs py-2 bg-white">
+
+      <div class="container mx-auto px-6">
+
+        <div class="bg-white p-4 shadow-xl border border-gray-100 rounded-xl
+                 flex flex-col lg:flex-row lg:flex-nowrap
+                 gap-4 lg:items-center">
+
+          <!-- Search -->
+          <div class="relative flex-1 min-w-0 group">
+
+            <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+
+            <input type="text" id="batterySearch" placeholder="Search Model, Plates, Amps, Use, Types ..."
+              autocomplete="off" class="w-full pl-10 pr-12 py-3 rounded-lg bg-gray-100 border-none
+                     focus:ring-2 focus:ring-[#c00d1e] outline-none
+                     text-[100%] tracking-normal
+                     text-ellipsis overflow-hidden whitespace-nowrap">
+
+            <button id="clearSearch" type="button" class="hidden absolute right-3 top-1/2 -translate-y-1/2
+                     z-10 w-8 h-8 flex items-center justify-center
+                     rounded-full text-gray-500 hover:text-[#c00d1e]
+                     transition-colors cursor-pointer">
+
+              <i class="fa-solid fa-circle-xmark text-lg pointer-events-none"></i>
+
+            </button>
+
+            <div id="search-suggestions"
+              class="absolute top-full left-0 w-full bg-white shadow-2xl border border-gray-100 hidden mt-1 max-h-60 overflow-y-auto rounded-lg">
+            </div>
+
+          </div>
+
+          <!-- Filters -->
+          <div class="flex flex-wrap lg:flex-nowrap gap-2
+                   justify-center lg:justify-end
+                   lg:shrink-0">
+
+            <button
+              class="filter-btn active border-2 border-gray-100 px-4 py-2 text-m uppercase tracking-wider rounded-md transition-all whitespace-nowrap"
+              data-cat="All">
+              All
+            </button>
+
+            <button
+              class="filter-btn border-2 border-gray-100 px-4 py-2 text-m uppercase tracking-wider hover:border-[#c00d1e] rounded-md transition-all whitespace-nowrap"
+              data-cat="Automotive">
+              Automotive
+            </button>
+
+            <button
+              class="filter-btn border-2 border-gray-100 px-4 py-2 text-m uppercase tracking-wider hover:border-[#c00d1e] rounded-md transition-all whitespace-nowrap"
+              data-cat="Solar">
+              Solar
+            </button>
+
+            <button
+              class="filter-btn border-2 border-gray-100 px-4 py-2 text-m uppercase tracking-wider hover:border-[#c00d1e] rounded-md transition-all whitespace-nowrap"
+              data-cat="Industrial">
+              Industrial
+            </button>
+
+            <button
+              class="filter-btn border-2 border-gray-100 px-4 py-2 text-m uppercase tracking-wider hover:border-[#c00d1e] rounded-md transition-all whitespace-nowrap"
+              data-cat="Deep-Cycle">
+              Deep Cycle
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- <section id="search-section" class="top-0 z-10 backdrop-blur-xs py-2 bg-white">
       <div class="container mx-auto px-6">
         <div
           class="bg-white p-4 shadow-xl flex flex-col lg:flex-row gap-6 items-center border border-gray-100 rounded-xl">
@@ -73,7 +151,7 @@
           </div>
         </div>
       </div>
-    </section>
+    </section> -->
 
     <div id="compare-modal"
       class="fixed inset-0 bg-black/80 z-[200] opacity-0 pointer-events-none transition-opacity duration-300 [&.active]:opacity-100 [&.active]:pointer-events-auto">

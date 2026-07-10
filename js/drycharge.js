@@ -555,8 +555,8 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "Industrial",
     },
     "Deep-Cycle": {
-      img: "assets/Alaska Deep Cycle Logo.png",
-      mobile_img: "assets/Alaska Deep Cycle Logo.png",
+      img: "assets/solutions/deep-cycle.webp",
+      mobile_img: "assets/solutions/mobile/deep-cycle-mobile.webp",
       title: "Deep Cycle",
     },
   };
