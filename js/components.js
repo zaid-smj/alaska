@@ -55,8 +55,6 @@ const headerHTML = /* HTML */ `
               </div>
             </li>
 
-            
-
             <li class="nav-item">
               <a href="about.html" class="nav-link">About Us</a>
             </li>
@@ -85,7 +83,7 @@ const footerHTML = /* HTML */ `
         <!-- Logo Column -->
         <div class="flex flex-col justify-center md:justify-start">
           <img src="assets/technology/tech.png" alt="Graphite Technology" class="h-14 md:h-16 w-auto object-contain" />
-          <img src="assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 w-auto object-contain" />
+          <img src="assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 mt-6 w-auto object-contain" />
         </div>
 
         <!-- Address Column -->
@@ -261,6 +259,7 @@ function setupMobileMenu() {
       <div class="flex justify-between items-center p-6 border-b border-gray-100">
         <a href="index.html">
           <img src="assets/technology/tech.png" alt="Tech Logo" class="h-14 md:h-16 w-auto object-contain" />
+          <img src="assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 mt-4 w-auto object-contain" />
         </a>
       </div>
     </div>

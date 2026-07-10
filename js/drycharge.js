@@ -528,9 +528,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // --- BANNER CAROUSEL ---
-  const heroImg = document.getElementById("hero-banner-img");
+  const heroCarousel = document.querySelector(".hero-carousel");
+  const heroTrack = document.getElementById("hero-carousel-track");
   const textBox = document.getElementById("hero-text-box");
-  const subTitle = document.getElementById("hero-subtitle");
   const filterButtons = document.querySelectorAll(".filter-btn");
 
   const contentMap = {
@@ -554,46 +554,75 @@ document.addEventListener("DOMContentLoaded", () => {
       mobile_img: "assets/solutions/mobile/industrial-mobile.webp",
       title: "Industrial",
     },
+    "Deep-Cycle": {
+      img: "assets/Alaska Deep Cycle Logo.png",
+      mobile_img: "assets/Alaska Deep Cycle Logo.png",
+      title: "Deep Cycle",
+    },
   };
 
-  let autoScrollInterval;
-  let categories = Object.keys(contentMap);
+  const heroCategories = ["All", "Automotive", "Solar", "Industrial", "Deep-Cycle"];
+  const heroSlides = heroCategories.map((category) => ({ category, ...contentMap[category] }));
+  let autoScrollInterval = null;
   let currentIndex = 0;
+  let slideCount = heroSlides.length;
+  let autoScrollEnabled = true;
 
   function triggerAnimations() {
     // Animation removed - keeping simple and clean
   }
 
-  function updateHero(cat) {
-    const data = contentMap[cat];
-    // Update <picture> sources for responsive banner
-    const picture = heroImg.closest("picture");
-    if (picture) {
-      const sources = picture.querySelectorAll("source");
-      sources.forEach((source) => {
-        if (source.media.includes("max-width")) {
-          source.srcset = data.mobile_img;
-        } else {
-          source.srcset = data.img;
-        }
-      });
-      // Force browser to reload correct image
-      const isMobile = window.innerWidth <= 640;
-      heroImg.src = isMobile && data.mobile_img ? data.mobile_img : data.img;
-    } else {
-      // Fallback for old structure
-      const isMobile = window.innerWidth <= 640;
-      heroImg.src = isMobile && data.mobile_img ? data.mobile_img : data.img;
+  function renderHeroCarousel() {
+    if (!heroTrack) return;
+
+    const slides = [...heroSlides, heroSlides[0]];
+    heroTrack.innerHTML = slides
+      .map((slide, index) => {
+        const containClass = slide.category === "Deep-Cycle" ? "hero-slide--contain" : "";
+        const imgClass = slide.category === "Deep-Cycle" ? "object-contain" : "object-cover";
+        const isMobile = window.innerWidth <= 640;
+        const src = isMobile ? slide.mobile_img || slide.img : slide.img;
+        const firstImageId = index === 0 ? ' id="hero-banner-img"' : "";
+
+        return `
+          <article class="hero-slide ${containClass}" data-category="${slide.category}">
+            <img${firstImageId} src="${src}" data-desktop="${slide.img}" data-mobile="${slide.mobile_img}" alt="${slide.category} banner" class="hero-slide-img ${imgClass}" />
+          </article>
+        `;
+      })
+      .join("");
+
+    slideCount = heroSlides.length;
+  }
+
+  function syncHeroTitle(cat) {
+    const data = contentMap[cat] || contentMap.All;
+    const heroTitle = document.getElementById("hero-title");
+    if (heroTitle) heroTitle.innerHTML = data.title;
+
+    if (textBox) {
+      textBox.classList.toggle("hero-text-box--contain", cat === "Deep-Cycle");
     }
-    heroImg.setAttribute("data-desktop", data.img);
-    heroImg.setAttribute("data-mobile", data.mobile_img);
-    document.getElementById("hero-title").innerHTML = data.title;
-    if (subTitle && data.sub) {
-      subTitle.innerText = data.sub;
+  }
+
+  function updateHeroPosition(index, animate = true) {
+    if (!heroTrack || !slideCount) return;
+
+    currentIndex = index;
+    heroTrack.style.transition = animate ? "transform 700ms ease-in-out" : "none";
+    heroTrack.style.transform = `translateX(-${index * 100}%)`;
+
+    const activeCategory = heroSlides[index % heroSlides.length]?.category || "All";
+    syncHeroTitle(activeCategory);
+
+    if (!animate) {
+      heroTrack.offsetHeight;
     }
   }
 
   function stopAutoScroll() {
+    autoScrollEnabled = false;
+    if (heroCarousel) heroCarousel.classList.add("is-paused");
     if (autoScrollInterval) {
       clearInterval(autoScrollInterval);
       autoScrollInterval = null;
@@ -601,36 +630,69 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function startAutoScroll() {
-    const activeCat = document.querySelector(".filter-btn.active")?.getAttribute("data-cat") || "All";
-    if (activeCat !== "All") {
-      stopAutoScroll();
-      return;
-    }
+    autoScrollEnabled = true;
+    if (heroCarousel) heroCarousel.classList.remove("is-paused");
 
     if (autoScrollInterval) clearInterval(autoScrollInterval);
     autoScrollInterval = setInterval(() => {
-      currentIndex = (currentIndex + 1) % categories.length;
-      updateHero(categories[currentIndex]);
-    }, 3500);
+      if (!autoScrollEnabled) return;
+      updateHeroPosition(currentIndex + 1, true);
+    }, 3200);
+  }
+
+  function updateHero(cat) {
+    const category = contentMap[cat] ? cat : "All";
+    const targetIndex = heroCategories.indexOf(category);
+
+    if (targetIndex >= 0) {
+      updateHeroPosition(targetIndex, true);
+      syncHeroTitle(category);
+    }
+
+    if (category === "All") {
+      startAutoScroll();
+    } else {
+      stopAutoScroll();
+    }
+  }
+
+  if (heroTrack) {
+    heroTrack.addEventListener("transitionend", () => {
+      if (currentIndex === slideCount) {
+        updateHeroPosition(0, false);
+      }
+    });
   }
 
   filterButtons.forEach((button) => {
     button.addEventListener("click", function () {
       const category = this.getAttribute("data-cat");
       updateHero(category);
-
-      // Auto-scroll disabled
-      // if (category === "All") {
-      //   startAutoScroll();
-      // } else {
-      //   stopAutoScroll();
-      // }
+      applyFilters();
     });
   });
 
+  renderHeroCarousel();
+
+  const initialHash = window.location.hash ? window.location.hash.substring(1) : "";
+  if (initialHash && contentMap[initialHash]) {
+    document.querySelector(".filter-btn.active")?.classList.remove("active");
+    const targetBtn = document.querySelector(`.filter-btn[data-cat="${initialHash}"]`);
+    if (targetBtn) targetBtn.classList.add("active");
+
+    try {
+      updateHero(initialHash);
+    } catch (e) {}
+    try {
+      applyFilters();
+    } catch (e) {}
+  } else {
+    startAutoScroll();
+    updateHeroPosition(0, false);
+  }
+
   // Start UI
   triggerAnimations();
-  // Auto-scroll disabled - startAutoScroll();
 });
 
 // --- MODAL & COMPARISON LOGIC ---
@@ -959,32 +1021,5 @@ function initDryCharge() {
 }
 // Run after a short delay to allow component injection
 window.addEventListener("load", () => {
-  // Run after a short delay to allow component injection
-  window.addEventListener("load", () => {
-    setTimeout(initDryCharge, 300);
-  });
-});
-
-// After everything is loaded, ensure hero reflects any incoming hash (e.g., from index links)
-window.addEventListener("load", function () {
-  const hash = window.location.hash ? window.location.hash.substring(1) : "";
-  if (hash && contentMap[hash]) {
-    // Activate corresponding filter button UI if present
-    document.querySelector(".filter-btn.active")?.classList.remove("active");
-    const targetBtn = document.querySelector(`.filter-btn[data-cat="${hash}"]`);
-    if (targetBtn) targetBtn.classList.add("active");
-
-    // Update hero banner and apply filters
-    try {
-      updateHero(hash);
-    } catch (e) {}
-    try {
-      applyFilters();
-    } catch (e) {}
-  } else {
-    // start default auto-scroll
-    try {
-      startAutoScroll();
-    } catch (e) {}
-  }
+  setTimeout(initDryCharge, 300);
 });
