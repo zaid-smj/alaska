@@ -4,7 +4,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dry Charge | Alaska Batteries</title>
+  <title>Dry Charge Batteries | Automotive, Solar & Industrial Batteries | Alaska Batteries Pakistan</title>
+  <meta name="description" content="Browse Alaska Batteries' Dry Charge battery range for automotive, solar, industrial and backup power applications. Compare specifications, capacities and recommended uses.">
+  <meta name="keywords" content="Dry Charge Batteries Pakistan, Automotive Batteries, Solar Batteries, Industrial Batteries, Deep Cycle Batteries, UPS Batteries, Alaska Batteries Pakistan">
+
+  <link rel="canonical" href="https://alaskabatteries.com/dry-charge.html">
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -293,10 +297,190 @@
   </div>
   <div id="footer-placeholder"></div>
 
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"CollectionPage",
+  "@id":"https://alaskabatteries.com/dry-charge.html",
+  "url":"https://alaskabatteries.com/dry-charge.html",
+  "name":"Dry Charge Batteries | Automotive, Solar & Industrial Batteries | Alaska Batteries Pakistan",
+  "description":"Browse Alaska Batteries' Dry Charge battery collection for automotive, industrial, solar, UPS and deep cycle applications in Pakistan.",
+  "isPartOf":{
+    "@id":"https://alaskabatteries.com/#website"
+  },
+  "about":{
+    "@id":"https://alaskabatteries.com/#organization"
+  },
+  "inLanguage":"en-PK"
+}
+</script>
+
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+    {
+      "@type":"ListItem",
+      "position":1,
+      "name":"Home",
+      "item":"https://alaskabatteries.com/"
+    },
+    {
+      "@type":"ListItem",
+      "position":2,
+      "name":"Dry Charge Batteries",
+      "item":"https://alaskabatteries.com/dry-charge.html"
+    }
+  ]
+}
+</script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const itemList = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Alaska Batteries Dry Charge Battery Collection",
+    "description": "Collection of Dry Charge batteries for automotive, solar, industrial, UPS and deep cycle applications.",
+    "url": "https://alaskabatteries.com/dry-charge.html",
+    "numberOfItems": batteryData.length,
+    "itemListOrder": "https://schema.org/ItemListOrderAscending",
+    "itemListElement": batteryData.map((battery, index) => ({
+      "@type": "ListItem",
+      "position": index + 1,
+      "item": {
+        "@id":
+          "https://alaskabatteries.com/dry-charge.html#" +
+          battery.model.replace(/\s+/g, "-").toLowerCase()
+      }
+    }))
+  };
+
+  const script = document.createElement("script");
+  script.type = "application/ld+json";
+  script.text = JSON.stringify(itemList);
+  document.head.appendChild(script);
+
+});
+</script>
+  
   <script src="js/data.js"></script>
   <script src="js/components.js"></script>
   <script src="js/drycharge.js"></script>
   <script src="js/animations.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+  const productList = batteryData.map((battery) => ({
+
+    "@type": "Product",
+
+    "@id":
+      "https://alaskabatteries.com/dry-charge.html#" +
+      battery.model.replace(/\s+/g, "-").toLowerCase(),
+
+    "name": battery.model,
+
+"url":
+  "https://alaskabatteries.com/dry-charge.html#" +
+  battery.model.replace(/\s+/g, "-").toLowerCase(),
+
+"sku": battery.model,
+
+"model": battery.model,
+
+    "brand": {
+      "@type": "Brand",
+      "name": "Alaska Batteries"
+    },
+
+    "manufacturer": {
+      "@type": "Organization",
+      "name": "Alaska Batteries"
+    },
+
+    "description":
+  battery.model +
+  " is an Alaska Batteries " +
+  battery.tech +
+  " battery suitable for " +
+  (Array.isArray(battery.uses)
+    ? battery.uses.join(", ")
+    : battery.uses),
+
+    "image":
+      "https://alaskabatteries.com/" +
+      battery.image,
+
+    "category":
+      Array.isArray(battery.categories)
+        ? battery.categories.join(", ")
+        : battery.categories,
+
+    "additionalProperty": [
+
+      {
+        "@type": "PropertyValue",
+        "name": "Capacity",
+        "value": battery.ah + " Ah"
+      },
+
+      {
+        "@type": "PropertyValue",
+        "name": "Voltage",
+        "value": battery.p + "V"
+      },
+
+      {
+        "@type": "PropertyValue",
+        "name": "Warranty",
+        "value": battery.warranty
+      },
+
+      {
+        "@type": "PropertyValue",
+        "name": "Weight",
+        "value": battery.weightKg + " kg"
+      },
+
+      {
+        "@type": "PropertyValue",
+        "name": "Box Size",
+        "value": battery.boxSize
+      }
+      ,
+
+{
+  "@type": "PropertyValue",
+  "name": "Model",
+  "value": battery.model
+}
+
+    ]
+
+  }));
+
+
+  const schema = {
+    "@context": "https://schema.org",
+    "@graph": productList
+  };
+
+
+  const script = document.createElement("script");
+
+  script.type = "application/ld+json";
+
+  script.text = JSON.stringify(schema);
+
+  document.head.appendChild(script);
+
+});
+</script>
+  
 </body>
 
 </html>
