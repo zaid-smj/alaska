@@ -111,7 +111,7 @@ const batteryData = [
     model: "A 99",
     plates: 21,
     boxSize: "N-50",
-    weightKg: 0,
+    weightKg: 11.1,
     dimensions: { l: "10.08", w: "6.69", h: "7.95", unit: "in" },
     ah: 65,
     p: 12,
