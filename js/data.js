@@ -108,6 +108,21 @@ const batteryData = [
   },
   {
     id: "8",
+    model: "A 99",
+    plates: 21,
+    boxSize: "N-50",
+    weightKg: 0,
+    dimensions: { l: "10.08", w: "6.69", h: "7.95", unit: "in" },
+    ah: 65,
+    p: 12,
+    warranty: "9 Months",
+    tech: "Graphite Enhanced Lead-Acid Battery",
+    image: "assets/batteries/automotive/a99.png",
+    categories: ["Automotive"],
+    uses: "UPS Backup, Solar Inverters",
+  },
+  {
+    id: "9",
     model: "A 110",
     plates: 11,
     boxSize: "N-70",
@@ -122,7 +137,7 @@ const batteryData = [
     uses: "Small Hatchbacks, Generators",
   },
   {
-    id: "9",
+    id: "10",
     model: "A 115Z/ZL",
     plates: 13,
     boxSize: "N-70",
@@ -137,7 +152,7 @@ const batteryData = [
     uses: "Generators, Solar Inverters",
   },
   {
-    id: "10",
+    id: "11",
     model: "A 120Z/ZL",
     plates: 15,
     boxSize: "N-70",
@@ -152,7 +167,7 @@ const batteryData = [
     uses: "Generators, Solar Inverters",
   },
   {
-    id: "11",
+    id: "12",
     model: "Solar-50",
     plates: 5,
     boxSize: "NS-40",
@@ -167,7 +182,7 @@ const batteryData = [
     uses: "Home UPS, Solar Inverters",
   },
   {
-    id: "12",
+    id: "13",
     model: "Solar-100",
     plates: 9,
     boxSize: "N-70",
@@ -182,7 +197,7 @@ const batteryData = [
     uses: "Home UPS, Solar Inverters,Off-Grid Home Systems",
   },
   {
-    id: "13",
+    id: "14",
     model: "A 130",
     plates: 15,
     boxSize: "6X15",
@@ -197,7 +212,7 @@ const batteryData = [
     uses: "Home UPS, Solar Inverters,Off-Grid Home Systems",
   },
   {
-    id: "14",
+    id: "15",
     model: "A 140",
     plates: 17,
     boxSize: "6X15",
@@ -212,7 +227,7 @@ const batteryData = [
     uses: "Home UPS, Solar Inverters,Off-Grid Home Systems",
   },
   {
-    id: "15",
+    id: "16",
     model: "A 150",
     plates: 17,
     boxSize: "N-100",
@@ -227,7 +242,7 @@ const batteryData = [
     uses: "Home UPS, Solar Inverters,Agricultural Machinery",
   },
   {
-    id: "16",
+    id: "17",
     model: "A 160",
     plates: 19,
     boxSize: "N-100",
@@ -242,7 +257,7 @@ const batteryData = [
     uses: "Home UPS, Solar Inverters,Agricultural Machinery",
   },
   {
-    id: "17",
+    id: "18",
     model: "A 180",
     plates: 19,
     boxSize: "N-120",
@@ -257,7 +272,7 @@ const batteryData = [
     uses: "Agricultural Machinery, Heavy Vehicles,Heavy Machinery Backup",
   },
   {
-    id: "18",
+    id: "19",
     model: "A 200",
     plates: 21,
     boxSize: "N-120",
@@ -272,7 +287,7 @@ const batteryData = [
     uses: "Agricultural Machinery, Heavy Vehicles,Heavy Machinery Backup",
   },
   {
-    id: "19",
+    id: "20",
     model: "A 210",
     plates: 21,
     boxSize: "N-150",
@@ -287,7 +302,7 @@ const batteryData = [
     uses: "Agricultural Machinery, Heavy Vehicles,Heavy Machinery Backup",
   },
   {
-    id: "20",
+    id: "21",
     model: "A 230",
     plates: 23,
     boxSize: "N-150",
@@ -302,7 +317,7 @@ const batteryData = [
     uses: "Agricultural Machinery, Heavy Vehicles,Heavy Machinery Backup",
   },
   {
-    id: "21",
+    id: "22",
     model: "A 260",
     plates: 25,
     boxSize: "N-150",
@@ -317,7 +332,7 @@ const batteryData = [
     uses: "Agricultural Machinery, Heavy Vehicles,Heavy Machinery Backup",
   },
   {
-    id: "22",
+    id: "23",
     model: "A 270",
     plates: 27,
     boxSize: "N-150",
@@ -332,7 +347,7 @@ const batteryData = [
     uses: "Agricultural Machinery, Heavy Vehicles,Heavy Machinery Backup",
   },
   {
-    id: "23",
+    id: "24",
     model: "DC 1100",
     plates: 11,
     boxSize: "N-70",
@@ -347,7 +362,7 @@ const batteryData = [
     uses: "UPS Backup, Solar Inverters",
   },
   {
-    id: "24",
+    id: "25",
     model: "DC 1600",
     plates: 19,
     boxSize: "N-120",
@@ -362,7 +377,7 @@ const batteryData = [
     uses: "UPS Backup, Solar Inverters",
   },
   {
-    id: "25",
+    id: "26",
     model: "DC 2000",
     plates: 21,
     boxSize: "N-150",
@@ -374,21 +389,6 @@ const batteryData = [
     tech: "Graphite Enhanced Lead-Acid Battery",
     image: "assets/batteries/deep-cycle/dc2000.png",
     categories: ["Deep-Cycle"],
-    uses: "UPS Backup, Solar Inverters",
-  },
-  {
-    id: "26",
-    model: "A 99",
-    plates: 21,
-    boxSize: "N-50",
-    weightKg: 0,
-    dimensions: { l: "10.08", w: "6.69", h: "7.95", unit: "in" },
-    ah: 65,
-    p: 12,
-    warranty: "9 Months",
-    tech: "Graphite Enhanced Lead-Acid Battery",
-    image: "assets/batteries/automotive/a99.png",
-    categories: ["Automotive"],
     uses: "UPS Backup, Solar Inverters",
   },
 ];
