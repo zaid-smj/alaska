@@ -231,30 +231,9 @@
           </div>
         </div>
 
-        <div class="mt-8 lg:mt-10 grid gap-6 lg:grid-cols-[96px_minmax(0,1fr)] items-stretch">
-          <div class="hidden lg:flex items-center justify-center">
-            <div class="catalog-vertical-label">DRY CHARGE</div>
-          </div>
-
-          <div class="min-w-0">
-            <div class="flex items-center justify-end gap-4 mb-4">
-              <div class="flex items-center gap-2 shrink-0">
-                <button id="catalog-prev" type="button" onclick="scrollCatalog(-1)"
-                  class="w-11 h-11 rounded-full border border-gray-200 bg-white text-black shadow-sm hover:border-[#c00d1e] hover:text-[#c00d1e] transition-colors flex items-center justify-center"
-                  aria-label="Previous batteries">
-                  <i class="fa-solid fa-chevron-left"></i>
-                </button>
-                <button id="catalog-next" type="button" onclick="scrollCatalog(1)"
-                  class="w-11 h-11 rounded-full border border-gray-200 bg-white text-black shadow-sm hover:border-[#c00d1e] hover:text-[#c00d1e] transition-colors flex items-center justify-center"
-                  aria-label="Next batteries">
-                  <i class="fa-solid fa-chevron-right"></i>
-                </button>
-              </div>
-            </div>
-
-            <div class="catalog-viewport">
-              <div id="thumb-grid" class="catalog-track"></div>
-            </div>
+        <!-- Battery Grid Display -->
+        <div class="mt-4 px-0">
+          <div id="battery-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 py-6">
           </div>
         </div>
       </div>

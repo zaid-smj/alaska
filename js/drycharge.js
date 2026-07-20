@@ -3,6 +3,8 @@ let currentBatteryId = null;
 let compareFirstId = null;
 let compareSelectingFirst = false;
 let lastFiltered = [];
+let catalogPageIndex = 0;
+let catalogPageCount = 0;
 
 function normalizeUses(uses) {
   if (!uses) return [];
@@ -372,29 +374,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function renderThumbnails(data) {
-    const batteryGrid = document.getElementById("battery-grid");
-    if (!batteryGrid) return;
-
-    if (data.length === 0) {
-      batteryGrid.innerHTML = `<div class="col-span-full text-gray-400 font-bold p-4 text-center">No batteries found.</div>`;
-      return;
-    }
-
-    // Data is already sorted when passed to this function
-    const sortedData = data;
-
-    // Render all filtered batteries in a grid
-    batteryGrid.innerHTML = sortedData
-      .map(
-        (b) => `
-            <div onclick="window.updateStage('${b.id}', true)" 
-                 class="battery-card cursor-pointer border-2 border-gray-200 p-4 rounded-lg hover:border-[#c00d1e] transition-all text-center">
-                <img src="${b.image}" alt="${b.model}" class="h-40 w-auto object-contain mx-auto mb-3">
-                <p class="text-sm font-black uppercase leading-tight">${b.model}</p>
-                <p class="text-xs text-gray-500 mt-1">${b.ah} AH</p>
-            </div>`,
-      )
-      .join("");
+    renderGrid(data);
   }
 
   // Gallery modal functions
@@ -967,36 +947,70 @@ window.addEventListener("click", (e) => {
 });
 
 window.scrollCatalog = function (direction) {
-  const grid = document.getElementById("thumb-grid");
-  if (grid) {
-    const scrollAmount = grid.clientWidth * 0.5;
-    grid.scrollBy({ left: direction * scrollAmount, behavior: "smooth" });
-  }
+  setCatalogPage(catalogPageIndex + direction, true);
 };
+
+function setCatalogPage(nextIndex, animate = true) {
+  const grid = document.getElementById("thumb-grid");
+  if (!grid || catalogPageCount === 0) return;
+
+  const normalizedIndex = ((nextIndex % catalogPageCount) + catalogPageCount) % catalogPageCount;
+  catalogPageIndex = normalizedIndex;
+  grid.style.transition = animate ? "transform 600ms ease" : "none";
+  grid.style.transform = `translateX(-${catalogPageIndex * 100}%)`;
+
+  const prevBtn = document.getElementById("catalog-prev");
+  const nextBtn = document.getElementById("catalog-next");
+  if (prevBtn) prevBtn.disabled = catalogPageCount <= 1;
+  if (nextBtn) nextBtn.disabled = catalogPageCount <= 1;
+
+  if (!animate) {
+    grid.offsetHeight;
+  }
+}
+
+function chunkProducts(items, size) {
+  const chunks = [];
+  for (let index = 0; index < items.length; index += size) {
+    chunks.push(items.slice(index, index + size));
+  }
+  return chunks;
+}
+
 // Function to render the catalog grid
 function renderGrid(products) {
-  const grid = document.getElementById("catalog-grid");
+  const grid = document.getElementById("thumb-grid");
   if (!grid) return;
 
-  grid.innerHTML = "";
-  products.forEach((product) => {
-    const card = document.createElement("div");
-    card.className = "group bg-white border border-gray-100 p-6 hover:shadow-2xl hover:border-[#c00d1e] transition-all duration-500 cursor-pointer flex flex-col items-center text-center";
+  const pages = chunkProducts(products, 8);
+  catalogPageCount = Math.max(pages.length, 1);
+  catalogPageIndex = 0;
 
-    card.onclick = () => {
-      updateStage(product);
-      document.getElementById("details-anchor").scrollIntoView({ behavior: "smooth" });
-    };
+  grid.innerHTML = pages
+    .map((page) => {
+      return `
+        <div class="catalog-page">
+          ${page
+            .map(
+              (product) => `
+                <article class="catalog-card group" data-id="${product.id}">
+                  <button type="button" class="catalog-card__button" onclick="window.updateStage('${product.id}', true)">
+                    <div class="catalog-card__media">
+                      <img src="${product.image}" alt="${product.model}" class="catalog-card__image">
+                    </div>
+                    <h4 class="catalog-card__title">${product.model}</h4>
+                    <p class="catalog-card__meta">${product.ah} AH</p>
+                  </button>
+                </article>
+              `,
+            )
+            .join("")}
+        </div>
+      `;
+    })
+    .join("");
 
-    card.innerHTML = `
-            <div class="h-40 w-full mb-6 overflow-hidden">
-                <img src="${product.image}" class="w-full h-full object-contain group-hover:scale-110 transition-transform duration-500">
-            </div>
-            <h4 class="text-xl font-black uppercase tracking-tighter">${product.model}</h4>
-            <p class="text-[10px] font-bold text-gray-400 uppercase mt-2">${product.plates} Plates | ${product.ah} Ah</p>
-        `;
-    grid.appendChild(card);
-  });
+  setCatalogPage(0, false);
 }
 
 // THE INITIALIZER

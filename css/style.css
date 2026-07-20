@@ -1793,120 +1793,142 @@ a.btn-cta-alt.w-1\/2 {
   line-height: 1.5;
 }
 
-/* Ensure the container doesn't force a grid */
-
-#thumb-grid {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  overflow-x: auto !important;
-  gap: 2rem !important;
-  padding: 20px 0 40px 0 !important;
-  /* Hide scrollbar for IE, Edge and Firefox */
-  display: flex !important;
-  overflow-x: auto !important;
-  touch-action: pan-x; /* Helps mobile responsiveness */
+/* Dry charge rail layout */
+.catalog-vertical-label {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: clamp(2.75rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: 0.05em;
+  color: #111111;
+  line-height: 0.9;
 }
 
-/* Force the Card Width */
-.thumb-card {
-  flex: 0 0 220px !important; /* Locks width at 220px */
-  width: 220px !important;
-  min-width: 220px !important;
-  background: white;
-  border: 1px solid #f0f0f0;
-  padding: 5px;
+.catalog-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 0.35rem 0.25rem 0.6rem;
+}
+
+#thumb-grid.catalog-track {
+  display: flex !important;
+  width: 100%;
+  transform: translateX(0);
+  transition: transform 600ms ease;
+  will-change: transform;
+}
+
+.catalog-page {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: start;
+}
+
+.catalog-card {
+  min-width: 0;
+}
+
+.catalog-card__button {
+  width: 100%;
+  min-height: 0;
+  border: 1px solid #dbe2ea;
+  border-radius: 1.25rem;
+  background: #fff;
+  padding: 0.85rem 0.75rem 0.95rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  cursor: pointer;
-  transition: transform 0.3s ease;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
+  box-shadow: 0 1px 0 rgba(15, 23, 42, 0.03);
 }
 
-.thumb-card:hover {
-  transform: translateY(-10px);
+.catalog-card__button:hover {
+  transform: translateY(-4px);
   border-color: #c00d1e;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
 
-/* Force the Image Size */
-.thumb-card img {
-  width: 100% !important;
-  height: 150px !important; /* This makes the battery look big */
-  object-fit: contain !important;
-  transition: 0.3s;
+.catalog-card__media {
+  width: 100%;
+  height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.thumb-card:hover img {
-  filter: grayscale(0%);
+.catalog-card__image {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
 }
 
-.thumb-card p {
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  margin-top: 15px;
+.catalog-card__title {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.1;
+  font-weight: 900;
   text-transform: uppercase;
+  letter-spacing: 0.01em;
+  color: #000;
 }
 
-/* The Glowing Scrollbar */
-#thumb-grid::-webkit-scrollbar {
-  display: none; /* Hide scrollbar for Chrome, Safari and Opera */
+.catalog-card__meta {
+  margin: 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
 }
-/* Hide scrollbar for Firefox and IE/Edge */
-#thumb-grid {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-#thumb-grid::-webkit-scrollbar-track {
-  background: #f1f1f1;
-}
-#thumb-grid::-webkit-scrollbar-thumb {
-  background: #c00d1e;
-  box-shadow: 0 0 15px rgba(204, 0, 27, 0.8);
-}
-/* Mobile View Adjustments (Screens smaller than 768px) */
-@media (max-width: 767px) {
-  #thumb-grid {
-    gap: 0.5rem !important; /* Smaller gap for mobile screens */
-    padding-bottom: 10px !important;
+
+@media (max-width: 1023px) {
+  .catalog-page {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.65rem;
   }
 
-  .thumb-card {
-    /* This shows roughly 2.2 batteries at once */
-    flex: 0 0 calc(45%) !important;
-    width: calc(45%) !important;
-    min-width: 130px !important; /* Minimum width to keep images readable */
-    padding: 15px 10px !important;
-  }
-
-  .thumb-card img {
-    height: 100px !important; /* Slightly shorter images for mobile layout */
-    margin-bottom: 10px !important;
-  }
-
-  .thumb-card p {
-    font-size: 11px !important; /* Smaller text for mobile */
-  }
-
-  /* Hide navigation arrows on mobile to save space (since users swipe) */
-  .absolute.left-4,
-  .absolute.right-4 {
-    display: none !important;
+  .catalog-card__media {
+    height: 88px;
   }
 }
 
-/* Apply this to the items being generated in data.js */
-.product-thumb {
-  user-select: none;
-  -webkit-user-drag: none;
+@media (max-width: 640px) {
+  .catalog-page {
+    gap: 0.6rem;
+  }
+
+  .catalog-card__button {
+    border-radius: 1rem;
+    padding: 0.8rem 0.65rem 0.85rem;
+  }
+
+  .catalog-card__media {
+    height: 82px;
+  }
+
+  .catalog-card__title {
+    font-size: 0.85rem;
+  }
+
+  .catalog-card__meta {
+    font-size: 0.68rem;
+  }
 }
 
-.product-thumb img {
-  pointer-events: none; /* Crucial: Mouse events pass through the image to the div */
-
-  -webkit-user-drag: none;
-}
-
-#thumb-grid.active {
-  cursor: grabbing;
+#catalog-prev:disabled,
+#catalog-next:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 .social-box {
