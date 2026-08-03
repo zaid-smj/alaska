@@ -1217,6 +1217,7 @@ offers: {
   "@type": "Offer",
   url: "https://alaskabatteries.com/dry-charge.html#" + battery.model.replace(/\s+/g, "-").toLowerCase(),
   availability: "https://schema.org/InStock",
+  itemCondition: "https://schema.org/NewCondition",
   priceCurrency: "PKR",
 },
     
