@@ -1008,3 +1008,355 @@ if (document.getElementById("cert-center-img")) {
   }
 }
 window.scrollCertCarousel = scrollCertCarousel;
+
+// Feature data - Only 3 items
+const featureData = [
+  {
+    id: 0,
+    title: "ADVANCED PLATE COMPOSITION",
+    desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
+                <li>Traditional batteries use <b>lead - antimony or lead - calcium grids</b > that degrade faster due
+                    to
+                    sulfation.</li>
+            <li><b>Graphite Lead-Acid</b> batteries incorporate <b>Graphite</b>, reducing sulfation and
+              increasing
+              efficiency.</li>
+              <li>Longer battery life & improved energy flow.</li>
+                </ul >`,
+    image: "assets/technology/tech-1.webp",
+  },
+  {
+    id: 1,
+    title: "ENERGY EFFICIENCY & HEAT",
+    desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
+                  <li>Traditional batteries generate <b>more heat and waste energy</b> due to high internal
+                    resistance.
+                  </li>
+                  <li>Graphite Lead-Acid models have <b>lower internal resistance</b>, keeping temperatures low and
+                    performance high.</li>
+                    <li>Improved reliability and efficiency.</li>
+                </ul>`,
+    image: "assets/technology/tech-2.webp",
+  },
+  {
+    id: 2,
+    title: "CYCLE LIFE & LONGEVITY",
+    desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
+                  <li>Standard batteries last <b>300-500 cycles</b>, while graphite-enhanced versions last
+                    <b>600-1000+
+                      cycles</b>.
+                  </li>
+                  <li>Graphite slows down sulfate buildup, preserving battery health.</li>
+                  <li>Extended lifespan and lower costs.</li>
+                </ul>`,
+    image: "assets/technology/tech-3.webp",
+  },
+  {
+    id: 3,
+    title: "DEEP DISCHARGE RECOVERY",
+    desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
+                  <li>Normal batteries <b>suffer permanent</b> damage from deep discharges.</li>
+                  <li>Graphite Lead Acid batteries <b>recover better</b> from deep discharge cycles.</li>
+                  <li>Durability in demanding conditions.</li>
+                </ul>`,
+    image: "assets/technology/tech-4.webp",
+  },
+  {
+    id: 4,
+    title: "IDEAL FOR MODERN APPLICATIONS",
+    desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
+                  <li>Traditional Lead-Acid batteries are best for <b>low-drain uses</b> like motorcycles.</li>
+                  <li>Graphite batteries excel in: Stop-Start Vehicles, Solar Energy Storage, Hybrid System &
+                    Industrial
+                    Use.</li>
+                    <li>Versatility for the future of storage.</li>
+                </ul>`,
+    image: "assets/technology/tech-5.webp",
+  },
+  {
+    id: 5,
+    title: "CHARGE ACCEPTANCE & SPEED",
+    desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
+                  <li>Normal Lead Acid batteries charge <b>slower</b> and struggle in <b>partial state-of-charge
+                      (PSoC)
+                      conditions</b>.</li>
+                  <li>Graphite Lead Acid batteries <b>absorb current much faster</b>, ideal for <b>modern stop-start
+                      vehicle systems</b>.</li>
+                  <li>Faster charging and increased efficiency.</li>
+                </ul>`,
+    image: "assets/technology/tech-6.webp",
+  },
+];
+
+function selectFeatureTab(index, scrollToSection = false) {
+  const feature = featureData[index];
+  const featureImage = document.getElementById("featureImage");
+  featureImage.classList.add("swiping");
+  setTimeout(() => {
+    featureImage.src = feature.image;
+    document.getElementById("featureTitle").textContent = feature.title;
+    document.getElementById("featureDesc").innerHTML = feature.desc;
+    featureImage.classList.remove("swiping");
+  }, 200);
+
+  // Desktop tabs (horizontal bar)
+  const desktopTabs = document.querySelectorAll("#tabsContainer .feature-tab");
+  desktopTabs.forEach((tab, i) => {
+    const h3 = tab.querySelector("h3");
+    if (i === index) {
+      tab.classList.remove("border-gray-300");
+      tab.classList.add("border-[#c00d1e]");
+      h3.classList.remove("text-gray-400");
+      h3.classList.add("text-black", "font-extrabold");
+    } else {
+      tab.classList.remove("border-[#c00d1e]");
+      tab.classList.add("border-gray-300");
+      h3.classList.remove("text-black", "font-extrabold");
+      h3.classList.add("text-gray-400", "font-extrabold");
+    }
+  });
+  // Mobile grid tabs (2x3 grid)
+  const mobileTabs = document.querySelectorAll("#tabsGrid .feature-tab");
+  mobileTabs.forEach((tab, i) => {
+    const h3 = tab.querySelector("h3");
+    if (i === index) {
+      tab.classList.remove("border-gray-300");
+      tab.classList.add("border-t-4", "border-[#c00d1e]");
+      h3.classList.remove("text-gray-400");
+      h3.classList.add("text-black", "font-extrabold");
+    } else {
+      tab.classList.remove("border-t-4", "border-[#c00d1e]");
+      tab.classList.add("border-gray-300");
+      h3.classList.remove("text-black", "font-extrabold");
+      h3.classList.add("text-gray-400", "font-extrabold");
+    }
+  });
+  // On mobile, scroll the whole section into view if requested
+  if (scrollToSection && window.innerWidth < 768) {
+    const section = document.querySelector(".bg-gray-100.md\\:px-4.md\\:py-6") || document.querySelector(".bg-gray-100");
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  selectFeatureTab(0, false);
+});
+
+// Attach click handlers to mobile grid tabs to enable scroll
+document.addEventListener("DOMContentLoaded", () => {
+  const mobileTabs = document.querySelectorAll("#tabsGrid .feature-tab");
+  mobileTabs.forEach((tab, i) => {
+    tab.onclick = function () {
+      selectFeatureTab(i, true);
+    };
+  });
+});
+
+function checkChevronVisibility() {
+  const container = document.getElementById("tabsContainer");
+  const leftBtn = document.getElementById("scrollLeftBtn");
+  const rightBtn = document.getElementById("scrollRightBtn");
+
+  // If content fits without scrolling, hide chevrons
+  if (container.scrollWidth <= container.clientWidth) {
+    leftBtn.style.display = "none";
+    rightBtn.style.display = "none";
+  } else {
+    // Show chevrons if scrolling is needed
+    leftBtn.style.display = "flex";
+    rightBtn.style.display = "flex";
+  }
+}
+
+// Re-check on window resize
+window.addEventListener("resize", checkChevronVisibility);
+
+// Scroll tabs functions
+function scrollTabsLeft() {
+  const container = document.getElementById("tabsContainer");
+  container.scrollBy({
+    left: -300,
+    behavior: "smooth",
+  });
+}
+
+function scrollTabsRight() {
+  const container = document.getElementById("tabsContainer");
+  container.scrollBy({
+    left: 300,
+    behavior: "smooth",
+  });
+}
+const techmodal = document.getElementById("techmodal");
+const closeTechModal = document.querySelector(".techmodal-close");
+const techIframe = document.getElementById("techmodal-iframe");
+
+const techVideoURL = "https://www.youtube.com/embed/nu4N6ER5VB4?si=j6WBiQBTYwHYpotO&autoplay=1&rel=0";
+const youtubeDirectURL = "https://www.youtube.com/watch?v=nu4N6ER5VB4";
+
+function openTechVideoModal() {
+  // Check if mobile (screen width < 768px)
+  if (window.innerWidth < 768) {
+    // On mobile, open YouTube directly in new tab
+    window.open(youtubeDirectURL, "_blank");
+  } else {
+    // On desktop, open modal
+    techIframe.src = techVideoURL;
+    techmodal.style.display = "block";
+  }
+}
+
+closeTechModal.addEventListener("click", closeModal);
+
+window.addEventListener("click", (e) => {
+  if (e.target === techmodal) closeModal();
+});
+
+function closeModal() {
+  techmodal.style.display = "none";
+  techIframe.src = ""; // stop video
+}
+
+//AboutUs Page JS
+
+function openImageModal(imageSrc, title) {
+  const modal = document.getElementById("imageModal");
+  const modalImage = document.getElementById("modalImage");
+  const modalCaption = document.getElementById("modalCaption");
+  const modalCloseBtn = document.getElementById("modalCloseBtn");
+
+  // Populate
+
+  modalImage.src = imageSrc;
+  if (modalCaption) {
+    if (title) {
+      modalCaption.innerHTML = `<span class="block text-xl md:text-2xl font-black uppercase tracking-tight text-[#c00d1e] nice-title">${title}</span>`;
+      modalCaption.style.display = "block";
+    } else {
+      modalCaption.textContent = "";
+      modalCaption.style.display = "none";
+    }
+  }
+
+  // Show modal
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+  document.body.style.overflow = "hidden";
+
+  // Close button handler (ensure only one listener)
+  if (modalCloseBtn && !modalCloseBtn._bound) {
+    modalCloseBtn.addEventListener("click", function () {
+      closeImageModal();
+    });
+    modalCloseBtn._bound = true;
+  }
+
+  // Handle image loading errors
+  modalImage.onerror = function () {
+    this.src = "assets/logo.png"; // Fallback
+  };
+}
+
+function closeImageModal(event) {
+  // If called from an event, only allow clicks on the overlay (#imageModal)
+  if (event && event.target && event.target.id && event.target.id !== "imageModal") {
+    return;
+  }
+
+  const modal = document.getElementById("imageModal");
+  const modalImage = document.getElementById("modalImage");
+
+  if (modal) {
+    modal.classList.add("hidden");
+    modal.classList.remove("flex");
+  }
+  if (modalImage) modalImage.src = "";
+  const modalCaption = document.getElementById("modalCaption");
+  if (modalCaption) modalCaption.textContent = "";
+  document.body.style.overflow = "auto";
+}
+
+// Close modal on Escape key
+document.addEventListener("keydown", function (event) {
+  if (event.key === "Escape") {
+    closeImageModal();
+  }
+});
+
+// Factory tour CTA: scroll to and play the story video
+const playTourBtn = document.getElementById("play-tour");
+if (playTourBtn) {
+  playTourBtn.addEventListener("click", function () {
+    const video = document.getElementById("storyVideo");
+    if (!video) return;
+    // Scroll the video into view (center) and play
+    video.scrollIntoView({ behavior: "smooth", block: "center" });
+    // Ensure play is triggered after scroll (allow small delay)
+    setTimeout(() => {
+      // Try to play; user gesture from click should allow playback
+      video.play().catch(() => {
+        // If play prevented, focus the video so user can play
+        video.focus();
+      });
+    }, 300);
+  });
+}
+
+// Carousel logic for certifications (3-card window)
+(function () {
+  const carousel = document.getElementById("certifications-carousel");
+  const cards = carousel ? Array.from(carousel.getElementsByClassName("cert-card")) : [];
+  const btnLeft = document.getElementById("certScrollLeft");
+  const btnRight = document.getElementById("certScrollRight");
+  let centerIdx = 1; // Start with second card centered
+
+  function updateVisibleCards() {
+    if (!carousel || cards.length === 0) return;
+    cards.forEach((card, i) => {
+      // Only show center and its two neighbors
+      if (i === centerIdx) {
+        card.style.display = "";
+        card.style.transform = "scale(1.15)";
+        card.style.zIndex = 2;
+        card.style.opacity = 1;
+        card.style.boxShadow = "0 8px 32px 0 rgba(44,0,30,0.18)";
+      } else if (i === centerIdx - 1 || i === centerIdx + 1) {
+        card.style.display = "";
+        card.style.transform = "scale(0.85)";
+        card.style.zIndex = 1;
+        card.style.opacity = 0.7;
+        card.style.boxShadow = "";
+      } else {
+        card.style.display = "none";
+      }
+    });
+  }
+
+  function scrollToCard(idx) {
+    centerIdx = idx;
+    updateVisibleCards();
+  }
+
+  // Scroll buttons
+  if (btnLeft && btnRight && cards.length > 0) {
+    btnLeft.style.display = btnRight.style.display = window.innerWidth >= 768 ? "flex" : "none";
+    btnLeft.onclick = function () {
+      centerIdx = Math.max(1, centerIdx - 1);
+      scrollToCard(centerIdx);
+    };
+    btnRight.onclick = function () {
+      centerIdx = Math.min(cards.length - 2, centerIdx + 1);
+      scrollToCard(centerIdx);
+    };
+    window.addEventListener("resize", function () {
+      btnLeft.style.display = btnRight.style.display = window.innerWidth >= 768 ? "flex" : "none";
+      updateVisibleCards();
+    });
+    // Initial highlight
+    setTimeout(function () {
+      scrollToCard(centerIdx);
+    }, 200);
+  }
+})();

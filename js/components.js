@@ -19,7 +19,7 @@ const headerHTML = /* HTML */ `
             <li class="nav-item">
               <a href="dry-charge.html" class="nav-link">Solutions</a>
               <div class="dropdown-panel">
-                <a href="dry-charge.html" class="dropdown-item">Dry Charge</a>
+                <a href="dry-charge.html" class="dropdown-item">Lead-Acid</a>
                 <a href="dry-charge.html#mf-section" class="dropdown-item">Maintenance Free</a>
                 <a href="l-ion.html" class="dropdown-item">Lithium-ion</a>
                 <a href="inverters.html" class="dropdown-item">Inverters</a>

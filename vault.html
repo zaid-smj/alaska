@@ -5,8 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Battery Guides, FAQs & Gallery | Alaska Batteries Pakistan</title>
-  <meta name="description" content="Explore Alaska Batteries' knowledge vault featuring battery buying guides, maintenance tips, frequently asked questions, company news, and product galleries for automotive, industrial, and solar batteries in Pakistan.">
-  <meta name="keywords" content="battery guide Pakistan, battery FAQs, battery maintenance tips, Alaska Batteries blog, automotive battery guide, solar battery guide, industrial battery guide, battery news Pakistan">
+  <meta name="description"
+    content="Explore Alaska Batteries' knowledge vault featuring battery buying guides, maintenance tips, frequently asked questions, company news, and product galleries for automotive, industrial, and solar batteries in Pakistan.">
+  <meta name="keywords"
+    content="battery guide Pakistan, battery FAQs, battery maintenance tips, Alaska Batteries blog, automotive battery guide, solar battery guide, industrial battery guide, battery news Pakistan">
   <link rel="canonical" href="https://alaskabatteries.com/vault.html">
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -164,101 +166,6 @@
         </div>
       </div>
     </section>
-
-    <style>
-      /* Unified filter button styles (FAQ + Gallery) - compact, wrapping text */
-      .faq-filter-btn,
-      .gallery-filter-btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 0.5rem 0.5rem;
-        min-height: 44px;
-        white-space: normal;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-        line-height: 1.1;
-        max-width: 180px;
-        width: auto;
-      }
-
-      /* Ensure filter buttons don't shrink when inside a flex scroller */
-      .faq-filters .faq-filter-btn,
-      .faq-filters {
-        flex-shrink: 1;
-        margin-right: 0.1rem;
-      }
-
-      .gallery-filter-btn {
-        flex-shrink: 0;
-        margin-right: 0.5rem;
-      }
-
-      /* Make the horizontal scroller touch-friendly */
-      .faq-filters {
-        -webkit-overflow-scrolling: touch;
-      }
-
-      /* Mobile: give space between + icon and text, allow wrapping */
-      @media (max-width: 767px) {
-        .faq-trigger {
-          gap: 0.75rem;
-          align-items: center;
-        }
-
-        .faq-trigger h4 {
-          flex: 1 1 auto;
-          min-width: 0;
-          margin-right: 0.5rem;
-          word-break: break-word;
-        }
-
-        .faq-trigger i {
-          flex: 0 0 auto;
-          margin-left: 0.5rem;
-          align-self: center;
-        }
-
-        .faq-item .faq-content {
-          padding-left: 1.25rem;
-          padding-right: 1.25rem;
-        }
-
-        /* Mobile: narrower buttons with wrapped text */
-        .gallery-filter-btn,
-        .faq-filter-btn {
-          display: inline-flex !important;
-          padding: 0.35rem 0.5rem !important;
-          min-height: 44px !important;
-          height: auto !important;
-          font-size: 0.9rem !important;
-          line-height: 1.1 !important;
-          width: 120px !important;
-          max-width: 140px !important;
-          white-space: normal !important;
-          word-break: break-word !important;
-          text-align: center !important;
-          align-items: center !important;
-          justify-content: center !important;
-        }
-
-        .gallery-filter-btn.btn-lg,
-        .faq-filter-btn.btn-lg {
-          padding-top: 0.35rem !important;
-          padding-bottom: 0.35rem !important;
-          height: auto !important;
-        }
-
-        /* Ensure the scroller fits the viewport on small screens */
-        .faq-filters {
-          max-width: 100% !important;
-          padding-left: 0.1rem !important;
-          padding-right: 0.1rem !important;
-          box-sizing: border-box !important;
-        }
-      }
-    </style>
 
     <section id="faqs"
       class="border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group">
@@ -690,257 +597,9 @@
     </div>
   </div>
 
-  <style>
-    /* Blog Modal Improvements */
-    #blog-modal.active {
-      opacity: 1;
-    }
-
-    #blog-modal.active>div:nth-child(2) {
-      transform: scale(1);
-    }
-
-    /* Force outer modal panel to not be the scrolling container when active */
-    #blog-modal.active>div:nth-child(2) {
-      overflow-y: hidden !important;
-    }
-
-    /* Ensure the inner modal-body is the only scroll container and fits viewport */
-    #modal-body {
-      overflow-y: auto !important;
-      max-height: calc(100vh - 6rem) !important;
-      box-sizing: border-box;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Enhanced Typography for Blog Content */
-    .blog-content h1,
-    .blog-content h2,
-    .blog-content h3,
-    .blog-content h4,
-    .blog-content h5,
-    .blog-content h6 {
-      color: #18181b;
-      font-weight: 800;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
-      line-height: 1.3;
-    }
-
-    .blog-content h2 {
-      font-size: 1.75rem;
-      border-left: 4px solid #c00d1e;
-      padding-left: 1rem;
-      text-transform: uppercase;
-    }
-
-    .blog-content h3 {
-      font-size: 1.5rem;
-      color: #27272a;
-    }
-
-    .blog-content h4 {
-      font-size: 1.25rem;
-      color: #3f3f46;
-    }
-
-    .blog-content p {
-      margin-bottom: 1.25rem;
-      line-height: 1.8;
-      color: #52525b;
-      font-size: 1rem;
-    }
-
-    .blog-content ul,
-    .blog-content ol {
-      margin: 1.5rem 0;
-      padding-left: 1.75rem;
-    }
-
-    .blog-content li {
-      margin-bottom: 0.75rem;
-      line-height: 1.7;
-      color: #52525b;
-    }
-
-    .blog-content strong {
-      color: #27272a;
-      font-weight: 700;
-    }
-
-    .blog-content a {
-      color: #c00d1e;
-      text-decoration: underline;
-      transition: color 0.2s;
-    }
-
-    .blog-content a:hover {
-      color: #a00016;
-    }
-
-    .blog-content img {
-      border-radius: 1rem;
-      margin: 2rem 0;
-      width: 100%;
-      max-width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    .blog-content blockquote {
-      border-left: 4px solid #c00d1e;
-      padding-left: 1.5rem;
-      margin: 2rem 0;
-      font-style: italic;
-      color: #3f3f46;
-      background: #fef2f2;
-      padding: 1.5rem;
-      border-radius: 0.5rem;
-    }
-
-    .blog-content code {
-      background: #f4f4f5;
-      padding: 0.25rem 0.5rem;
-      border-radius: 0.25rem;
-      font-size: 0.9em;
-      color: #c00d1e;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .blog-content pre {
-      background: #f4f4f5;
-      padding: 1rem;
-      border-radius: 0.5rem;
-      overflow-x: auto;
-      margin: 1.5rem 0;
-      max-width: 100%;
-    }
-
-    .blog-content pre code {
-      background: transparent;
-      padding: 0;
-      word-wrap: normal;
-      overflow-wrap: normal;
-    }
-
-    .blog-content table {
-      width: 100%;
-      max-width: 100%;
-      overflow-x: auto;
-      display: block;
-      border-collapse: collapse;
-      margin: 1.5rem 0;
-    }
-
-    .blog-content table th,
-    .blog-content table td {
-      padding: 0.75rem;
-      border: 1px solid #e4e4e7;
-      text-align: left;
-    }
-
-    .blog-content table th {
-      background: #f4f4f5;
-      font-weight: 700;
-    }
-
-    /* Prevent Horizontal Overflow */
-    .blog-content * {
-      max-width: 100%;
-      box-sizing: border-box;
-    }
-
-    .blog-content {
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      word-break: break-word;
-    }
-
-    .blog-content iframe,
-    .blog-content video {
-      max-width: 100%;
-      height: auto;
-    }
-
-    /* Modal Container - Prevent Overflow */
-    #modal-body {
-      overflow-x: hidden;
-      overflow-y: auto;
-      box-sizing: border-box;
-      /* Keep the modal body within viewport minus modal padding */
-      max-height: calc(100vh - 4rem);
-    }
-
-    /* Ensure the outer modal panel does not scroll; the inner #modal-body handles scrolling */
-    #blog-modal>div:nth-child(2) {
-      overflow-x: hidden;
-      overflow-y: visible;
-      box-sizing: border-box;
-      max-height: calc(100vh - 4rem);
-    }
-
-    /* Mobile Optimizations */
-    @media (max-width: 768px) {
-      .blog-content h2 {
-        font-size: 1.5rem;
-      }
-
-      .blog-content h3 {
-        font-size: 1.25rem;
-      }
-
-      .blog-content p {
-        font-size: 0.95rem;
-      }
-
-      #blog-modal {
-        align-items: flex-start;
-      }
-
-      #modal-body {
-        padding-top: 3rem !important;
-      }
-
-      .blog-content pre {
-        font-size: 0.85rem;
-        padding: 0.75rem;
-      }
-
-      .blog-content table {
-        font-size: 0.85rem;
-      }
-    }
-
-    /* Smooth Scrolling - applied to the inner scroll container */
-    #modal-body {
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Custom Scrollbar for Blog Modal (inside the white panel) */
-    #modal-body::-webkit-scrollbar {
-      width: 8px;
-    }
-
-    #modal-body::-webkit-scrollbar-track {
-      background: #f4f4f5;
-      border-radius: 10px;
-    }
-
-    #modal-body::-webkit-scrollbar-thumb {
-      background: #c00d1e;
-      border-radius: 10px;
-    }
-
-    #modal-body::-webkit-scrollbar-thumb:hover {
-      background: #a00016;
-    }
-  </style>
-
   <div id="footer-placeholder"></div>
 
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"WebPage",
@@ -958,7 +617,7 @@
 }
 </script>
 
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"FAQPage",
@@ -1109,9 +768,9 @@
     }
   ]
 }
-</script>  
+</script>
 
-<script type="application/ld+json">
+  <script type="application/ld+json">
 {
   "@context":"https://schema.org",
   "@type":"BreadcrumbList",
@@ -1131,7 +790,7 @@
   ]
 }
 </script>
-  
+
   <script src="js/components.js"></script>
   <script src="js/main.js"></script>
   <script src="js/gallery.js"></script>

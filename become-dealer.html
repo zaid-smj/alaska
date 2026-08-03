@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Become a Dealer | Alaska Batteries</title>
+  <title>Become a Partner | Alaska Batteries</title>
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -96,88 +96,88 @@
   </main>
 
   <div id="footer-placeholder"></div>
-
   <script src="js/components.js"></script>
   <script src="js/animations.js"></script>
-
-
   <script>
-    // Replace with your real endpoint
-    const EMAIL_API_URL = 'https://alaskabatteries.com/send-email.php';
+    // Become Partner Form Submission
+    const EMAIL_API_URL = "https://alaskabatteries.com/send-email.php";
 
-    const dealerForm = document.getElementById('contactForm');
+    const dealerForm = document.getElementById("contactForm");
     if (dealerForm) {
-      dealerForm.addEventListener('submit', async function (e) {
+      dealerForm.addEventListener("submit", async function (e) {
         e.preventDefault();
-        const btn = document.getElementById('submitBtn');
+        const btn = document.getElementById("submitBtn");
         const original = btn.innerHTML;
 
-        const name = document.getElementById('fullName').value.trim();
-        const company = document.getElementById('companyName').value ? document.getElementById('companyName').value.trim() : '';
-        const email = document.getElementById('userEmail').value.trim();
-        const phone = document.getElementById('userPhone').value.trim();
+        const name = document.getElementById("fullName").value.trim();
+        const company = document.getElementById("companyName").value ? document.getElementById("companyName").value.trim() : "";
+        const email = document.getElementById("userEmail").value.trim();
+        const phone = document.getElementById("userPhone").value.trim();
 
         if (!name || !company || !email || !phone) {
-          alert('Please complete all required fields (Name, Company, Email, Phone).');
+          alert("Please complete all required fields (Name, Company, Email, Phone).");
           return;
         }
 
-        btn.disabled = true; btn.textContent = 'Sending...';
+        btn.disabled = true;
+        btn.textContent = "Sending...";
 
-        const selectedInterests = Array.from(document.querySelectorAll('input[name="interests[]"]:checked')).map(i => i.value);
+        const selectedInterests = Array.from(document.querySelectorAll('input[name="interests[]"]:checked')).map((i) => i.value);
 
-        const addressField = document.getElementById('Address');
-        const address = addressField ? (addressField.value || '').trim() : '';
+        const addressField = document.getElementById("Address");
+        const address = addressField ? (addressField.value || "").trim() : "";
 
         const payload = {
-          form: 'dealer',
+          form: "dealer",
           name,
           company,
           email,
           phone,
-          subject: address
+          subject: address,
         };
 
         if (selectedInterests.length) payload.interests = selectedInterests;
 
         // Build a simple message so auto-reply and admin email include useful details
         const msgParts = [];
-        if (address) msgParts.push('Address: ' + address);
-        if (selectedInterests.length) msgParts.push('Primary Interest(s): ' + selectedInterests.join(', '));
-        if (company) msgParts.push('Company: ' + company);
-        payload.message = msgParts.join('\n') || 'No additional message provided.';
+        if (address) msgParts.push("Address: " + address);
+        if (selectedInterests.length) msgParts.push("Primary Interest(s): " + selectedInterests.join(", "));
+        if (company) msgParts.push("Company: " + company);
+        payload.message = msgParts.join("\n") || "No additional message provided.";
 
         try {
           const res = await fetch(EMAIL_API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
           });
           const result = await res.json();
           if (res.ok && result.success) {
-            const modal = document.getElementById('successModal');
+            const modal = document.getElementById("successModal");
             if (modal) {
-              modal.classList.remove('hidden');
-              modal.classList.add('flex');
-              document.body.style.overflow = 'hidden';
-            } else if (typeof showSuccessModal === 'function') {
+              modal.classList.remove("hidden");
+              modal.classList.add("flex");
+              document.body.style.overflow = "hidden";
+            } else if (typeof showSuccessModal === "function") {
               showSuccessModal();
             } else {
-              alert('Message sent successfully.');
+              alert("Message sent successfully.");
             }
             dealerForm.reset();
           } else {
-            alert(result.message || 'Failed to send message.');
+            alert(result.message || "Failed to send message.");
           }
         } catch (err) {
           console.error(err);
-          alert('Failed to send message. Try again later.');
+          alert("Failed to send message. Try again later.");
         } finally {
-          btn.disabled = false; btn.innerHTML = original;
+          btn.disabled = false;
+          btn.innerHTML = original;
         }
       });
     }
   </script>
+
 </body>
 
 </html>
