@@ -1213,6 +1213,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     description: battery.model + " is an Alaska Batteries " + battery.tech + " battery suitable for " + (Array.isArray(battery.uses) ? battery.uses.join(", ") : battery.uses),
 
+offers: {
+  "@type": "Offer",
+  url: "https://alaskabatteries.com/dry-charge.html#" + battery.model.replace(/\s+/g, "-").toLowerCase(),
+  availability: "https://schema.org/InStock",
+  priceCurrency: "PKR",
+},
+    
     image: "https://alaskabatteries.com/" + battery.image,
 
     category: Array.isArray(battery.categories) ? battery.categories.join(", ") : battery.categories,
