@@ -103,6 +103,36 @@ body {
 .group\/nav:hover .group-hover\/nav\:visible {
   display: block !important;
 }
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.comparison-th,
+.comparison-td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e5e7eb;
+  vertical-align: top;
+}
+
+.comparison-th {
+  color: #111827;
+  font-size: 0.875rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.comparison-td {
+  color: #4b5563;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.comparison-table tbody tr:last-child .comparison-td {
+  border-bottom: none;
+}
 /* css/style.css */
 .hero-glow {
   box-shadow: 0 0 50px -10px rgba(204, 0, 27, 0.3);
@@ -1042,6 +1072,17 @@ img {
   object-position: center center;
 }
 
+.home-hero-carousel .hero-slide picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.home-hero-carousel .hero-slide img {
+  object-fit: cover;
+  object-position: bottom;
+}
+
 .hero-slide--contain img {
   object-fit: contain;
   background: transparent;
@@ -1798,8 +1839,8 @@ a.btn-cta-alt.w-1\/2 {
   writing-mode: horizontal-tb;
   /* transform: rotate(180deg); */
   transform: none;
-  font-size: clamp(2.75rem, 5vw, 3.5rem);
-  font-weight: 900;
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 800;
   letter-spacing: 0.05em;
   color: #111111;
   line-height: 0.9;
@@ -1826,12 +1867,249 @@ a.btn-cta-alt.w-1\/2 {
   padding: 0.35rem 0.25rem 0.6rem;
 }
 
-#thumb-grid.catalog-track {
+/* Give some space under the grid so the thin scrollbar isn't flush to content */
+.catalog-viewport {
+  padding-bottom: 12px;
+}
+
+.catalog-track {
   display: flex !important;
   width: 100%;
   transform: translateX(0);
   transition: transform 600ms ease;
   will-change: transform;
+}
+/* Allow horizontal scroll for touch and mouse drag; pages are full-width children */
+.catalog-track {
+  overflow-x: auto;
+  scroll-behavior: smooth;
+}
+
+/* Thin/custom scrollbar for catalog tracks */
+.catalog-track {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(192, 13, 30, 0.6) transparent;
+}
+.catalog-track::-webkit-scrollbar {
+  height: 8px;
+}
+.catalog-track::-webkit-scrollbar-track {
+  background: transparent;
+}
+.catalog-track::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  min-width: 24px;
+}
+.catalog-track::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+/* When in deep-mode, use a lighter thumb for contrast */
+body.deep-mode .catalog-track::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.18);
+}
+body.deep-mode .catalog-track {
+  scrollbar-color: rgba(255, 255, 255, 0.18) transparent;
+}
+
+/* Deep Cycle dark mode styles */
+body.deep-mode,
+body.deep-mode main {
+  background-color: #0b0b0c !important;
+  color: #e6e7e8 !important;
+}
+
+/* Override common utility text colors to be readable on dark background */
+body.deep-mode .text-black {
+  color: #e6e7e8 !important;
+}
+body.deep-mode .text-gray-400 {
+  color: #bfc3c6 !important;
+}
+body.deep-mode .text-gray-500 {
+  color: #c5c7c9 !important;
+}
+
+/* Make white backgrounds dark and buttons adapt */
+body.deep-mode .bg-white {
+  background-color: #0f1112 !important;
+}
+body.deep-mode .catalog-card__button {
+  background-color: #0f1112 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+body.deep-mode .catalog-card__meta {
+  color: #9aa0a3 !important;
+}
+body.deep-mode .catalog-card__title {
+  color: #ffffff !important;
+}
+
+/* Hero text box adjustments */
+body.deep-mode .banner-overlay-support {
+  background-color: rgba(0, 0, 0, 0.6) !important;
+}
+
+/* ==========================================================================
+   Design Tokens & Theme Transitions
+   ========================================================================== */
+:root {
+  /* Duration Variables */
+  --p-duration-sm: 0.7s;
+  --p-duration-md: 1s;
+  --p-duration-lg: 1.5s;
+  --p-duration-xl: 1.7s;
+
+  /* Easing Functions */
+  --p-ease-in-out: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --p-ease-in: cubic-bezier(0, 0, 0.2, 1);
+  --p-ease-out: cubic-bezier(0.4, 0, 0.5, 1);
+}
+
+/* Smooth background, text color, and border shift across the site */
+body,
+main,
+header,
+footer,
+.catalog-card__button,
+.catalog-card__title,
+.catalog-card__meta,
+.hero-carousel {
+  transition:
+    background-color var(--p-duration-lg) var(--p-ease-in-out),
+    color var(--p-duration-lg) var(--p-ease-in-out),
+    border-color var(--p-duration-lg) var(--p-ease-in-out);
+}
+
+/* Light Mode Defaults */
+body {
+  background-color: #ffffff;
+  color: #000000 !important;
+}
+
+/* Deep Mode Defaults (Crisp Black background, crisp light text) */
+body.deep-mode,
+body.deep-mode main {
+  background-color: #000000 !important;
+  color: #e6e7e8;
+}
+
+/* Header & nav adjustments in deep-mode */
+body.deep-mode header {
+  background-color: #000000 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+body.deep-mode header img {
+  /* filter: brightness(1.05) contrast(1.02); */
+  /* filter: invert(1); */
+  content: url("../assets/logo-inv.png") !important;
+}
+
+body.deep-mode footer {
+  background-color: #000000 !important;
+  border-color: rgba(255, 255, 255, 0.06) !important;
+}
+
+body.deep-mode footer img {
+  /* filter: brightness(50) contrast(1); */
+  /* filter: invert(1); */
+  content: url("../assets/tech-inv.png") !important;
+}
+
+body.deep-mode footer .CaAg {
+  content: url("../assets/calcium_silver_logo-inv.png") !important;
+}
+
+body.deep-mode .nav-link,
+body.deep-mode .nav-item .dropdown-item,
+body.deep-mode #mobile-menu-trigger {
+  color: #e6e7e8 !important;
+}
+
+body.deep-mode .nav-link:hover,
+body.deep-mode .nav-item .dropdown-item:hover {
+  color: var(--alaska-red) !important;
+}
+
+header {
+  transition:
+    background-color 520ms ease,
+    border-color 520ms ease,
+    color 520ms ease;
+}
+
+footer {
+  transition:
+    background-color 520ms ease,
+    border-color 520ms ease,
+    color 520ms ease;
+}
+
+body.deep-mode .social-box {
+  /* Dimensions: Forced Square */
+  width: 48px;
+  height: 48px;
+  box-shadow: 0 10px 15px -3px rgba(201, 201, 201, 0.075);
+
+  /* Centering the icon perfectly */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Appearance */
+  color: #9ca3af; /* Gray icon color */
+  font-size: 2rem; /* Icon size */
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.deep-mode .deep-mode-color {
+  color: #ffffff !important;
+}
+
+body.deep-mode .deep-mode-color2 {
+  color: #ffffff !important;
+}
+
+body.deep-mode .deep-mode-color2:hover {
+  color: var(--alaska-red) !important;
+}
+
+body.deep-mode .dropdown-panel,
+body.deep-mode .dropdown-item {
+  background: #000000 !important;
+  color: #e6e7e8 !important;
+}
+
+body.deep-mode #mobile-menu-trigger {
+  color: #e6e7e8 !important;
+}
+body.deep-mode .catalog-card__button:hover {
+  /* transform: translateY(-4px); */
+  border-color: #c00d1e !important;
+  box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+}
+
+/* Base style for fading targets */
+.fade-target {
+  color: inherit; /* Inherits crisp text color directly from body */
+  transition:
+    opacity var(--p-duration-md) var(--p-ease-in-out),
+    filter var(--p-duration-md) var(--p-ease-in-out);
+  will-change: opacity, filter;
+  opacity: 1;
+  filter: brightness(1);
+}
+
+/* 
+  1. DULL / DIM PHASE:
+  When dark-fade or light-fade is added by JS, text dulls out and lowers opacity
+*/
+body.dark-fade .fade-target,
+body.light-fade .fade-target {
+  opacity: 0.25; /* Dulls the opacity without disappearing fully */
+  filter: brightness(1); /* Grays out high-contrast text */
 }
 
 .catalog-page {
@@ -1867,7 +2145,7 @@ a.btn-cta-alt.w-1\/2 {
 }
 
 .catalog-card__button:hover {
-  transform: translateY(-4px);
+  /* transform: translateY(-4px); */
   border-color: #c00d1e;
   box-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
 }
@@ -1941,8 +2219,8 @@ a.btn-cta-alt.w-1\/2 {
   }
 }
 
-#catalog-prev:disabled,
-#catalog-next:disabled {
+[id^="catalog-prev"]:disabled,
+[id^="catalog-next"]:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }

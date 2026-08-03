@@ -3,8 +3,12 @@ let currentBatteryId = null;
 let compareFirstId = null;
 let compareSelectingFirst = false;
 let lastFiltered = [];
-let catalogPageIndex = 0;
-let catalogPageCount = 0;
+// Maintain per-section catalog state: index and page count
+const catalogState = {
+  dry: { index: 0, count: 0 },
+  deep: { index: 0, count: 0 },
+  mf: { index: 0, count: 0 },
+};
 
 function normalizeUses(uses) {
   if (!uses) return [];
@@ -178,7 +182,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("batterySearch");
   const clearBtn = document.getElementById("clearSearch");
   const suggestionsBox = document.getElementById("search-suggestions");
-  const thumbGrid = document.getElementById("thumb-grid");
 
   // --- AUTO-SELECT CATEGORY FROM URL HASH ---
   const hash = window.location.hash.substring(1);
@@ -239,37 +242,37 @@ document.addEventListener("DOMContentLoaded", () => {
     detailsLabel.addEventListener("click", () => detailsBtn.click());
   }
 
-  // --- 2. DRAG TO SCROLL LOGIC (Fixed) ---
-  if (thumbGrid) {
+  // --- 2. DRAG TO SCROLL LOGIC (applies to all catalog-track elements) ---
+  document.querySelectorAll(".catalog-track").forEach((track) => {
     let isDown = false;
     let startX;
     let scrollLeft;
 
-    thumbGrid.addEventListener("mousedown", (e) => {
+    track.addEventListener("mousedown", (e) => {
       isDown = true;
-      thumbGrid.classList.add("active");
-      startX = e.pageX - thumbGrid.offsetLeft;
-      scrollLeft = thumbGrid.scrollLeft;
+      track.classList.add("active");
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
     });
 
-    thumbGrid.addEventListener("mouseleave", () => {
+    track.addEventListener("mouseleave", () => {
       isDown = false;
-      thumbGrid.classList.remove("active");
+      track.classList.remove("active");
     });
 
-    thumbGrid.addEventListener("mouseup", () => {
+    track.addEventListener("mouseup", () => {
       isDown = false;
-      thumbGrid.classList.remove("active");
+      track.classList.remove("active");
     });
 
-    thumbGrid.addEventListener("mousemove", (e) => {
+    track.addEventListener("mousemove", (e) => {
       if (!isDown) return;
       e.preventDefault();
-      const x = e.pageX - thumbGrid.offsetLeft;
+      const x = e.pageX - track.offsetLeft;
       const walk = (x - startX) * 2; // Scroll-fast speed
-      thumbGrid.scrollLeft = scrollLeft - walk;
+      track.scrollLeft = scrollLeft - walk;
     });
-  }
+  });
 
   // --- SEARCH & CLEAR LOGIC ---
   if (searchInput) {
@@ -314,37 +317,38 @@ document.addEventListener("DOMContentLoaded", () => {
       let matchesSearch = true;
 
       if (term) {
-        // Check if search is specifically for plates (e.g., "9 plates", "11 plate")
         const platesMatch = term.match(/^(\d+)\s+plates?$/i);
         if (platesMatch) {
-          // Search specifically for that exact number of plates when "plates" keyword is used
           const plateNumber = parseInt(platesMatch[1]);
           matchesSearch = b.plates === plateNumber;
         } else if (/^\d{1,2}$/.test(term)) {
-          // If it's just a 1-2 digit number, check if it matches plates OR search generally
           const num = parseInt(term);
-          // Common plate counts are odd numbers from 7 to 21
           if (num >= 7 && num <= 25) {
-            // Check if it matches plates exactly OR appears in other attributes
             const searchStr = getBatterySearchText(b);
             matchesSearch = b.plates === num || searchStr.includes(term);
           } else {
-            // For other numbers, just do general search
             const searchStr = getBatterySearchText(b);
             matchesSearch = searchStr.includes(term);
           }
         } else {
-          // General search across all battery properties
           const searchStr = getBatterySearchText(b);
           matchesSearch = searchStr.includes(term);
         }
       }
 
-      const matchesCat = activeCat === "All" || b.categories.includes(activeCat);
+      // Category matching rules
+      let matchesCat = false;
+      if (activeCat === "All") matchesCat = true;
+      else if (activeCat === "Solar") matchesCat = (Array.isArray(b.categories) && b.categories.includes("Solar")) || (b.series || "dry-charge") === "deep-cycle";
+      else if (activeCat === "MF")
+        matchesCat =
+          (b.series || "dry-charge") === "mf" ||
+          ((b.series || "dry-charge") === "dry-charge" && ((Array.isArray(b.categories) && b.categories.includes("MF")) || b.isMF || (b.tech && b.tech.toLowerCase().includes("maintenance"))));
+      else matchesCat = Array.isArray(b.categories) && b.categories.includes(activeCat);
+
       return matchesSearch && matchesCat;
     });
 
-    // Sort batteries by model number (ascending) BEFORE updating stage
     const sortedFiltered = [...filtered].sort((a, b) => {
       const numA = parseInt(a.model.match(/\d+/)?.[0] || 0);
       const numB = parseInt(b.model.match(/\d+/)?.[0] || 0);
@@ -353,28 +357,36 @@ document.addEventListener("DOMContentLoaded", () => {
 
     lastFiltered = sortedFiltered;
 
-    // Update the main stage with the first sorted battery
-    if (sortedFiltered.length > 0) {
-      window.updateStage(sortedFiltered[0].id, false);
-    }
+    if (sortedFiltered.length > 0) window.updateStage(sortedFiltered[0].id, false);
 
-    // Ensure hero/banner matches the active category when filters are applied
-    // Defer hero/banner update so it doesn't run before banner elements are initialized
     if (typeof updateHero === "function") {
       setTimeout(() => {
         try {
           updateHero(activeCat);
-        } catch (e) {
-          /* ignore if updateHero is not available yet */
-        }
+        } catch (e) {}
       }, 0);
     }
 
-    renderThumbnails(sortedFiltered);
+    const bySeries = {
+      "dry-charge": sortedFiltered.filter((p) => (p.series || "dry-charge") === "dry-charge"),
+      "deep-cycle": sortedFiltered.filter((p) => (p.series || "dry-charge") === "deep-cycle"),
+      mf: sortedFiltered.filter((p) => (p.series || "dry-charge") === "mf"),
+    };
+
+    renderGridForSection("thumb-grid-dry", bySeries["dry-charge"]);
+    renderGridForSection("thumb-grid-deep", bySeries["deep-cycle"]);
+    renderGridForSection("thumb-grid-mf", bySeries["mf"]);
   }
 
   function renderThumbnails(data) {
-    renderGrid(data);
+    const bySeries = {
+      "dry-charge": data.filter((p) => p.series === "dry-charge"),
+      "deep-cycle": data.filter((p) => p.series === "deep-cycle"),
+      mf: data.filter((p) => p.series === "mf"),
+    };
+    renderGridForSection("thumb-grid-dry", bySeries["dry-charge"]);
+    renderGridForSection("thumb-grid-deep", bySeries["deep-cycle"]);
+    renderGridForSection("thumb-grid-mf", bySeries["mf"]);
   }
 
   // Gallery modal functions
@@ -534,14 +546,9 @@ document.addEventListener("DOMContentLoaded", () => {
       mobile_img: "assets/solutions/mobile/industrial-mobile.webp",
       title: "Industrial",
     },
-    "Deep-Cycle": {
-      img: "assets/solutions/deep-cycle.webp",
-      mobile_img: "assets/solutions/mobile/deep-cycle-mobile.webp",
-      title: "Deep Cycle",
-    },
   };
 
-  const heroCategories = ["All", "Automotive", "Solar", "Industrial", "Deep-Cycle"];
+  const heroCategories = ["All", "Automotive", "Solar", "Industrial"];
   const heroSlides = heroCategories.map((category) => ({ category, ...contentMap[category] }));
   let autoScrollInterval = null;
   let currentIndex = 0;
@@ -617,7 +624,7 @@ document.addEventListener("DOMContentLoaded", () => {
     autoScrollInterval = setInterval(() => {
       if (!autoScrollEnabled) return;
       updateHeroPosition(currentIndex + 1, true);
-    }, 3200);
+    }, 2200);
   }
 
   function updateHero(cat) {
@@ -946,27 +953,35 @@ window.addEventListener("click", (e) => {
   }
 });
 
-window.scrollCatalog = function (direction) {
-  setCatalogPage(catalogPageIndex + direction, true);
+window.scrollCatalog = function (section, direction) {
+  const state = catalogState[section] || { index: 0, count: 0 };
+  setCatalogPage(section, state.index + direction, true);
 };
 
-function setCatalogPage(nextIndex, animate = true) {
-  const grid = document.getElementById("thumb-grid");
-  if (!grid || catalogPageCount === 0) return;
+function setCatalogPage(section, nextIndex, animate = true) {
+  const containerId = section === "dry" ? "thumb-grid-dry" : section === "deep" ? "thumb-grid-deep" : "thumb-grid-mf";
+  const grid = document.getElementById(containerId);
+  const state = catalogState[section];
+  if (!grid || !state) return;
 
+  const catalogPageCount = state.count || 1;
   const normalizedIndex = ((nextIndex % catalogPageCount) + catalogPageCount) % catalogPageCount;
-  catalogPageIndex = normalizedIndex;
-  grid.style.transition = animate ? "transform 600ms ease" : "none";
-  grid.style.transform = `translateX(-${catalogPageIndex * 100}%)`;
+  state.index = normalizedIndex;
+  // Use scrollLeft for touch/drag compatibility; each "page" is the grid's clientWidth
+  const pageWidth = grid.clientWidth || grid.offsetWidth || 1;
+  const left = state.index * pageWidth;
+  try {
+    grid.scrollTo({ left, behavior: animate ? "smooth" : "auto" });
+  } catch (e) {
+    grid.scrollLeft = left;
+  }
 
-  const prevBtn = document.getElementById("catalog-prev");
-  const nextBtn = document.getElementById("catalog-next");
+  const prevBtn = document.getElementById(`catalog-prev-${section}`);
+  const nextBtn = document.getElementById(`catalog-next-${section}`);
   if (prevBtn) prevBtn.disabled = catalogPageCount <= 1;
   if (nextBtn) nextBtn.disabled = catalogPageCount <= 1;
 
-  if (!animate) {
-    grid.offsetHeight;
-  }
+  if (!animate) grid.offsetHeight;
 }
 
 function chunkProducts(items, size) {
@@ -978,13 +993,29 @@ function chunkProducts(items, size) {
 }
 
 // Function to render the catalog grid
-function renderGrid(products) {
-  const grid = document.getElementById("thumb-grid");
+function renderGridForSection(containerId, products) {
+  const grid = document.getElementById(containerId);
   if (!grid) return;
-
   const pages = chunkProducts(products, 8);
-  catalogPageCount = Math.max(pages.length, 1);
-  catalogPageIndex = 0;
+  const section = containerId.includes("-dry") ? "dry" : containerId.includes("-deep") ? "deep" : "mf";
+  // Find the wrapper (the parent that contains title + controls)
+  const viewport = grid.closest(".catalog-viewport");
+  const wrapper = viewport ? viewport.parentElement : null;
+
+  if (!products || products.length === 0) {
+    // Hide entire section (title, buttons, viewport)
+    if (wrapper) wrapper.style.display = "none";
+    catalogState[section].count = 0;
+    catalogState[section].index = 0;
+    grid.innerHTML = "";
+    return;
+  }
+
+  // Ensure wrapper is visible when we have products
+  if (wrapper) wrapper.style.display = "";
+
+  catalogState[section].count = Math.max(pages.length, 1);
+  catalogState[section].index = 0;
 
   grid.innerHTML = pages
     .map((page) => {
@@ -1010,30 +1041,125 @@ function renderGrid(products) {
     })
     .join("");
 
-  setCatalogPage(0, false);
+  setCatalogPage(section, 0, false);
 }
 
 // THE INITIALIZER
 function initDryCharge() {
-  // 1. Use 'batteryData' (matching your data.js)
-  if (typeof batteryData !== "undefined") {
-    // 2. Since your data doesn't have a "series" field yet,
-    // let's show all batteries for now to get the grid working.
-    const dryChargeModels = batteryData;
-
-    renderGrid(dryChargeModels);
-
-    // 3. Update the Stage with the first battery
-    if (dryChargeModels.length > 0) {
-      updateStage(dryChargeModels[0]);
-    }
-
-    console.log("Grid initialized with", dryChargeModels.length, "models.");
-  } else {
+  if (typeof batteryData === "undefined") {
     console.error("batteryData is missing from data.js");
+    return;
+  }
+
+  // Initial render: show all items distributed by series
+  const dry = batteryData.filter((b) => (b.series || "dry-charge") === "dry-charge");
+  const deep = batteryData.filter((b) => (b.series || "dry-charge") === "deep-cycle");
+  const mf = batteryData.filter((b) => (b.series || "dry-charge") === "mf");
+
+  renderGridForSection("thumb-grid-dry", dry);
+  renderGridForSection("thumb-grid-deep", deep);
+  renderGridForSection("thumb-grid-mf", mf);
+
+  // Set initial stage to first available product (sorted by model numeric value)
+  const all = [...dry, ...deep, ...mf];
+  if (all.length > 0) {
+    const firstBySort = [...all].sort((a, b) => {
+      const numA = parseInt(a.model.match(/\d+/)?.[0] || 0);
+      const numB = parseInt(b.model.match(/\d+/)?.[0] || 0);
+      return numA - numB;
+    })[0];
+    if (firstBySort) window.updateStage(firstBySort.id);
   }
 }
 // Run after a short delay to allow component injection
 window.addEventListener("load", () => {
   setTimeout(initDryCharge, 300);
 });
+
+/**
+ * Utility to run asynchronous class transitions without jQuery dependencies
+ */
+function runThemeTransition(step1Fn, step2Fn, delay = 500) {
+  return new Promise((resolve) => {
+    const body = document.body;
+
+    // Step 1: Start dulling text out
+    step1Fn(body);
+
+    // Step 2: Swap background & restore crisp text after transition delay
+    setTimeout(() => {
+      step2Fn(body);
+      resolve();
+    }, delay);
+  });
+}
+
+// Scroll-triggered theme for Deep Cycle section
+(function setupDeepCycleThemeObserver() {
+  let isDeep = false;
+
+  function onIntersect(entries) {
+    entries.forEach((entry) => {
+      const nowDeep = entry.isIntersecting;
+
+      if (nowDeep && !isDeep) {
+        enterDeepMode();
+      } else if (!nowDeep && isDeep) {
+        exitDeepMode();
+      }
+    });
+  }
+
+  function enterDeepMode() {
+    isDeep = true;
+    return runThemeTransition(
+      (body) => body.classList.add("dark-fade"),
+      (body) => {
+        body.classList.add("deep-mode");
+        body.classList.remove("dark-fade");
+      },
+    );
+  }
+
+  function exitDeepMode() {
+    isDeep = false;
+    return runThemeTransition(
+      (body) => body.classList.add("light-fade"),
+      (body) => body.classList.remove("deep-mode", "light-fade"),
+    );
+  }
+
+  function init() {
+    const el = document.getElementById("mf-section");
+    if (!el) return;
+
+    const observer = new IntersectionObserver(onIntersect, {
+      root: null,
+      threshold: 0.5,
+      rootMargin: "0px",
+    });
+
+    observer.observe(el);
+  }
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    setTimeout(init, 50);
+  } else {
+    document.addEventListener("DOMContentLoaded", init);
+  }
+})();
+
+// Mark key elements as fade-targets so CSS animations apply
+(function markFadeTargets() {
+  function init() {
+    const selectors = ["#hero-title", ".catalog-vertical-label", ".catalog-card__title", "#stage-name", "#stage-tech", ".catalog-card__meta"];
+    const els = document.querySelectorAll(selectors.join(","));
+    els.forEach((el) => el.classList.add("fade-target"));
+  }
+
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    setTimeout(init, 50);
+  } else {
+    document.addEventListener("DOMContentLoaded", init);
+  }
+})();

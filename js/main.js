@@ -685,6 +685,113 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
     container.scrollBy({ left: move * dir, behavior: "smooth" });
   }
 
+  function initHomeHeroBannerSlider() {
+    const heroTrack = document.getElementById("home-hero-carousel-track");
+    if (!heroTrack) return;
+
+    const heroKicker = document.getElementById("home-hero-kicker");
+    const heroTitle = document.getElementById("home-hero-title");
+    const heroSubtitle = document.getElementById("home-hero-subtitle");
+    const heroPrimaryBtn = document.getElementById("home-hero-btn-primary");
+    const heroSecondaryBtn = document.getElementById("home-hero-btn-secondary");
+    const heroPrimaryBtnLabel = document.getElementById("home-hero-btn-primary-label");
+    const heroSecondaryBtnLabel = document.getElementById("home-hero-btn-secondary-label");
+
+    const heroSlides = [
+      {
+        desktop: "assets/slider-home/slide-1.webp",
+        mobile: "assets/solutions/mobile/automotive-mobile.webp",
+        alt: "Automotive banner",
+        kicker: "Placeholder",
+        title: "Placeholder Title",
+        subtitle: "Placeholder text for banner.",
+        primaryBtn: { text: "View More", href: "#" },
+        secondaryBtn: { text: "Get Support", href: "#" },
+      },
+      {
+        desktop: "assets/slider-home/slide-2.webp",
+        mobile: "assets/solutions/mobile/solar-mobile.webp",
+        alt: "Solar banner",
+        kicker: "Placeholder",
+        title: "Placeholder Title",
+        subtitle: "Placeholder text for banner.",
+        primaryBtn: { text: "Explore", href: "#" },
+        secondaryBtn: { text: "Find Partner", href: "#" },
+      },
+      {
+        desktop: "assets/slider-home/slide-3.webp",
+        mobile: "assets/solutions/mobile/industrial-mobile.webp",
+        alt: "Industrial banner",
+        kicker: "Placeholder",
+        title: "Placeholder Title",
+        subtitle: "Placeholder text for banner.",
+        primaryBtn: { text: "View More", href: "#" },
+        secondaryBtn: { text: "Get Support", href: "#" },
+      },
+    ];
+
+    const slidesWithLoop = [...heroSlides, heroSlides[0]];
+
+    heroTrack.innerHTML = slidesWithLoop
+      .map(
+        (slide) => `
+          <article class="hero-slide">
+            <picture>
+              <source srcset="${slide.mobile}" media="(max-width: 767px)">
+              <source srcset="${slide.desktop}" media="(min-width: 768px)">
+              <img src="${slide.desktop}" alt="${slide.alt}" class="hero-slide-img" />
+            </picture>
+          </article>
+        `,
+      )
+      .join("");
+
+    let currentIndex = 0;
+    const slideCount = heroSlides.length;
+
+    function syncHeroContent(index) {
+      const slide = heroSlides[index % slideCount];
+      if (!slide) return;
+
+      if (heroKicker) heroKicker.textContent = slide.kicker;
+      if (heroTitle) heroTitle.textContent = slide.title;
+      if (heroSubtitle) heroSubtitle.textContent = slide.subtitle;
+
+      if (heroPrimaryBtn && slide.primaryBtn) {
+        heroPrimaryBtn.href = slide.primaryBtn.href;
+        if (heroPrimaryBtnLabel) heroPrimaryBtnLabel.textContent = slide.primaryBtn.text;
+      }
+
+      if (heroSecondaryBtn && slide.secondaryBtn) {
+        heroSecondaryBtn.href = slide.secondaryBtn.href;
+        if (heroSecondaryBtnLabel) heroSecondaryBtnLabel.textContent = slide.secondaryBtn.text;
+      }
+    }
+
+    function updatePosition(index, animate = true) {
+      currentIndex = index;
+      heroTrack.style.transition = animate ? "transform 700ms ease-in-out" : "none";
+      heroTrack.style.transform = `translateX(-${index * 100}%)`;
+      syncHeroContent(index);
+
+      if (!animate) {
+        heroTrack.offsetHeight;
+      }
+    }
+
+    heroTrack.addEventListener("transitionend", () => {
+      if (currentIndex === slideCount) {
+        updatePosition(0, false);
+      }
+    });
+
+    updatePosition(0, false);
+
+    setInterval(() => {
+      updatePosition(currentIndex + 1, true);
+    }, 2600);
+  }
+
   // Products Carousel Control
   function initCarousel() {
     const carousel = document.getElementById("productsCarousel");
@@ -783,6 +890,8 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
   } else {
     initCarousel();
   }
+
+  initHomeHeroBannerSlider();
 
   window.addEventListener("load", initBlogEngine);
 

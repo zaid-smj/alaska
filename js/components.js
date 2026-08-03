@@ -20,7 +20,7 @@ const headerHTML = /* HTML */ `
               <a href="dry-charge.html" class="nav-link">Solutions</a>
               <div class="dropdown-panel">
                 <a href="dry-charge.html" class="dropdown-item">Dry Charge</a>
-                <a href="mf.html" class="dropdown-item">Maintenance Free</a>
+                <a href="dry-charge.html#mf-section" class="dropdown-item">Maintenance Free</a>
                 <a href="l-ion.html" class="dropdown-item">Lithium-ion</a>
                 <a href="inverters.html" class="dropdown-item">Inverters</a>
                 <!--<a href="tubular.html" class="dropdown-item">Tubular</a>-->
@@ -83,17 +83,17 @@ const footerHTML = /* HTML */ `
         <!-- Logo Column -->
         <div class="flex flex-col justify-center md:justify-start">
           <img src="assets/technology/tech.png" alt="Graphite Technology" class="h-14 md:h-16 w-auto object-contain" />
-          <img src="assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 mt-6 w-auto object-contain" />
+          <img src="assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 mt-6 w-auto object-contain CaAg" />
         </div>
 
         <!-- Address Column -->
         <div class="flex flex-col items-center md:items-start text-center md:text-left">
-          <div class="text-gray-600 text-baseline font-normal leading-relaxed space-y-1">
+          <div class="text-gray-600 text-baseline font-normal leading-relaxed space-y-1 deep-mode-color">
             <p>7th Floor, B-3 Tower, Opp. F-9 Park,</p>
             <p>Sector F-9/G-9, Jinnah Avenue, New Blue Area,</p>
             <p>Islamabad, Pakistan, 44010</p>
             <p class="pt-2">
-              <a href="tel:0518740280" class="text-gray-600 font-bold hover:text-[#c00d1e] transition-colors">+92 51 874 0280</a>
+              <a href="tel:0518740280" class="text-gray-600 font-bold hover:text-[#c00d1e] transition-colors deep-mode-color2">+92 51 874 0280</a>
             </p>
             <p>
               <a href="mailto:info@alaskabatteries.com" class="text-[#c00d1e] hover:underline transition-colors">info@alaskabatteries.com</a>
@@ -103,7 +103,7 @@ const footerHTML = /* HTML */ `
 
         <!-- Navigation Column -->
         <div class="flex justify-center md:justify-center">
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-0 gap-x-10 text-baseline font-medium text-gray-700 text-center md:text-left">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-0 gap-x-10 text-baseline font-medium text-gray-700 text-center md:text-left deep-mode-color">
             <ul class="flex flex-col space-y-2 items-center md:items-start">
               <li>
                 <a href="index.html" class="hover:text-[#c00d1e] transition-colors">Home</a>
@@ -160,7 +160,7 @@ const footerHTML = /* HTML */ `
       </div>
 
       <div class="pt-4 pb-1 flex flex-col items-center text-xs text-gray-400 uppercase tracking-normal text-center">
-        <p>©2026 S.M.J International Industries Pvt. Ltd. All Rights Reserved.</p>
+        <p>©2026 S.M.J International Industries Ltd. All Rights Reserved.</p>
       </div>
     </div>
     <div id="successModal" class="fixed inset-0 z-[100] hidden items-center justify-center bg-black/80 backdrop-blur-sm p-4">
