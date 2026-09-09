@@ -1,28 +1,28 @@
 <?php
 
-namespace App\Filament\Resources\LoginEvents;
+namespace App\Filament\Resources\WorkSessions;
 
 use App\Enums\AdminRole;
-use App\Filament\Resources\LoginEvents\Pages\ListLoginEvents;
-use App\Filament\Resources\LoginEvents\Tables\LoginEventsTable;
-use App\Models\LoginEvent;
+use App\Filament\Resources\WorkSessions\Pages\ListWorkSessions;
+use App\Filament\Resources\WorkSessions\Tables\WorkSessionsTable;
+use App\Models\WorkSession;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\Auth;
 
-class LoginEventResource extends Resource
+class WorkSessionResource extends Resource
 {
-    protected static ?string $model = LoginEvent::class;
+    protected static ?string $model = WorkSession::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClock;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
 
-    protected static ?string $navigationLabel = 'Login History';
+    protected static ?string $navigationLabel = 'Employee Sessions';
 
-    protected static ?string $modelLabel = 'Login Event';
+    protected static ?string $modelLabel = 'Employee Session';
 
-    protected static ?string $pluralModelLabel = 'Login History';
+    protected static ?string $pluralModelLabel = 'Employee Sessions';
 
     public static function canViewAny(): bool
     {
@@ -51,13 +51,13 @@ class LoginEventResource extends Resource
 
     public static function table(Table $table): Table
     {
-        return LoginEventsTable::configure($table);
+        return WorkSessionsTable::configure($table);
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => ListLoginEvents::route('/'),
+            'index' => ListWorkSessions::route('/'),
         ];
     }
 }

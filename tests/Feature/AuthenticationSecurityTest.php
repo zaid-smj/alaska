@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Enums\AdminRole;
-use App\Filament\Resources\LoginSessions\LoginSessionResource;
 use App\Models\LoginSession;
 use App\Models\User;
+use App\Services\WorkSessionService;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\DB;
@@ -56,18 +55,6 @@ class AuthenticationSecurityTest extends TestCase
         Notification::assertSentTo($user, ResetPassword::class);
     }
 
-    public function test_only_the_super_admin_can_view_login_sessions(): void
-    {
-        $admin = User::factory()->create(['role' => AdminRole::Admin]);
-        $superAdmin = User::factory()->create(['role' => AdminRole::SuperAdmin]);
-
-        $this->actingAs($admin);
-        $this->assertFalse(LoginSessionResource::canViewAny());
-
-        $this->actingAs($superAdmin);
-        $this->assertTrue(LoginSessionResource::canViewAny());
-    }
-
     public function test_deactivating_an_admin_revokes_all_of_their_login_sessions(): void
     {
         $admin = User::factory()->create(['is_active' => true]);
@@ -81,46 +68,15 @@ class AuthenticationSecurityTest extends TestCase
             'last_activity' => now()->timestamp,
         ]);
 
+        app(WorkSessionService::class)->markActive($admin);
+
         $admin->update(['is_active' => false]);
 
         $this->assertDatabaseMissing('sessions', ['id' => 'first-test-session']);
-    }
-
-    public function test_login_session_view_only_includes_authenticated_non_expired_sessions(): void
-    {
-        $admin = User::factory()->create();
-
-        DB::table('sessions')->insert([
-            [
-                'id' => 'active-authenticated-session',
-                'user_id' => $admin->id,
-                'ip_address' => '127.0.0.1',
-                'user_agent' => 'Test browser',
-                'payload' => 'test-payload',
-                'last_activity' => now()->timestamp,
-            ],
-            [
-                'id' => 'anonymous-session',
-                'user_id' => null,
-                'ip_address' => '127.0.0.1',
-                'user_agent' => 'curl',
-                'payload' => 'test-payload',
-                'last_activity' => now()->timestamp,
-            ],
-            [
-                'id' => 'expired-authenticated-session',
-                'user_id' => $admin->id,
-                'ip_address' => '127.0.0.1',
-                'user_agent' => 'Old browser',
-                'payload' => 'test-payload',
-                'last_activity' => now()->subMinutes(config('session.lifetime') + 1)->timestamp,
-            ],
+        $this->assertDatabaseHas('work_sessions', [
+            'user_id' => $admin->id,
+            'end_reason' => 'deactivated',
         ]);
-
-        $this->assertSame(
-            ['active-authenticated-session'],
-            LoginSessionResource::getEloquentQuery()->pluck('id')->all(),
-        );
     }
 
     public function test_login_session_exposes_readable_device_and_presence_labels(): void

@@ -4,7 +4,6 @@ namespace Tests\Feature;
 
 use App\Enums\AdminRole;
 use App\Filament\Resources\AuditLogs\AuditLogResource;
-use App\Filament\Resources\LoginEvents\LoginEventResource;
 use App\Models\AuditLog;
 use App\Models\LoginEvent;
 use App\Models\User;
@@ -25,11 +24,9 @@ class AuditLoggingTest extends TestCase
 
         $this->actingAs($superAdmin);
         $this->assertTrue(AuditLogResource::canViewAny());
-        $this->assertTrue(LoginEventResource::canViewAny());
 
         $this->actingAs($admin);
         $this->assertFalse(AuditLogResource::canViewAny());
-        $this->assertFalse(LoginEventResource::canViewAny());
     }
 
     public function test_sign_in_and_failed_sign_in_attempts_are_kept_out_of_the_audit_log(): void

@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Enums\AdminRole;
 use App\Models\User;
 use App\Services\AuditLogger;
+use App\Services\WorkSessionService;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
@@ -33,6 +34,7 @@ class ResetSuperAdminMfa extends Command
         $superAdmin->saveAppAuthenticationSecret(null);
         $superAdmin->saveAppAuthenticationRecoveryCodes(null);
         DB::table('sessions')->where('user_id', $superAdmin->id)->delete();
+        app(WorkSessionService::class)->end($superAdmin, 'security_reset');
 
         app(AuditLogger::class)->record(
             'security.mfa_reset',

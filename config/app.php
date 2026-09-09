@@ -69,6 +69,18 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Display Timezone
+    |--------------------------------------------------------------------------
+    |
+    | Dates remain stored in UTC, while administrator-facing timestamps are
+    | shown in the timezone where the team works.
+    |
+    */
+
+    'display_timezone' => env('APP_DISPLAY_TIMEZONE', 'Asia/Karachi'),
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
     |

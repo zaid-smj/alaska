@@ -83,7 +83,9 @@ class AdminInvitationService
         Notification::route('mail', $invitation->email)
             ->notify(new AdminInvitationNotification(
                 token: $token,
-                expiresAt: $invitation->expires_at->format('F j, Y \a\t g:i A T'),
+                expiresAt: $invitation->expires_at
+                    ->timezone(config('app.display_timezone'))
+                    ->format('F j, Y \a\t g:i A T'),
             ));
     }
 }

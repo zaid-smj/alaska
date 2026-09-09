@@ -34,7 +34,7 @@ class AuditLogsTable
                     ->badge()
                     ->formatStateUsing(fn (string $state): string => self::eventLabel($state))
                     ->color(fn (string $state): string => match ($state) {
-                        'invitation.revoked', 'session.revoked',
+                        'invitation.revoked',
                         'session.revoked_all', 'security.mfa_reset' => 'danger',
                         'invitation.accepted' => 'success',
                         default => 'gray',
@@ -71,7 +71,9 @@ class AuditLogsTable
                             ? "{$record->actor->name} ({$record->actor->email})"
                             : 'System / public';
                         $data['event'] = self::eventLabel($record->event);
-                        $data['created_at'] = $record->created_at->format('M j, Y g:i:s A T');
+                        $data['created_at'] = $record->created_at
+                            ->timezone(config('app.display_timezone'))
+                            ->format('M j, Y g:i:s A T');
                         $data['metadata'] = $record->metadata
                             ? json_encode($record->metadata, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES)
                             : 'No additional details';
@@ -110,7 +112,6 @@ class AuditLogsTable
             'invitation.resent',
             'invitation.revoked',
             'invitation.accepted',
-            'session.revoked',
             'session.revoked_all',
             'security.mfa_reset',
         ];
@@ -129,7 +130,6 @@ class AuditLogsTable
             'invitation.resent' => 'Invitation resent',
             'invitation.revoked' => 'Invitation revoked',
             'invitation.accepted' => 'Invitation accepted',
-            'session.revoked' => 'Session revoked',
             'session.revoked_all' => 'All sessions revoked',
             'security.mfa_reset' => 'MFA reset',
             default => str($event)->replace('.', ' ')->headline()->toString(),

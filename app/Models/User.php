@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use App\Enums\AdminRole;
 use App\Services\AuditLogger;
+use App\Services\WorkSessionService;
 use Database\Factories\UserFactory;
 use Filament\Auth\MultiFactor\App\Concerns\InteractsWithAppAuthentication;
 use Filament\Auth\MultiFactor\App\Concerns\InteractsWithAppAuthenticationRecovery;
@@ -85,6 +86,7 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
         static::updated(function (User $user) {
             if ($user->wasChanged('is_active') && ! $user->is_active) {
                 DB::table('sessions')->where('user_id', $user->id)->delete();
+                app(WorkSessionService::class)->end($user, 'deactivated');
             }
 
             $changes = collect(['name', 'email', 'role', 'is_active'])

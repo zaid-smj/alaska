@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Models\LoginEvent;
 use App\Models\User;
+use App\Services\WorkSessionService;
+use Filament\Support\Facades\FilamentTimezone;
 use Illuminate\Auth\Events\Failed;
 use Illuminate\Auth\Events\Login;
 use Illuminate\Auth\Events\Logout;
@@ -26,6 +28,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        FilamentTimezone::set(config('app.display_timezone'));
+
         Password::defaults(fn (): Password => Password::min(12)
             ->letters()
             ->mixedCase()
@@ -41,6 +45,12 @@ class AppServiceProvider extends ServiceProvider
                     'ip_address' => request()->ip(),
                     'user_agent' => request()->userAgent(),
                 ]);
+
+                app(WorkSessionService::class)->markActive(
+                    $event->user,
+                    request()->ip(),
+                    request()->userAgent(),
+                );
             }
         });
 
@@ -53,6 +63,12 @@ class AppServiceProvider extends ServiceProvider
                     'ip_address' => request()->ip(),
                     'user_agent' => request()->userAgent(),
                 ]);
+
+                app(WorkSessionService::class)->endIfNoOtherActiveDevices(
+                    $event->user,
+                    'logout',
+                    session()->getId(),
+                );
             }
         });
 

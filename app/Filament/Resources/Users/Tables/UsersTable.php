@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources\Users\Tables;
 
+use App\Models\LoginEvent;
 use App\Models\User;
 use App\Services\AuditLogger;
+use App\Services\WorkSessionService;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
 use Filament\Notifications\Notification;
@@ -54,6 +56,16 @@ class UsersTable
                         && DB::table('sessions')->where('user_id', $record->id)->exists())
                     ->action(function (User $record): void {
                         $revokedCount = DB::table('sessions')->where('user_id', $record->id)->delete();
+
+                        LoginEvent::create([
+                            'user_id' => $record->id,
+                            'event' => 'forced_logout',
+                            'attempted_email' => $record->email,
+                            'ip_address' => request()->ip(),
+                            'user_agent' => request()->userAgent(),
+                        ]);
+
+                        app(WorkSessionService::class)->end($record, 'forced_logout');
 
                         app(AuditLogger::class)->record(
                             'session.revoked_all',
