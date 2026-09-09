@@ -22,15 +22,13 @@ class UserForm
                     ->email()
                     ->required()
                     ->disabled(
-                        fn (?User $record): bool =>
-                            $record?->role === AdminRole::SuperAdmin
+                        fn (?User $record): bool => $record?->role === AdminRole::SuperAdmin
                     ),
 
                 Toggle::make('is_active')
                     ->label('Active')
                     ->disabled(
-                        fn (?User $record): bool =>
-                            $record?->role === AdminRole::SuperAdmin
+                        fn (?User $record): bool => $record?->role === AdminRole::SuperAdmin
                     ),
             ]);
     }

@@ -3,24 +3,29 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Enums\AdminRole;
+use App\Services\AuditLogger;
 use Database\Factories\UserFactory;
+use Filament\Auth\MultiFactor\App\Concerns\InteractsWithAppAuthentication;
+use Filament\Auth\MultiFactor\App\Concerns\InteractsWithAppAuthenticationRecovery;
+use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthentication;
+use Filament\Auth\MultiFactor\App\Contracts\HasAppAuthenticationRecovery;
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Database\Eloquent\Attributes\Fillable;
 use Illuminate\Database\Eloquent\Attributes\Hidden;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Enums\AdminRole;
-
-use Filament\Models\Contracts\FilamentUser;
-use Filament\Panel;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
-#[Fillable(['name', 'email', 'password', 'role', 'is_active'])]
+#[Fillable(['name', 'email', 'email_verified_at', 'password', 'role', 'is_active'])]
 #[Hidden(['password', 'remember_token'])]
-class User extends Authenticatable implements FilamentUser
+class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery
 {
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, InteractsWithAppAuthentication, InteractsWithAppAuthenticationRecovery, Notifiable;
 
     /**
      * Get the attributes that should be cast.
@@ -75,6 +80,38 @@ class User extends Authenticatable implements FilamentUser
                     ]);
                 }
             }
+        });
+
+        static::updated(function (User $user) {
+            if ($user->wasChanged('is_active') && ! $user->is_active) {
+                DB::table('sessions')->where('user_id', $user->id)->delete();
+            }
+
+            $changes = collect(['name', 'email', 'role', 'is_active'])
+                ->filter(fn (string $field): bool => $user->wasChanged($field))
+                ->mapWithKeys(fn (string $field): array => [$field => [
+                    'from' => $user->getRawOriginal($field),
+                    'to' => $user->getAttributes()[$field] ?? null,
+                ]])
+                ->all();
+
+            if ($changes !== []) {
+                app(AuditLogger::class)->record(
+                    'admin.updated',
+                    "Administrator {$user->email} was updated.",
+                    $user,
+                    ['changes' => $changes],
+                );
+            }
+        });
+
+        static::created(function (User $user) {
+            app(AuditLogger::class)->record(
+                'admin.created',
+                "Administrator {$user->email} was created.",
+                $user,
+                ['role' => $user->role->value],
+            );
         });
     }
 
