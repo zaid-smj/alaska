@@ -529,22 +529,22 @@ document.addEventListener("DOMContentLoaded", () => {
     All: {
       img: "assets/solutions/solutions-hero.webp",
       mobile_img: "assets/solutions/mobile/solutions-hero-mobile.webp",
-      title: 'Lead<span class="text-[#c00d1e]">-Acid</span>',
+      title: 'Lead-Acid <span class="text-[#c00d1e]">Batteries in Pakistan</span>',
     },
     Automotive: {
       img: "assets/solutions/automotive.webp",
       mobile_img: "assets/solutions/mobile/automotive-mobile.webp",
-      title: "Automotive",
+      title: 'Automotive <span class="text-[#c00d1e]">Batteries in Pakistan</span>',
     },
     Solar: {
       img: "assets/solutions/solar.webp",
       mobile_img: "assets/solutions/mobile/solar-mobile.webp",
-      title: "Solar",
+      title: 'Solar <span class="text-[#c00d1e]">Batteries in Pakistan</span>',
     },
     Industrial: {
       img: "assets/solutions/industrial.webp",
       mobile_img: "assets/solutions/mobile/industrial-mobile.webp",
-      title: "Industrial",
+      title: 'Solar <span class="text-[#c00d1e]">Batteries in Pakistan</span>',
     },
   };
 
