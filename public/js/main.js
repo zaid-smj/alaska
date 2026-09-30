@@ -697,7 +697,7 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
     const heroPrimaryBtnLabel = document.getElementById("home-hero-btn-primary-label");
     const heroSecondaryBtnLabel = document.getElementById("home-hero-btn-secondary-label");
 
-    const heroSlides = [
+    const fallbackHeroSlides = [
       {
         desktop: "assets/slider-home/slide-1.webp",
         mobile: "assets/solutions/mobile/automotive-mobile.webp",
@@ -730,6 +730,16 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
       },
     ];
 
+    const managedHeroSlides = window.ALASKA_CONTENT?.homeBanners;
+    const heroSlides = Array.isArray(managedHeroSlides)
+      ? managedHeroSlides
+      : fallbackHeroSlides;
+
+    if (!heroSlides.length) {
+      heroTrack.closest(".hero-section")?.classList.add("hidden");
+      return;
+    }
+
     const slidesWithLoop = [...heroSlides, heroSlides[0]];
 
     heroTrack.innerHTML = slidesWithLoop
@@ -757,14 +767,20 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
       if (heroTitle) heroTitle.textContent = slide.title;
       if (heroSubtitle) heroSubtitle.textContent = slide.subtitle;
 
-      if (heroPrimaryBtn && slide.primaryBtn) {
-        heroPrimaryBtn.href = slide.primaryBtn.href;
-        if (heroPrimaryBtnLabel) heroPrimaryBtnLabel.textContent = slide.primaryBtn.text;
+      if (heroPrimaryBtn) {
+        heroPrimaryBtn.classList.toggle("hidden", !slide.primaryBtn);
+        if (slide.primaryBtn) {
+          heroPrimaryBtn.href = slide.primaryBtn.href;
+          if (heroPrimaryBtnLabel) heroPrimaryBtnLabel.textContent = slide.primaryBtn.text;
+        }
       }
 
-      if (heroSecondaryBtn && slide.secondaryBtn) {
-        heroSecondaryBtn.href = slide.secondaryBtn.href;
-        if (heroSecondaryBtnLabel) heroSecondaryBtnLabel.textContent = slide.secondaryBtn.text;
+      if (heroSecondaryBtn) {
+        heroSecondaryBtn.classList.toggle("hidden", !slide.secondaryBtn);
+        if (slide.secondaryBtn) {
+          heroSecondaryBtn.href = slide.secondaryBtn.href;
+          if (heroSecondaryBtnLabel) heroSecondaryBtnLabel.textContent = slide.secondaryBtn.text;
+        }
       }
     }
 

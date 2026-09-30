@@ -2,7 +2,7 @@
  * Gallery Engine - Production Version
  */
 
-const galleryData = {
+const fallbackGalleryData = {
   corporate: [
     { src: "assets/gallery/corp/corp-3.jpg" },
     { src: "assets/gallery/corp/corp-5.jpg" },
@@ -27,6 +27,11 @@ const galleryData = {
   awards: [{ src: "assets/gallery/awards/award-2.jpg" }, { src: "assets/gallery/awards/award-3.jpg" }],
 };
 
+const managedGalleryData = window.ALASKA_CONTENT?.gallery;
+const galleryData = managedGalleryData && typeof managedGalleryData === "object"
+  ? managedGalleryData
+  : fallbackGalleryData;
+
 let currentCategoryImages = [];
 let currentMobileGalleryIndex = 0;
 let currentLightboxIndex = 0;
@@ -38,7 +43,7 @@ function updateGallery(category) {
   if (!rail) return;
 
   // Update Global Cache for the slider
-  currentCategoryImages = galleryData[category];
+  currentCategoryImages = galleryData[category] || [];
   currentMobileGalleryIndex = 0; // Reset mobile gallery index
 
   // Update Tab UI (also mirror to .filter-btn.active for consistent styling)
@@ -55,7 +60,7 @@ function updateGallery(category) {
     card.onclick = () => openLightbox(index); // Pass index to open at specific spot
 
     card.innerHTML = `
-            <img src="${item.src}" alt="${item.title}">
+            <img src="${item.src}" alt="${item.alt || item.title || "Gallery image"}">
             <div class="gallery-overlay"></div>
             
         `;
@@ -80,7 +85,7 @@ function openLightbox(index) {
       .map(
         (item) => `
         <div class="lightbox-slide">
-            <img src="${item.src}" alt="${item.title}" draggable="false">
+            <img src="${item.src}" alt="${item.alt || item.title || "Gallery image"}" draggable="false">
         </div>
     `,
       )
@@ -109,7 +114,7 @@ function renderMobileLightboxSlide() {
   if (!img) {
     slider.innerHTML = `
       <div class="lightbox-slide">
-          <img id="lightbox-mobile-img" class="lightbox-mobile-img" src="${item.src}" alt="${item.title}" draggable="false">
+          <img id="lightbox-mobile-img" class="lightbox-mobile-img" src="${item.src}" alt="${item.alt || item.title || "Gallery image"}" draggable="false">
       </div>
     `;
     return;
@@ -118,7 +123,7 @@ function renderMobileLightboxSlide() {
   img.classList.add("is-fading");
   requestAnimationFrame(() => {
     img.src = item.src;
-    img.alt = item.title || "";
+    img.alt = item.alt || item.title || "Gallery image";
     img.onload = () => img.classList.remove("is-fading");
   });
 }
@@ -133,12 +138,13 @@ function updateLightboxTitle(index) {
   const titleElem = document.getElementById("lightbox-title");
   if (!titleElem) return;
   if (currentCategoryImages[index]) {
-    titleElem.innerText = currentCategoryImages[index].title;
+    titleElem.innerText = currentCategoryImages[index].title || currentCategoryImages[index].alt || "";
   }
 }
 
 // Navigation Controls
 function nextLightbox() {
+  if (!currentCategoryImages.length) return;
   if (isMobileLightbox) {
     currentLightboxIndex = (currentLightboxIndex + 1) % currentCategoryImages.length;
     renderMobileLightboxSlide();
@@ -150,6 +156,7 @@ function nextLightbox() {
 }
 
 function prevLightbox() {
+  if (!currentCategoryImages.length) return;
   if (isMobileLightbox) {
     currentLightboxIndex = (currentLightboxIndex - 1 + currentCategoryImages.length) % currentCategoryImages.length;
     renderMobileLightboxSlide();
@@ -303,7 +310,15 @@ function updateMobileGallery() {
   const images = currentCategoryImages;
   const totalCount = images.length;
 
-  if (!featureImg || !leftImg || !rightImg || totalCount === 0) return;
+  if (!featureImg || !leftImg || !rightImg) return;
+
+  if (totalCount === 0) {
+    featureImg.removeAttribute("src");
+    leftImg.removeAttribute("src");
+    rightImg.removeAttribute("src");
+    if (dotsContainer) dotsContainer.innerHTML = "";
+    return;
+  }
 
   // Set feature image with smooth fade
   featureImg.classList.add("is-fading");
@@ -361,12 +376,14 @@ function updateGalleryDots() {
 
 function mobileNextGallery() {
   const totalCount = currentCategoryImages.length;
+  if (!totalCount) return;
   currentMobileGalleryIndex = (currentMobileGalleryIndex + 1) % totalCount;
   updateMobileGallery();
 }
 
 function mobilePrevGallery() {
   const totalCount = currentCategoryImages.length;
+  if (!totalCount) return;
   currentMobileGalleryIndex = (currentMobileGalleryIndex - 1 + totalCount) % totalCount;
   updateMobileGallery();
 }
@@ -378,6 +395,7 @@ function handleMobileImageClick(offset) {
   }
 
   const totalCount = currentCategoryImages.length;
+  if (!totalCount) return;
   let clickedIndex = currentMobileGalleryIndex + offset;
   clickedIndex = ((clickedIndex % totalCount) + totalCount) % totalCount;
   openLightbox(clickedIndex);

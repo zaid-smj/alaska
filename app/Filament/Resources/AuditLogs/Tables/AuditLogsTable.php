@@ -36,7 +36,9 @@ class AuditLogsTable
                     ->color(fn (string $state): string => match ($state) {
                         'invitation.revoked',
                         'session.revoked_all', 'security.mfa_reset' => 'danger',
-                        'invitation.accepted' => 'success',
+                        'invitation.accepted',
+                        'content.banner.created', 'content.gallery.created' => 'success',
+                        'content.banner.deleted', 'content.gallery.deleted' => 'danger',
                         default => 'gray',
                     })
                     ->searchable(),
@@ -114,6 +116,14 @@ class AuditLogsTable
             'invitation.accepted',
             'session.revoked_all',
             'security.mfa_reset',
+            'content.banner.created',
+            'content.banner.updated',
+            'content.banner.deleted',
+            'content.banner.reordered',
+            'content.gallery.created',
+            'content.gallery.updated',
+            'content.gallery.deleted',
+            'content.gallery.reordered',
         ];
 
         return collect($events)
@@ -132,6 +142,14 @@ class AuditLogsTable
             'invitation.accepted' => 'Invitation accepted',
             'session.revoked_all' => 'All sessions revoked',
             'security.mfa_reset' => 'MFA reset',
+            'content.banner.created' => 'Banner slide created',
+            'content.banner.updated' => 'Banner slide updated',
+            'content.banner.deleted' => 'Banner slide deleted',
+            'content.banner.reordered' => 'Banner slides reordered',
+            'content.gallery.created' => 'Gallery image added',
+            'content.gallery.updated' => 'Gallery image updated',
+            'content.gallery.deleted' => 'Gallery image removed',
+            'content.gallery.reordered' => 'Gallery images reordered',
             default => str($event)->replace('.', ' ')->headline()->toString(),
         };
     }
