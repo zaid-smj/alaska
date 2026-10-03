@@ -1053,7 +1053,7 @@ const featureData = [
   },
   {
     id: 3,
-    title: "DEEP DISCHARGE RECOVERY",
+    title: "GRAPHITE BATTERY DEEP DISCHARGE RECOVERY",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
                   <li>Normal batteries <b>suffer permanent</b> damage from deep discharges.</li>
                   <li>Graphite Lead Acid batteries <b>recover better</b> from deep discharge cycles.</li>
