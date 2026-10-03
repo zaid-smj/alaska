@@ -1027,7 +1027,7 @@ const featureData = [
   },
   {
     id: 1,
-    title: "ENERGY EFFICIENCY & HEAT",
+    title: "GRAPHITE BATTERY ENERGY EFFICIENCY & HEAT",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
                   <li>Traditional batteries generate <b>more heat and waste energy</b> due to high internal
                     resistance.
