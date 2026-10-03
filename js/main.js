@@ -1040,7 +1040,7 @@ const featureData = [
   },
   {
     id: 2,
-    title: "CYCLE LIFE & LONGEVITY",
+    title: "GRAPHITE BATTERY CYCLE LIFE & LONGEVITY",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
                   <li>Standard batteries last <b>300-500 cycles</b>, while graphite-enhanced versions last
                     <b>600-1000+
