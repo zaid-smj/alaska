@@ -1063,7 +1063,7 @@ const featureData = [
   },
   {
     id: 4,
-    title: "IDEAL FOR MODERN APPLICATIONS",
+    title: "GRAPHITE BATTERIES FOR MODERN APPLICATIONS",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
                   <li>Traditional Lead-Acid batteries are best for <b>low-drain uses</b> like motorcycles.</li>
                   <li>Graphite batteries excel in: Stop-Start Vehicles, Solar Energy Storage, Hybrid System &
