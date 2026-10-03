@@ -1013,7 +1013,7 @@ window.scrollCertCarousel = scrollCertCarousel;
 const featureData = [
   {
     id: 0,
-    title: "ADVANCED PLATE COMPOSITION",
+    title: "ADVANCED GRAPHITE LEAD-ACID BATTERY COMPOSITION",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
                 <li>Traditional batteries use <b>lead - antimony or lead - calcium grids</b > that degrade faster due
                     to
