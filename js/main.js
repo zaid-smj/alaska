@@ -1075,7 +1075,7 @@ const featureData = [
   },
   {
     id: 5,
-    title: "CHARGE ACCEPTANCE & SPEED",
+    title: "GRAPHITE BATTERY CHARGE ACCEPTANCE & SPEED",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
                   <li>Normal Lead Acid batteries charge <b>slower</b> and struggle in <b>partial state-of-charge
                       (PSoC)
