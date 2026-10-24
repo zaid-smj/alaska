@@ -1,9 +1,15 @@
 <?php
 
 use App\Http\Controllers\AdminInvitationController;
+use App\Http\Controllers\ProductCatalogController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\WorkSessionHeartbeatController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/lead-acid', [ProductCatalogController::class, 'index'])->name('catalog.lead-acid');
+Route::get('/products/compare-search', [ProductCatalogController::class, 'compareSearch'])->name('products.compare-search');
+Route::get('/products/{slug}', [ProductCatalogController::class, 'show'])->name('products.show');
+Route::get('/solutions/{type}', [ProductCatalogController::class, 'comingSoon'])->where('type', 'lithium-ion|inverters')->name('catalog.coming-soon');
 
 Route::get('/', [WebsiteController::class, 'home'])->name('site.home');
 Route::get('/index.html', [WebsiteController::class, 'home'])->name('site.index');

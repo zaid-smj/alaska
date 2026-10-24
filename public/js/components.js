@@ -5,62 +5,58 @@ const headerHTML = /* HTML */ `
     <div class="container mx-auto px-6">
       <div class="flex items-center h-20">
         <div class="w-1/4">
-          <a href="index.html">
-            <img src="assets/logo.png" alt="Alaska Logo" class="h-14 md:h-16 w-auto object-contain" />
+          <a href="/index.html">
+            <img src="/assets/logo.png" alt="Alaska Logo" class="h-14 md:h-16 w-auto object-contain" />
           </a>
         </div>
 
         <nav class="hidden lg:block w-3/4 h-full">
           <ul class="flex h-full items-center justify-end">
             <li class="nav-item">
-              <a href="index.html" class="nav-link">Home</a>
+              <a href="/index.html" class="nav-link">Home</a>
             </li>
 
             <li class="nav-item">
-              <a href="dry-charge.html" class="nav-link">Solutions</a>
+              <button type="button" class="nav-link" aria-label="Solutions menu">Solutions</button>
               <div class="dropdown-panel">
-                <a href="dry-charge.html" class="dropdown-item">Lead-Acid</a>
-                <a href="dry-charge.html#mf-section" class="dropdown-item">Maintenance Free</a>
-                <a href="l-ion.html" class="dropdown-item">Lithium-ion</a>
-                <a href="inverters.html" class="dropdown-item">Inverters</a>
-                <!--<a href="tubular.html" class="dropdown-item">Tubular</a>-->
-                <!--<a href="mcb.html" class="dropdown-item">Motorcycle</a>-->
-                <!--<a href="vrla.html" class="dropdown-item">VRLA</a>-->
+                <a href="/lead-acid" class="dropdown-item">Lead Acid</a>
+                <a href="/solutions/lithium-ion" class="dropdown-item">Lithium Ion</a>
+                <a href="/solutions/inverters" class="dropdown-item">Inverters</a>
               </div>
             </li>
 
             <li class="nav-item">
-              <a href="graphite.html" class="nav-link">Technology</a>
+              <a href="/graphite.html" class="nav-link">Technology</a>
               <div class="dropdown-panel">
-                <a href="graphite.html" class="dropdown-item">Graphite Lead-Acid</a>
-                <a href="CaAg.html" class="dropdown-item">Calcium Silver</a>
-                <a href="FePO.html" class="dropdown-item">Lithium ion</a>
+                <a href="/graphite.html" class="dropdown-item">Graphite Lead-Acid</a>
+                <a href="/CaAg.html" class="dropdown-item">Calcium Silver</a>
+                <a href="/FePO.html" class="dropdown-item">Lithium ion</a>
               </div>
             </li>
 
             <li class="nav-item">
-              <a href="dealers.html" class="nav-link">Partners</a>
+              <a href="/dealers.html" class="nav-link">Partners</a>
               <div class="dropdown-panel">
-                <a href="dealers.html" class="dropdown-item">Find a Partner</a>
-                <a href="become-dealer.html" class="dropdown-item">Become a Partner</a>
+                <a href="/dealers.html" class="dropdown-item">Find a Partner</a>
+                <a href="/become-dealer.html" class="dropdown-item">Become a Partner</a>
               </div>
             </li>
 
             <li class="nav-item">
-              <a href="vault.html" class="nav-link">Vault</a>
+              <a href="/vault.html" class="nav-link">Vault</a>
               <div class="dropdown-panel">
-                <a href="vault.html#blogs" class="dropdown-item">News</a>
-                <a href="vault.html#faqs" class="dropdown-item">FAQ<span class="lowercase">s</span></a>
-                <a href="vault.html#gallery" class="dropdown-item">Gallery</a>
+                <a href="/vault.html#blogs" class="dropdown-item">News</a>
+                <a href="/vault.html#faqs" class="dropdown-item">FAQ<span class="lowercase">s</span></a>
+                <a href="/vault.html#gallery" class="dropdown-item">Gallery</a>
               </div>
             </li>
 
             <li class="nav-item">
-              <a href="about.html" class="nav-link">About Us</a>
+              <a href="/about.html" class="nav-link">About Us</a>
             </li>
 
             <li class="nav-item">
-              <a href="support.html" class="nav-link">Contact Us</a>
+              <a href="/support.html" class="nav-link">Contact Us</a>
             </li>
           </ul>
         </nav>
@@ -82,8 +78,8 @@ const footerHTML = /* HTML */ `
       <div class="flex flex-col md:flex-row md:justify-between gap-8 items-center md:items-start mb-4">
         <!-- Logo Column -->
         <div class="flex flex-col justify-center md:justify-start">
-          <img src="assets/technology/tech.png" alt="Graphite Technology" class="h-14 md:h-16 w-auto object-contain" />
-          <img src="assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 mt-6 w-auto object-contain CaAg" />
+          <img src="/assets/technology/tech.png" alt="Graphite Technology" class="h-14 md:h-16 w-auto object-contain" />
+          <img src="/assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 mt-6 w-auto object-contain CaAg" />
         </div>
 
         <!-- Address Column -->
@@ -106,28 +102,28 @@ const footerHTML = /* HTML */ `
           <div class="grid grid-cols-1 md:grid-cols-2 gap-y-2 md:gap-y-0 gap-x-10 text-baseline font-medium text-gray-700 text-center md:text-left deep-mode-color">
             <ul class="flex flex-col space-y-2 items-center md:items-start">
               <li>
-                <a href="index.html" class="hover:text-[#c00d1e] transition-colors">Home</a>
+                <a href="/index.html" class="hover:text-[#c00d1e] transition-colors">Home</a>
               </li>
               <li>
-                <a href="dry-charge.html" class="hover:text-[#c00d1e] transition-colors">Solutions</a>
+                <a href="/lead-acid" class="hover:text-[#c00d1e] transition-colors">Solutions</a>
               </li>
               <li>
-                <a href="graphite.html" class="hover:text-[#c00d1e] transition-colors">Technology</a>
+                <a href="/graphite.html" class="hover:text-[#c00d1e] transition-colors">Technology</a>
               </li>
               <li>
-                <a href="vault.html" class="hover:text-[#c00d1e] transition-colors">Vault</a>
+                <a href="/vault.html" class="hover:text-[#c00d1e] transition-colors">Vault</a>
               </li>
             </ul>
 
             <ul class="flex flex-col space-y-2 items-center md:items-start">
               <li>
-                <a href="dealers.html" class="hover:text-[#c00d1e] transition-colors">Partner Locator</a>
+                <a href="/dealers.html" class="hover:text-[#c00d1e] transition-colors">Partner Locator</a>
               </li>
               <li>
-                <a href="about.html" class="hover:text-[#c00d1e] transition-colors">About Us</a>
+                <a href="/about.html" class="hover:text-[#c00d1e] transition-colors">About Us</a>
               </li>
               <li>
-                <a href="support.html" class="hover:text-[#c00d1e] transition-colors">Contact Us</a>
+                <a href="/support.html" class="hover:text-[#c00d1e] transition-colors">Contact Us</a>
               </li>
             </ul>
           </div>
@@ -210,8 +206,8 @@ function setupMobileMenu() {
       id="mobile-panel"
       class="absolute top-0 right-0 h-full w-full max-w-[320px] bg-white shadow-2xl translate-x-full transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)] flex flex-col">
       <div class="flex justify-between items-center p-6 border-b border-gray-100">
-        <a href="index.html">
-          <img src="assets/logo.png" alt="Alaska Logo" class="h-14 md:h-16 w-auto object-contain" />
+        <a href="/index.html">
+          <img src="/assets/logo.png" alt="Alaska Logo" class="h-14 md:h-16 w-auto object-contain" />
         </a>
         <button id="close-mobile" class="text-zinc-500 hover:text-black transition-colors">
           <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -224,7 +220,7 @@ function setupMobileMenu() {
         <div id="mobile-menu-container" class="flex w-[200%] h-full transition-transform duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]">
           <div id="main-view" class="w-1/2 h-full flex flex-col">
             <nav class="p-4">
-              <a href="index.html" class="flex items-center px-4 py-4 text-[15px] font-semibold text-white  rounded-lg transition-all">Home</a>
+              <a href="/index.html" class="flex items-center px-4 py-4 text-[15px] font-semibold text-white  rounded-lg transition-all">Home</a>
 
               <button onclick="openSubmenu('solutions-sub')" class="w-full flex justify-between items-center px-4 py-4 text-[15px] font-semibold text-white  rounded-lg transition-all group">
                 Solutions <i class="fa-solid fa-chevron-right text-[10px] text-white group-hover:text-[#c00d1e]"></i>
@@ -242,8 +238,8 @@ function setupMobileMenu() {
                 Vault <i class="fa-solid fa-chevron-right text-[10px] text-white group-hover:text-[#c00d1e]"></i>
               </button>
 
-              <a href="about.html" class="flex items-center px-4 py-4 text-[15px] font-semibold text-white  rounded-lg transition-all">About Us</a>
-              <a href="support.html" class="flex items-center px-4 py-4 text-[15px] font-semibold text-white  rounded-lg transition-all">Contact Us</a>
+              <a href="/about.html" class="flex items-center px-4 py-4 text-[15px] font-semibold text-white  rounded-lg transition-all">About Us</a>
+              <a href="/support.html" class="flex items-center px-4 py-4 text-[15px] font-semibold text-white  rounded-lg transition-all">Contact Us</a>
             </nav>
           </div>
 
@@ -257,9 +253,9 @@ function setupMobileMenu() {
       </div>
 
       <div class="flex justify-between items-center p-6 border-b border-gray-100">
-        <a href="index.html">
-          <img src="assets/technology/tech.png" alt="Tech Logo" class="h-14 md:h-16 w-auto object-contain" />
-          <img src="assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 mt-4 w-auto object-contain" />
+        <a href="/index.html">
+          <img src="/assets/technology/tech.png" alt="Tech Logo" class="h-14 md:h-16 w-auto object-contain" />
+          <img src="/assets/calcium_silver_logo.png" alt="Calcium Silver Technology" class="h-14 md:h-16 mt-4 w-auto object-contain" />
         </a>
       </div>
     </div>
@@ -270,19 +266,21 @@ function setupMobileMenu() {
   // Corporate Style Submenus
   const submenus = {
     "solutions-sub": `
-      <a href="dry-charge.html" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">Dry Charge Batteries</a>
+      <a href="/lead-acid" class="px-4 py-4 text-[15px] font-semibold text-white transition-colors">Lead Acid</a>
+      <a href="/solutions/lithium-ion" class="px-4 py-4 text-[15px] font-semibold text-white transition-colors">Lithium Ion</a>
+      <a href="/solutions/inverters" class="px-4 py-4 text-[15px] font-semibold text-white transition-colors">Inverters</a>
     `,
     "tech-sub": `
-      <a href="graphite.html" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">Graphite Technology</a>
+      <a href="/graphite.html" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">Graphite Technology</a>
     `,
     "dealers-sub": `
-      <a href="dealers.html" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">Find a Partner</a>
-      <a href="become-dealer.html" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">Become a Partner</a>
+      <a href="/dealers.html" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">Find a Partner</a>
+      <a href="/become-dealer.html" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">Become a Partner</a>
     `,
     "vault-sub": `
-      <a href="vault.html#blogs" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">News</a>
-      <a href="vault.html#faqs" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">FAQs</a>
-      <a href="vault.html#gallery" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">Gallery</a>
+      <a href="/vault.html#blogs" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">News</a>
+      <a href="/vault.html#faqs" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">FAQs</a>
+      <a href="/vault.html#gallery" class="px-4 py-4 text-[15px] font-semibold text-white  transition-colors">Gallery</a>
     `,
   };
 
@@ -337,16 +335,16 @@ function setupMobileMenu() {
 
 // Set active nav item based on current page
 function setActiveNavItem() {
-  const currentPage = window.location.pathname.split("/").pop() || "index.html";
-  const navLinks = document.querySelectorAll(".nav-link");
-
-  navLinks.forEach((link) => {
-    const href = link.getAttribute("href");
-    // Check if link matches current page
-    if (href === currentPage || (currentPage === "" && href === "index.html") || (currentPage === "index.html" && href === "index.html")) {
-      link.closest(".nav-item").classList.add("active");
+  const path = window.location.pathname;
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && (new URL(href, window.location.origin).pathname === path || (path === '/' && href === '/index.html'))) {
+      link.closest('.nav-item').classList.add('active');
     }
   });
+  if (path === '/lead-acid' || path.startsWith('/products/') || path.startsWith('/solutions/')) {
+    document.querySelector('.nav-item > button.nav-link')?.closest('.nav-item').classList.add('active');
+  }
 }
 
 function init() {
@@ -432,4 +430,25 @@ document.addEventListener("click", function (e) {
   } catch (err) {
     // ignore
   }
+});
+
+// A keyboard- and touch-accessible trigger, with hover retained for desktop users.
+document.addEventListener('DOMContentLoaded', () => {
+  const trigger = document.querySelector('.nav-item > button.nav-link');
+  if (!trigger) return;
+  const panel = trigger.nextElementSibling;
+  panel.id = 'solutions-dropdown';
+  trigger.setAttribute('aria-controls', panel.id);
+  trigger.setAttribute('aria-expanded', 'false');
+  const close = () => { trigger.setAttribute('aria-expanded', 'false'); trigger.parentElement.classList.remove('solutions-open'); };
+  trigger.addEventListener('click', () => {
+    const open = trigger.getAttribute('aria-expanded') !== 'true';
+    trigger.setAttribute('aria-expanded', String(open));
+    trigger.parentElement.classList.toggle('solutions-open', open);
+  });
+  trigger.parentElement.addEventListener('mouseenter', () => trigger.setAttribute('aria-expanded', 'true'));
+  trigger.parentElement.addEventListener('mouseleave', close);
+  trigger.parentElement.addEventListener('focusout', event => { if (!trigger.parentElement.contains(event.relatedTarget)) close(); });
+  document.addEventListener('click', event => { if (!trigger.parentElement.contains(event.target)) close(); });
+  document.addEventListener('keydown', event => { if (event.key === 'Escape' && trigger.parentElement.contains(document.activeElement)) { close(); trigger.blur(); } });
 });

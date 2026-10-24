@@ -3986,3 +3986,6 @@ select#provinceFilter::-webkit-scrollbar-thumb {
     background-image: url("assets/future-1-mobile.webp");
   }
 }
+
+/* Solutions dropdown supports mouse, touch and keyboard activation. */
+.nav-item.solutions-open .dropdown-panel, .nav-item:focus-within .dropdown-panel { opacity: 1; visibility: visible; pointer-events: auto; transform: translateY(0); }
