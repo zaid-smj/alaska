@@ -1,0 +1,283 @@
+/* =====================================================================
+   Alaska Batteries — page banner standard (single source of truth)
+   ---------------------------------------------------------------------
+   • Home page:   <section class="home-banner …">  → full fold
+   • Every other page: <section class="page-banner …"> → half fold
+
+   "Fold" = the visible screen below the 80px fixed header. These rules
+   override the older per-page heights in style.css / ui.css / pages.css
+   (h-440, md:h-[400px], h-[92vh], .sc-hero 300–420px, etc.).
+   Load this file after style.css, ui.css and pages.css.
+   ===================================================================== */
+
+:root {
+  --header-h: 80px;
+  --fold: calc(100vh - var(--header-h));
+}
+@supports (height: 100svh) {
+  :root {
+    --fold: calc(100svh - var(--header-h));
+  }
+}
+
+/* ---------- Half fold: every page except the home page ---------- */
+.page-banner {
+  position: relative !important;
+  display: block !important;
+  width: 100%;
+  height: calc(var(--fold) / 2) !important;
+  min-height: 260px !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+  overflow: hidden !important;
+}
+
+/* inner wrappers fill the banner */
+.page-banner > .banner-wrapper,
+.page-banner > .banner-wrapper2,
+.page-banner > .banner-wrapper3,
+.page-banner > div:first-child,
+.page-banner .hero-carousel,
+.page-banner .hero-carousel-viewport {
+  height: 100% !important;
+  min-height: 0 !important;
+  width: 100%;
+}
+
+/* the banner photo always covers the banner, whatever its own size classes say */
+.page-banner > picture,
+.page-banner > .banner-wrapper > picture,
+.page-banner > .banner-wrapper2 > picture,
+.page-banner > .banner-wrapper3 > picture,
+.page-banner > div:first-child > picture {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.page-banner > img,
+.page-banner > picture > img,
+.page-banner > .banner-wrapper > img,
+.page-banner > .banner-wrapper2 > img,
+.page-banner > .banner-wrapper3 > img,
+.page-banner > div:first-child > img,
+.page-banner > div:first-child > picture > img {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 0 !important;
+  object-fit: cover !important;
+}
+/* keep the title box above the photo */
+.page-banner #hero-text-box,
+.page-banner .sc-hero-box {
+  z-index: 2;
+}
+
+/* ---------- Full fold: home page only ---------- */
+.home-banner {
+  height: var(--fold) !important;
+  min-height: 480px !important;
+  max-height: none !important;
+  aspect-ratio: auto !important;
+}
+.home-banner .hero-carousel,
+.home-banner .hero-carousel-viewport,
+.home-banner .hero-carousel-track {
+  height: 100% !important;
+}
+
+/* Desktop/tablet: title box sits in the vertical middle of the banner, so a
+   long title never spills out of a shorter (half-fold) banner. */
+@media (min-width: 768px) {
+  .page-banner #hero-text-box,
+  .page-banner .sc-hero-box {
+    top: 50% !important;
+    bottom: auto !important;
+    transform: translateY(-50%) !important;
+    max-height: calc(100% - 24px) !important;
+  }
+}
+
+/* ---------- Buttons inside page banners (js/components.js → BANNER_BUTTONS) ---------- */
+.banner-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+.banner-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.75);
+  background: transparent;
+  color: #fff !important;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-decoration: none !important;
+  text-transform: none;
+  letter-spacing: 0;
+  transition:
+    background-color 0.15s,
+    border-color 0.15s;
+}
+.banner-btn:hover {
+  border-color: #fff;
+  background: rgba(255, 255, 255, 0.12);
+}
+.banner-btn.is-primary {
+  background: #c00d1e;
+  border-color: #c00d1e;
+}
+.banner-btn.is-primary:hover {
+  background: #a00a18;
+  border-color: #a00a18;
+}
+.banner-btn:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+}
+@media (max-width: 767px) {
+  .banner-actions {
+    gap: 6px;
+    margin-top: 16px;
+  }
+  .banner-btn {
+    min-height: 34px;
+    padding: 6px 12px;
+    font-size: 12.5px;
+  }
+}
+/* Title box grows to fit its buttons (older banners fixed it at 75px on phones) */
+.page-banner #hero-text-box {
+  height: auto !important;
+  max-height: none !important;
+  display: block !important;
+}
+.page-banner #hero-text-box {
+  bottom: auto !important;
+}
+
+/* ---------- Banner headings: one size on every page ---------- */
+.page-banner h1,
+.home-banner h1 {
+  font-size: 22px !important;
+  line-height: 1.2 !important;
+}
+@media (min-width: 768px) {
+  .page-banner h1,
+  .home-banner h1 {
+    font-size: 40px !important;
+    line-height: 1.15 !important;
+  }
+}
+
+/* =====================================================================
+   One background for every half-fold banner: the Alaska bolt banner.
+   The artwork fills the banner (cover) from its left edge, so the dark
+   panel is always fully visible; any cropping happens on the car side.
+   The title and buttons sit on the dark panel, with no box behind them.
+   ===================================================================== */
+.page-banner {
+  /* banner height (see .page-banner above) and the artwork's drawn width */
+  --pb-h: max(260px, calc(var(--fold) / 2));
+  --pb-img-w: max(100vw, calc(var(--pb-h) * 1200 / 350));
+  background: #262427 url("../assets/banner/page-banner.png") no-repeat left center / cover !important;
+}
+.page-banner img,
+.page-banner picture,
+.page-banner .hero-carousel-viewport,
+.page-banner .hero-carousel-dots,
+.page-banner .hero-carousel-btn {
+  display: none !important;
+}
+.page-banner > div,
+.page-banner .banner-wrapper,
+.page-banner .banner-wrapper2,
+.page-banner .banner-wrapper3,
+.page-banner .hero-carousel {
+  background: transparent !important;
+}
+/* title box: no bubble, kept inside the dark panel (27.5% of the artwork's width) */
+.page-banner #hero-text-box,
+.page-banner .sc-hero-box {
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+  left: 0 !important;
+  right: auto !important;
+  --pb-pad: clamp(16px, 3vw, 48px);
+  /* the title size lives on the box, so "em" below means one title-letter height */
+  font-size: clamp(29.2px, calc(2.42vw + 5px), 44.6px) !important;
+  /* keep to the dark panel, but never so narrow that a title needs more than 3 lines */
+  width: max(calc(var(--pb-img-w) * 0.275 - var(--pb-pad) - 20px), 9.8em) !important;
+  max-width: none !important;
+  padding: 0 0 0 var(--pb-pad) !important;
+  margin: 0 !important;
+  top: 50% !important;
+  bottom: auto !important;
+  transform: translateY(-50%) !important;
+}
+.page-banner #hero-text-box h1,
+.page-banner .sc-hero-box h1 {
+  font-size: 1em !important;
+}
+/* more room between the title and its buttons */
+.page-banner .banner-actions {
+  margin-top: 28px;
+  gap: 10px;
+}
+@media (max-width: 767px) {
+  .page-banner .banner-actions {
+    margin-top: 22px;
+    gap: 8px;
+  }
+}
+
+/* banner buttons always sit on one line; the row may extend past the title onto the artwork */
+.page-banner .banner-actions {
+  flex-wrap: nowrap !important;
+  width: max-content;
+  max-width: calc(100vw - var(--pb-pad, 16px) - 12px);
+}
+.page-banner .banner-btn {
+  white-space: nowrap;
+  flex: none;
+}
+/* phones: a row that is wider than the screen scrolls sideways instead of wrapping */
+@media (max-width: 767px) {
+  .page-banner .banner-actions {
+    width: calc(100vw - var(--pb-pad, 16px)) !important;
+    max-width: none;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding: 2px 16px 2px 2px;
+    margin-left: -2px;
+  }
+  .page-banner .banner-actions::-webkit-scrollbar {
+    display: none;
+  }
+}
+/* let the button row run past the title box */
+.page-banner #hero-text-box,
+.page-banner .sc-hero-box {
+  overflow: visible !important;
+}
+/* outline buttons keep a dark fill so they stay readable where the row crosses the artwork */
+.page-banner .banner-btn:not(.is-primary) {
+  background: rgba(38, 36, 39, 0.85);
+}
+.page-banner .banner-btn:not(.is-primary):hover {
+  background: rgba(60, 58, 62, 0.95);
+}

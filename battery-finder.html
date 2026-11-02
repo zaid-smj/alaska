@@ -1,0 +1,122 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Battery Finder | Alaska Batteries Pakistan</title>
+  <meta name="description"
+    content="Find the right Alaska car battery for your vehicle. Choose your make, model and engine to see the recommended Alaska battery, maintenance-free option and dealers near you." />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://alaskabatteries.com/battery-finder.html">
+  <meta property="og:title" content="Battery Finder | Alaska Batteries" />
+  <meta property="og:description" content="Pick your car and engine to find the right Alaska battery." />
+  <meta property="og:image" content="https://alaskabatteries.com/assets/automotive-home.webp" />
+  <meta name="theme-color" content="#c00d1e" />
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <link rel="stylesheet" href="css/battery-finder.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+</head>
+
+<body class="bg-gray-50 text-black font-sans overflow-x-hidden">
+  <div id="header-placeholder"></div>
+
+  <div class="sc bf" id="bf-root">
+
+    <section class="page-banner sc-hero" aria-label="Battery Finder">
+      <picture>
+        <source srcset="assets/mobile/automotive-mob.webp" media="(max-width: 767px)">
+        <img src="assets/automotive-home.webp" alt="Car on a coastal road with an Alaska automotive battery" fetchpriority="high" />
+      </picture>
+      <div class="sc-hero-box">
+        <h1>Battery <span>Finder</span></h1>
+      </div>
+    </section>
+
+    <div class="sc-wrap">
+<p class="tool-preview-note" role="note" style="padding:12px 18px;background:#fff7ed;color:#7c2d12;border-radius:8px;margin:0 0 24px">Preview: recommendations use the supplied sample catalog. <a href="/lead-acid" style="text-decoration:underline">Browse our current Lead Acid catalog.</a></p>
+      <!-- Finder -->
+      <section class="sc-card bf-finder" aria-labelledby="bf-title">
+        <div class="bf-finder-head">
+          <h2 id="bf-title">Find the right battery for your <em>vehicle</em></h2>
+        </div>
+
+        <form class="bf-panel" id="panel-vehicle" aria-labelledby="bf-title" novalidate>
+          <div class="bf-selects">
+            <div class="bf-sel">
+              <label class="sc-label" for="bf-make"><span class="bf-step">1</span>Make</label>
+              <select class="sc-select" id="bf-make" required></select>
+            </div>
+            <div class="bf-sel">
+              <label class="sc-label" for="bf-model"><span class="bf-step">2</span>Model</label>
+              <select class="sc-select" id="bf-model" required disabled></select>
+            </div>
+            <div class="bf-sel">
+              <label class="sc-label" for="bf-engine"><span class="bf-step">3</span>Engine</label>
+              <select class="sc-select" id="bf-engine" required disabled></select>
+            </div>
+            <button type="submit" class="sc-btn bf-go" id="bf-go" disabled><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>Find battery</button>
+          </div>
+          <div class="bf-popular">
+            <span class="sc-label" style="margin:0">Popular:</span>
+            <div class="sc-chips" id="bf-popular"></div>
+          </div>
+        </form>
+
+      </section>
+
+      <!-- Results -->
+      <section class="bf-results" id="bf-results" aria-live="polite" tabindex="-1"></section>
+
+      <!-- Help -->
+      <section class="bf-help" aria-labelledby="help-title">
+        <h3 id="help-title">How to choose a car battery</h3>
+        <div class="bf-help-grid">
+          <div class="sc-card sc-pad">
+            <div class="bf-help-ic"><i class="fa-solid fa-ruler-combined" aria-hidden="true"></i></div>
+            <h4>1. Case size</h4>
+            <p>The new battery must fit the tray and hold-down clamp. Match the size code on your old battery: NS40 for most small cars, N70 for diesel pickups and SUVs.</p>
+          </div>
+          <div class="sc-card sc-pad">
+            <div class="bf-help-ic"><i class="fa-solid fa-left-right" aria-hidden="true"></i></div>
+            <h4>2. Terminal side</h4>
+            <p>L and R versions are mirror images: the positive (+) terminal sits on opposite sides. Match the letter on your old battery (or bring it to the dealer). With the wrong side, the cables won't reach.</p>
+          </div>
+          <div class="sc-card sc-pad">
+            <div class="bf-help-ic"><i class="fa-solid fa-gauge-high" aria-hidden="true"></i></div>
+            <h4>3. Capacity (Ah)</h4>
+            <p>Bigger engines, diesels and cars with heavy AC use need more amp-hours. For extra capacity, choose a higher plate option in the same case size, so it still fits your tray. Going smaller shortens battery life.</p>
+          </div>
+        </div>
+        <p class="sc-help" style="margin-top:14px">Not sure? Any <a href="dealers.html#partner-finder" style="color:var(--red);font-weight:700">Alaska partner</a> can check your vehicle and fit the right battery.</p>
+      </section>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/tools-catalog-data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/vehicle-data.js"></script>
+  <script src="js/battery-finder-engine.js"></script>
+  <script src="js/battery-finder.js"></script>
+</body>
+
+</html>

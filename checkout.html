@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout | Alaska Batteries</title>
+  <meta name="description" content="Review the batteries in your cart and send them to Alaska Batteries for a quotation." />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://alaskabatteries.com/checkout.html">
+  <meta name="theme-color" content="#c00d1e" />
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/split-form.css" />
+  <script src="/js/form-preview.js" defer></script>
+</head>
+
+<body class="bg-gray-50 text-black font-sans overflow-x-hidden">
+  <div id="header-placeholder"></div>
+
+  <main class="sc pg">
+    <section class="page-banner sc-hero" aria-labelledby="page-title">
+      <picture>
+        <source srcset="assets/mobile/become-dealer-mobile.webp" media="(max-width: 767px)">
+        <img src="assets/become-dealer.webp" alt="" fetchpriority="high" />
+      </picture>
+      <div class="sc-hero-box">
+        <h1 id="page-title">Checkout</h1>
+      </div>
+    </section>
+
+    <section id="cart-content" class="sf-section flex flex-col md:flex-row border-t border-gray-100">
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider" id="order-card">
+        <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">Your <span class="text-[#c00d1e]">Cart</span></h2>
+        <div id="cart-box" aria-live="polite"></div>
+
+        <form data-preview-form id="order-form" class="space-y-8" novalidate hidden>
+          <h3 class="sf-label" style="margin-top:40px">Delivery Details</h3>
+          <div class="sf-row">
+            <div><label class="sr-only" for="o-name">Full Name</label><input type="text" id="o-name" placeholder="Full Name" required autocomplete="name" class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+            <div><label class="sr-only" for="o-phone">Phone / WhatsApp</label><input type="tel" id="o-phone" placeholder="Phone / WhatsApp" required autocomplete="tel" class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+          </div>
+          <div class="sf-row">
+            <div><label class="sr-only" for="o-email">Email Address</label><input type="email" id="o-email" placeholder="Email Address" required autocomplete="email" class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+            <div><label class="sr-only" for="o-city">City</label><input type="text" id="o-city" placeholder="City" required autocomplete="address-level2" class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+          </div>
+          <div><label class="sr-only" for="o-address">Delivery Address</label><input type="text" id="o-address" placeholder="Delivery Address" required autocomplete="street-address" class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+          <div><label class="sr-only" for="o-notes">Notes (optional)</label><textarea rows="2" id="o-notes" maxlength="800" placeholder="Notes (Optional)" class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent resize-none"></textarea></div>
+          <label class="sc-check"><input type="checkbox" id="o-consent"> <span>I agree to Alaska Batteries contacting me about this order, as described in the <a href="privacy-policy.html#privacy-content" class="text-[#c00d1e] font-bold">privacy policy</a>.</span></label>
+          <p class="sc-error" id="o-err" role="alert"></p>
+          <button type="submit" id="o-submit" class="btn-primary btn-lg">Place Order</button>
+        </form>
+      </div>
+
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white flex flex-col justify-start">
+        <div class="space-y-8" id="cart-aside"></div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/tools-catalog-data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/forms.js"></script>
+  <script>
+    (function () {
+      var Cart = window.AlaskaCart;
+      var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+      var catalog = typeof batteryData !== "undefined" ? batteryData : [];
+      var box = document.getElementById("cart-box");
+      var aside = document.getElementById("cart-aside");
+
+      function product(id) { return catalog.find(function (b) { return String(b.id) === String(id); }); }
+
+      var F = window.AlaskaForms;
+      var $ = function (id) { return document.getElementById(id); };
+      var form = $("order-form");
+      var MAX = Cart.max || 49;
+      var H = function (t) { return '<h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">' + t + '</h4>'; };
+      var talk = '<div class="pt-8 border-t border-gray-200">' + H("Prefer to Talk?") +
+        '<ul class="space-y-3 text-gray-600 text-sm">' +
+        '<li class="flex items-start gap-3"><i class="fas fa-envelope text-[#c00d1e] mt-1" aria-hidden="true"></i><span>Email us at <a href="mailto:info@alaskabatteries.com" class="text-[#c00d1e] font-semibold hover:underline">info@alaskabatteries.com</a></span></li>' +
+        '<li class="flex items-start gap-3"><i class="fab fa-whatsapp text-[#c00d1e] mt-1" aria-hidden="true"></i><span>Phone or <a href="https://wa.me/923266660757" target="_blank" rel="noopener" class="text-[#c00d1e] font-semibold hover:underline">WhatsApp</a> on <a href="tel:+923266660757" class="text-[#c00d1e] font-semibold hover:underline">+92 326 666 0757</a></span></li></ul></div>';
+      var bulk = '<div>' + H("Bulk Orders") + '<p class="text-gray-600 text-base leading-relaxed mb-6">The cart is for orders of up to ' + MAX + ' units. For 50 units or more, request a quote and our sales team will price your order.</p>' +
+        '<a class="sf-wa" href="quote.html#quote-content">Request a Quote</a></div>';
+
+      function render() {
+        var items = Cart.items();
+        form.hidden = !items.length;
+        if (!items.length) {
+          box.innerHTML = '<div class="sf-cart-empty"><p class="text-gray-600 text-base leading-relaxed">Your cart is empty. Find the right battery, then tap "Add to Cart" on any product.</p>' +
+            '<div class="sf-actions"><a class="btn-primary btn-lg" href="battery-finder.html#bf-root">Find My Battery</a><a class="sf-file-btn" href="/lead-acid">Browse Batteries</a></div></div>';
+          aside.innerHTML = bulk + talk;
+          return;
+        }
+        box.innerHTML = '<ul class="sf-cart">' + items.map(function (it) {
+          var p = product(it.id) || {};
+          var spec = [p.ah ? p.ah + " Ah" : "", p.p ? p.p + " V" : "", p.boxSize || "", p.warranty && !/none/i.test(p.warranty) ? p.warranty + " warranty" : ""].filter(Boolean).join(" · ");
+          var name = p.model || it.model;
+          return '<li class="sf-cart-row" data-id="' + esc(it.id) + '">' +
+            '<div class="img">' + (it.image || p.image ? '<img src="' + esc(p.image || it.image) + '" alt="" loading="lazy">' : "") + '</div>' +
+            '<div class="info"><div class="name">' + esc(name) + '</div>' + (spec ? '<div class="meta">' + esc(spec) + '</div>' : "") + (it.note ? '<div class="note">' + esc(it.note) + '</div>' : "") +
+            '<div class="ctrl"><div class="qty" role="group" aria-label="Quantity for ' + esc(name) + '">' +
+              '<button type="button" data-act="dec" aria-label="Decrease quantity">−</button>' +
+              '<input type="number" inputmode="numeric" min="1" max="' + MAX + '" value="' + it.qty + '" aria-label="Quantity">' +
+              '<button type="button" data-act="inc" aria-label="Increase quantity">+</button></div>' +
+            '<button type="button" class="cart-remove" data-act="remove"><i class="fa-regular fa-trash-can" aria-hidden="true"></i> Remove</button></div></div>' +
+            '</li>';
+        }).join("") + '</ul>' +
+          '<div class="sf-cart-more"><a class="sf-link" href="battery-finder.html#bf-root">+ Add More Products</a><button type="button" class="sf-link-btn" id="cart-clear">Empty Cart</button></div>';
+        var units = Cart.count();
+        aside.innerHTML = '<div>' + H("Summary") +
+          '<dl class="sf-sum"><div><dt>Products</dt><dd>' + items.length + '</dd></div><div><dt>Units</dt><dd>' + units + ' <small style="font-size:13px;font-weight:600;color:#6b7280">of ' + MAX + '</small></dd></div><div><dt>Payment</dt><dd>Confirmed by phone</dd></div></dl></div>' +
+          '<div>' + H("What Happens Next") + '<ol class="sf-steps">' +
+          '<li><div><strong>Place your order</strong><p>Add your delivery details and send the order.</p></div></li>' +
+          '<li><div><strong>We call to confirm</strong><p>Our team confirms the price, payment and delivery with you.</p></div></li>' +
+          '<li><div><strong>Delivery</strong><p>Your batteries are delivered to the address you gave.</p></div></li></ol></div>' +
+          bulk + talk;
+      }
+
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var bad = F.validate([
+          { el: $("o-name"), msg: "name" },
+          { el: $("o-phone"), test: F.isPhone, msg: "phone number" },
+          { el: $("o-email"), test: F.isEmail, msg: "email" },
+          { el: $("o-city"), msg: "city" },
+          { el: $("o-address"), msg: "delivery address" },
+        ], $("o-err"));
+        if (bad) return;
+        if (!$("o-consent").checked) { $("o-err").textContent = "Please tick the consent box so we can contact you about your order."; $("o-consent").focus(); return; }
+        var items = Cart.items();
+        if (!items.length) return;
+        var ref = F.reference("OR");
+        var lines = ["WEBSITE ORDER (payment to be confirmed by phone)", "Reference: " + ref, "", "Items:"];
+        items.forEach(function (it) { var p = product(it.id) || {}; lines.push("- " + it.qty + " × " + (p.model || it.model) + (it.note ? " (" + it.note + ")" : "")); });
+        lines.push("Total units: " + Cart.count(), "", "Deliver to: " + $("o-address").value.trim() + ", " + $("o-city").value.trim());
+        if ($("o-notes").value.trim()) lines.push("", "Notes: " + $("o-notes").value.trim());
+        var btn = $("o-submit"); btn.disabled = true; btn.textContent = "Sending…";
+        var res = await F.send({
+          form: "order",
+          name: $("o-name").value.trim(), email: $("o-email").value.trim(), phone: $("o-phone").value.trim(), city: $("o-city").value.trim(),
+          subject: "Order " + ref + " — " + $("o-city").value.trim(),
+          message: lines.join("\n"),
+        });
+        btn.disabled = false; btn.textContent = "Place Order";
+        if (res.ok) {
+          Cart.clear();
+          var card = $("order-card");
+          card.innerHTML = '<div class="pg-success" role="status" tabindex="-1"><div class="ok"><i class="fa-solid fa-check" aria-hidden="true"></i></div><h3>Order received</h3><p>Thank you. Our team will call you to confirm the price, payment and delivery. Your reference:</p><div class="pg-ref">' + ref + '</div><div class="sc-actions" style="justify-content:center"><a class="sc-btn ghost" href="/lead-acid">Keep Browsing</a><a class="sc-btn plain" href="index.html">Back to Home</a></div></div>';
+          card.querySelector(".pg-success").focus();
+        } else {
+          $("o-err").innerHTML = F.esc(res.message) + ' You can also send your order on <a href="' + F.waLink("Assalam o Alaikum, I'd like to order:\n" + lines.slice(3).join("\n")) + '" target="_blank" rel="noopener" class="text-[#c00d1e] font-bold">WhatsApp</a>.';
+        }
+      });
+
+      box.addEventListener("click", function (e) {
+        var row = e.target.closest(".sf-cart-row"); if (!row) return;
+        var id = row.dataset.id; var act = e.target.closest("[data-act]"); if (!act) return;
+        var input = row.querySelector("input");
+        if (act.dataset.act === "inc") Cart.setQty(id, Number(input.value) + 1);
+        if (act.dataset.act === "dec") Cart.setQty(id, Math.max(1, Number(input.value) - 1));
+        if (act.dataset.act === "remove") { Cart.remove(id); window.alaskaToast && window.alaskaToast("Removed from cart"); }
+      });
+      box.addEventListener("change", function (e) {
+        var row = e.target.closest(".sf-cart-row"); if (row && e.target.matches("input")) Cart.setQty(row.dataset.id, e.target.value);
+      });
+      box.addEventListener("click", function (e) { if (e.target.closest("#cart-clear")) Cart.clear(); });
+
+      // Re-render on changes, keeping keyboard focus on the same control
+      document.addEventListener("alaska:cart", function () {
+        var a = document.activeElement, row = a && a.closest && a.closest(".sf-cart-row"), act = a && a.dataset && a.dataset.act;
+        var id = row && row.dataset.id;
+        render();
+        if (id) {
+          var r = box.querySelector('.sf-cart-row[data-id="' + id + '"]');
+          var target = r && (act ? r.querySelector('[data-act="' + act + '"]') : r.querySelector("input"));
+          if (target) target.focus(); else box.focus();
+        }
+      });
+      box.setAttribute("tabindex", "-1");
+      render();
+    })();
+  </script>
+</body>
+
+</html>

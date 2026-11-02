@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Warranty | Alaska Batteries</title>
+  <meta name="description" content="Official Alaska Batteries warranty terms for dry-charge, maintenance-free and Life Series lithium batteries, warranty periods by model, and how to claim." />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://alaskabatteries.com/warranty.html">
+  <meta name="theme-color" content="#c00d1e" />
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/split-form.css" />
+  <style>
+    /* warranty terms: pick a battery type, then a card period */
+    .wt-tabs { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0 16px; }
+    .wt-tabs button { padding: 12px 20px; border-radius: 999px; border: 2px solid var(--line); background: var(--surface); color: var(--ink); font-weight: 800; font-size: 14px; cursor: pointer; }
+    .wt-tabs button:hover { border-color: var(--red); }
+    .wt-tabs button[aria-selected="true"] { background: var(--red); border-color: var(--red); color: #fff; }
+    .wt-sub { display: inline-flex; padding: 4px; gap: 4px; border-radius: 999px; background: var(--surface-2); border: 1px solid var(--line); margin-bottom: 14px; }
+    .wt-sub button { padding: 8px 18px; border-radius: 999px; border: 0; background: transparent; color: var(--ink-2); font-weight: 800; font-size: 13px; cursor: pointer; }
+    .wt-sub button[aria-pressed="true"] { background: var(--surface); color: var(--red); box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+    .wt-tabs button:focus-visible, .wt-sub button:focus-visible { outline: 2px solid var(--red); outline-offset: 2px; }
+    .wt-anchor { display: block; position: relative; top: -100px; }
+    .wt-model-list { list-style: none; margin: 0 0 6px; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+    .wt-model-list li { padding: 5px 10px; border-radius: 8px; background: var(--surface-2); border: 1px solid var(--line); font-size: 13px; font-weight: 700; }
+    #terms { padding-bottom: 48px; }
+    .wt-panel > .sc-card { width: 100%; }
+    .wt-models-card { margin-bottom: 18px; }
+    .wt-head { margin: 4px 0 10px; color: var(--red); font-size: 13px; font-weight: 900; letter-spacing: 0.12em; text-transform: uppercase; }
+    .wt-panel .sc-card > h4:first-child { margin-top: 0; }
+    .wt-models-card .wt-model-list { margin: 0; }
+  </style>
+  <script src="/js/form-preview.js" defer></script>
+</head>
+
+<body class="bg-gray-50 text-black font-sans overflow-x-hidden">
+  <div id="header-placeholder"></div>
+
+  <main class="sc pg">
+    <section class="page-banner sc-hero" aria-labelledby="page-title">
+      <picture>
+        <source srcset="assets/mobile/support-mobile.webp" media="(max-width: 767px)">
+        <img src="assets/support2.webp" alt="" fetchpriority="high" />
+      </picture>
+      <div class="sc-hero-box">
+        <h1 id="page-title">Warranty</h1>
+      </div>
+    </section>
+
+    <section id="reg-content" class="sf-section flex flex-col md:flex-row border-t border-gray-100">
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider" id="reg-content-left">
+        <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">Register Your <span class="text-[#c00d1e]">Warranty</span></h2>
+        <form data-preview-form id="reg-form" class="space-y-8" novalidate>
+          <div class="sf-row">
+            <div><label class="sr-only" for="r-name">Full Name</label><input type="text" id="r-name" placeholder="Full Name" required autocomplete="name"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+            <div><label class="sr-only" for="r-phone">Phone / WhatsApp</label><input type="tel" id="r-phone" placeholder="Phone / WhatsApp" required autocomplete="tel"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+          </div>
+          <div class="sf-row">
+            <div><label class="sr-only" for="r-email">Email Address</label><input type="email" id="r-email" placeholder="Email Address" required autocomplete="email"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+            <div><label class="sr-only" for="r-city">City</label><input type="text" id="r-city" placeholder="City" required autocomplete="address-level2"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+          </div>
+          <div class="sf-row">
+            <div><label class="sr-only" for="r-type">Product type</label><select id="r-type" required class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent"><option value="" disabled selected>Product type</option><option>Dry-charge lead-acid</option><option>Maintenance-free (MF) lead-acid</option><option>Lithium (Life Series)</option><option>Inverter</option></select></div>
+            <div><label class="sr-only" for="r-model">Model</label><select id="r-model" required class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent"><option value="" disabled selected>Model</option></select></div>
+          </div>
+          <div class="sf-row">
+            <div><label class="sr-only" for="r-serial">Battery Code / Serial No.</label><input type="text" id="r-serial" placeholder="Battery Code / Serial No." required
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+            <div><label class="sr-only" for="r-card">Warranty Card No.</label><input type="text" id="r-card" placeholder="Warranty Card No." required
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+          </div>
+          <div class="sf-row">
+            <div><label class="sr-only" for="r-date">Date of purchase</label><input type="date" id="r-date" placeholder="Date of purchase" required aria-label="Date of purchase" title="Date of purchase"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+            <div><label class="sr-only" for="r-dealer">Bought From (Dealer / Shop)</label><input type="text" id="r-dealer" placeholder="Bought From (Dealer / Shop)" required
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+          </div>
+
+          <div class="sf-file">
+            <input type="file" id="r-file" accept=".pdf,.jpg,.jpeg,.png" aria-describedby="r-file-name" />
+            <label for="r-file" class="sf-file-btn"><i class="fas fa-paperclip" aria-hidden="true"></i> <span class="sf-file-act">Attach Warranty Card</span></label>
+            <span id="r-file-name" class="sf-file-name">Optional: photo of your stamped warranty card or invoice (PDF or image, up to 5 MB).</span>
+          </div>
+
+          <label class="sc-check"><input type="checkbox" id="r-consent" required> <span>I confirm the details are correct and agree to the <a href="privacy-policy.html#privacy-content" class="text-[#c00d1e] font-bold">privacy policy</a>.</span></label>
+          <p class="sc-error" id="r-err" role="alert"></p>
+          <button type="submit" id="r-submit" class="btn-primary btn-lg">Register Warranty</button>
+        </form>
+      </div>
+
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white flex flex-col justify-start">
+        <div class="space-y-8">
+          <div>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Warranty at a Glance</h4>
+            <p class="text-gray-600 text-base leading-relaxed mb-4">Alaska batteries carry a free-replacement warranty against manufacturing defects. The period depends on the product and is printed on the warranty card supplied with your battery.</p>
+            <ul class="space-y-3 text-gray-600 text-sm">
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span><strong>Dry-charge lead-acid:</strong> 6 or 9 months, depending on the card</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span><strong>Maintenance-free (MF):</strong> 6 or 15 months, depending on the card</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span><strong>Lithium (Life Series):</strong> 5 years</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span><strong>Inverters:</strong> 2 years</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Why Register?</h4>
+            <ul class="space-y-3 text-gray-600 text-sm">
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Keeps an online record of your purchase with Alaska Batteries</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Makes it quicker to match your battery if you ever need to claim</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Your stamped warranty card is still required for any claim, so keep it safe</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="pt-8 border-t border-gray-200">
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Need to Make a Claim?</h4>
+            <p class="text-gray-600 text-sm mb-3">Tell us about the battery and the problem, and our service team will contact you.</p>
+            <a class="sc-btn" href="warranty-claim.html#claim-content"><i class="fa-solid fa-file-signature" aria-hidden="true"></i>File a Claim</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="sc-wrap" id="terms">
+      <h2 class="pg-title">Official <em>warranty</em> terms</h2>
+
+      <div class="wt-tabs" role="tablist" aria-label="Product type">
+        <button type="button" role="tab" id="tab-dry" aria-controls="panel-dry" aria-selected="true">Dry-Charge</button>
+        <button type="button" role="tab" id="tab-mf" aria-controls="panel-mf" aria-selected="false" tabindex="-1">Maintenance-Free (MF)</button>
+        <button type="button" role="tab" id="tab-lfp" aria-controls="panel-lfp" aria-selected="false" tabindex="-1">LiFePO4 (Life Series)</button>
+        <button type="button" role="tab" id="tab-inv" aria-controls="panel-inv" aria-selected="false" tabindex="-1">Inverters</button>
+      </div>
+
+      <section class="wt-panel" id="panel-dry" role="tabpanel" aria-labelledby="tab-dry">
+        <span id="dry-charge" class="wt-anchor"></span><span id="periods" class="wt-anchor"></span>
+        <div class="wt-sub" role="group" aria-label="Warranty card">
+          <button type="button" data-period="6" aria-pressed="true">6 Months</button>
+          <button type="button" data-period="9" aria-pressed="false">9 Months</button>
+        </div>
+        <h3 class="wt-head">Models with this warranty</h3>
+        <div class="wt-models-card">
+          <div class="wt-models" data-series="dry"></div>
+        </div>
+        <h3 class="wt-head">Warranty terms &amp; conditions</h3>
+        <div class="sc-card sc-pad">
+              <ol class="w-terms"><li>The warranty card must be obtained, fully completed, signed, and stamped by the dealer.</li><li>Initial battery charging is mandatory.</li><li>The warranty covers manufacturing defects only.</li><li>The warranty does not cover repaired or physically damaged batteries, or faults caused by overcharging, misuse, deep discharge, incorrect installation, or tampering with the warranty card or battery code.</li><li>The warranty is valid for <b data-period="6">6 months from the date of sale or 12 months from the date of manufacture</b><b data-period="9" hidden>9 months from the date of sale or 15 months from the date of manufacture</b>, whichever comes first.</li><li>The warranty period for the claimed battery will commence from the original sale date of the old (replaced) battery.</li><li>The company reserves the right to modify the warranty terms without prior notice.</li><li>The warranty is void in case of reverse connection or installation in a vehicle with a lower capacity than recommended.</li><li>The warranty does not apply to solar or generator usage.</li><li>After warranty replacement, acid charges are payable by the customer.</li><li>In case of disputes, only Islamabad courts shall have jurisdiction.</li></ol>
+        </div>
+      </section>
+
+      <section class="wt-panel" id="panel-mf" role="tabpanel" aria-labelledby="tab-mf" hidden>
+        <span id="mf" class="wt-anchor"></span>
+        <div class="wt-sub" role="group" aria-label="Warranty card">
+          <button type="button" data-period="6" aria-pressed="true">6 Months</button>
+          <button type="button" data-period="15" aria-pressed="false">15 Months</button>
+        </div>
+        <h3 class="wt-head">Models with this warranty</h3>
+        <div class="wt-models-card">
+          <div class="wt-models" data-series="mf"></div>
+        </div>
+        <h3 class="wt-head">Warranty terms &amp; conditions</h3>
+        <div class="sc-card sc-pad">
+              <ol class="w-terms"><li>Warranty card must be fully completed, signed &amp; stamped by dealer at purchase. Otherwise, the claim will not be accepted.</li><li><b data-period="6">6 months from the date of sale or 12 months from manufacturing date</b><b data-period="15" hidden>15 months from the date of sale or 21 months from manufacturing date</b>. If the battery fails within this period, it will be replaced free of charge.</li><li>Replacement battery warranty will be counted from original battery purchase date.</li><li>Check terminal voltage at purchase time. If below 12.5V, recharging is dealer's responsibility.</li><li>Warranty applies only to manufacturing defects.</li><li>No claim for faulty electrical system, overcharge, sulphation, or dry/burnt cells.</li><li>Warranty void if: repaired, physically damaged, overcharged, misused, deep discharged, wrongly installed, or card/code altered.</li><li>Company reserves the right to amend warranty terms without prior notice.</li><li>Warranty will be void in case of reverse connection or installation in lower capacity vehicle.</li><li>Warranty will be void if used in solar, generator, DC system, commercial, or rental vehicles.</li><li>Defective battery must be returned to dealer in original condition (without removing electrolyte).</li><li>In case of any dispute, only the courts of Islamabad shall have jurisdiction.</li></ol>
+        </div>
+      </section>
+
+      <section class="wt-panel" id="panel-lfp" role="tabpanel" aria-labelledby="tab-lfp" hidden>
+        <span id="lithium" class="wt-anchor"></span>
+        <h3 class="wt-head">Models with this warranty</h3>
+        <div class="wt-models-card">
+          <ul class="wt-model-list" id="wt-lfp-models"></ul>
+        </div>
+        <h3 class="wt-head">Warranty terms &amp; conditions</h3>
+        <div class="sc-card sc-pad">
+              <h4>Period of warranty</h4>
+              <p class="prose" style="margin:0 0 12px">Five (05) Years Warranty from the date of delivery under normal operating conditions at given Number of Cycles Vs Depth of Discharge whichever comes first. Lithium-ion (LiFePO4) Batteries are guaranteed to be free from defects in material and workmanship.</p>
+              <h4>Provisions and claims procedure</h4>
+              <ol class="w-terms"><li>The battery must be installed and maintained in accordance with the industry practices and H-Power Technologies (Pvt) Limited applicable operating procedure.</li><li>The battery will not be considered defective unless irregular decrease in overall battery performance is observed.</li><li>Each battery should be charged, discharged and stored in accordance with the manufacturer printed instruction.</li><li>Battery should be recharged immediately following a discharge.</li><li>Battery environmental conditions shall be maintained as per industry practices and given datasheet/manual.</li><li>Warranty is void if the battery becomes unserviceable due to fire, wreckage, freezing, neglect, abuse, force majeure, parts of the battery are tampered/modified or the battery is serviced by persons not authorized by H-Power Technologies (Pvt) Limited.</li><li>Warranty is void if the batteries are used in conjunction with other brand else than Alaska Batteries or connected in a string of different capacities.</li><li>Installation and periodic inspection reports regarding temperature, load, voltage settings, number of cycles and duration are to be maintained by end user and made available to H-Power Technologies (Pvt) Limited on request to support any warranty claim adjustment.</li><li>In case of any complaint user agrees that the manufacturer or his agent shall be granted free access on selected sites as mutually agreed with reasonable notice along with the operational data log of the installed batteries to monitor and realize battery condition in operational scenario.</li></ol>
+              <h4>Claims</h4>
+              <div class="w-list"><ul><li>Contact original point of purchase/delivery for instructions on applicable warranty claim procedures where batteries are delivered.</li><li>Warranty claims must be submitted in writing with proof of purchase and battery serial number.</li><li>Upon satisfactory proof of claim as determined by H-Power Technologies (Pvt) Limited after sales services department the battery will be repaired or replaced based on the test report and remaining warranty period will be considered from the date of delivery.</li><li>Under no circumstances can product be returned, credited or exchanged without written authority from H-Power Technologies (Pvt) Limited.</li></ul></div>
+              <h4>Limitations</h4>
+              <div class="w-list"><ul><li>3 Years Replacement/Repair and 2 Years Parts Services is the only warranty and remedy provided by H-Power Technologies (Pvt) Limited.</li><li>All Lithium batteries should only be used as per prescribed instructions and industry practices.</li><li>In no event shall H-Power Technologies (Pvt) Limited be liable, except to the extent that this limitation is found to be unenforceable, any such dispute will be resolved in the jurisdiction of Islamabad courts under applicable law.</li></ul></div>
+            </div>
+      </section>
+      <section class="wt-panel" id="panel-inv" role="tabpanel" aria-labelledby="tab-inv" hidden>
+        <span id="inverters" class="wt-anchor"></span>
+        <h3 class="wt-head">Models with this warranty</h3>
+        <div class="wt-models-card">
+          <ul class="wt-model-list" id="wt-inv-models"></ul>
+        </div>
+        <h3 class="wt-head">Warranty terms &amp; conditions</h3>
+        <div class="sc-card sc-pad">
+              <h4>Two-year warranty</h4>
+              <ol class="w-terms"><li>This product offers two years warranty.</li><li>The warranty is available only to customers who purchase the solar inverter through authorised distributors.</li><li>The warranty is valid only on presentation of a fully completed warranty card.</li><li>This warranty covers repairs for malfunctions that occur during the warranty period.</li><li>Parts and maintenance costs beyond the warranty period, other than after-sale services, shall be borne by the customer.</li><li>The original warranty card and invoice must be presented for claim verification.</li></ol>
+              <h4>Conditions that void the warranty</h4>
+              <div class="w-list"><ul><li>Any unauthorised change to the stamped or filled warranty card by the customer or distributor automatically voids the warranty.</li><li>The warranty is void if the product is serviced at an unauthorised centre or disassembled by the customer.</li><li>Damage caused by accidents, short circuits, voltage fluctuations, substandard wiring, abnormally high or low voltage, fire, overloading or improper installation is not covered.</li><li>The warranty is void if the product is altered, misused, mishandled, damaged in an accident, or has a tampered serial number.</li></ul></div>
+              <h4>Company disclaimer</h4>
+              <div class="w-list"><ul><li>The company assumes no liability for force majeure events or emergency legal circumstances.</li><li>The company is not liable for loss or damage during installation, commissioning or transport, or arising from misuse of the product.</li></ul></div>
+              <h4>Applicable law</h4>
+              <p class="prose" style="margin:0 0 12px">This product and its warranty are governed by local laws. In case of disputes, only Islamabad courts shall have jurisdiction.</p>
+              <h4>Service</h4>
+              <p class="prose" style="margin:0">Inverter service is handled through our customer care network: the head office in Islamabad and our offices in Rawalpindi, Lahore, Faisalabad, Multan, Peshawar, Sukkur and Karachi. See <a href="support.html#info-container" class="ab-link" style="color:var(--red);font-weight:700">office addresses and phone numbers</a>.</p>
+            </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/tools-catalog-data.js"></script>
+  <script src="js/lithium-data.js"></script>
+  <script src="js/inverter-data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/forms.js"></script>
+  <script>
+    // Warranty terms: battery-type tabs, card-period switch and model lists (js/data.js)
+    (function () {
+      var esc = function (v) { return String(v == null ? "" : v).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+      var data = typeof batteryData !== "undefined" ? batteryData : [];
+      var months = function (b) { var m = /(\d+)\s*Month/i.exec(b.warranty || ""); return m ? m[1] : null; };
+      var isMf = function (b) { return b.series === "mf"; };
+      var fillModels = function (panel, period) {
+        var box = panel.querySelector(".wt-models");
+        if (!box) return;
+        var mf = box.dataset.series === "mf";
+        var list = data.filter(function (b) { return isMf(b) === mf && months(b) === period; });
+        var tbc = mf ? data.filter(function (b) { return isMf(b) && b.warrantyStatus; }) : [];
+        box.innerHTML = (list.length ? '<ul class="wt-model-list">' + list.map(function (b) { return "<li>" + esc(b.model) + "</li>"; }).join("") + "</ul>" : '<p class="sc-help">No current models on this card.</p>') +
+          (tbc.length ? '<p class="sc-help" style="margin-top:8px">Warranty not yet published for: ' + tbc.map(function (b) { return esc(b.model); }).join(", ") + ". Ask your dealer.</p>" : "");
+      };
+      var setPeriod = function (panel, period) {
+        panel.querySelectorAll(".wt-sub button").forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.period === period ? "true" : "false"); });
+        panel.querySelectorAll("[data-period]:not(button)").forEach(function (el) { el.hidden = el.dataset.period !== period; });
+        fillModels(panel, period);
+      };
+      document.querySelectorAll(".wt-panel").forEach(function (panel) {
+        var first = panel.querySelector(".wt-sub button");
+        if (!first) return;
+        panel.querySelectorAll(".wt-sub button").forEach(function (b) { b.addEventListener("click", function () { setPeriod(panel, b.dataset.period); }); });
+        setPeriod(panel, first.dataset.period);
+      });
+      // Life Series models (js/lithium-data.js)
+      var invList = document.getElementById("wt-inv-models");
+      if (invList && typeof inverterData !== "undefined") invList.innerHTML = inverterData.map(function (m) { return "<li>" + esc(m.model) + "</li>"; }).join("");
+      var lfp = document.getElementById("wt-lfp-models");
+      if (lfp && typeof lithiumData !== "undefined") {
+        lfp.innerHTML = lithiumData.map(function (m) { return "<li>" + esc(m.code || m.title) + "</li>"; }).join("");
+      }
+      // battery-type tabs
+      var tabs = Array.prototype.slice.call(document.querySelectorAll(".wt-tabs [role=tab]"));
+      var select = function (tab, focus) {
+        tabs.forEach(function (t) {
+          var on = t === tab;
+          t.setAttribute("aria-selected", on ? "true" : "false");
+          t.tabIndex = on ? 0 : -1;
+          document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+        });
+        if (focus) tab.focus();
+      };
+      tabs.forEach(function (t, i) {
+        t.addEventListener("click", function () { select(t); });
+        t.addEventListener("keydown", function (e) {
+          var n = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+          if (n) { e.preventDefault(); select(tabs[(i + n + tabs.length) % tabs.length], true); }
+        });
+      });
+      // links like warranty.html#lithium or #mf open the matching tab
+      var openFromHash = function () {
+        var id = location.hash.slice(1);
+        var anchor = id && document.getElementById(id);
+        var panel = anchor && anchor.closest && anchor.closest(".wt-panel");
+        if (!panel) return;
+        select(document.getElementById(panel.getAttribute("aria-labelledby")));
+        var go = function () { document.getElementById("terms").scrollIntoView({ block: "start" }); }; setTimeout(go, 50); setTimeout(go, 400);
+      };
+      window.addEventListener("hashchange", openFromHash);
+      openFromHash();
+    })();
+  </script>
+  <script>
+    // Warranty registration form
+    (function () {
+      var F = window.AlaskaForms;
+      var $ = function (id) { return document.getElementById(id); };
+      if (!F || !$("reg-form")) return;
+      var data = typeof batteryData !== "undefined" ? batteryData : [];
+      var lithium = typeof lithiumData !== "undefined" ? lithiumData.map(function (m) { return m.code || m.title; }) : [];
+      // Model list follows the chosen product type
+      var modelsFor = function (type) {
+        if (/MF/.test(type)) return data.filter(function (b) { return b.series === "mf"; }).map(function (b) { return b.model; });
+        if (/Dry/.test(type)) return data.filter(function (b) { return b.series !== "mf"; }).map(function (b) { return b.model; });
+        if (/Lithium/.test(type)) return lithium;
+        if (/Inverter/.test(type)) return typeof inverterData !== "undefined" ? inverterData.map(function (m) { return m.model; }) : [];
+        return [];
+      };
+      var fillModels = function () {
+        var list = modelsFor($("r-type").value);
+        $("r-model").innerHTML = '<option value="" disabled selected>Model</option>' +
+          list.map(function (m) { return "<option>" + F.esc(m) + "</option>"; }).join("") + "<option>Other / not sure</option>";
+      };
+      $("r-type").addEventListener("change", fillModels);
+      fillModels();
+      $("r-date").max = new Date().toISOString().slice(0, 10);
+      F.fileButton($("r-file"));
+
+      $("reg-form").addEventListener("submit", async function (e) {
+        e.preventDefault();
+        var bad = F.validate([
+          { el: $("r-name"), msg: "name" },
+          { el: $("r-phone"), test: F.isPhone, msg: "phone number" },
+          { el: $("r-email"), test: F.isEmail, msg: "email" },
+          { el: $("r-city"), msg: "city" },
+          { el: $("r-type"), msg: "product type" },
+          { el: $("r-model"), msg: "model" },
+          { el: $("r-serial"), msg: "battery code / serial number" },
+          { el: $("r-card"), msg: "warranty card number" },
+          { el: $("r-date"), test: function (v) { return v && v <= new Date().toISOString().slice(0, 10); }, msg: "purchase date" },
+          { el: $("r-dealer"), msg: "where you bought it" },
+        ], $("r-err"));
+        if (bad) return;
+        if (!$("r-consent").checked) { $("r-err").textContent = "Please tick the confirmation box."; $("r-consent").focus(); return; }
+
+        var ref = F.reference("WR");
+        var lines = [
+          "WARRANTY REGISTRATION " + ref,
+          "City: " + $("r-city").value.trim(),
+          "Product: " + $("r-type").value + " — " + $("r-model").value,
+          "Battery code / serial no.: " + $("r-serial").value.trim(),
+          "Warranty card no.: " + $("r-card").value.trim(),
+          "Purchased: " + $("r-date").value + " from " + $("r-dealer").value.trim(),
+        ];
+        var btn = $("r-submit");
+        btn.disabled = true; btn.textContent = "Sending…";
+        var res = await F.send(F.withFile({
+          form: "warranty-registration",
+          name: $("r-name").value.trim(),
+          email: $("r-email").value.trim(),
+          phone: $("r-phone").value.trim(),
+          city: $("r-city").value.trim(),
+          subject: "Warranty registration " + ref + " — " + $("r-model").value,
+          message: lines.join("\n"),
+        }, $("r-file")));
+        btn.disabled = false; btn.textContent = "Register Warranty";
+        if (res.ok) {
+          var box = $("reg-content-left");
+          box.innerHTML = '<div class="pg-success" role="status"><div class="ok"><i class="fa-solid fa-check" aria-hidden="true"></i></div><h3>Warranty registered</h3>' +
+            '<p>Thank you. Your registration has been sent. Please keep this reference with your stamped warranty card:</p><div class="pg-ref">' + ref + '</div>' +
+            '<div class="sc-actions" style="justify-content:center"><a class="sc-btn ghost" href="#terms">Warranty terms</a><a class="sc-btn plain" href="index.html">Back to home</a></div></div>';
+          box.setAttribute("tabindex", "-1"); box.focus();
+        } else {
+          $("r-err").innerHTML = F.esc(res.message) + ' You can send the same details on <a href="' + F.waLink(lines.join("\n") + "\nName: " + $("r-name").value + "\nPhone: " + $("r-phone").value) + '" target="_blank" rel="noopener" style="color:var(--red);font-weight:800">WhatsApp</a> instead.';
+        }
+      });
+    })();
+  </script>
+</body>
+
+</html>

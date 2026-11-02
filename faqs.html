@@ -1,0 +1,1909 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs | Alaska Batteries Pakistan</title>
+  <meta name="description"
+    content="Answers to common questions about choosing, caring for and claiming warranty on Alaska batteries in Pakistan.">
+  <meta name="keywords"
+    content="battery FAQs Pakistan, Alaska Batteries warranty questions, battery care questions, which battery for my car">
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://alaskabatteries.com/faqs.html">
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/split-form.css" />
+  <style>
+    /* how-to guides: two columns of expandable cards */
+    .guide-grid { display: grid; gap: 14px; align-items: start; }
+    /* desktop zigzag ("W"): guides alternate left and right, and the right-hand
+       column starts half a card lower. Two independent columns (built by the
+       script at the end of the page), so opening a guide only pushes down its own column */
+    .guide-col { display: grid; gap: 14px; align-content: start; }
+    @media (min-width: 900px) {
+      .guide-grid.is-split { grid-template-columns: 1fr 1fr; }
+      .guide-grid.is-split .guide-col + .guide-col { padding-top: 64px; }
+    }
+    .guide-card { border: 1px solid #e5e7eb; border-bottom-width: 4px; border-radius: 10px; background: #fff; }
+    .guide-card summary { display: flex; align-items: center; gap: 14px; padding: 18px 20px; cursor: pointer; list-style: none; }
+    .guide-card summary::-webkit-details-marker { display: none; }
+    .guide-card summary > i:first-child { width: 40px; height: 40px; flex: none; display: grid; place-items: center; border-radius: 10px; background: #fdecee; color: #c00d1e; font-size: 17px; }
+    .guide-card summary span { flex: 1; display: grid; gap: 2px; }
+    .guide-card summary strong { font-size: 16px; }
+    .guide-card summary small { font-size: 13px; color: #6b7280; }
+    .guide-plus { color: #c00d1e; transition: transform 0.25s; }
+    .guide-card[open] .guide-plus { transform: rotate(45deg); }
+    .guide-card summary:hover strong { color: #c00d1e; }
+    .guide-card summary:focus-visible { outline: 2px solid #c00d1e; outline-offset: -2px; border-radius: 10px; }
+    .guide-card .sf-steps { padding: 0 20px 20px; }
+    .guide-card .sf-steps p { margin: 3px 0 0; font-size: 14px; color: inherit; }
+    .faq-count { font-weight: 600; opacity: 0.6; }
+    /* topic buttons: wrap instead of squeezing */
+    .faq-filters { flex-wrap: wrap; overflow: visible !important; }
+    @media (max-width: 639px) {
+      .faq-filters { display: grid !important; grid-template-columns: 1fr 1fr; gap: 8px !important; }
+    }
+    .guide-body { padding: 0 20px 18px; font-size: 14px; }
+    .guide-body h3 { margin: 4px 0 8px; font-size: 14px; font-weight: 800; color: #c00d1e; }
+    .guide-body ul { margin: 0 0 14px; padding-left: 18px; list-style: disc; display: grid; gap: 6px; }
+    html[data-theme="dark"] .guide-card { background: #171b22; border-color: #2b313b; }
+    html[data-theme="dark"] .guide-card summary > i:first-child { background: #3a1418; }
+    html[data-theme="dark"] .guide-card summary small { color: #9ca3af; }
+  </style>
+</head>
+
+<body class="bg-white overflow-x-hidden">
+  <div id="header-placeholder"></div>
+
+  <main class="bg-white">
+    <section id="faqs"
+      class="page-banner border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group">
+      <div class="relative md:h-[400px] w-full flex flex-col banner-wrapper">
+        <img src="assets/vault/faqs.webp" alt="FAQs" class="w-full h-full" />
+        <div id="hero-text-box"
+          class="absolute bottom-1 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[450px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 max-h-[150px] md:max-h-none overflow-hidden">
+          <h1 class="text-3xl md:text-5xl font-bold text-left tracking-normal leading-tight text-white">FAQs
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq-list" class="py-10 bg-white" aria-labelledby="faq-h">
+      <div class="container mx-auto px-6">
+        <h2 id="faq-h" class="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-6">Frequently Asked <span class="text-[#c00d1e]">Questions</span></h2>
+        <div class="flex flex-col md:flex-row justify-start items-center gap-4 mb-6">
+          <div class="faq-filters flex gap-2 md:gap-4 w-full overflow-x-auto no-scrollbar py-2">
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight active" data-category="battery-selection">Battery Selection <span class="faq-count">(6)</span></button>
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight" data-category="technology">Battery Technology <span class="faq-count">(6)</span></button>
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight" data-category="battery-care">Battery Care <span class="faq-count">(10)</span></button>
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight" data-category="troubleshooting">Troubleshooting <span class="faq-count">(8)</span></button>
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight" data-category="mf">Maintenance-Free <span class="faq-count">(7)</span></button>
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight" data-category="lithium">Lithium (LiFePO4) <span class="faq-count">(8)</span></button>
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight" data-category="solar">Solar &amp; UPS <span class="faq-count">(7)</span></button>
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight" data-category="purchasing">Buying &amp; Partners <span class="faq-count">(6)</span></button>
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight" data-category="warranty-support">Warranty &amp; Support <span class="faq-count">(11)</span></button>
+            <button class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight" data-category="recycling">Recycling <span class="faq-count">(4)</span></button>
+          </div>
+        </div>
+
+        <div class="space-y-4 max-w-full">
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Which Alaska Batteries model is right for my vehicle?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Choose based on the recommended capacity (Ah), terminal layout and physical size for your vehicle. The quickest way is our <a href="battery-finder.html#bf-root" class="text-[#c00d1e] font-semibold hover:underline">Battery Finder</a>: pick your vehicle and engine to see the battery that fits. An <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Alaska partner</a> can also confirm the right fit.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What does AH (Ampere-hour) mean on a battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">AH indicates energy storage capacity. In general: higher AH = longer backup, but correct sizing and charging matter more than just going bigger.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Can I install a higher AH battery than recommended?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Sometimes yes, if space, wiring, and charging output support it. Oversizing without proper charging can lead to undercharging and shorter life.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How do I confirm battery size and terminal type before buying?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Check your existing battery’s size code/dimensions, terminal position, and hold-down type. If unsure, ask dealer for confirmation.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What is the difference between dry-charge and maintenance-free (MF) batteries?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Dry-charge batteries are filled with electrolyte and must be given an initial charge at the time of sale, and their electrolyte level should be checked and topped up with distilled water. Maintenance-free (MF) batteries are sealed: they should never be opened or topped up.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What are Graphite Enhanced and Calcium Silver Enriched batteries?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">They are Alaska's two lead-acid technologies. Graphite Enhanced batteries add graphite to the plates to reduce sulfation and improve charge acceptance. Calcium Silver Enriched batteries use silver-enhanced calcium grids for heat and corrosion resistance. See <a href="graphite.html#tech-features" class="text-[#c00d1e] font-semibold hover:underline">Graphite Enhanced Technology</a> and <a href="CaAg.html#tech-features" class="text-[#c00d1e] font-semibold hover:underline">Calcium Silver Enriched Technology</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="technology">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How does a lead-acid battery work?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">A lead-acid battery stores energy chemically. Each cell has positive plates of lead dioxide and negative plates of sponge lead in a sulfuric acid electrolyte. When you draw power, both plates react with the acid and slowly turn into lead sulfate, releasing electricity. Charging reverses the reaction. A 12 V battery has six cells of about 2 V each, connected in series.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="technology">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What is the difference between tubular and flat-plate batteries?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">They differ in how the positive plate is built. Flat-plate batteries use a flat grid pasted with active material, which delivers strong bursts of current and suits starting a vehicle. Tubular batteries hold the active material in tubes around spines, which keeps it in place through many deep discharges, so they suit long daily backup such as UPS and solar. Choose by use: starting power or repeated deep cycling.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="technology">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What is the difference between conventional and Graphite Enhanced batteries?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Both are lead-acid batteries. Graphite Enhanced batteries add graphite to the plates, which improves conductivity, reduces sulfation and helps the battery accept charge faster and recover better after deep discharge. In everyday use this means stronger performance for longer. See <a href="graphite.html#tech-features" class="text-[#c00d1e] font-semibold hover:underline">Graphite Enhanced Technology</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="technology">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What is Calcium Silver technology in batteries?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Calcium Silver Enriched batteries use lead-calcium grids with added silver. The silver improves resistance to grid corrosion and heat, which is the main cause of wear in hot climates, while the calcium keeps water loss low so the battery stays maintenance-free. See <a href="CaAg.html#tech-features" class="text-[#c00d1e] font-semibold hover:underline">Calcium Silver Enriched Technology</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="technology">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What is battery cycle life?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Cycle life is how many times a battery can be discharged and recharged before its capacity falls to a set level, usually 80% of the original. It depends heavily on depth of discharge: a battery used only partly before recharging lasts far more cycles than one regularly run flat. Heat and undercharging also shorten it.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="technology">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What factors determine a battery's overall performance?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Capacity (Ah), cold cranking amps (CCA) for starting, plate and grid design, and the battery technology all set the starting point. In use, performance depends on temperature, how deeply and how often it is discharged, the charging system, and care such as clean terminals and correct electrolyte levels in dry-charge batteries.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How can I increase battery life in Pakistan’s heat and driving conditions?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Keep terminals clean, ensure strong connections, avoid deep discharge, and confirm the charging system is healthy, heat and heavy use require disciplined charging.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What are the warning signs of a weak battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Slow starting, dim lights, low backup time, or frequent jump-start needs. Get it tested early to avoid sudden failure.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Is it harmful to fully discharge a battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Yes. Deep discharge reduces capacity and life. Recharge as soon as possible and avoid repeated “complete drain” situations.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why does my battery lose performance in extreme weather?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Heat accelerates internal wear; cold reduces available power temporarily. Correct sizing and proper charging reduce seasonal performance drops.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How often should I charge if usage is low or irregular?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Don’t let it sit weak for long. If usage is low, charge periodically to maintain a healthy state-of-charge and prevent early damage.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What should I avoid to prevent battery failure?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Avoid loose terminals, low charge for long periods, overloaded backup setups, and using a faulty charger/alternator. These are common causes of early failure.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How often should I top up a dry-charge battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Check the electrolyte level regularly and top up with distilled water only. Never use tap water or add acid. Maintenance-free (MF) batteries must not be opened or topped up.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How do I keep the terminals in good condition?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Keep the battery surface clean and dry, make sure the clamps are tight, and apply a thin layer of petroleum jelly to the terminals to protect them from corrosion and sulfation.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What charging current should I use for a lead-acid battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">The recommended charging current printed on the warranty card is C10, which is the battery's Ah rating divided by 10. For example, a 65 Ah battery should be charged at about 6.5 A.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How should I store a battery I'm not using?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Charge it fully, disconnect it and keep it clean, dry and away from heat. Recharge it regularly while it is not in use.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="troubleshooting">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why does my battery keep dying even after charging?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Common causes are a parasitic drain (something left on, or a faulty accessory drawing power with the engine off), a weak alternator or charger, short trips that never recharge the battery fully, loose or corroded connections, or a battery near the end of its life. Have the battery and charging system tested at an <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Alaska partner</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="troubleshooting">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why does my vehicle struggle to start in the morning?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Overnight the battery cools and any small drains reduce its charge, so a weak or partly discharged battery shows up first thing in the morning. Check that the terminals are clean and tight. If slow starting continues, have the battery tested: it may need charging, or it may be time to replace it.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="troubleshooting">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why is my battery getting unusually hot?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed"><strong class="text-[#c00d1e]">Safety first:</strong> A battery that is hot to the touch is a warning sign, usually of overcharging, a faulty charger or alternator, or an internal fault. Switch off the charger or engine, keep away from flames and sparks, and do not touch the battery if it is swollen or leaking. Have it and the charging system checked at an <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Alaska partner</a> before using it again.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="troubleshooting">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why is there corrosion around my battery terminals?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">White or bluish deposits form when acid vapour reacts with the metal terminals, often because of loose clamps, overcharging or a small leak. With the engine off, disconnect the negative terminal first, clean the deposits with a baking soda and water solution, dry, reconnect positive first and apply a thin layer of petroleum jelly. Wear gloves and eye protection.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="troubleshooting">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why is my battery making bubbling or unusual noises?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed"><strong class="text-[#c00d1e]">Safety first:</strong> Some gentle bubbling is normal near the end of charging a dry-charge battery, as the battery gives off gas. Heavy bubbling, hissing or bubbling while not charging points to overcharging or an internal fault. Stop charging, ventilate the area, keep sparks and flames away, and have the battery checked at an <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Alaska partner</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="troubleshooting">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why does my battery voltage drop suddenly?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">A sudden drop under load usually means a damaged cell, heavy sulfation from being left discharged, or a loose or corroded connection. Check the connections first. If the voltage still collapses when the engine cranks or the load comes on, the battery needs testing and may need replacing.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="troubleshooting">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why does my battery smell like rotten eggs?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed"><strong class="text-[#c00d1e]">Safety first:</strong> A rotten-egg smell is hydrogen sulfide, a sign the battery is being overcharged or is overheating and venting. Switch off the charger or engine, ventilate the area, keep sparks and flames away and do not handle a swollen or leaking battery. Stop using it and have it checked at an <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Alaska partner</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="troubleshooting">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How do I know whether the problem is my battery or alternator?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">With the engine off, a healthy, charged battery reads about 12.6 V. With the engine running it should read about 13.8 to 14.4 V; a lower reading points to the alternator. If the car starts with a jump but dies soon after, suspect the alternator. If it struggles to start but runs fine afterwards, suspect the battery. An Alaska partner can test both.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="mf">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What is a maintenance-free (MF) battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">An MF battery is sealed, so it needs no topping up with water during its life. Just keep it clean, dry and charged.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="mf">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Do I need to add water or electrolyte to an MF battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">No. Do not attempt to open an MF battery or add electrolyte to it.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="mf">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How should I store an MF battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Keep it clean and dry, and if it is not used for a long period of time, recharge it every 30 days.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="mf">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What voltage should a new MF battery show?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Check the terminal voltage at the time of purchase. If it is below 12.5 V, recharging is the dealer's responsibility.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="mf">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Can I use an MF battery for solar, a generator or a commercial vehicle?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">No. The MF warranty is void if the battery is used in solar, generator, DC system, commercial or rental vehicle applications.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="mf">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What warranty do MF batteries carry?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">6 or 15 months depending on the model and the card supplied with the battery. See the <a href="warranty.html#mf" class="text-[#c00d1e] font-semibold hover:underline">maintenance-free warranty terms</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="mf">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How should I return a faulty MF battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Return it to the dealer in its original condition, without removing the electrolyte, along with the completed warranty card.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="lithium">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What is a LiFePO4 battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Lithium Iron Phosphate (LiFePO4) is a lithium chemistry with a stable iron-phosphate cathode, long cycle life and built-in battery management. Learn more on <a href="lifepo4.html#tech-features" class="text-[#c00d1e] font-semibold hover:underline">LiFePO4 Technology</a> or see the <a href="/solutions/lithium-ion" class="text-[#c00d1e] font-semibold hover:underline">Life Series range</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="lithium">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What warranty do Life Series lithium batteries carry?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Five years from the date of delivery under normal operating conditions, at the given number of cycles versus depth of discharge, whichever comes first. See the <a href="warranty.html#lithium" class="text-[#c00d1e] font-semibold hover:underline">lithium warranty terms</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="lithium">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Can I connect a Life Series battery to my existing inverter?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Yes, if the inverter is compatible and configured for the battery's specifications. Compatible Life Series energy-storage models support inverter communication over CAN or RS485. Ask your dealer or installer to confirm compatibility before installing.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="lithium">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Can I mix Life Series batteries with other batteries?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">No. The warranty is void if Life Series batteries are used with another brand or connected in a string of different capacities.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="lithium">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What records should I keep for a lithium installation?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Keep the installation report and periodic inspection records of temperature, load, voltage settings, number of cycles and duration. These may be requested to support a warranty claim.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="lithium">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Does a LiFePO4 battery need maintenance?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">No routine maintenance is needed. Keep it within its rated operating conditions and recharge it promptly after a discharge.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="lithium">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What does the battery management system (BMS) do?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">The built-in BMS monitors the battery and protects it against conditions such as overcharging, excessive discharge current and abnormal temperatures, depending on the model.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="lithium">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Is LiFePO4 safe?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">LiFePO4 uses a stable iron-phosphate cathode that offers improved thermal stability compared with many other lithium-ion chemistries. See <a href="lifepo4.html#tech-features" class="text-[#c00d1e] font-semibold hover:underline">LiFePO4 Technology</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="solar">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Which Alaska batteries are made for solar and backup use?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Solar-100, the larger A-series models from A 130 to A 160, the DC deep-cycle range and the <a href="/solutions/lithium-ion" class="text-[#c00d1e] font-semibold hover:underline">Life Series LiFePO4 batteries</a>. See the full <a href="/lead-acid" class="text-[#c00d1e] font-semibold hover:underline">lead-acid range</a> for details.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="solar">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How do I choose the right battery for UPS or backup use?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Select by required backup time, load (watts), and charging compatibility. Higher Ah can increase backup time, but the charging setup must support it properly.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="solar">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How do I choose the right battery for solar backup?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Choose based on daily usage, charge controller settings, and depth-of-discharge needs. Correct sizing improves backup reliability and extends battery life.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="solar">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Should I choose lead-acid or lithium (LiFePO4) for my solar system?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Lead-acid costs less up front. LiFePO4 lets you use more of its capacity, lasts many more cycles and needs no maintenance, which suits daily solar cycling. The <a href="solar-calculator.html#solar-calculator" class="text-[#c00d1e] font-semibold hover:underline">Solar Calculator</a> can help you size either option.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="solar">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Can I use a car battery for solar or UPS?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">It is not recommended. Car batteries are designed for short, high-current starts, not daily deep cycling. The warranty on dry-charge and MF car batteries does not cover solar or generator use, so choose a solar or deep-cycle model instead.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="solar">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How do I size a solar system?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Start with the appliances you want to run and for how long. The <a href="solar-calculator.html#solar-calculator" class="text-[#c00d1e] font-semibold hover:underline">Solar Calculator</a> turns that into a recommended inverter, battery and panel setup.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="solar">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Does Alaska Batteries sell inverters?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Yes. See our <a href="/solutions/inverters" class="text-[#c00d1e] font-semibold hover:underline">hybrid solar inverters</a>. They carry a two-year warranty when bought through an authorised distributor. See the <a href="warranty.html#inverters" class="text-[#c00d1e] font-semibold hover:underline">inverter warranty terms</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="purchasing">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Where can I purchase genuine Alaska Batteries?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">From authorised Alaska partners across Pakistan. Use <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Find a Partner</a> to find one near you, or <a href="quote.html#quote-content" class="text-[#c00d1e] font-semibold hover:underline">request a quote</a> and our sales team will help.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="purchasing">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How can I find an authorized Alaska Batteries dealer near me?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Open <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Find a Partner</a>, search by shop, area or city, or pick your region. Each partner shows its address, phone number, a map and directions.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="purchasing">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How do I verify an authorized dealer?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Check that the shop is listed on <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Find a Partner</a>. An authorised partner completes, signs and stamps your warranty card and gives you an invoice. If you are unsure, <a href="support.html#support-content" class="text-[#c00d1e] font-semibold hover:underline">contact us</a> with the shop's name and city and we will confirm.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="purchasing">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Does Alaska Batteries offer home delivery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Delivery depends on your city and the partner serving your area. For orders of up to 49 units, add the batteries to your cart and place your order, and our team will call to confirm delivery. For 50 units or more, <a href="quote.html#quote-content" class="text-[#c00d1e] font-semibold hover:underline">request a quote</a>, or <a href="support.html#support-content" class="text-[#c00d1e] font-semibold hover:underline">contact us</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="purchasing">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How can I request a quotation for bulk battery purchases?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Use the <a href="quote.html#quote-content" class="text-[#c00d1e] font-semibold hover:underline">Request a Quote</a> form for orders of 50 units or more. Tell us the models, quantities and your city, and our sales team will send prices and availability, usually within one working day. Businesses, fleets, installers and dealers can all use it.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="purchasing">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How can I become an authorized Alaska Batteries dealer?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Apply on <a href="become-dealer.html#partner-content" class="text-[#c00d1e] font-semibold hover:underline">Become a Partner</a>. Our partnerships team reviews your application and contacts you to agree terms.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How do I claim warranty for Alaska Batteries in Pakistan?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Take the battery, warranty card and proof of purchase to the dealer you bought it from. The battery will be tested and the warranty process guided from there. You can also <a href="warranty-claim.html#claim-content" class="text-[#c00d1e] font-semibold hover:underline">start a claim online</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why is filling the warranty card at purchase important?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Because it documents purchase date, dealer stamp, battery serial/ID, and customer details, which helps validate warranty quickly and prevents claim delays.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What should be filled on the warranty card at the time of purchase?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">At minimum: purchase date, dealer name + stamp, battery model, serial/ID, and customer name/contact. Ensure the dealer completes it before you leave.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What is usually not covered under warranty?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Misuse, physical damage, tampering, incorrect installation, and problems caused by faulty charging systems (over/undercharging) are commonly excluded.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How can I check if my Alaska Battery is genuine?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Buy only from authorised dealers (see <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Find a Partner</a>), keep the invoice, and make sure the warranty card is completed and stamped. If unsure, ask the dealer to verify the battery identification details.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What should I do with my old battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Return it to an authorized dealer for safe handling and responsible recovery. This supports proper recycling and safer disposal.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Can I register my warranty online?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Yes. Use the form on the <a href="warranty.html#reg-content" class="text-[#c00d1e] font-semibold hover:underline">Warranty page</a>. Registering keeps a record of your purchase, but your stamped warranty card is still required for any claim.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">How long is the warranty on my battery?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">It depends on the product and is printed on your warranty card: dry-charge 6 or 9 months, maintenance-free 6 or 15 months, Life Series lithium 5 years. See the <a href="warranty.html#periods" class="text-[#c00d1e] font-semibold hover:underline">warranty period by model</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What warranty do Alaska inverters carry?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Two years, for inverters bought through an authorised distributor. It covers repairs for malfunctions during that period. Keep the fully completed warranty card and your invoice, as both are needed for a claim. The warranty is void if the inverter is opened or serviced at an unauthorised centre, or damaged by short circuits, voltage fluctuations, poor wiring, overloading or improper installation. See the <a href="warranty.html#inverters" class="text-[#c00d1e] font-semibold hover:underline">full inverter warranty terms</a>.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Does a replacement battery get a new warranty period?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">No. The warranty on a replacement battery is counted from the original purchase date of the battery it replaced.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What happens after I submit a claim online?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Our service team replies within two working days with where to take the battery for testing. Keep the battery, warranty card and invoice ready.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="recycling">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Why should lead-acid batteries never be disposed of with household waste?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">They contain lead and sulfuric acid. In ordinary waste, lead can leak into soil and water and the acid can burn and corrode. Both are harmful to people and the environment, so old batteries must go to proper collection for recycling.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="recycling">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Can I exchange my old battery when purchasing a new one?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Take your old battery to an <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Alaska partner</a> when you buy a new one, so it can be handled and recycled safely. Ask the partner about any exchange value they offer.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="recycling">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">Are lead-acid batteries recyclable?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Yes. Lead-acid batteries are among the most recycled products in the world. Almost all of the lead and plastic can be recovered and used again.</p>
+            </div>
+          </div>
+
+          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="recycling">
+            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
+              <h4 class="font-bold text-base tracking-normal text-left">What happens to recycled battery materials?</h4>
+              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
+            </button>
+            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
+              <p class="pb-6 text-gray-500 text-sm leading-relaxed">Batteries are sorted and broken down. The lead is melted, purified and made into new grids and plates, the plastic casings are turned into pellets for new battery cases, and the sulfuric acid is neutralised or converted into useful chemicals.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="guides" class="py-10 bg-white border-t border-gray-100" aria-labelledby="guides-h">
+      <div class="container mx-auto px-6">
+        <h2 id="guides-h" class="text-3xl md:text-4xl font-black uppercase tracking-tighter mb-6">How-To <span class="text-[#c00d1e]">Guides</span></h2>
+        <div class="guide-grid">
+          <details class="guide-card">
+            <summary>
+              <i class="fa-solid fa-screwdriver-wrench" aria-hidden="true"></i>
+              <span><strong>Care instructions from your warranty card</strong><small>Official care for dry-charge and maintenance-free batteries.</small></span>
+              <i class="fa-solid fa-plus guide-plus" aria-hidden="true"></i>
+            </summary>
+            <div class="guide-body">
+              <h3>Dry-charge batteries</h3>
+              <ul>
+                <li>Charge at the recommended rate of C10 = Ah ÷ 10.</li>
+                <li>Check the battery's electrolyte level regularly.</li>
+                <li>Use only distilled water to maintain electrolyte levels during service.</li>
+                <li>Always keep the battery surface dry and clean, and apply a layer of petroleum jelly to the terminals to protect them from sulfation.</li>
+              </ul>
+              <h3>Maintenance-free (MF) batteries</h3>
+              <ul>
+                <li>Do not attempt to open the battery or add electrolyte to it.</li>
+                <li>Always keep the battery clean and dry.</li>
+                <li>Do not allow rust or dirt to accumulate on the battery terminals.</li>
+                <li>If the battery is not used for a long period of time, recharge it every 30 days.</li>
+              </ul>
+            </div>
+          </details>
+          <details class="guide-card">
+            <summary>
+              <i class="fa-solid fa-car-battery" aria-hidden="true"></i>
+              <span><strong>Installing a car battery</strong><small>Replace your car battery safely.</small></span>
+              <i class="fa-solid fa-plus guide-plus" aria-hidden="true"></i>
+            </summary>
+            <ol class="sf-steps">
+              <li><div><p>Switch off the engine and all electrics, and remove the key.</p></div></li>
+              <li><div><p>Disconnect the negative (−) terminal first, then the positive (+).</p></div></li>
+              <li><div><p>Remove the hold-down clamp and lift the old battery out. Batteries are heavy, so lift with care.</p></div></li>
+              <li><div><p>Clean the battery tray and cable clamps.</p></div></li>
+              <li><div><p>Place the new battery in the same orientation and secure the hold-down clamp.</p></div></li>
+              <li><div><p>Connect the positive (+) terminal first, then the negative (−). Never reverse the connection: it can damage the vehicle and voids the warranty.</p></div></li>
+              <li><div><p>Tighten the clamps and apply a thin layer of petroleum jelly to the terminals.</p></div></li>
+              <li><div><p>Start the engine and check that the lights and charging warning light behave normally.</p></div></li>
+            </ol>
+          </details>
+          <details class="guide-card">
+            <summary>
+              <i class="fa-solid fa-plug-circle-bolt" aria-hidden="true"></i>
+              <span><strong>First charge for a dry-charge battery</strong><small>What happens before a new dry-charge battery goes into service.</small></span>
+              <i class="fa-solid fa-plus guide-plus" aria-hidden="true"></i>
+            </summary>
+            <ol class="sf-steps">
+              <li><div><p>The dealer fills the battery with electrolyte at the time of sale.</p></div></li>
+              <li><div><p>Initial charging is mandatory before use.</p></div></li>
+              <li><div><p>Charge at the recommended C10 rate: the Ah rating divided by 10 (for example, 6.5 A for a 65 Ah battery).</p></div></li>
+              <li><div><p>Check the electrolyte level after charging and top up with distilled water if needed.</p></div></li>
+              <li><div><p>Make sure the dealer completes, signs and stamps your warranty card.</p></div></li>
+            </ol>
+          </details>
+          <details class="guide-card">
+            <summary>
+              <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+              <span><strong>Jump-starting a car safely</strong><small>Get going again without damaging either car.</small></span>
+              <i class="fa-solid fa-plus guide-plus" aria-hidden="true"></i>
+            </summary>
+            <ol class="sf-steps">
+              <li><div><p>Park the two cars close together without touching, and switch both off.</p></div></li>
+              <li><div><p>Connect red to the flat battery's positive (+), then to the good battery's positive (+).</p></div></li>
+              <li><div><p>Connect black to the good battery's negative (−), then to bare metal on the flat car's engine, away from the battery.</p></div></li>
+              <li><div><p>Start the good car and let it run for a few minutes, then start the flat car.</p></div></li>
+              <li><div><p>Remove the cables in reverse order and drive for at least 30 minutes to recharge.</p></div></li>
+              <li><div><p>If it keeps happening, have the battery and charging system tested at an Alaska partner.</p></div></li>
+            </ol>
+          </details>
+          <details class="guide-card">
+            <summary>
+              <i class="fa-solid fa-solar-panel" aria-hidden="true"></i>
+              <span><strong>Connecting a battery to a UPS or solar inverter</strong><small>Set up lead-acid backup correctly.</small></span>
+              <i class="fa-solid fa-plus guide-plus" aria-hidden="true"></i>
+            </summary>
+            <ol class="sf-steps">
+              <li><div><p>Choose a solar or deep-cycle model, not a car battery.</p></div></li>
+              <li><div><p>Match the system voltage. For 24 V or 48 V systems, connect identical batteries in series.</p></div></li>
+              <li><div><p>Use batteries of the same model and age in one bank.</p></div></li>
+              <li><div><p>Set the inverter or charge controller to the correct battery type and charging values.</p></div></li>
+              <li><div><p>Use cables and fuses sized by a qualified installer, and tighten all connections.</p></div></li>
+              <li><div><p>Avoid regular deep discharge, and recharge fully as soon as possible after a power cut.</p></div></li>
+            </ol>
+          </details>
+          <details class="guide-card">
+            <summary>
+              <i class="fa-solid fa-battery-full" aria-hidden="true"></i>
+              <span><strong>Installing a Life Series LiFePO4 battery</strong><small>Get the best from your lithium battery.</small></span>
+              <i class="fa-solid fa-plus guide-plus" aria-hidden="true"></i>
+            </summary>
+            <ol class="sf-steps">
+              <li><div><p>Have the system installed by a qualified installer, following the battery manual.</p></div></li>
+              <li><div><p>Use a compatible inverter configured for the battery's specifications.</p></div></li>
+              <li><div><p>Connect the communication cable (CAN or RS485) on compatible models, so the inverter and battery management system work together.</p></div></li>
+              <li><div><p>Do not connect Life Series batteries with other brands or batteries of different capacity.</p></div></li>
+              <li><div><p>Keep the installation report and periodic inspection records for warranty support.</p></div></li>
+            </ol>
+          </details>
+          <details class="guide-card">
+            <summary>
+              <i class="fa-solid fa-box-archive" aria-hidden="true"></i>
+              <span><strong>Storing a battery</strong><small>Keep a spare or seasonal battery healthy.</small></span>
+              <i class="fa-solid fa-plus guide-plus" aria-hidden="true"></i>
+            </summary>
+            <ol class="sf-steps">
+              <li><div><p>Charge the battery fully before storing it.</p></div></li>
+              <li><div><p>Disconnect it and keep it clean, dry and away from heat and direct sun.</p></div></li>
+              <li><div><p>Recharge MF batteries every 30 days while they are not in use.</p></div></li>
+              <li><div><p>Check dry-charge electrolyte levels before putting the battery back into service.</p></div></li>
+            </ol>
+          </details>
+          <details class="guide-card">
+            <summary>
+              <i class="fa-solid fa-gauge-high" aria-hidden="true"></i>
+              <span><strong>Checking your battery's health</strong><small>Spot problems before the battery lets you down.</small></span>
+              <i class="fa-solid fa-plus guide-plus" aria-hidden="true"></i>
+            </summary>
+            <ol class="sf-steps">
+              <li><div><p>Watch for warning signs: slow starting, dim lights, short backup time or frequent jump-starts.</p></div></li>
+              <li><div><p>Check that the terminals are clean and tight. Loose clamps often look like a dead battery.</p></div></li>
+              <li><div><p>Check the voltage when buying an MF battery: if it reads below 12.5 V, the dealer should recharge it.</p></div></li>
+              <li><div><p>Have the battery and charging system tested at any Alaska partner if you are unsure.</p></div></li>
+            </ol>
+          </details>
+          <details class="guide-card">
+            <summary>
+              <i class="fa-solid fa-recycle" aria-hidden="true"></i>
+              <span><strong>Recycling your old battery</strong><small>Dispose of lead-acid batteries responsibly.</small></span>
+              <i class="fa-solid fa-plus guide-plus" aria-hidden="true"></i>
+            </summary>
+            <ol class="sf-steps">
+              <li><div><p>Do not throw an old battery away or open it.</p></div></li>
+              <li><div><p>Keep it upright to avoid leaks, and carry it carefully.</p></div></li>
+              <li><div><p>Return it to an authorised dealer for safe handling and responsible recycling.</p></div></li>
+            </ol>
+          </details>
+        </div>
+        <p class="text-gray-500 text-sm mt-6">Not sure about something? <a href="support.html#support-content" class="text-[#c00d1e] font-semibold hover:underline">Contact us</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "@id":"https://alaskabatteries.com/faqs.html",
+  "url":"https://alaskabatteries.com/faqs.html",
+  "name":"FAQs | Alaska Batteries Pakistan",
+  "description":"Answers to common questions about choosing, caring for and claiming warranty on Alaska batteries in Pakistan.",
+  "isPartOf":{"@id":"https://alaskabatteries.com/#website"},
+  "about":{"@id":"https://alaskabatteries.com/#organization"},
+  "inLanguage":"en-PK"
+}
+</script>
+
+  <script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://alaskabatteries.com/"},
+    {"@type":"ListItem","position":2,"name":"FAQs","item":"https://alaskabatteries.com/faqs.html"}
+  ]
+}
+</script>
+
+  <script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "FAQPage",
+ "mainEntity": [
+  {
+   "@type": "Question",
+   "name": "Which Alaska Batteries model is right for my vehicle?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Choose based on the recommended capacity (Ah), terminal layout and physical size for your vehicle. The quickest way is our Battery Finder: pick your vehicle and engine to see the battery that fits. An Alaska partner can also confirm the right fit."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does AH (Ampere-hour) mean on a battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "AH indicates energy storage capacity. In general: higher AH = longer backup, but correct sizing and charging matter more than just going bigger."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I install a higher AH battery than recommended?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Sometimes yes, if space, wiring, and charging output support it. Oversizing without proper charging can lead to undercharging and shorter life."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I confirm battery size and terminal type before buying?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Check your existing battery’s size code/dimensions, terminal position, and hold-down type. If unsure, ask dealer for confirmation."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is the difference between dry-charge and maintenance-free (MF) batteries?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Dry-charge batteries are filled with electrolyte and must be given an initial charge at the time of sale, and their electrolyte level should be checked and topped up with distilled water. Maintenance-free (MF) batteries are sealed: they should never be opened or topped up."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What are Graphite Enhanced and Calcium Silver Enriched batteries?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "They are Alaska's two lead-acid technologies. Graphite Enhanced batteries add graphite to the plates to reduce sulfation and improve charge acceptance. Calcium Silver Enriched batteries use silver-enhanced calcium grids for heat and corrosion resistance. See Graphite Enhanced Technology and Calcium Silver Enriched Technology."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How does a lead-acid battery work?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A lead-acid battery stores energy chemically. Each cell has positive plates of lead dioxide and negative plates of sponge lead in a sulfuric acid electrolyte. When you draw power, both plates react with the acid and slowly turn into lead sulfate, releasing electricity. Charging reverses the reaction. A 12 V battery has six cells of about 2 V each, connected in series."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is the difference between tubular and flat-plate batteries?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "They differ in how the positive plate is built. Flat-plate batteries use a flat grid pasted with active material, which delivers strong bursts of current and suits starting a vehicle. Tubular batteries hold the active material in tubes around spines, which keeps it in place through many deep discharges, so they suit long daily backup such as UPS and solar. Choose by use: starting power or repeated deep cycling."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is the difference between conventional and Graphite Enhanced batteries?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Both are lead-acid batteries. Graphite Enhanced batteries add graphite to the plates, which improves conductivity, reduces sulfation and helps the battery accept charge faster and recover better after deep discharge. In everyday use this means stronger performance for longer. See Graphite Enhanced Technology."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is Calcium Silver technology in batteries?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Calcium Silver Enriched batteries use lead-calcium grids with added silver. The silver improves resistance to grid corrosion and heat, which is the main cause of wear in hot climates, while the calcium keeps water loss low so the battery stays maintenance-free. See Calcium Silver Enriched Technology."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is battery cycle life?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Cycle life is how many times a battery can be discharged and recharged before its capacity falls to a set level, usually 80% of the original. It depends heavily on depth of discharge: a battery used only partly before recharging lasts far more cycles than one regularly run flat. Heat and undercharging also shorten it."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What factors determine a battery's overall performance?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Capacity (Ah), cold cranking amps (CCA) for starting, plate and grid design, and the battery technology all set the starting point. In use, performance depends on temperature, how deeply and how often it is discharged, the charging system, and care such as clean terminals and correct electrolyte levels in dry-charge batteries."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How can I increase battery life in Pakistan’s heat and driving conditions?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Keep terminals clean, ensure strong connections, avoid deep discharge, and confirm the charging system is healthy, heat and heavy use require disciplined charging."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What are the warning signs of a weak battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Slow starting, dim lights, low backup time, or frequent jump-start needs. Get it tested early to avoid sudden failure."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is it harmful to fully discharge a battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Deep discharge reduces capacity and life. Recharge as soon as possible and avoid repeated “complete drain” situations."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does my battery lose performance in extreme weather?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Heat accelerates internal wear; cold reduces available power temporarily. Correct sizing and proper charging reduce seasonal performance drops."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How often should I charge if usage is low or irregular?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Don’t let it sit weak for long. If usage is low, charge periodically to maintain a healthy state-of-charge and prevent early damage."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What should I avoid to prevent battery failure?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Avoid loose terminals, low charge for long periods, overloaded backup setups, and using a faulty charger/alternator. These are common causes of early failure."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How often should I top up a dry-charge battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Check the electrolyte level regularly and top up with distilled water only. Never use tap water or add acid. Maintenance-free (MF) batteries must not be opened or topped up."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I keep the terminals in good condition?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Keep the battery surface clean and dry, make sure the clamps are tight, and apply a thin layer of petroleum jelly to the terminals to protect them from corrosion and sulfation."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What charging current should I use for a lead-acid battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The recommended charging current printed on the warranty card is C10, which is the battery's Ah rating divided by 10. For example, a 65 Ah battery should be charged at about 6.5 A."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How should I store a battery I'm not using?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Charge it fully, disconnect it and keep it clean, dry and away from heat. Recharge it regularly while it is not in use."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does my battery keep dying even after charging?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Common causes are a parasitic drain (something left on, or a faulty accessory drawing power with the engine off), a weak alternator or charger, short trips that never recharge the battery fully, loose or corroded connections, or a battery near the end of its life. Have the battery and charging system tested at an Alaska partner."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does my vehicle struggle to start in the morning?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Overnight the battery cools and any small drains reduce its charge, so a weak or partly discharged battery shows up first thing in the morning. Check that the terminals are clean and tight. If slow starting continues, have the battery tested: it may need charging, or it may be time to replace it."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is my battery getting unusually hot?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Safety first: A battery that is hot to the touch is a warning sign, usually of overcharging, a faulty charger or alternator, or an internal fault. Switch off the charger or engine, keep away from flames and sparks, and do not touch the battery if it is swollen or leaking. Have it and the charging system checked at an Alaska partner before using it again."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is there corrosion around my battery terminals?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "White or bluish deposits form when acid vapour reacts with the metal terminals, often because of loose clamps, overcharging or a small leak. With the engine off, disconnect the negative terminal first, clean the deposits with a baking soda and water solution, dry, reconnect positive first and apply a thin layer of petroleum jelly. Wear gloves and eye protection."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is my battery making bubbling or unusual noises?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Safety first: Some gentle bubbling is normal near the end of charging a dry-charge battery, as the battery gives off gas. Heavy bubbling, hissing or bubbling while not charging points to overcharging or an internal fault. Stop charging, ventilate the area, keep sparks and flames away, and have the battery checked at an Alaska partner."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does my battery voltage drop suddenly?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "A sudden drop under load usually means a damaged cell, heavy sulfation from being left discharged, or a loose or corroded connection. Check the connections first. If the voltage still collapses when the engine cranks or the load comes on, the battery needs testing and may need replacing."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why does my battery smell like rotten eggs?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Safety first: A rotten-egg smell is hydrogen sulfide, a sign the battery is being overcharged or is overheating and venting. Switch off the charger or engine, ventilate the area, keep sparks and flames away and do not handle a swollen or leaking battery. Stop using it and have it checked at an Alaska partner."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I know whether the problem is my battery or alternator?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "With the engine off, a healthy, charged battery reads about 12.6 V. With the engine running it should read about 13.8 to 14.4 V; a lower reading points to the alternator. If the car starts with a jump but dies soon after, suspect the alternator. If it struggles to start but runs fine afterwards, suspect the battery. An Alaska partner can test both."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is a maintenance-free (MF) battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "An MF battery is sealed, so it needs no topping up with water during its life. Just keep it clean, dry and charged."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Do I need to add water or electrolyte to an MF battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. Do not attempt to open an MF battery or add electrolyte to it."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How should I store an MF battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Keep it clean and dry, and if it is not used for a long period of time, recharge it every 30 days."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What voltage should a new MF battery show?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Check the terminal voltage at the time of purchase. If it is below 12.5 V, recharging is the dealer's responsibility."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I use an MF battery for solar, a generator or a commercial vehicle?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The MF warranty is void if the battery is used in solar, generator, DC system, commercial or rental vehicle applications."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What warranty do MF batteries carry?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "6 or 15 months depending on the model and the card supplied with the battery. See the maintenance-free warranty terms."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How should I return a faulty MF battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Return it to the dealer in its original condition, without removing the electrolyte, along with the completed warranty card."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is a LiFePO4 battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Lithium Iron Phosphate (LiFePO4) is a lithium chemistry with a stable iron-phosphate cathode, long cycle life and built-in battery management. Learn more on LiFePO4 Technology or see the Life Series range."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What warranty do Life Series lithium batteries carry?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Five years from the date of delivery under normal operating conditions, at the given number of cycles versus depth of discharge, whichever comes first. See the lithium warranty terms."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I connect a Life Series battery to my existing inverter?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes, if the inverter is compatible and configured for the battery's specifications. Compatible Life Series energy-storage models support inverter communication over CAN or RS485. Ask your dealer or installer to confirm compatibility before installing."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I mix Life Series batteries with other batteries?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The warranty is void if Life Series batteries are used with another brand or connected in a string of different capacities."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What records should I keep for a lithium installation?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Keep the installation report and periodic inspection records of temperature, load, voltage settings, number of cycles and duration. These may be requested to support a warranty claim."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does a LiFePO4 battery need maintenance?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No routine maintenance is needed. Keep it within its rated operating conditions and recharge it promptly after a discharge."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What does the battery management system (BMS) do?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "The built-in BMS monitors the battery and protects it against conditions such as overcharging, excessive discharge current and abnormal temperatures, depending on the model."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Is LiFePO4 safe?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "LiFePO4 uses a stable iron-phosphate cathode that offers improved thermal stability compared with many other lithium-ion chemistries. See LiFePO4 Technology."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Which Alaska batteries are made for solar and backup use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Solar-100, the larger A-series models from A 130 to A 160, the DC deep-cycle range and the Life Series LiFePO4 batteries. See the full lead-acid range for details."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I choose the right battery for UPS or backup use?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Select by required backup time, load (watts), and charging compatibility. Higher Ah can increase backup time, but the charging setup must support it properly."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I choose the right battery for solar backup?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Choose based on daily usage, charge controller settings, and depth-of-discharge needs. Correct sizing improves backup reliability and extends battery life."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Should I choose lead-acid or lithium (LiFePO4) for my solar system?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Lead-acid costs less up front. LiFePO4 lets you use more of its capacity, lasts many more cycles and needs no maintenance, which suits daily solar cycling. The Solar Calculator can help you size either option."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I use a car battery for solar or UPS?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It is not recommended. Car batteries are designed for short, high-current starts, not daily deep cycling. The warranty on dry-charge and MF car batteries does not cover solar or generator use, so choose a solar or deep-cycle model instead."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I size a solar system?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Start with the appliances you want to run and for how long. The Solar Calculator turns that into a recommended inverter, battery and panel setup."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does Alaska Batteries sell inverters?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. See our hybrid solar inverters. They carry a two-year warranty when bought through an authorised distributor. See the inverter warranty terms."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Where can I purchase genuine Alaska Batteries?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "From authorised Alaska partners across Pakistan. Use Find a Partner to find one near you, or request a quote and our sales team will help."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How can I find an authorized Alaska Batteries dealer near me?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Open Find a Partner, search by shop, area or city, or pick your region. Each partner shows its address, phone number, a map and directions."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I verify an authorized dealer?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Check that the shop is listed on Find a Partner. An authorised partner completes, signs and stamps your warranty card and gives you an invoice. If you are unsure, contact us with the shop's name and city and we will confirm."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does Alaska Batteries offer home delivery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Delivery depends on your city and the partner serving your area. For orders of up to 49 units, add the batteries to your cart and place your order, and our team will call to confirm delivery. For 50 units or more, request a quote, or contact us."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How can I request a quotation for bulk battery purchases?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Use the Request a Quote form for orders of 50 units or more. Tell us the models, quantities and your city, and our sales team will send prices and availability, usually within one working day. Businesses, fleets, installers and dealers can all use it."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How can I become an authorized Alaska Batteries dealer?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Apply on Become a Partner. Our partnerships team reviews your application and contacts you to agree terms."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How do I claim warranty for Alaska Batteries in Pakistan?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Take the battery, warranty card and proof of purchase to the dealer you bought it from. The battery will be tested and the warranty process guided from there. You can also start a claim online."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why is filling the warranty card at purchase important?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Because it documents purchase date, dealer stamp, battery serial/ID, and customer details, which helps validate warranty quickly and prevents claim delays."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What should be filled on the warranty card at the time of purchase?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "At minimum: purchase date, dealer name + stamp, battery model, serial/ID, and customer name/contact. Ensure the dealer completes it before you leave."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What is usually not covered under warranty?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Misuse, physical damage, tampering, incorrect installation, and problems caused by faulty charging systems (over/undercharging) are commonly excluded."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How can I check if my Alaska Battery is genuine?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Buy only from authorised dealers (see Find a Partner), keep the invoice, and make sure the warranty card is completed and stamped. If unsure, ask the dealer to verify the battery identification details."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What should I do with my old battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Return it to an authorized dealer for safe handling and responsible recovery. This supports proper recycling and safer disposal."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I register my warranty online?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Use the form on the Warranty page. Registering keeps a record of your purchase, but your stamped warranty card is still required for any claim."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "How long is the warranty on my battery?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "It depends on the product and is printed on your warranty card: dry-charge 6 or 9 months, maintenance-free 6 or 15 months, Life Series lithium 5 years. See the warranty period by model."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What warranty do Alaska inverters carry?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Two years, for inverters bought through an authorised distributor. It covers repairs for malfunctions during that period. Keep the fully completed warranty card and your invoice, as both are needed for a claim. The warranty is void if the inverter is opened or serviced at an unauthorised centre, or damaged by short circuits, voltage fluctuations, poor wiring, overloading or improper installation. See the full inverter warranty terms."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Does a replacement battery get a new warranty period?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "No. The warranty on a replacement battery is counted from the original purchase date of the battery it replaced."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What happens after I submit a claim online?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Our service team replies within two working days with where to take the battery for testing. Keep the battery, warranty card and invoice ready."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Why should lead-acid batteries never be disposed of with household waste?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "They contain lead and sulfuric acid. In ordinary waste, lead can leak into soil and water and the acid can burn and corrode. Both are harmful to people and the environment, so old batteries must go to proper collection for recycling."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Can I exchange my old battery when purchasing a new one?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Take your old battery to an Alaska partner when you buy a new one, so it can be handled and recycled safely. Ask the partner about any exchange value they offer."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "Are lead-acid batteries recyclable?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Yes. Lead-acid batteries are among the most recycled products in the world. Almost all of the lead and plastic can be recovered and used again."
+   }
+  },
+  {
+   "@type": "Question",
+   "name": "What happens to recycled battery materials?",
+   "acceptedAnswer": {
+    "@type": "Answer",
+    "text": "Batteries are sorted and broken down. The lead is melted, purified and made into new grids and plates, the plastic casings are turned into pellets for new battery cases, and the sulfuric acid is neutralised or converted into useful chemicals."
+   }
+  }
+ ]
+}
+</script>
+
+  <script type="application/ld+json">
+[
+ {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Installing a car battery",
+  "description": "Replace your car battery safely.",
+  "step": [
+   {
+    "@type": "HowToStep",
+    "position": 1,
+    "text": "Switch off the engine and all electrics, and remove the key."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 2,
+    "text": "Disconnect the negative (−) terminal first, then the positive (+)."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 3,
+    "text": "Remove the hold-down clamp and lift the old battery out. Batteries are heavy, so lift with care."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 4,
+    "text": "Clean the battery tray and cable clamps."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 5,
+    "text": "Place the new battery in the same orientation and secure the hold-down clamp."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 6,
+    "text": "Connect the positive (+) terminal first, then the negative (−). Never reverse the connection: it can damage the vehicle and voids the warranty."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 7,
+    "text": "Tighten the clamps and apply a thin layer of petroleum jelly to the terminals."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 8,
+    "text": "Start the engine and check that the lights and charging warning light behave normally."
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "First charge for a dry-charge battery",
+  "description": "What happens before a new dry-charge battery goes into service.",
+  "step": [
+   {
+    "@type": "HowToStep",
+    "position": 1,
+    "text": "The dealer fills the battery with electrolyte at the time of sale."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 2,
+    "text": "Initial charging is mandatory before use."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 3,
+    "text": "Charge at the recommended C10 rate: the Ah rating divided by 10 (for example, 6.5 A for a 65 Ah battery)."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 4,
+    "text": "Check the electrolyte level after charging and top up with distilled water if needed."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 5,
+    "text": "Make sure the dealer completes, signs and stamps your warranty card."
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Jump-starting a car safely",
+  "description": "Get going again without damaging either car.",
+  "step": [
+   {
+    "@type": "HowToStep",
+    "position": 1,
+    "text": "Park the two cars close together without touching, and switch both off."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 2,
+    "text": "Connect red to the flat battery's positive (+), then to the good battery's positive (+)."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 3,
+    "text": "Connect black to the good battery's negative (−), then to bare metal on the flat car's engine, away from the battery."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 4,
+    "text": "Start the good car and let it run for a few minutes, then start the flat car."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 5,
+    "text": "Remove the cables in reverse order and drive for at least 30 minutes to recharge."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 6,
+    "text": "If it keeps happening, have the battery and charging system tested at an Alaska partner."
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Connecting a battery to a UPS or solar inverter",
+  "description": "Set up lead-acid backup correctly.",
+  "step": [
+   {
+    "@type": "HowToStep",
+    "position": 1,
+    "text": "Choose a solar or deep-cycle model, not a car battery."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 2,
+    "text": "Match the system voltage. For 24 V or 48 V systems, connect identical batteries in series."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 3,
+    "text": "Use batteries of the same model and age in one bank."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 4,
+    "text": "Set the inverter or charge controller to the correct battery type and charging values."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 5,
+    "text": "Use cables and fuses sized by a qualified installer, and tighten all connections."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 6,
+    "text": "Avoid regular deep discharge, and recharge fully as soon as possible after a power cut."
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Installing a Life Series LiFePO4 battery",
+  "description": "Get the best from your lithium battery.",
+  "step": [
+   {
+    "@type": "HowToStep",
+    "position": 1,
+    "text": "Have the system installed by a qualified installer, following the battery manual."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 2,
+    "text": "Use a compatible inverter configured for the battery's specifications."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 3,
+    "text": "Connect the communication cable (CAN or RS485) on compatible models, so the inverter and battery management system work together."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 4,
+    "text": "Do not connect Life Series batteries with other brands or batteries of different capacity."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 5,
+    "text": "Keep the installation report and periodic inspection records for warranty support."
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Storing a battery",
+  "description": "Keep a spare or seasonal battery healthy.",
+  "step": [
+   {
+    "@type": "HowToStep",
+    "position": 1,
+    "text": "Charge the battery fully before storing it."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 2,
+    "text": "Disconnect it and keep it clean, dry and away from heat and direct sun."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 3,
+    "text": "Recharge MF batteries every 30 days while they are not in use."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 4,
+    "text": "Check dry-charge electrolyte levels before putting the battery back into service."
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Checking your battery's health",
+  "description": "Spot problems before the battery lets you down.",
+  "step": [
+   {
+    "@type": "HowToStep",
+    "position": 1,
+    "text": "Watch for warning signs: slow starting, dim lights, short backup time or frequent jump-starts."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 2,
+    "text": "Check that the terminals are clean and tight. Loose clamps often look like a dead battery."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 3,
+    "text": "Check the voltage when buying an MF battery: if it reads below 12.5 V, the dealer should recharge it."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 4,
+    "text": "Have the battery and charging system tested at any Alaska partner if you are unsure."
+   }
+  ]
+ },
+ {
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "Recycling your old battery",
+  "description": "Dispose of lead-acid batteries responsibly.",
+  "step": [
+   {
+    "@type": "HowToStep",
+    "position": 1,
+    "text": "Do not throw an old battery away or open it."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 2,
+    "text": "Keep it upright to avoid leaks, and carry it carefully."
+   },
+   {
+    "@type": "HowToStep",
+    "position": 3,
+    "text": "Return it to an authorised dealer for safe handling and responsible recycling."
+   }
+  ]
+ }
+]
+</script>
+
+  <script>
+    // How-to guides: on wide screens, deal the cards into two columns (1 left, 2 right, 3 left …)
+    (function () {
+      var grid = document.querySelector(".guide-grid");
+      if (!grid) return;
+      var cards = Array.prototype.slice.call(grid.querySelectorAll(".guide-card"));
+      var mq = window.matchMedia("(min-width: 900px)");
+      function layout() {
+        if (mq.matches && !grid.classList.contains("is-split")) {
+          var a = document.createElement("div"), b = document.createElement("div");
+          a.className = b.className = "guide-col";
+          cards.forEach(function (c, i) { (i % 2 ? b : a).appendChild(c); });
+          grid.append(a, b);
+          grid.classList.add("is-split");
+        } else if (!mq.matches && grid.classList.contains("is-split")) {
+          cards.forEach(function (c) { grid.appendChild(c); });
+          Array.prototype.slice.call(grid.querySelectorAll(".guide-col")).forEach(function (col) { col.remove(); });
+          grid.classList.remove("is-split");
+        }
+      }
+      layout();
+      if (mq.addEventListener) mq.addEventListener("change", layout); else mq.addListener(layout);
+    })();
+  </script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+
+</html>

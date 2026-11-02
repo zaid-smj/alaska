@@ -178,7 +178,7 @@ class ContentManagementTest extends TestCase
         $this->get('/about.html')
             ->assertOk()
             ->assertDontSee('cdn.tailwindcss.com', false)
-            ->assertSee('/css/site-custom.css', false);
+            ->assertSee('/css/style.css', false);
         $this->assertFileExists(public_path('assets/slider-home/slide-1.webp'));
         $this->assertFileExists(public_path('css/style.css'));
         $this->assertFileExists(public_path('js/gallery.js'));

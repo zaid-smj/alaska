@@ -1,0 +1,343 @@
+/* Alaska Batteries — Battery Finder page.
+   Builds on the shared tokens/components in ui.css (.sc …). */
+
+.bf .sc-wrap {
+  padding-bottom: 64px;
+}
+.bf-finder {
+  margin-top: 24px;
+  padding: 20px 16px 22px;
+  position: relative;
+  z-index: 2;
+}
+@media (min-width: 768px) {
+  .bf-finder {
+    margin-top: 32px; /* sits below the banner with space, never over it */
+    padding: 26px 28px 28px;
+  }
+}
+.bf-finder-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.bf-finder-head h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.bf-finder-head h2 em {
+  font-style: normal;
+  color: var(--red);
+}
+.bf-tabs {
+  display: inline-flex;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 4px;
+  gap: 4px;
+}
+.bf-tabs button {
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--ink-2);
+  padding: 10px 14px;
+  border-radius: 9px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 42px;
+}
+.bf-tabs button[aria-selected="true"] {
+  background: var(--red);
+  color: #fff;
+}
+.bf-tabs button:focus-visible {
+  outline: 2px solid var(--red);
+  outline-offset: 2px;
+}
+
+.bf-selects {
+  display: grid;
+  gap: 12px;
+}
+@media (min-width: 860px) {
+  .bf-selects {
+    grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+    align-items: end;
+  }
+}
+.bf-sel .sc-label {
+  margin-bottom: 6px;
+}
+.bf-step {
+  display: inline-grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  font-size: 11px;
+  letter-spacing: 0;
+}
+.sc-select:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.bf-go {
+  min-height: 48px;
+  width: 100%;
+}
+@media (min-width: 860px) {
+  .bf-go {
+    width: auto;
+  }
+}
+.bf-popular {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+.bf-popular .sc-chips button,
+#bf-size-chips button {
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  background: var(--surface);
+  border: 1.5px solid var(--line);
+  border-radius: 999px;
+  padding: 8px 12px;
+  min-height: 38px;
+  cursor: pointer;
+}
+.bf-popular .sc-chips button:hover,
+#bf-size-chips button:hover {
+  border-color: var(--red);
+  color: var(--red);
+}
+.bf-size-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: flex-end;
+}
+.bf-size-row .sc-input {
+  text-transform: uppercase;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.bf-size-row .sc-input::placeholder {
+  text-transform: none;
+  font-weight: 500;
+  letter-spacing: 0;
+  font-size: 16px;
+}
+@media (max-width: 859px) {
+  .bf-size-row .bf-go {
+    width: 100%;
+  }
+}
+
+/* results */
+.bf-results {
+  margin-top: 28px;
+}
+.bf-results:empty {
+  display: none;
+}
+.bf-results:focus {
+  outline: none;
+}
+.bf-res-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+.bf-res-head .k {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.bf-res-head h3 {
+  margin: 4px 0 0;
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+.bf-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 10px;
+}
+.bf-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  color: var(--ink-2);
+}
+.bf-tag i {
+  color: var(--red);
+}
+
+.bf-picks {
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 900px) {
+  .bf-picks {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .bf-picks.n-1 {
+    grid-template-columns: minmax(0, 520px);
+  }
+  .bf-picks.n-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.bf .sc-opt-img {
+  height: 190px;
+}
+.bf .sc-opt-img img {
+  max-height: 160px;
+}
+.bf-qty {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--red);
+}
+.bf-variants {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.bf-variants span {
+  font-size: 12px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+}
+.bf-fitnote {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ok);
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  margin-top: 8px;
+}
+.bf-fitnote.warn {
+  color: var(--warn);
+}
+
+.bf-help {
+  margin-top: 40px;
+}
+.bf-help h3 {
+  margin: 0 0 14px;
+  font-size: 22px;
+  font-weight: 800;
+}
+.bf-help-grid {
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 820px) {
+  .bf-help-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.bf-help h4 {
+  margin: 10px 0 6px;
+  font-size: 16px;
+  font-weight: 800;
+}
+.bf-help p {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-2);
+}
+.bf-help-ic {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: var(--red-soft);
+  color: var(--red);
+  font-size: 17px;
+}
+
+.bf-empty {
+  text-align: center;
+  padding: 28px 20px;
+}
+.bf-empty i {
+  font-size: 28px;
+  color: var(--red);
+}
+.bf-empty h4 {
+  margin: 10px 0 6px;
+  font-size: 18px;
+}
+.bf-empty p {
+  margin: 0 auto 16px;
+  max-width: 52ch;
+  color: var(--ink-2);
+  line-height: 1.55;
+}
+.bf-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 24px;
+  transform: translateX(-50%);
+  background: #111827;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 300;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+@media print {
+  .bf-finder,
+  .bf-help,
+  .sc-toolbar,
+  .bf-actions {
+    display: none !important;
+  }
+}

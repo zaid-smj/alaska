@@ -1,0 +1,249 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Careers | Alaska Batteries</title>
+  <meta name="description" content="Join Alaska Batteries — send your CV and tell us how you would like to help power Pakistan." />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/split-form.css" />
+  <script src="/js/form-preview.js" defer></script>
+</head>
+
+<body class="bg-white overflow-x-hidden">
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section
+      class="page-banner border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group  hero-fold">
+      <div class="relative h-full md:h-full w-full flex flex-col banner-wrapper">
+        <img id="hero-banner-img" src="assets/careers.webp" data-desktop="assets/careers.webp" data-mobile="assets/mobile/careers-mobile.webp" alt="Careers at Alaska Batteries" class="w-full h-full object-cover" />
+        <div id="hero-text-box"
+          class="absolute bottom-1 left-0 right-0 md:bottom-auto  md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden">
+          <h1 id="hero-banner-title"
+            class="text-2xl md:text-5xl text-left font-bold uppercase tracking-normal leading-tight text-white">
+            Careers</h1>
+        </div>
+      </div>
+    </section>
+
+    <section id="careers-content" class="sf-section flex flex-col md:flex-row border-t border-gray-100">
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider">
+        <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">Join Our <span
+            class="text-[#c00d1e]">Team</span></h2>
+        <form data-preview-form id="careersForm" class="space-y-8">
+          <input type="text" id="careers-fullName" placeholder="Full Name" required autocomplete="name"
+            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+          <div class="sf-row">
+            <input type="email" id="careers-email" placeholder="Email Address" required autocomplete="email"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+            <input type="tel" id="careers-phone" placeholder="Phone Number" required autocomplete="tel"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+          </div>
+          <div class="sf-row">
+            <input type="text" id="careers-position" placeholder="Current Position" autocomplete="organization-title"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+            <input type="text" id="careers-city" placeholder="City" required autocomplete="address-level2"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+          </div>
+
+          <textarea rows="4" id="careers-message"
+            placeholder="Tell us about yourself and why you'd like to join Alaska Batteries"
+            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest resize-none"></textarea>
+          <div class="sf-file">
+            <input type="file" id="careers-resume" accept=".pdf,.doc,.docx" required aria-describedby="careers-file-name" />
+            <label for="careers-resume" class="sf-file-btn"><i class="fas fa-upload" aria-hidden="true"></i> <span class="sf-file-act">Upload Resume</span></label>
+            <span id="careers-file-name" class="sf-file-name">PDF or Word file. No file chosen yet.</span>
+          </div>
+
+          <button type="submit" id="careersSubmitBtn" class="btn-primary btn-lg">
+            Submit Application
+          </button>
+        </form>
+      </div>
+
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white flex flex-col justify-start">
+        <div class="space-y-8">
+          <div>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Why Join Alaska Batteries?</h4>
+            <p class="text-gray-600 text-base leading-relaxed mb-6">We are Pakistan's fastest-growing battery brand,
+              committed to powering reliable solutions across automotive, industrial, and solar sectors. Join a team
+              passionate about innovation, customer success, and sustainable growth.</p>
+          </div>
+
+          <div>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">What We Offer</h4>
+            <ul class="space-y-3 text-gray-600 text-sm">
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
+                <span>Competitive salary and benefits package</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
+                <span>Professional development and training opportunities</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
+                <span>Work in a dynamic, fast-growing organization</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
+                <span>Collaborative and inclusive work environment</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
+                <span>Opportunities to make a real impact</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="mt-12 pt-8 border-t border-gray-200">
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Contact HR</h4>
+            <p class="text-gray-600 text-sm mb-2">For questions about open positions:</p>
+            <p class="font-semibold text-gray-900"><a href="mailto:careers@alaskabatteries.com"
+                class="text-[#c00d1e] hover:underline">careers@alaskabatteries.com</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script src="js/components.js"></script>
+    <script src="js/animations.js"></script>
+
+    <script>
+      // Swap hero image to mobile-specific source on small viewports
+      function updateHeroImageForViewport() {
+        const heroBannerImg = document.getElementById('hero-banner-img');
+        if (!heroBannerImg) return;
+        const isMobile = window.matchMedia('(max-width: 640px)').matches;
+        if (isMobile && heroBannerImg.dataset.mobile) {
+          heroBannerImg.src = heroBannerImg.dataset.mobile;
+        } else if (heroBannerImg.dataset.desktop) {
+          heroBannerImg.src = heroBannerImg.dataset.desktop;
+        }
+      }
+
+      // Update on load and resize
+      window.addEventListener('load', updateHeroImageForViewport);
+      window.addEventListener('resize', updateHeroImageForViewport);
+    </script>
+    <script>
+      // Form endpoint (same site)
+      const EMAIL_API_URL = 'send-email.php';
+
+      // Success modal element (check if it exists in components.js)
+      function showSuccessModal() {
+        const modal = document.getElementById('successModal');
+        if (modal) {
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+        } else {
+          // Fallback if modal doesn't exist
+          alert('Message sent successfully! We will get back to you within 48 hours.');
+        }
+      }
+
+      function closeModal() {
+        const modal = document.getElementById('successModal');
+        if (modal) {
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+        }
+      }
+
+      // Careers form handler (handles file upload)
+      const careersForm = document.getElementById('careersForm');
+      if (careersForm) {
+        careersForm.addEventListener('submit', async function (event) {
+          event.preventDefault();
+          const btn = document.getElementById('careersSubmitBtn');
+          const originalText = btn.textContent;
+
+          const name = document.getElementById('careers-fullName').value.trim();
+          const email = document.getElementById('careers-email').value.trim();
+          const phone = document.getElementById('careers-phone').value.trim();
+          const city = document.getElementById('careers-city').value.trim();
+          const position = document.getElementById('careers-position').value.trim();
+          const resumeInput = document.getElementById('careers-resume');
+
+          if (!name || !email || !phone || !city || !resumeInput.files.length) {
+            alert('Please complete all required fields and upload your resume.');
+            return;
+          }
+
+          btn.disabled = true;
+          btn.textContent = 'Sending...';
+
+          const payload = new FormData();
+          payload.append('form', 'careers');
+          payload.append('name', name);
+          payload.append('email', email);
+          payload.append('phone', phone);
+          payload.append('city', city);
+          payload.append('position', position);
+          payload.append('message', document.getElementById('careers-message').value || '');
+          payload.append('resume', resumeInput.files[0]);
+
+          try {
+            const response = await fetch(EMAIL_API_URL, {
+              method: 'POST',
+              body: payload
+            });
+            const result = await response.json();
+            if (response.ok && result.success) {
+              if (typeof showSuccessModal === 'function') showSuccessModal();
+              else alert('Application sent successfully.');
+              careersForm.reset();
+            } else {
+              alert(result.message || 'Failed to send application.');
+            }
+          } catch (err) {
+            console.error(err);
+            alert('Failed to send application. Try again later.');
+          } finally {
+            btn.disabled = false;
+            btn.textContent = originalText;
+          }
+        });
+      }
+
+      // Resume upload: show the chosen file name next to the button
+      (function () {
+        const input = document.getElementById('careers-resume');
+        const box = input && input.closest('.sf-file');
+        const label = document.getElementById('careers-file-name');
+        if (!input || !box || !label) return;
+        const show = () => {
+          const f = input.files && input.files[0];
+          box.classList.toggle('has-file', !!f);
+          label.textContent = f ? f.name : 'PDF or Word file. No file chosen yet.';
+          box.querySelector('.sf-file-act').textContent = f ? 'Change File' : 'Upload Resume';
+        };
+        input.addEventListener('change', show);
+        const form = input.form;
+        if (form) form.addEventListener('reset', () => setTimeout(show, 0));
+      })();
+    </script>
+</body>
+
+</html>

@@ -13,6 +13,17 @@ class WebsiteController extends Controller
 {
     private const LEGACY_PAGES = [
         'about',
+        'battery-finder',
+        'careers',
+        'checkout',
+        'faqs',
+        'lifepo4',
+        'news',
+        'privacy-policy',
+        'quote',
+        'solar-calculator',
+        'warranty-claim',
+        'warranty',
         'become-dealer',
         'CaAg',
         'dealers',
@@ -30,6 +41,23 @@ class WebsiteController extends Controller
         'tubular',
         'vrla',
     ];
+
+    private const RETAINED_PRODUCT_PAGES = [
+        'dry-charge.html', 'deep-cycle.html',
+        'FePO.html', 'mcb.html', 'mf.html', 'solutions.html', 'technology.html',
+        'tubular.html', 'vrla.html',
+    ];
+
+    public function productRange(string $type): Response
+    {
+        $filename = match ($type) {
+            'lithium-ion' => 'l-ion.html',
+            'inverters' => 'inverters.html',
+            default => abort(404),
+        };
+
+        return $this->htmlWithContent($filename, []);
+    }
 
     public function home(): Response
     {
@@ -96,7 +124,9 @@ class WebsiteController extends Controller
         );
         $html = str_replace(
             'href="css/style.css"',
-            'href="/css/site-custom.css"',
+            in_array($filename, self::RETAINED_PRODUCT_PAGES, true)
+                ? 'href="/css/legacy-product-shell.css"'
+                : 'href="/css/style.css"',
             $html,
         );
         $json = json_encode(

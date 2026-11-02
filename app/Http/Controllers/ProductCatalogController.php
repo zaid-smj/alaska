@@ -44,11 +44,4 @@ class ProductCatalogController extends Controller
 
         return response()->json($products->map(fn (Product $product) => ['id' => $product->id, 'name' => $product->name, 'image' => $product->image_url, 'url' => route('products.show', $product->slug), 'specifications' => $product->specifications()]));
     }
-
-    public function comingSoon(string $type): View
-    {
-        abort_unless(in_array($type, ['lithium-ion', 'inverters'], true), 404);
-
-        return view('catalog.coming-soon', ['title' => $type === 'lithium-ion' ? 'Lithium Ion' : 'Inverters']);
-    }
 }

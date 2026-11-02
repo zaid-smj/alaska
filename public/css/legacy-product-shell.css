@@ -1,0 +1,5 @@
+/* Preserve product styling while using the redesigned shared navigation. */
+@import url('/css/legacy-products.css') layer(components);
+@import url('/css/nav.css');
+@import url('/css/footer.css');
+@import url('/css/theme.css');

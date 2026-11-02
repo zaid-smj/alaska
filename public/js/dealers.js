@@ -1,1125 +1,1005 @@
-// This would ideally live in js/data.js
+/*
+ * Alaska Batteries — authorised partner list (dealers.html)
+ * Cleaned list: duplicates merged, map pins matched to the right shop, city and
+ * province filled from each shop's map pin or name. Shops without a map pin use a
+ * Google Maps search for their name and address. Shops with no phone number show
+ * the Alaska head office number instead.
+ */
+const HEAD_OFFICE_PHONE = "+92 51 874 0280";
 const dealers = [
-  {
-    name: "Al Karam Auto Store - Mandi Bahauddin",
-    address: "Larri Adda, Mandi Bahauddin",
-    city: "Mandi Bahauddin",
-    province: "PUNJAB",
-    contact: "0340-4898273",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d840.4538645086028!2d73.4835991!3d32.5844453!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391f7debe95d8cab%3A0x278e8e5f22660c49!2sAl-Karam%20Auto%20Store!5e0!3m2!1sen!2s!4v1771479416029!5m2!1sen!2s",
-  },
-  {
-    name: "Al-Karam Auto Store",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0340-4898273",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3361.8202919856412!2d73.48403259999999!3d32.5843164!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x391f7debe95d8cab%3A0x278e8e5f22660c49!2sAl-Karam%20Battery%20centre%20and%20solar%20system!5e0!3m2!1sen!2s!4v1780564996997!5m2!1sen!2s",
-  },
-  {
-    name: "Bao G Battery Center",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0324-6697095",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3404.184700123107!2d73.08859217560823!3d31.436581774252428!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDI2JzExLjciTiA3M8KwMDUnMjguMiJF!5e0!3m2!1sen!2s!4v1780564685315!5m2!1sen!2s",
-  },
-  {
-    name: "Baoo Jee Enterprises - Faisalabad",
-    address: "Shop#77, Shoaib Bilal Market, Opp Mian Trust Market, Faisalabad",
-    city: "Faisalabad",
-    province: "PUNJAB",
-    contact: "0324-6697095",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d27236.377910279356!2d73.0561471!3d31.4265982!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x392243003ce41849%3A0x68af7da23a1260e3!2sBao%20Gee%20Battery%20Center!5e0!3m2!1sen!2s!4v1771479601960!5m2!1sen!2s",
-  },
-  {
-    name: "Bilal Battery Center - Garh More",
-    address: "Multan Road, Garh More",
-    city: "Garh More",
-    province: "PUNJAB",
-    contact: "0300-4029561",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3425.5346293786884!2d71.8440548!3d30.843703500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39249b4d3b01f793%3A0x4a5c91b29e84572c!2sBILAL%20Battery%20Center!5e0!3m2!1sen!2s!4v1771479634029!5m2!1sen!2s",
-  },
-  {
-    name: "Chaudhary Battery Studio- Faisalabad",
-    address: "Shoaib Bilal Market, Faisalabad",
-    city: "Faisalabad",
-    province: "PUNJAB",
-    contact: "0313-3744595",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.5388587930897!2d73.0919029!3d31.426828999999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39226900754567b7%3A0x8bf077049964fe3e!2sChaudhary%20Battery%20Studio!5e0!3m2!1sen!2s!4v1771479663735!5m2!1sen!2s",
-  },
-  {
-    name: "Choudhry Battery Studio",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0313-7344595",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3404.5388815129268!2d73.08930587560775!3d31.426828374257003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDI1JzM2LjYiTiA3M8KwMDUnMzAuOCJF!5e0!3m2!1sen!2s!4v1780571061703!5m2!1sen!2s",
-  },
-  {
-    name: "Ganj Bakhash Battery Service",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0345-5794000",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3367.3269396848646!2d73.56769097564441!3d32.4371825738075!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDI2JzEzLjkiTiA3M8KwMzQnMTMuMCJF!5e0!3m2!1sen!2s!4v1780565102148!5m2!1sen!2s",
-  },
-  {
-    name: "Hafiz Battery Center",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0306-7509798",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3414.0024129085878!2d72.09905548!3d31.1652082!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x392383797444751b%3A0xdc29a47d5fc14b27!2sHafiz%20Battery%20Center%20%26%20Oil%20Traders%2018-Hazari!5e0!3m2!1sen!2s!4v1780564833895!5m2!1sen!2s",
-  },
-  {
-    name: "Hafiz Battery Center - 18 Hazari",
-    address: "Jhang Road, Near PSO Pump, 18 Hazari, Distict Jhang",
-    city: "18 Hazari",
-    province: "PUNJAB",
-    contact: "0306-7509798",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1707.0037200213865!2d72.0989711!3d31.1650687!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x392383797444751b%3A0xdc29a47d5fc14b27!2sHafiz%20Battery%20Center%20%26%20Oil%20Traders%2018-Hazari!5e0!3m2!1sen!2s!4v1771479731763!5m2!1sen!2s",
-  },
-  {
-    name: "Hannan Traders - Faisalabad",
-    address: "Sadaqat Autos, Mian Trust Market, Faisalabad",
-    city: "Faisalabad",
-    province: "PUNJAB",
-    contact: "0321-6600390",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1702.3072581765614!2d73.090636!3d31.4247452!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x392269270f686d13%3A0xc6fb954987412b0!2sHannan%20Traders!5e0!3m2!1sen!2s!4v1771479746198!5m2!1sen!2s",
-  },
-  {
-    name: "Haroon Battery Center",
-    address: "",
-    city: "",
-    province: "PUNJAB",
-    contact: "0333-9944940",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3404.5073035523315!2d73.09054947560786!3d31.427698074256536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDI1JzM5LjciTiA3M8KwMDUnMzUuMyJF!5e0!3m2!1sen!2s!4v1780565039112!5m2!1sen!2s",
-  },
-  {
-    name: "Imtiaz Traders - Faisalabad",
-    address: "88-A Basement, Shoaib Bilal Market, Opp Commisioner Road,Faisalabad.",
-    city: "Faisalabad",
-    province: "PUNJAB",
-    contact: "0300-9660830",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d212.78291460228772!2d73.091338!3d31.4271657!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3922682131ab0a03%3A0x1a3fc4565c7f1d41!2sImtiaz%20Ahmed%20%26%20Javed%20Traders!5e0!3m2!1sen!2s!4v1771618716455!5m2!1sen!2s",
-  },
-  {
-    name: "Karachi Battery Service",
-    address: "",
-    city: "",
-    province: "PUNJAB",
-    contact: "0321-6030072",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3404.529256073038!2d73.08887097560782!3d31.42709347425684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDI1JzMyLjUiTiA3M8KwMDUnMjkuMiJF!5e0!3m2!1sen!2s!4v1780565237525!5m2!1sen!2s",
-  },
-  {
-    name: "Lahore Battery Service & Auto Store - Mandi Shah Jewana",
-    address: "Railway Crossing, Mandi Shah Jewana",
-    city: "Mandi Shah Jewana",
-    province: "PUNJAB",
-    contact: "0346-7374605",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3399.3730898006015!2d72.2926312!3d31.568815299999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3923e99baaaaaaab%3A0x448732f9eb7f305a!2sLAHORE%20BATTERY%20SERVICE!5e0!3m2!1sen!2s!4v1771618737641!5m2!1sen!2s",
-  },
-  {
-    name: "Madina Auto Store",
-    address: "",
-    city: "",
-    province: "PUNJAB",
-    contact: "0300-6163940",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3371.228994769613!2d73.47859577564441!3d32.332561473852536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDE5JzU3LjIiTiA3M8KwMjgnNTIuMiJF!5e0!3m2!1sen!2s!4v1780574661339!5m2!1sen!2s",
-  },
-  {
-    name: "Modern Battery Service",
-    address: "",
-    city: "",
-    province: "PUNJAB",
-    contact: "0300-6032937",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3372.5728949331506!2d72.34496687564295!3d32.29645917386817!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDE3JzQ3LjMiTiA3MsKwMjAnNTEuMiJF!5e0!3m2!1sen!2s!4v1781071473416!5m2!1sen!2s",
-  },
-  {
-    name: "Modern Battery Service - Khushab",
-    address: "Kalma Chowk, Khushab",
-    city: "Khushab",
-    province: "PUNJAB",
-    contact: "0300-6032937",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3372.575319805381!2d72.3476616!3d32.29639399999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3921163be8f62375%3A0x765a5e7f2882659!2sModern%20Battery%20Service!5e0!3m2!1sen!2s!4v1771618752473!5m2!1sen!2s",
-  },
-  {
-    name: "Nadeem Noor Battery",
-    address: "",
-    city: "",
-    province: "PUNJAB",
-    contact: "0345-5762657",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3362.8321939626826!2d73.21683887565365!3d32.557323473756284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDMzJzI2LjQiTiA3M8KwMTMnMDkuOSJF!5e0!3m2!1sen!2s!4v1780564938772!5m2!1sen!2s",
-  },
-  {
-    name: "Punjab Battery House",
-    address: "",
-    city: "",
-    province: "PUNJAB",
-    contact: "0300-0677858",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3372.8280078580015!2d72.27605218885498!3d32.28960180000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39213db7490345db%3A0x26ce00af55fb0fca!2sPunjab%20batteries%20services!5e0!3m2!1sen!2s!4v1780564773138!5m2!1sen!2s",
-  },
-  {
-    name: "Rehman Traders",
-    address: "",
-    city: "",
-    province: "PUNJAB",
-    contact: "0300-8198824",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3388.1162724964975!2d71.89702227562584!3d31.876254974053108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDUyJzM0LjUiTiA3McKwNTMnNTguNiJF!5e0!3m2!1sen!2s!4v1780564467638!5m2!1sen!2s",
-  },
-  {
-    name: "Risen Trading Co. - Jauharabad",
-    address: "Balouch Market Near Bus Stand, Jauharabad, Khushab",
-    city: "Jouharabad",
-    province: "PUNJAB",
-    contact: "0300-0677858",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d843.2079617022931!2d72.2800795!3d32.2894986!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39213c4da1011eb7%3A0x6674cfbd30492d81!2sBaloch%20Market%2C%20Jauharabad%2C%20Pakistan!5e0!3m2!1sen!2s!4v1771618766364!5m2!1sen!2s",
-  },
-  {
-    name: "Rohan Traders - Faisalabad",
-    address: "216-A, Shoaib Bilal Market, Opposite General Bus Stand, Sargodha Raod Faisalabad",
-    city: "Faisalabad",
-    province: "PUNJAB",
-    contact: "0333-9944940",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d851.134850855405!2d73.0914854!3d31.426814!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39226821401ead95%3A0x2081cc971f3f0b92!2sShoaib%20Bilal%20Market!5e0!3m2!1sen!2s!4v1771618887077!5m2!1sen!2s",
-  },
-  {
-    name: "Sadaqat Autos",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0323-6691244",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3404.566098129988!2d73.0893592756078!3d31.426078774257366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1",
-  },
-  {
-    name: "Shafi Battery Service",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0300-9817799",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3404.566098129988!2d73.0893592756078!3d31.426078774257366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDI2JzMzLjkiTiA3M8KwMDUnMzEuMCJF!5e0!3m2!1sen!2s!4v1781071196363!5m2!1sen!2s",
-  },
-  {
-    name: "Shahid & Saleem Battery Center",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0322-7661268",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3372.6060415623433!2d72.33790507564285!3d32.29556827386854!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDE3JzQ0LjEiTiA3MsKwMjAnMjUuNyJF!5e0!3m2!1sen!2s!4v1780565150164!5m2!1sen!2s",
-  },
-  {
-    name: "Shahid Battery Center - Faisalabad",
-    address: "Shop #1, Mian Trust Market, Opposite Khidmat Markaz, Faisalabad",
-    city: "Faisalabad",
-    province: "PUNJAB",
-    contact: "0304-4111268",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3404.545391623903!2d73.08946917560779!3d31.426649074257007!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDI1JzM1LjkiTiA3M8KwMDUnMzEuNCJF!5e0!3m2!1sen!2s!4v1780564886232!5m2!1sen!2s",
-  },
-  {
-    name: "Shahid Enterprises - Faisalabad",
-    address: "Shop#138-A, Shoaib Bilal Market, Near Mian Trust Market, Faisalabad",
-    city: "Faisalabad",
-    province: "PUNJAB",
-    contact: "0322-7661268",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3404.559434696852!2d73.09224329999999!3d31.4262623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x392243007ad80a2b%3A0xe13f7034cf55dd2c!2sShahid%20Battery%20Center%20(Agency)!5e0!3m2!1sen!2s!4v1771618902265!5m2!1sen!2s",
-  },
-  {
-    name: "Adnan Battery Center - Tando Jan Muhammad",
-    address: "Shop#3, Near Eid Gah, Jhado Road, Tando Jan Muhammad",
-    city: "Tando Jan Muhammad",
-    province: "SINDH",
-    contact: "0301/0334-2556215",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d851.1374124140546!2d73.0918723!3d31.4265318!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39226821401ead95%3A0x2081cc971f3f0b92!2sShoaib%20Bilal%20Market!5e0!3m2!1sen!2s!4v1771618917080!5m2!1sen!2s",
-  },
-  {
-    name: "MRP Traders - Hyderabad",
-    address: "Shop#32-33 Mehran Commercial Market, Hyderabad",
-    city: "Hyderabad",
-    province: "SINDH",
-    contact: "0313-6513390",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3613.9459978733553!2d69.21325259999999!3d25.069819400000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x394e8d86b21225d3%3A0x4062add5d357c80e!2sAdnan%20battery%20centre!5e0!3m2!1sen!2s!4v1771618932278!5m2!1sen!2s",
-  },
-  {
-    name: "Abbas Enterprises - Swat",
-    address: "",
-    city: "",
-    province: "",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d901.2132075116978!2d68.35246289999999!3d25.3762484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x394c717be1377c29%3A0xd47b1a06e9bb841e!2sMRP%20TRADERS!5e0!3m2!1sen!2s!4v1771619094794!5m2!1sen!2s",
-  },
-  {
-    name: "Abdul waheed khan",
-    address: "",
-    city: "",
-    province: "",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3270.611149615707!2d72.46353527575495!3d34.94128797283523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzTCsDU2JzI4LjYiTiA3MsKwMjcnNTguMCJF!5e0!3m2!1sen!2s!4v1780575735768!5m2!1sen!2s",
-  },
-  {
-    name: "Danish Traders - Charsada",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0313-9335533",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3271.3929607774307!2d72.41343688964844!3d34.92168045043945!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dc3f4e2481cb33%3A0xaed1b55e9bb41550!2sAbdul%20waheed%20khan%20plaza!5e0!3m2!1sen!2s!4v1780923658086!5m2!1sen!2s",
-  },
-  {
-    name: "Haseeb Traders - Peshawar",
-    address: "Shop No.1, Nasir Mension, shuba Bazar, Peshawar Peshawar",
-    city: "Peshawar",
-    province: "KHYBER PAKHTUNKHWA",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3301.699631678485!2d71.75131607572082!3d34.1540259731188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzTCsDA5JzE0LjUiTiA3McKwNDUnMTQuMCJF!5e0!3m2!1sen!2s!4v1780576510089!5m2!1sen!2s",
-  },
-  {
-    name: "Jahangir & Momin Traders - Peshawar",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0302-9692112",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.3973211925486!2d71.5622745!3d34.008010899999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38d917aabf6f51a3%3A0x5dda1fea99cf9e82!2sHaseeb%20traders!5e0!3m2!1sen!2s!4v1771619410036!5m2!1sen!2s",
-  },
-  {
-    name: "Mian Battery Zone - Peshawar",
-    address: "Shop#1, Awami Market Karkhanoo Peshawar",
-    city: "Peshawar",
-    province: "KHYBER PAKHTUNKHWA",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1389.8978844414296!2d71.58269941597212!3d34.05020893647835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzTCsDAzJzAxLjEiTiA3McKwMzUnMDEuMiJF!5e0!3m2!1sen!2s!4v1780576632348!5m2!1sen!2s",
-  },
-  {
-    name: "Noor Traders - Kohat",
-    address: "",
-    city: "",
-    province: "",
-    contact: "0301-8845317/0315-9231509",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.793024851256!2d71.4252094!3d33.997849699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38d9118afc6a46b1%3A0xe55b7fd89b4d385d!2sMian%20Battery%20and%20Solar%20Zone!5e0!3m2!1sen!2s!4v1771619425949!5m2!1sen!2s",
-  },
-  {
-    name: "Peshawar Battery Center - Nowshera",
-    address: "Shop#21, Farooq Stadium Plaza, G.T Road, Nowshera Cantt",
-    city: "Nowshera",
-    province: "KHYBER PAKHTUNKHWA",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3324.9292739522853!2d71.45212937569524!3d33.55521387334818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzPCsDMzJzE4LjgiTiA3McKwMjcnMTYuOSJF!5e0!3m2!1sen!2s!4v1780724794505!5m2!1sen!2s",
-  },
-  {
-    name: "Punjab Batteries Center - Bannu",
-    address: "",
-    city: "",
-    province: "",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.4382624895084!2d72.0045177!3d34.006959699999996!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ded30076819a79%3A0xf62d9e4bf97e66dc!2sPeshawar%20battery%20centre!5e0!3m2!1sen!2s!4v1771619439210!5m2!1sen!2s",
-  },
-  {
-    name: "Quality Battery Scrap - Peshawar",
-    address: "",
-    city: "",
-    province: "",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d254708.61663707581!2d70.63716983706462!3d32.98747435919563!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDU5JzAyLjgiTiA3MMKwMzYnNDguMCJF!5e0!3m2!1sen!2s!4v1780896362935!5m2!1sen!2s",
-  },
-  {
-    name: "Seven Star Electronics & Battery  - Bajroh",
-    address: "",
-    city: "",
-    province: "",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d206.74495248193713!2d71.60510304919505!3d33.99460809024028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzPCsDM5JzQwLjYiTiA3McKwMzYnMTguOSJF!5e0!3m2!1sen!2s!4v1780572323342!5m2!1sen!2s",
-  },
-  {
-    name: "Shehzad Battery Center DIKhan",
-    address: "",
-    city: "",
-    province: "KHYBER PAKHTUNKHWA",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3278.110107273195!2d71.4527091757468!3d34.75281907290109!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzTCsDQ5JzEwLjIiTiA3McKwMjcnMTKuMCJF!5e0!3m2!1sen!2s!4v1780924047387!5m2!1sen!2s",
-  },
-  {
-    name: "Zahid Battery Center - D.I.Khan",
-    address: "",
-    city: "",
-    province: "KHYBER PAKHTUNKHWA",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3389.681980756825!2d70.90971757562421!3d31.833652474072043!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDUwJzAxLjIiTiA3MMKwNTQnNDQuMyJF!5e0!3m2!1sen!2s!4v1780923814058!5m2!1sen!2s",
-  },
-  {
-    name: "(Awon Ali & Brother) Riaz Shah Auto Battery service Nawabshah",
-    address: "",
-    city: "",
-    province: "KHYBER PAKHTUNKHWA",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3389.696831745523!2d70.9122543334961!3d31.833248138427734!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39266f9ec9ee2047%3A0x990571291c0a7bed!2sZahid%20battery%20center!5e0!3m2!1sen!2s!4v1780744888100!5m2!1sen!2s",
-  },
-  {
-    name: "(Nadeem) Hyderabad Battery Service Hyderabad",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3578.399404476551!2d68.4064028754168!3d26.248697677049236!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjbCsDE0JzU1LjMiTiA2OMKwMjQnMzIuMyJF!5e0!3m2!1sen!2s!4v1781072707772!5m2!1sen!2s",
-  },
-  {
-    name: "A A Battery zone Hyderabad",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0341-3360251",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3604.6781616116987!2d68.3664901753878!3d25.38210067759246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDIyJzU1LjYiTiA2OMKwMjInMDguNiJF!5e0!3m2!1sen!2s!4v1781072624861!5m2!1sen!2s",
-  },
-  {
-    name: "Abdul Hadi Battery Traders - Karachi",
-    address: "Shop No 02, Main Razzaqabad Bus Stop, Bin Qasim, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0332-6250288",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3604.6074869878544!2d68.36548677538791!3d25.384468277591036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDIzJzA0LjYiTiA2OMKwMjInMDUuMCJF!5e0!3m2!1sen!2s!4v1781072461007!5m2!1sen!2s",
-  },
-  {
-    name: "Abdul Wahid Battery service Hyderabad",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0345-4220311",
-    pin: "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14478.745051232441!2d67.1678194!3d24.8745628!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb339a20ea9bb8f%3A0x44cc0edf52ba87c1!2sAbdul%20Hadi%20Battery%20Traders!5e0!3m2!1sen!2s!4v1771619160608!5m2!1sen!2s",
-  },
-  {
-    name: "Agha Battery Centre",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0333-2153353/0306-2807021",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3604.8429794750346!2d68.37056387538772!3d25.376578477595878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDIyJzM1LjciTiA2OMKwMjInMjMuMyJF!5e0!3m2!1sen!2s!4v1781072841149!5m2!1sen!2s",
-  },
-  {
-    name: "Aithmad Battery Agra Taj Colony",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3621.329380168492!2d66.99525067536956!3d24.81840707795674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDQ5JzA2LjMiTiA2NsKwNTknNTIuMiJF!5e0!3m2!1sen!2s!4v1781072421579!5m2!1sen!2s",
-  },
-  {
-    name: "Atif Traders",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0345-5794000",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3619.758822617334!2d66.97610267537127!3d24.872085477921637!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDUyJzE5LjUiTiA2NsKwNTknNTg email address is disabled!5e0!3m2!1sen!2s!4v1781071652280!5m2!1sen!2s",
-  },
-  {
-    name: "Bangash battery",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0340-4898273",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3616.597176463477!2d67.06322857537482!3d24.97981637785155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDU4JzQ3LjMiTiA2N8KwMDMnNTYuOSJF!5e0!3m2!1sen!2s!4v1781072058779!5m2!1sen!2s",
-  },
-  {
-    name: "Battery Lab - Karachi",
-    address: "Korangi#5-1/2, Sector 43/B, Opposite Jumma Bazar Ground, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0336-2546020/0321-3626962",
-    pin: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.1515792807836!2d67.1651621!3d24.824489399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33bcdce243b89%3A0x7a70a4d68387521b!2sBattery%20lab!5e0!3m2!1sen!2s!4v1771619214630!5m2!1sen!2s",
-  },
-  {
-    name: "Battery Lab Korangi",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0300-0677858",
-    pin: "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3621.153962635914!2d67.16255647536977!3d24.82440787795281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDQ5JyI",
-  },
-  {
-    name: "Bismillah Battery service Shehdadpur",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0332-4989712",
-    pin: "",
-  },
-  {
-    name: "Chohan Traders Hyderabad",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0300-6058400",
-    pin: "",
-  },
-  {
-    name: "Darbar Battery Service - Karachi",
-    address: "Shop#197, Garden Takuna Market, Nishtar Road, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0321-3316771/0312-4912286",
-    pin: "",
-  },
-  {
-    name: "Delux Battery Service",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0323-6691244",
-    pin: "",
-  },
-  {
-    name: "Global Metal",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0300-8198824",
-    pin: "",
-  },
-  {
-    name: "Goodluck Battery",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0301-4192819",
-    pin: "",
-  },
-  {
-    name: "Habib Battery Service Khipro",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Hammad Battery Agra Taj Karachi",
-    address: "Shop#9, Near Navel Flates. Agra Taj Colony, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0322-7661268",
-    pin: "",
-  },
-  {
-    name: "Hammad Battery Service - Karachi",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0334-3547835/0301-2600032",
-    pin: "",
-  },
-  {
-    name: "Hayat Battery",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0313-7344595",
-    pin: "",
-  },
-  {
-    name: "Hayat Traders",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0300-9817799",
-    pin: "",
-  },
-  {
-    name: "Ittehad And Company",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0320-4890000",
-    pin: "",
-  },
-  {
-    name: "Jahangir Battery",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0333-9944940",
-    pin: "",
-  },
-  {
-    name: "Karachi King Battery",
-    address: "Shop#1, Near Babar Kanta, Bhens Colony More, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0301-6779541",
-    pin: "",
-  },
-  {
-    name: "Karachi Kings Batteries - Karachi",
-    address: "Shop#84, PNSC Flat Sector 15-A3, Buffer Zone Nagan Chowrangi, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0312-1367979/0314-2001736",
-    pin: "",
-  },
-  {
-    name: "M.S Battery & Solar - Karachi",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0347-2024943",
-    pin: "",
-  },
-  {
-    name: "M.S battery and solar",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "M/S Azmi Traders - Karachi",
-    address: "Office#312, 3rd Floor Rafique Market Shorab Katrak Road Saddar Regal Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0321-2148726/0322-8229823/0316-2249258",
-    pin: "",
-  },
-  {
-    name: "MRP Traders Hyderabad",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0324-6070803",
-    pin: "",
-  },
-  {
-    name: "Madina Battery Services - Karachi",
-    address: "S-3/97, Opposite Elementry Girls School, Suadabad, Malir Town, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0313-2029758/0306-8582990",
-    pin: "",
-  },
-  {
-    name: "Madni Battery Garden",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0345-5762657",
-    pin: "",
-  },
-  {
-    name: "Millat Tractor & Battery Centre Nawabshah",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Modern BatteryService",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0321-6030072",
-    pin: "",
-  },
-  {
-    name: "Mustafa Battery - Karachi",
-    address: "Shop#64, Iqra City Phase II, Abul Isphani Road, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0300-2378967",
-    pin: "",
-  },
-  {
-    name: "Raja Battery Centre Qasimabad Hyderabad",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0301-6519404",
-    pin: "",
-  },
-  {
-    name: "Rashid Traders - Karachi",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0314-2288107",
-    pin: "",
-  },
-  {
-    name: "Rashid Traders Garden",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Rayyan Battery",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0324-6697095",
-    pin: "",
-  },
-  {
-    name: "Rayyan Battery Services - Karachi",
-    address: "Shop#13, A-1, Heights, Nishter Road Garden, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Samaviah Traders Hyderabad",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Shahid Ali Battery Shop Qazi Ahmed",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Shahrukh Solar House - Karachi",
-    address: "Shop/Plot#02, Sector 32VE, Street#14, Nasir Jump, Korangi Town, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Shahrukh solar house",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0313-2280006",
-    pin: "",
-  },
-  {
-    name: "Shamim Akhtar Battery Service - Karachi",
-    address: "H.NO. L-S -54, SECTOR 1 D, MILLATABAD, COMMERCIAL AREA ORANGI TOWN, Karachi West",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0331-2920465",
-    pin: "",
-  },
-  {
-    name: "Siddiq Battery Traders - Karachi",
-    address: "Shop#1/2, Plot C-554, Near Malir Bridge. Quaidabad Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0300-6163940",
-    pin: "",
-  },
-  {
-    name: "Sindh Battery  Safora Karachi",
-    address: "Shop#9, Amin Plaza, Garden West, Nishtar Road, Garden West, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0300-2561392/0312-8734419",
-    pin: "",
-  },
-  {
-    name: "Sindh Battery Service - Karachi",
-    address: "Shop No C -31, Sunley Arcade, Safoora Chowrangi ,Gulshan Town, Karachi East",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0334--3038434",
-    pin: "",
-  },
-  {
-    name: "Sohail & Hassan Battery - Karachi",
-    address: "Shop#D-2/1, Ground Floor, Abid Square, Plot#ST-8/A/2 Block-7 F.B Area, Karachi",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0300-6032937",
-    pin: "",
-  },
-  {
-    name: "Wasey Battery Service",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0306-7509798",
-    pin: "",
-  },
-  {
-    name: "Yasir Traders",
-    address: "",
-    city: "",
-    province: "SINDH",
-    contact: "0333-2388490/0305-1250601",
-    pin: "",
-  },
-  {
-    name: "Zam Zam Batteries Traders - Karachi",
-    address: "Shop#50, Defence Garden Appt Phase-1, Main Korangi Road, DHA Karachi.",
-    city: "Karachi",
-    province: "SINDH",
-    contact: "0321-8262505",
-    pin: "",
-  },
-  {
-    name: "Ali & Company - Lahore",
-    address: "391, Block D3, Main WAPDA Avenue, WAPDA Town, Lahore",
-    city: "Lahore",
-    province: "PUNJAB",
-    contact: "0300-8035716",
-    pin: "",
-  },
-  {
-    name: "Ittefaq Battery House - Nankana Sahib",
-    address: "Shop# 1979, Near Admore Pump, Lorry Adda Mangtanwala Road, Nankana Sahib",
-    city: "Nankana Sahib",
-    province: "PUNJAB",
-    contact: "0323-1234562",
-    pin: "",
-  },
-  {
-    name: "Muhammadi Battery & Oil Traders - Lahore",
-    address: "P-334 Block-6 B-01, Town Ship Lahore",
-    city: "Lahore",
-    province: "PUNJAB",
-    contact: "0321-0521000/0323-7104079",
-    pin: "",
-  },
-  {
-    name: "New Rajput Battery - Lahore",
-    address: "Shop#23, Montgomary Road, Lahore",
-    city: "Lahore",
-    province: "PUNJAB",
-    contact: "0321-4367254",
-    pin: "",
-  },
-  {
-    name: "Sajjad Battery House - Lahore",
-    address: "Shop# E/193/2, Bank Stop Main Walton Road, Lahore",
-    city: "Lahore",
-    province: "PUNJAB",
-    contact: "0300-9415522",
-    pin: "",
-  },
-  {
-    name: "Umer Battery Service - Lahore",
-    address: "Shop#35, Street#9, New Iqbal Park, Opposite Adil Hospital, DHA, Lahore",
-    city: "Lahore",
-    province: "PUNJAB",
-    contact: "0300-9045551",
-    pin: "",
-  },
-  {
-    name: "Zeb Battery Center - Lahore",
-    address: "42 Aziz Road, Misri Shah Opposite WASA office, Chowk Nakhuds, Lahore",
-    city: "Lahore",
-    province: "PUNJAB",
-    contact: "0333-6105632",
-    pin: "",
-  },
-  {
-    name: "Al-Nawaz Traders - Multan",
-    address: "Shop#1,Volta Market, Vehari Chowk, Multan",
-    city: "Multan",
-    province: "PUNJAB",
-    contact: "0346-7863132/0335-5226667",
-    pin: "",
-  },
-  {
-    name: "ASR Traders and Builders Private Limited",
-    address: "Office#05, Prime Center Farooq Market, G-13/3, Islamabad",
-    city: "Islamabad",
-    province: "Federal Capital Territory",
-    contact: "0333-5297132",
-    pin: "",
-  },
-  {
-    name: "Anoosh And Shafel Traders - Rawalpindi",
-    address: "Shop#4 Pindi Cricket Stadium Road, Rawalpindi",
-    city: "Rawalpindi",
-    province: "PUNJAB",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Hafiz Battery Center - Talagang",
-    address: "Shop#3, Sunny Market, Mianwali Road, Near Chowk Siddiqabad, Talagang",
-    city: "Talagang",
-    province: "PUNJAB",
-    contact: "0333-5189023",
-    pin: "",
-  },
-  {
-    name: "Ikram Battery Center - Ternol",
-    address: "Shop#29-A Chaudhary Ayoub Market ( Bank Islami Market) G.T Road, Ternol, Islamabad",
-    city: "Islamabad",
-    province: "Federal Capital Territory",
-    contact: "0336-0530520/0311-1519535",
-    pin: "",
-  },
-  {
-    name: "Irfan Battery Centre - Rawalpindi",
-    address: "Shop#4324-A, Main Road Daryaabad, Gowalmandi, Rawalpindi",
-    city: "Rawalpindi",
-    province: "PUNJAB",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Melody Battery.Pk - Islamabad",
-    address: "Shop No.03, Block.5, Sector.G-6 Markaz,Melody Market, Islamabad",
-    city: "Islamabad",
-    province: "Federal Capital Territory",
-    contact: "",
-    pin: "",
-  },
-  {
-    name: "Pak Japan Battery Centre - Islamabad",
-    address: "Shop#55, Street#04, I-10/3 Auto Market Islamabad",
-    city: "Islamabad",
-    province: "Federal Capital Territory",
-    contact: "0317-7666507",
-    pin: "",
-  },
-  {
-    name: "Prince Battery Center - Rawalpindi",
-    address: "Shop#3, Awami Plaza, National Market, Chandni Chowk, Rawalpindi",
-    city: "Rawalpindi",
-    province: "PUNJAB",
-    contact: "",
-  },
+ {
+  "name": "ASR Traders and Builders Private Limited",
+  "address": "Office#05, Prime Center Farooq Market, G-13/3, Islamabad",
+  "city": "Islamabad",
+  "province": "Islamabad",
+  "contact": "0333-5297132",
+  "map": "https://maps.google.com/maps?q=33.6554432,72.9633664&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.6554432%2C72.9633664&query_place_id=ChIJ77gICQCX3zgRhn8t1EBw_7w"
+ },
+ {
+  "name": "Ikram Battery Center - Ternol",
+  "address": "Shop#29-A Chaudhary Ayoub Market ( Bank Islami Market) G.T Road, Ternol, Islamabad",
+  "city": "Islamabad",
+  "province": "Islamabad",
+  "contact": "0336-0530520/0311-1519535",
+  "map": "https://maps.google.com/maps?q=33.6543545,72.9080969&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.6543545%2C72.9080969&query_place_id=ChIJZVbD8vyX3zgRNS_EsxeawZk"
+ },
+ {
+  "name": "Melody Battery.Pk - Islamabad",
+  "address": "Shop No.03, Block.5, Sector.G-6 Markaz,Melody Market, Islamabad",
+  "city": "Islamabad",
+  "province": "Islamabad",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=33.7166774,73.0848193&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.7166774%2C73.0848193&query_place_id=ChIJt0zXTuW_3zgRDXecQag9quI"
+ },
+ {
+  "name": "Pak Japan Battery Centre - Islamabad",
+  "address": "Shop#55, Street#04, I-10/3 Auto Market Islamabad",
+  "city": "Islamabad",
+  "province": "Islamabad",
+  "contact": "0317-7666507",
+  "map": "https://maps.google.com/maps?q=33.6535142,73.0417229&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.6535142%2C73.0417229&query_place_id=ChIJAzK4vWTt3zgRIy7r7CX9LZU"
+ },
+ {
+  "name": "Seven Star Electronics & Battery - Bajroh",
+  "address": "Baee China, Bajaur",
+  "city": "Baee China, Bajaur",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=34.7526005,71.4552824&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=34.7526005%2C71.4552824&query_place_id=ChIJoaM00qLH2zgRfKNd9iSff1I"
+ },
+ {
+  "name": "Punjab Batteries Center - Bannu",
+  "address": "Bannu",
+  "city": "Bannu",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=32.9840971,70.6133919&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=32.9840971%2C70.6133919&query_place_id=ChIJW5a8YwAH2DgRbxbCGz6S2aM"
+ },
+ {
+  "name": "Shehzad Battery Center DIKhan",
+  "address": "Cantonment, Dera Ismail Khan",
+  "city": "Dera Ismail Khan",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=31.8336673,70.9123018&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.8336673%2C70.9123018&query_place_id=ChIJj2I3UclvJjkRuYhVqOXXUHQ"
+ },
+ {
+  "name": "Zahid Battery Center - D.I.Khan",
+  "address": "Cantonment, Dera Ismail Khan",
+  "city": "Dera Ismail Khan",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=31.8331311,70.912314&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.8331311%2C70.912314&query_place_id=ChIJRyDuyZ5vJjkR7XsKHClxBZk"
+ },
+ {
+  "name": "Abbas Enterprises - Swat",
+  "address": "Langar, Swat",
+  "city": "Langar, Swat",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3270.611149615707!2d72.46353527575495!3d34.94128797283523!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzTCsDU2JzI4LjYiTiA3MsKwMjcnNTguMCJF!5e0!3m2!1sen!2s!4v1780575735768!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=34.94128797283523,72.46353527575495"
+ },
+ {
+  "name": "Abdul waheed khan",
+  "address": "Matta, Swat",
+  "city": "Matta, Swat",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d3271.3929607774307!2d72.41343688964844!3d34.92168045043945!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dc3f4e2481cb33%3A0xaed1b55e9bb41550!2sAbdul%20waheed%20khan%20plaza!5e0!3m2!1sen!2s!4v1780923658086!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=34.92168045043945,72.41343688964844"
+ },
+ {
+  "name": "Noor Traders - Kohat",
+  "address": "Mir Ahmad Khalil, Kohat",
+  "city": "Mir Ahmad Khalil, Kohat",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "0301-8845317/0315-9231509",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3324.9292739522853!2d71.45212937569524!3d33.55521387334818!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzPCsDMzJzE4LjgiTiA3McKwMjcnMTYuOSJF!5e0!3m2!1sen!2s!4v1780724794505!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.55521387334818,71.45212937569524"
+ },
+ {
+  "name": "Peshawar Battery Center - Nowshera",
+  "address": "Shop#21, Farooq Stadium Plaza, G.T Road, Nowshera Cantt",
+  "city": "Nowshera",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=34.0069597,72.0045177&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=34.0069597%2C72.0045177&query_place_id=ChIJeZqBdgDT3jgR3GZ--UueLfY"
+ },
+ {
+  "name": "Haseeb Traders - Peshawar",
+  "address": "Shop No.1, Nasir Mension, shuba Bazar, Peshawar Peshawar",
+  "city": "Peshawar",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=34.0080109,71.5622745&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=34.0080109%2C71.5622745&query_place_id=ChIJo1Fvv6oX2TgRgp7Pmeof2l0"
+ },
+ {
+  "name": "Jahangir & Momin Traders - Peshawar",
+  "address": "Bakhshi Pul, Peshawar",
+  "city": "Peshawar",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "0302-9692112",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d1389.8978844414296!2d71.58269941597212!3d34.05020893647835!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzTCsDAzJzAxLjEiTiA3McKwMzUnMDEuMiJF!5e0!3m2!1sen!2s!4v1780576632348!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=34.05020893647835,71.58269941597212"
+ },
+ {
+  "name": "Mian Battery Zone - Peshawar",
+  "address": "Shop#1, Awami Market Karkhanoo Peshawar",
+  "city": "Peshawar",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=33.9978497,71.4252094&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.9978497%2C71.4252094&query_place_id=ChIJsUZq_IoR2TgRXThNm9h_W-U"
+ },
+ {
+  "name": "Quality Battery Scrap - Peshawar",
+  "address": "Haider Colony, Peshawar",
+  "city": "Peshawar",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d206.74495248193713!2d71.60510304919505!3d33.99460809024028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzPCsDM5JzQwLjYiTiA3McKwMzYnMTguOSJF!5e0!3m2!1sen!2s!4v1780572323342!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.99460809024028,71.60510304919505"
+ },
+ {
+  "name": "Danish Traders - Charsada",
+  "address": "Rajjar, Charsadda",
+  "city": "Rajjar, Charsadda",
+  "province": "Khyber Pakhtunkhwa",
+  "contact": "0313-9335533",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3301.699631678485!2d71.75131607572082!3d34.1540259731188!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzTCsDA5JzE0LjUiTiA3McKwNDUnMTQuMCJF!5e0!3m2!1sen!2s!4v1780576510089!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=34.1540259731188,71.75131607572082"
+ },
+ {
+  "name": "Hafiz Battery Center - 18 Hazari",
+  "address": "Jhang Road, Near PSO Pump, 18 Hazari, Distict Jhang",
+  "city": "18 Hazari",
+  "province": "Punjab",
+  "contact": "0306-7509798",
+  "map": "https://maps.google.com/maps?q=31.1653125,72.0989375&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.1653125%2C72.0989375&query_place_id=ChIJG3VEdHmDIzkRJ0vBX32kKdw"
+ },
+ {
+  "name": "Madina Auto Store",
+  "address": "Bhaikho, Mandi Bahauddin",
+  "city": "Bhaikho, Mandi Bahauddin",
+  "province": "Punjab",
+  "contact": "0300-6163940",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3371.228994769613!2d73.47859577564441!3d32.332561473852536!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDE5JzU3LjIiTiA3M8KwMjgnNTIuMiJF!5e0!3m2!1sen!2s!4v1780574661339!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=32.332561473852536,73.47859577564441"
+ },
+ {
+  "name": "Rehman Traders",
+  "address": "Dera Akbar Khan Pathan, Khushab",
+  "city": "Dera Akbar Khan Pathan, Khushab",
+  "province": "Punjab",
+  "contact": "0300-8198824",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3388.1162724964975!2d71.89702227562584!3d31.876254974053108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDUyJzM0LjUiTiA3McKwNTMnNTguNiJF!5e0!3m2!1sen!2s!4v1780564467638!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.876254974053108,71.89702227562584"
+ },
+ {
+  "name": "Baoo Jee Enterprises - Faisalabad",
+  "address": "Shop#77, Shoaib Bilal Market, Opp Mian Trust Market, Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0324-6697095",
+  "map": "https://maps.google.com/maps?q=31.4265982,73.092196&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4265982%2C73.092196&query_place_id=ChIJSRjkPABDIjkR42ASOqJ9r2g"
+ },
+ {
+  "name": "Chaudhary Battery Studio- Faisalabad",
+  "address": "Shoaib Bilal Market, Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0313-3744595",
+  "map": "https://maps.google.com/maps?q=31.4268051,73.0919187&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4268051%2C73.0919187&query_place_id=ChIJM3L0QCFoIjkRW2Q8NRVyMEc"
+ },
+ {
+  "name": "Hannan Traders - Faisalabad",
+  "address": "Sadaqat Autos, Mian Trust Market, Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0321-6600390",
+  "map": "https://maps.google.com/maps?q=31.4259853,73.0920065&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4259853%2C73.0920065&query_place_id=ChIJE21oDydpIjkRsBJ0mFS5bww"
+ },
+ {
+  "name": "Haroon Battery Center",
+  "address": "Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0333-9944940",
+  "map": "https://maps.google.com/maps?q=31.4277362,73.0931069&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4277362%2C73.0931069&query_place_id=ChIJDb0UUSFoIjkR7HfTdzxHcbw"
+ },
+ {
+  "name": "Imtiaz Traders - Faisalabad",
+  "address": "88-A Basement, Shoaib Bilal Market, Opp Commisioner Road,Faisalabad.",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0300-9660830",
+  "map": "https://maps.google.com/maps?q=31.4265982,73.092196&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4265982%2C73.092196&query_place_id=ChIJla0eQCFoIjkRkgs_H5fMgSA"
+ },
+ {
+  "name": "Karachi Battery Service",
+  "address": "Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0321-6030072",
+  "map": "https://maps.google.com/maps?q=31.4270855,73.0914733&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4270855%2C73.0914733&query_place_id=ChIJS2br7DdpIjkRTYdscdkkqXk"
+ },
+ {
+  "name": "Rohan Traders - Faisalabad",
+  "address": "216-A, Shoaib Bilal Market, Opposite General Bus Stand, Sargodha Raod Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0333-9944940",
+  "map": "https://maps.google.com/maps?q=31.4265982,73.092196&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4265982%2C73.092196&query_place_id=ChIJla0eQCFoIjkRkgs_H5fMgSA"
+ },
+ {
+  "name": "Sadaqat Autos",
+  "address": "Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0323-6691244",
+  "map": "https://maps.google.com/maps?q=31.4260887,73.0920602&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4260887%2C73.0920602&query_place_id=ChIJvdRcEyFoIjkRsib5YV5nP6Y"
+ },
+ {
+  "name": "Shafi Battery Service",
+  "address": "Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0300-9817799",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3404.566098129988!2d73.0893592756078!3d31.426078774257366!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzHCsDI2JzMzLjkiTiA3M8KwMDUnMzEuMCJF!5e0!3m2!1sen!2s!4v1781071196363!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.426078774257366,73.0893592756078"
+ },
+ {
+  "name": "Shahid & Saleem Battery Center",
+  "address": "Shoaib Bilal Market, Stadium Road, Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0322-7661268",
+  "map": "https://maps.google.com/maps?q=31.4266162,73.0921651&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4266162%2C73.0921651&query_place_id=ChIJSbDwPyFoIjkRCO4MvYB8H4w"
+ },
+ {
+  "name": "Shahid Battery Center - Faisalabad",
+  "address": "Shop #1, Mian Trust Market, Opposite Khidmat Markaz, Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0304-4111268",
+  "map": "https://maps.google.com/maps?q=31.4258222,73.0917691&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4258222%2C73.0917691&query_place_id=ChIJKwrYegBDIjkRLN1VzzRwP-E"
+ },
+ {
+  "name": "Shahid Enterprises - Faisalabad",
+  "address": "Shop#138-A, Shoaib Bilal Market, Near Mian Trust Market, Faisalabad",
+  "city": "Faisalabad",
+  "province": "Punjab",
+  "contact": "0322-7661268",
+  "map": "https://maps.google.com/maps?q=31.4265982,73.092196&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4265982%2C73.092196&query_place_id=ChIJla0eQCFoIjkRkgs_H5fMgSA"
+ },
+ {
+  "name": "Bilal Battery Center - Garh More",
+  "address": "Multan Road, Garh More",
+  "city": "Garh More",
+  "province": "Punjab",
+  "contact": "0300-4029561",
+  "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3425.5346293786884!2d71.8440548!3d30.843703500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39249b4d3b01f793%3A0x4a5c91b29e84572c!2sBILAL%20Battery%20Center!5e0!3m2!1sen!2s!4v1771479634029!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=30.843703500000004,71.8440548"
+ },
+ {
+  "name": "Punjab Battery House",
+  "address": "Satellite Town No 3, Jauharabad",
+  "city": "Jauharabad",
+  "province": "Punjab",
+  "contact": "0300-0677858",
+  "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3372.8280078580015!2d72.27605218885498!3d32.28960180000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39213db7490345db%3A0x26ce00af55fb0fca!2sPunjab%20batteries%20services!5e0!3m2!1sen!2s!4v1780564773138!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=32.28960180000001,72.27605218885498"
+ },
+ {
+  "name": "Risen Trading Co. - Jauharabad",
+  "address": "Balouch Market Near Bus Stand, Jauharabad, Khushab",
+  "city": "Jauharabad",
+  "province": "Punjab",
+  "contact": "0300-0677858",
+  "map": "https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d843.2079617022931!2d72.2800795!3d32.2894986!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39213c4da1011eb7%3A0x6674cfbd30492d81!2sBaloch%20Market%2C%20Jauharabad%2C%20Pakistan!5e0!3m2!1sen!2s!4v1771618766364!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=32.2894986,72.2800795"
+ },
+ {
+  "name": "Modern Battery Service - Khushab",
+  "address": "Kalma Chowk, Khushab",
+  "city": "Khushab",
+  "province": "Punjab",
+  "contact": "0300-6032937",
+  "map": "https://maps.google.com/maps?q=32.296394,72.3476616&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=32.296394%2C72.3476616&query_place_id=ChIJdSP26DsWITkRWSaI8uelZQc"
+ },
+ {
+  "name": "Nadeem Noor Battery",
+  "address": "Kotehra, Mandi Bahauddin",
+  "city": "Kotehra, Mandi Bahauddin",
+  "province": "Punjab",
+  "contact": "0345-5762657",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3362.8321939626826!2d73.21683887565365!3d32.557323473756284!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMzLCsDMzJzI2LjQiTiA3M8KwMTMnMDkuOSJF!5e0!3m2!1sen!2s!4v1780564938772!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=32.557323473756284,73.21683887565365"
+ },
+ {
+  "name": "Ali & Company - Lahore",
+  "address": "391, Block D3, Main WAPDA Avenue, WAPDA Town, Lahore",
+  "city": "Lahore",
+  "province": "Punjab",
+  "contact": "0300-8035716",
+  "map": "https://maps.google.com/maps?q=31.4406142,74.274179&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4406142%2C74.274179&query_place_id=ChIJoZHE_9gBGTkRcYdXHrdhRuA"
+ },
+ {
+  "name": "Muhammadi Battery & Oil Traders - Lahore",
+  "address": "P-334 Block-6 B-01, Town Ship Lahore",
+  "city": "Lahore",
+  "province": "Punjab",
+  "contact": "0321-0521000/0323-7104079",
+  "map": "https://maps.google.com/maps?q=31.4571181,74.3080985&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4571181%2C74.3080985&query_place_id=ChIJq6qqqksBGTkR-DXYMA8fQwc"
+ },
+ {
+  "name": "New Rajput Battery - Lahore",
+  "address": "Shop#23, Montgomary Road, Lahore",
+  "city": "Lahore",
+  "province": "Punjab",
+  "contact": "0321-4367254",
+  "map": "https://maps.google.com/maps?q=31.5666571,74.3276381&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.5666571%2C74.3276381&query_place_id=ChIJF0ptnk4bGTkRSySeeZHpGkw"
+ },
+ {
+  "name": "Sajjad Battery House - Lahore",
+  "address": "Shop# E/193/2, Bank Stop Main Walton Road, Lahore",
+  "city": "Lahore",
+  "province": "Punjab",
+  "contact": "0300-9415522",
+  "map": "https://maps.google.com/maps?q=31.4882933,74.3684417&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4882933%2C74.3684417&query_place_id=ChIJ88g52M8FGTkRAmUIUv4yaOE"
+ },
+ {
+  "name": "Umer Battery Service - Lahore",
+  "address": "Shop#35, Street#9, New Iqbal Park, Opposite Adil Hospital, DHA, Lahore",
+  "city": "Lahore",
+  "province": "Punjab",
+  "contact": "0300-9045551",
+  "map": "https://maps.google.com/maps?q=31.4886607,74.3794307&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4886607%2C74.3794307&query_place_id=ChIJ1a8eJN0FGTkRe4lnrDLeO18"
+ },
+ {
+  "name": "Zeb Battery Center - Lahore",
+  "address": "42 Aziz Road, Misri Shah Opposite WASA office, Chowk Nakhuds, Lahore",
+  "city": "Lahore",
+  "province": "Punjab",
+  "contact": "0333-6105632",
+  "map": "https://maps.google.com/maps?q=31.586384,74.3350423&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.586384%2C74.3350423&query_place_id=ChIJGQZm_0YbGTkRwNYcH5ZMWpw"
+ },
+ {
+  "name": "Al Karam Auto Store - Mandi Bahauddin",
+  "address": "Larri Adda, Mandi Bahauddin",
+  "city": "Mandi Bahauddin",
+  "province": "Punjab",
+  "contact": "0340-4898273",
+  "map": "https://maps.google.com/maps?q=32.5843164,73.4840326&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=32.5843164%2C73.4840326&query_place_id=ChIJq4xd6et9HzkRSQxmIl-Ojic"
+ },
+ {
+  "name": "Lahore Battery Service & Auto Store - Mandi Shah Jewana",
+  "address": "Railway Crossing, Mandi Shah Jewana",
+  "city": "Mandi Shah Jewana",
+  "province": "Punjab",
+  "contact": "0346-7374605",
+  "map": "https://maps.google.com/maps?q=31.5688153,72.2926312&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.5688153%2C72.2926312&query_place_id=ChIJq6qqqpvpIzkRWjB_6_kyh0Q"
+ },
+ {
+  "name": "Al-Nawaz Traders - Multan",
+  "address": "Shop#1,Volta Market, Vehari Chowk, Multan",
+  "city": "Multan",
+  "province": "Punjab",
+  "contact": "0346-7863132/0335-5226667",
+  "map": "https://maps.google.com/maps?q=30.1744536,71.5074692&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=30.1744536%2C71.5074692&query_place_id=ChIJ34rXrvY3OzkRRRLVJbXRB-Q"
+ },
+ {
+  "name": "Ittefaq Battery House - Nankana Sahib",
+  "address": "Shop# 1979, Near Admore Pump, Lorry Adda Mangtanwala Road, Nankana Sahib",
+  "city": "Nankana Sahib",
+  "province": "Punjab",
+  "contact": "0323-1234562",
+  "map": "https://maps.google.com/maps?q=31.4528547,73.7130015&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=31.4528547%2C73.7130015&query_place_id=ChIJjeh-1QaPGDkRgK0YaiM4Oq8"
+ },
+ {
+  "name": "Ganj Bakhash Battery Service",
+  "address": "Phalia–Mandi Bahauddin Road, Phalia, Mandi Bahauddin",
+  "city": "Pindi Noora, Mandi Bahauddin",
+  "province": "Punjab",
+  "contact": "0345-5794000",
+  "map": "https://maps.google.com/maps?q=32.4373548,73.5704793&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=32.4373548%2C73.5704793&query_place_id=ChIJiU2MpwJkHzkRDvl1k_tEDlg"
+ },
+ {
+  "name": "Anoosh And Shafel Traders - Rawalpindi",
+  "address": "Shop#4 Pindi Cricket Stadium Road, Rawalpindi",
+  "city": "Rawalpindi",
+  "province": "Punjab",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=33.6530625,73.0715625&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.6530625%2C73.0715625&query_place_id=ChIJH9eZ6juV3zgRnbwGPttSeEQ"
+ },
+ {
+  "name": "Irfan Battery Centre - Rawalpindi",
+  "address": "Shop#4324-A, Main Road Daryaabad, Gowalmandi, Rawalpindi",
+  "city": "Rawalpindi",
+  "province": "Punjab",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=33.6045495,73.0573504&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.6045495%2C73.0573504&query_place_id=ChIJbc2uWACV3zgR9abGry8uNFs"
+ },
+ {
+  "name": "Prince Battery Center - Rawalpindi",
+  "address": "Shop#3, Awami Plaza, National Market, Chandni Chowk, Rawalpindi",
+  "city": "Rawalpindi",
+  "province": "Punjab",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=33.6324065,73.0687347&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=33.6324065%2C73.0687347&query_place_id=ChIJX4jMeM-V3zgRxqWQ6MIFYvo"
+ },
+ {
+  "name": "Hafiz Battery Center - Talagang",
+  "address": "Shop#3, Sunny Market, Mianwali Road, Near Chowk Siddiqabad, Talagang",
+  "city": "Talagang",
+  "province": "Punjab",
+  "contact": "0333-5189023",
+  "map": "https://maps.google.com/maps?q=32.9234295,72.3985561&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=32.9234295%2C72.3985561&query_place_id=ChIJV0oOL7mVIDkR6bkVMt6V8I4"
+ },
+ {
+  "name": "Bangash battery",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Bangash+battery%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Bangash+battery%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "Delux Battery Service",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Delux+Battery+Service%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Delux+Battery+Service%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "Global Metal",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Global+Metal%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Global+Metal%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "Goodluck Battery",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "0301-4192819",
+  "map": "https://maps.google.com/maps?q=Goodluck+Battery%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Goodluck+Battery%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "Hayat Battery",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "0313-7344595",
+  "map": "https://maps.google.com/maps?q=Hayat+Battery%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Hayat+Battery%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "Hayat Traders",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Hayat+Traders%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Hayat+Traders%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "Ittehad And Company",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "0320-4890000",
+  "map": "https://maps.google.com/maps?q=Ittehad+And+Company%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Ittehad+And+Company%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "Jahangir Battery",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Jahangir+Battery%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Jahangir+Battery%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "Modern BatteryService",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Modern+BatteryService%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Modern+BatteryService%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "Wasey Battery Service",
+  "address": "",
+  "city": "",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Wasey+Battery+Service%2C+Sindh%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Wasey+Battery+Service%2C+Sindh%2C+Pakistan"
+ },
+ {
+  "name": "(Nadeem) Hyderabad Battery Service Hyderabad",
+  "address": "Saddar, Hyderabad",
+  "city": "Hyderabad",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3604.6781616116987!2d68.3664901753878!3d25.38210067759246!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDIyJzU1LjYiTiA2OMKwMjInMDguNiJF!5e0!3m2!1sen!2s!4v1781072624861!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=25.38210067759246,68.3664901753878"
+ },
+ {
+  "name": "A A Battery zone Hyderabad",
+  "address": "Saddar, Hyderabad",
+  "city": "Hyderabad",
+  "province": "Sindh",
+  "contact": "0341-3360251",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3604.6074869878544!2d68.36548677538791!3d25.384468277591036!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDIzJzA0LjYiTiA2OMKwMjInMDUuMCJF!5e0!3m2!1sen!2s!4v1781072461007!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=25.384468277591036,68.36548677538791"
+ },
+ {
+  "name": "Abdul Wahid Battery service Hyderabad",
+  "address": "Gulshan-e-Hali, Hyderabad",
+  "city": "Hyderabad",
+  "province": "Sindh",
+  "contact": "0345-4220311",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3604.8429794750346!2d68.37056387538772!3d25.376578477595878!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjXCsDIyJzM1LjciTiA2OMKwMjInMjMuMyJF!5e0!3m2!1sen!2s!4v1781072841149!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=25.376578477595878,68.37056387538772"
+ },
+ {
+  "name": "Chohan Traders Hyderabad",
+  "address": "Hyderabad",
+  "city": "Hyderabad",
+  "province": "Sindh",
+  "contact": "0300-6058400",
+  "map": "https://maps.google.com/maps?q=Chohan+Traders+Hyderabad%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Chohan+Traders+Hyderabad%2C+Pakistan"
+ },
+ {
+  "name": "MRP Traders - Hyderabad",
+  "address": "Shop#32-33 Mehran Commercial Market, Hyderabad",
+  "city": "Hyderabad",
+  "province": "Sindh",
+  "contact": "0313-6513390",
+  "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d901.2132075116978!2d68.35246289999999!3d25.3762484!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x394c717be1377c29%3A0xd47b1a06e9bb841e!2sMRP%20TRADERS!5e0!3m2!1sen!2s!4v1771619094794!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=25.3762484,68.35246289999999"
+ },
+ {
+  "name": "Raja Battery Centre Qasimabad Hyderabad",
+  "address": "Hyderabad",
+  "city": "Hyderabad",
+  "province": "Sindh",
+  "contact": "0301-6519404",
+  "map": "https://maps.google.com/maps?q=25.396271,68.340458&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=25.396271%2C68.340458&query_place_id=ChIJP1HaTyhxTDkR5L-9PeXz_dY"
+ },
+ {
+  "name": "Samaviah Traders Hyderabad",
+  "address": "Hyderabad",
+  "city": "Hyderabad",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Samaviah+Traders+Hyderabad%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Samaviah+Traders+Hyderabad%2C+Pakistan"
+ },
+ {
+  "name": "Abdul Hadi Battery Traders - Karachi",
+  "address": "Shop No 02, Main Razzaqabad Bus Stop, Bin Qasim, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0332-6250288",
+  "map": "https://maps.google.com/maps?q=24.8649755,67.2939413&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8649755%2C67.2939413&query_place_id=ChIJ2x76ztAzsz4R93CK25L8FWU"
+ },
+ {
+  "name": "Agha Battery Centre",
+  "address": "Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0333-2153353/0306-2807021",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3621.329380168492!2d66.99525067536956!3d24.81840707795674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDQ5JzA2LjMiTiA2NsKwNTknNTIuMiJF!5e0!3m2!1sen!2s!4v1781072421579!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.81840707795674,66.99525067536956"
+ },
+ {
+  "name": "Aithmad Battery Agra Taj Colony",
+  "address": "Machar Colony, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=24.872085477921637,66.97610267537127&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.872085477921637,66.97610267537127"
+ },
+ {
+  "name": "Atif Traders",
+  "address": "Ajmer Nagri, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3616.597176463477!2d67.06322857537482!3d24.97981637785155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zMjTCsDU4JzQ3LjMiTiA2N8KwMDMnNTYuOSJF!5e0!3m2!1sen!2s!4v1781072058779!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.97981637785155,67.06322857537482"
+ },
+ {
+  "name": "Battery Lab - Karachi",
+  "address": "Korangi#5-1/2, Sector 43/B, Opposite Jumma Bazar Ground, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0336-2546020/0321-3626962",
+  "map": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3621.1515792807836!2d67.1651621!3d24.824489399999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3eb33bcdce243b89%3A0x7a70a4d68387521b!2sBattery%20lab!5e0!3m2!1sen!2s!4v1771619214630!5m2!1sen!2s",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.824489399999997,67.1651621"
+ },
+ {
+  "name": "Darbar Battery Service - Karachi",
+  "address": "Shop#197, Garden Takuna Market, Nishtar Road, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0321-3316771/0312-4912286",
+  "map": "https://maps.google.com/maps?q=24.8767522,67.0215211&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8767522%2C67.0215211&query_place_id=ChIJp_eCQQA_sz4R87k3e2TLC-I"
+ },
+ {
+  "name": "Hammad Battery Agra Taj Karachi",
+  "address": "Shop#9, Near Navel Flates. Agra Taj Colony, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=24.8712953,66.9777156&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8712953%2C66.9777156&query_place_id=ChIJn3WdMQAVsz4RbzP9fHJ0G4o"
+ },
+ {
+  "name": "Hammad Battery Service - Karachi",
+  "address": "Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0334-3547835/0301-2600032",
+  "map": "https://maps.google.com/maps?q=Hammad+Battery+Service%2C+Karachi%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Hammad+Battery+Service%2C+Karachi%2C+Pakistan"
+ },
+ {
+  "name": "Karachi King Battery",
+  "address": "Shop#1, Near Babar Kanta, Bhens Colony More, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0301-6779541",
+  "map": "https://maps.google.com/maps?q=24.8225962,67.306945&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8225962%2C67.306945&query_place_id=ChIJqYlwIAAzsz4RDLY9F0GkNmE"
+ },
+ {
+  "name": "Karachi Kings Batteries - Karachi",
+  "address": "Shop#84, PNSC Flat Sector 15-A3, Buffer Zone Nagan Chowrangi, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0312-1367979/0314-2001736",
+  "map": "https://maps.google.com/maps?q=Karachi+Kings+Batteries%2C+Shop%2384%2C+PNSC+Flat+Sector+15-A3%2C+Buffer+Zone+Nagan+Chowrangi%2C+Karachi%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Karachi+Kings+Batteries%2C+Shop%2384%2C+PNSC+Flat+Sector+15-A3%2C+Buffer+Zone+Nagan+Chowrangi%2C+Karachi%2C+Pakistan"
+ },
+ {
+  "name": "M.S Battery & Solar - Karachi",
+  "address": "Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0347-2024943",
+  "map": "https://maps.google.com/maps?q=24.961607,67.0655417&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.961607%2C67.0655417&query_place_id=ChIJ4an8KQBBsz4Ri9OKJKT2tQc"
+ },
+ {
+  "name": "M/S Azmi Traders - Karachi",
+  "address": "Office#312, 3rd Floor Rafique Market Shorab Katrak Road Saddar Regal Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0321-2148726/0322-8229823/0316-2249258",
+  "map": "https://maps.google.com/maps?q=24.8588138,67.0258032&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8588138%2C67.0258032&query_place_id=ChIJ_YHPdGg_sz4RM5KkNw9XAL8"
+ },
+ {
+  "name": "Madina Battery Services - Karachi",
+  "address": "S-3/97, Opposite Elementry Girls School, Suadabad, Malir Town, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0313-2029758/0306-8582990",
+  "map": "https://maps.google.com/maps?q=24.8988548,67.2015749&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8988548%2C67.2015749&query_place_id=ChIJz8K54mY3sz4R_2ArHV3qyGc"
+ },
+ {
+  "name": "Madni Battery Garden",
+  "address": "Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=24.8769375,67.0208125&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8769375%2C67.0208125&query_place_id=ChIJhWBKEvY_sz4RYsMxbOH7thc"
+ },
+ {
+  "name": "Mustafa Battery - Karachi",
+  "address": "Shop#64, Iqra City Phase II, Abul Isphani Road, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0300-2378967",
+  "map": "https://maps.google.com/maps?q=24.945059,67.0941147&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.945059%2C67.0941147&query_place_id=ChIJQaoEfLs5sz4RB3UCNDbkndY"
+ },
+ {
+  "name": "Rashid Traders - Karachi",
+  "address": "Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0314-2288107",
+  "map": "https://maps.google.com/maps?q=24.8770234,67.0209638&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8770234%2C67.0209638&query_place_id=ChIJKXdrotc_sz4RttpJyBUDYeE"
+ },
+ {
+  "name": "Rayyan Battery Services - Karachi",
+  "address": "Shop#13, A-1, Heights, Nishter Road Garden, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Rayyan+Battery+Services%2C+Shop%2313%2C+A-1%2C+Heights%2C+Nishter+Road+Garden%2C+Karachi%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Rayyan+Battery+Services%2C+Shop%2313%2C+A-1%2C+Heights%2C+Nishter+Road+Garden%2C+Karachi%2C+Pakistan"
+ },
+ {
+  "name": "Shahrukh Solar House - Karachi",
+  "address": "Shop/Plot#02, Sector 32VE, Street#14, Nasir Jump, Korangi Town, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0313-2280006",
+  "map": "https://maps.google.com/maps?q=Shahrukh+Solar+House%2C+Shop%2FPlot%2302%2C+Sector+32VE%2C+Street%2314%2C+Nasir+Jump%2C+Korangi+Town%2C+Karachi%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Shahrukh+Solar+House%2C+Shop%2FPlot%2302%2C+Sector+32VE%2C+Street%2314%2C+Nasir+Jump%2C+Korangi+Town%2C+Karachi%2C+Pakistan"
+ },
+ {
+  "name": "Shamim Akhtar Battery Service - Karachi",
+  "address": "H.NO. L-S -54, SECTOR 1 D, MILLATABAD, COMMERCIAL AREA ORANGI TOWN, Karachi West",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0331-2920465",
+  "map": "https://maps.google.com/maps?q=Shamim+Akhtar+Battery+Service%2C+H.NO.+L-S+-54%2C+SECTOR+1+D%2C+MILLATABAD%2C+COMMERCIAL+AREA+ORANGI+TOWN%2C+Karachi+West%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Shamim+Akhtar+Battery+Service%2C+H.NO.+L-S+-54%2C+SECTOR+1+D%2C+MILLATABAD%2C+COMMERCIAL+AREA+ORANGI+TOWN%2C+Karachi+West%2C+Pakistan"
+ },
+ {
+  "name": "Siddiq Battery Traders - Karachi",
+  "address": "Shop #9, Ameen Plaza, Nishtar Road, Garden West, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=24.8779281,67.0218933&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8779281%2C67.0218933&query_place_id=ChIJ4VdtacY_sz4R3QBBKcMJpl8"
+ },
+ {
+  "name": "Sindh Battery Safora Karachi",
+  "address": "Shop#9, Amin Plaza, Garden West, Nishtar Road, Garden West, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0300-2561392/0312-8734419",
+  "map": "https://maps.google.com/maps?q=Sindh+Battery+Safora+Karachi%2C+Shop%239%2C+Amin+Plaza%2C+Garden+West%2C+Nishtar+Road%2C+Garden+West%2C+Karachi%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Sindh+Battery+Safora+Karachi%2C+Shop%239%2C+Amin+Plaza%2C+Garden+West%2C+Nishtar+Road%2C+Garden+West%2C+Karachi%2C+Pakistan"
+ },
+ {
+  "name": "Sindh Battery Service - Karachi",
+  "address": "Shop No C -31, Sunley Arcade, Safoora Chowrangi ,Gulshan Town, Karachi East",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0334-3038434",
+  "map": "https://maps.google.com/maps?q=24.9409115,67.154308&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.9409115%2C67.154308&query_place_id=ChIJsdNF31Q5sz4Rj0JFMj5wVzw"
+ },
+ {
+  "name": "Sohail & Hassan Battery - Karachi",
+  "address": "Shop#D-2/1, Ground Floor, Abid Square, Plot#ST-8/A/2 Block-7 F.B Area, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=24.9294838,67.067103&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.9294838%2C67.067103&query_place_id=ChIJtdYgwE8_sz4R6WtDq12PEQw"
+ },
+ {
+  "name": "Yasir Traders",
+  "address": "Shop #50, Defence Garden Apartments, Main Korangi Road, DHA, Karachi",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0333-2388490/0305-1250601",
+  "map": "https://maps.google.com/maps?q=24.8451945,67.0552259&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=24.8451945%2C67.0552259&query_place_id=ChIJxzF_BQo_sz4Rs3COZjOLCQA"
+ },
+ {
+  "name": "Zam Zam Batteries Traders - Karachi",
+  "address": "Shop#50, Defence Garden Appt Phase-1, Main Korangi Road, DHA Karachi.",
+  "city": "Karachi",
+  "province": "Sindh",
+  "contact": "0321-8262505",
+  "map": "https://maps.google.com/maps?q=Zam+Zam+Batteries+Traders%2C+Shop%2350%2C+Defence+Garden+Appt+Phase-1%2C+Main+Korangi+Road%2C+DHA+Karachi.%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Zam+Zam+Batteries+Traders%2C+Shop%2350%2C+Defence+Garden+Appt+Phase-1%2C+Main+Korangi+Road%2C+DHA+Karachi.%2C+Pakistan"
+ },
+ {
+  "name": "Habib Battery Service Khipro",
+  "address": "Khipro",
+  "city": "Khipro",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=25.8184098,69.3724565&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=25.8184098%2C69.3724565&query_place_id=ChIJiWaddAA3STkRzTZgUTzwWJs"
+ },
+ {
+  "name": "(Awon Ali & Brother) Riaz Shah Auto Battery service Nawabshah",
+  "address": "Nawabshah",
+  "city": "Nawabshah",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=26.2487389,68.4090088&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=26.2487389%2C68.4090088&query_place_id=ChIJ0TdyIgBNSjkRtNfq0feDR7o"
+ },
+ {
+  "name": "Millat Tractor & Battery Centre Nawabshah",
+  "address": "Nawabshah",
+  "city": "Nawabshah",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=26.2479937,68.4301394&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=26.2479937%2C68.4301394&query_place_id=ChIJ2eEabQFLSjkR5LiMTtv5Q9s"
+ },
+ {
+  "name": "Shahid Ali Battery Shop Qazi Ahmed",
+  "address": "Qazi Ahmed",
+  "city": "Qazi Ahmed",
+  "province": "Sindh",
+  "contact": "",
+  "map": "https://maps.google.com/maps?q=Shahid+Ali+Battery+Shop+Qazi+Ahmed%2C+Pakistan&z=15&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=Shahid+Ali+Battery+Shop+Qazi+Ahmed%2C+Pakistan"
+ },
+ {
+  "name": "Bismillah Battery service Shehdadpur",
+  "address": "Shahdadpur",
+  "city": "Shahdadpur",
+  "province": "Sindh",
+  "contact": "0332-4989712",
+  "map": "https://maps.google.com/maps?q=25.9189774,68.6149339&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=25.9189774%2C68.6149339&query_place_id=ChIJdctg7_nBSzkRRJcEM2kLqqA"
+ },
+ {
+  "name": "Adnan Battery Center - Tando Jan Muhammad",
+  "address": "Shop#3, Near Eid Gah, Jhado Road, Tando Jan Muhammad",
+  "city": "Tando Jan Muhammad",
+  "province": "Sindh",
+  "contact": "0301/0334-2556215",
+  "map": "https://maps.google.com/maps?q=25.0698194,69.2132526&z=17&output=embed",
+  "directions": "https://www.google.com/maps/search/?api=1&query=25.0698194%2C69.2132526&query_place_id=ChIJ0yUSsoaNTjkRDshX09WtYkA"
+ }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
-  const searchInput = document.getElementById("dealerSearch");
-  const provinceSelect = document.getElementById("provinceFilter");
-  const dealerList = document.getElementById("dealerList");
-  const dealerCount = document.getElementById("dealerCount");
-  const dealerCountDisplay = document.getElementById("dealerCountDisplay");
+document.addEventListener("DOMContentLoaded", function () {
+  var search = document.getElementById("dealerSearch");
+  var clear = document.getElementById("dealerClear");
+  var chipsBox = document.getElementById("regionChips");
+  var list = document.getElementById("dealerList");
+  var count = document.getElementById("dealerCount");
+  var map = document.getElementById("dealerMap");
+  var mapTitle = document.getElementById("dealerMapTitle");
+  if (!list || !map) return;
 
-  function renderDealers(data) {
-    dealerList.innerHTML = "";
-    dealerCount.innerText = data.length;
-    if (dealerCountDisplay) dealerCountDisplay.innerText = data.length;
+  var esc = function (s) { return String(s == null ? "" : s).replace(/[&"'<>]/g, function (c) { return { "&": "&amp;", '"': "&quot;", "'": "&#39;", "<": "&lt;", ">": "&gt;" }[c]; }); };
+  var tel = function (s) { return s.split("/")[0].replace(/[^+\d]/g, ""); };
+  // "Shop Name - City" shows as "Shop Name" (the city is shown on the card)
+  var shortName = function (d) {
+    var m = /^(.*?)\s*-\s*([^-]+)$/.exec(d.name);
+    return m && d.city && d.city.toLowerCase().indexOf(m[2].trim().toLowerCase().slice(0, 5)) === 0 ? m[1] : d.name;
+  };
+  var place = function (d) { return [d.city, d.province].filter(Boolean).filter(function (v, i, a) { return a.indexOf(v) === i; }).join(", "); };
 
-    if (data.length === 0) {
-      dealerList.innerHTML = `
-                <div class="p-10 text-center border-2 border-dashed border-gray-100">
-                    <p class="text-gray-400 font-black uppercase text-xs tracking-widest">No dealers found in this region</p>
-                </div>`;
-      return;
-    }
+  var regions = ["All", "Islamabad", "Punjab", "Sindh", "Khyber Pakhtunkhwa"];
+  var region = "All", selected = null;
 
-    data.forEach((dealer) => {
-      const card = document.createElement("div");
-      card.className = "dealer-card bg-white border-2 border-gray-200 p-5 rounded-lg hover:border-[#c00d1e] hover:shadow-md transition-all group cursor-pointer";
-      card.innerHTML = `
-                <div class="flex justify-between items-start mb-3">
-                    <div class="flex-1">
-                        <h4 class="text-zinc-900 font-bold uppercase tracking-wide text-sm mb-2 group-hover:text-[#c00d1e] transition-colors">${dealer.name}</h4>
-                        <p class="text-gray-600 text-xs font-medium leading-relaxed">${dealer.address}</p>
-                    </div>
-                    <span class="text-xs bg-gray-100 text-[#c00d1e] px-3 py-1 rounded-full font-bold uppercase ml-2 whitespace-nowrap">${dealer.province}</span>
-                </div>
-                <div class="flex items-center gap-3 pt-3 border-t border-gray-100">
-                  <a href="tel:${dealer.contact}" class="text-zinc-900 text-xs font-bold uppercase tracking-wide hover:text-[#c00d1e] transition-colors flex items-center gap-1">
-                    <i class="fa-solid fa-phone text-[10px]"></i>
-                    ${dealer.contact}
-                  </a>
-                  <span class="text-gray-300">|</span>
-                  <button class="get-directions-btn text-[#c00d1e] text-xs font-semibold uppercase tracking-wide hover:underline">Get Directions</button>
-                </div>
-            `;
-      dealerList.appendChild(card);
+  chipsBox.innerHTML = regions.map(function (r) {
+    var n = r === "All" ? dealers.length : dealers.filter(function (d) { return d.province === r; }).length;
+    return '<button type="button" class="loc-chip" data-region="' + esc(r) + '" aria-pressed="' + (r === "All") + '">' + (r === "All" ? "All Regions" : esc(r)) + ' <span class="chip-n">' + n + "</span></button>";
+  }).join("");
 
-      // Add click handler to update map and scroll when card is clicked
-      card.addEventListener("click", () => {
-        // Use pin if available for more precise location
-        if (dealer.pin) {
-          updateMapLocationByPin(dealer.pin);
-        } else {
-          updateMapLocation(dealer.address);
-        }
-        scrollToSearchBar();
-      });
+  var show = function (d, scroll) {
+    selected = d;
+    if (map.getAttribute("src") !== d.map) map.setAttribute("src", d.map);
+    map.title = "Map: " + d.name;
+    if (mapTitle) mapTitle.textContent = shortName(d) + (d.city ? ", " + d.city.split(",")[0] : "");
+    list.querySelectorAll(".dealer-card").forEach(function (c) { c.classList.toggle("is-active", c.__d === d); c.setAttribute("aria-current", c.__d === d ? "true" : "false"); });
+    if (scroll && window.innerWidth < 768) document.getElementById("dealerMapWrap").scrollIntoView({ behavior: "smooth", block: "start" });
+  };
 
-      // Wire the Get Directions button separately so it doesn't trigger the card click
-      const dirBtn = card.querySelector(".get-directions-btn");
-      if (dirBtn) {
-        dirBtn.addEventListener("click", (e) => {
-          e.stopPropagation();
-          e.preventDefault();
-          if (dealer.pin) {
-            updateMapLocationByPin(dealer.pin);
-          } else {
-            updateMapLocation(dealer.address);
-          }
-          scrollToSearchBar();
-        });
-      }
+  var render = function () {
+    var term = (search.value || "").trim().toLowerCase();
+    var rows = dealers.filter(function (d) {
+      if (region !== "All" && d.province !== region) return false;
+      if (!term) return true;
+      return (d.name + " " + d.address + " " + d.city + " " + d.province).toLowerCase().indexOf(term) > -1;
     });
-  }
-
-  function filterDealers() {
-    const term = searchInput.value.toLowerCase();
-    const prov = provinceSelect.value;
-    const provNorm = (prov || "").toLowerCase();
-
-    const filtered = dealers.filter((d) => {
-      const matchesSearch = d.name.toLowerCase().includes(term) || d.address.toLowerCase().includes(term) || d.city.toLowerCase().includes(term) || d.province.toLowerCase().includes(term);
-      const dProv = (d.province || "").toLowerCase();
-      let matchesProv = false;
-      if (prov === "All") {
-        matchesProv = true;
-      } else if (provNorm === "ict") {
-        matchesProv = (d.city || "").toLowerCase().includes("islamabad") || dProv === provNorm;
-      } else if (provNorm === "gilgit baltistan") {
-        matchesProv = dProv.includes("gilgit");
-      } else {
-        matchesProv = dProv === provNorm;
+    count.textContent = rows.length + (rows.length === 1 ? " partner" : " partners");
+    clear.hidden = !term;
+    list.scrollTop = 0; // new results start at the top of the list
+    if (!rows.length) {
+      list.innerHTML = '<div class="dealer-empty"><p>No partners match your search.</p><p>Try another city or <a href="support.html#support-content">contact us</a> and we will point you to the nearest one.</p></div>';
+      return;
+    }
+    // group by city
+    var html = "", last = null;
+    list.innerHTML = "";
+    rows.forEach(function (d) {
+      var group = d.city ? d.city.split(",").pop().trim() : d.province;
+      if (group !== last) {
+        var h = document.createElement("h3");
+        h.className = "dealer-group";
+        h.textContent = group;
+        list.appendChild(h);
+        last = group;
       }
-      return matchesSearch && matchesProv;
+      var c = document.createElement("article");
+      c.className = "dealer-card";
+      c.tabIndex = 0;
+      c.__d = d;
+      var phone = d.contact
+        ? '<a class="d-link" href="tel:' + esc(tel(d.contact)) + '"><i class="fa-solid fa-phone" aria-hidden="true"></i>' + esc(d.contact) + "</a>"
+        : '<a class="d-link d-muted" href="tel:+92518740280" title="This partner has no listed number"><i class="fa-solid fa-phone" aria-hidden="true"></i>Call Alaska: ' + HEAD_OFFICE_PHONE + "</a>";
+      c.innerHTML =
+        '<h4 class="d-name">' + esc(shortName(d)) + "</h4>" +
+        '<p class="d-addr"><i class="fa-solid fa-location-dot" aria-hidden="true"></i><span>' + esc(d.address && d.address !== d.city ? d.address : place(d)) + "</span></p>" +
+        (d.address && d.city && d.address.toLowerCase().indexOf(d.city.split(",")[0].toLowerCase()) < 0 ? '<p class="d-place">' + esc(place(d)) + "</p>" : "") +
+        '<div class="d-actions">' + phone +
+        '<a class="d-link" href="' + esc(d.directions) + '" target="_blank" rel="noopener"><i class="fa-solid fa-diamond-turn-right" aria-hidden="true"></i>Directions</a></div>';
+      c.addEventListener("click", function (e) { if (!e.target.closest("a")) show(d, true); });
+      c.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); show(d, true); } });
+      list.appendChild(c);
     });
+    if (!selected || rows.indexOf(selected) < 0) show(rows[0], false);
+    else show(selected, false);
+  };
 
-    renderDealers(filtered);
-  }
-
-  searchInput.addEventListener("input", filterDealers);
-  provinceSelect.addEventListener("change", filterDealers);
-
-  // Clear button and suggestions
-  const dealerClear = document.getElementById("dealerClear");
-  const suggestionsBox = document.getElementById("dealer-suggestions");
-
-  function updateSuggestions(term) {
-    term = (term || "").toLowerCase().trim();
-    if (!term) {
-      suggestionsBox.classList.add("hidden");
-      return;
-    }
-
-    const prov = provinceSelect.value;
-    const provNorm = (prov || "").toLowerCase();
-
-    const matches = dealers
-      .filter((d) => {
-        const matchesSearch = d.name.toLowerCase().includes(term) || d.address.toLowerCase().includes(term) || d.city.toLowerCase().includes(term) || d.province.toLowerCase().includes(term);
-        const dProv = (d.province || "").toLowerCase();
-        let matchesProv = false;
-        if (prov === "All") {
-          matchesProv = true;
-        } else if (provNorm === "ict") {
-          matchesProv = (d.city || "").toLowerCase().includes("islamabad") || dProv === provNorm;
-        } else if (provNorm === "gilgit baltistan") {
-          matchesProv = dProv.includes("gilgit");
-        } else {
-          matchesProv = dProv === provNorm;
-        }
-        return matchesSearch && matchesProv;
-      })
-      .slice(0, 8);
-
-    if (matches.length === 0) {
-      suggestionsBox.innerHTML = `<div class="p-3 text-gray-500 text-sm">No suggestions</div>`;
-      suggestionsBox.classList.remove("hidden");
-      return;
-    }
-
-    suggestionsBox.innerHTML = matches
-      .map(
-        (m) =>
-          `<button type="button" class="w-full text-left px-4 py-2 hover:bg-gray-100 suggestion-item" data-value="${escapeHtml(
-            m.name,
-          )}"><div class="text-sm font-bold">${escapeHtml(m.name)}</div><div class="text-xs text-gray-500">${escapeHtml(m.city)} • ${escapeHtml(m.province)}</div></button>`,
-      )
-      .join("");
-
-    suggestionsBox.classList.remove("hidden");
-  }
-
-  function escapeHtml(str) {
-    return String(str).replace(/[&"'<>]/g, (s) => ({ "&": "&amp;", '"': "&quot;", "'": "&#39;", "<": "&lt;", ">": "&gt;" })[s]);
-  }
-
-  // Show/hide clear button
-  function toggleClear() {
-    if ((searchInput.value || "").trim()) {
-      dealerClear.classList.remove("hidden");
-    } else {
-      dealerClear.classList.add("hidden");
-    }
-  }
-
-  // Wire input to suggestions + clear button
-  searchInput.addEventListener("input", function (e) {
-    toggleClear();
-    updateSuggestions(this.value);
+  chipsBox.addEventListener("click", function (e) {
+    var b = e.target.closest(".loc-chip");
+    if (!b) return;
+    region = b.dataset.region;
+    chipsBox.querySelectorAll(".loc-chip").forEach(function (x) { x.setAttribute("aria-pressed", x === b ? "true" : "false"); });
+    render();
   });
-
-  dealerClear.addEventListener("click", function (e) {
-    e.preventDefault();
-    searchInput.value = "";
-    toggleClear();
-    suggestionsBox.classList.add("hidden");
-    filterDealers();
-    searchInput.focus();
-  });
-
-  // Delegate suggestion clicks
-  suggestionsBox.addEventListener("click", function (e) {
-    const btn = e.target.closest(".suggestion-item");
-    if (!btn) return;
-    const val = btn.getAttribute("data-value");
-    if (val) {
-      searchInput.value = val;
-      toggleClear();
-      suggestionsBox.classList.add("hidden");
-      filterDealers();
-    }
-  });
-
-  // Hide suggestions when clicking outside
-  document.addEventListener("click", function (e) {
-    if (!e.target.closest("#dealer-suggestions") && !e.target.closest("#dealerSearch")) {
-      suggestionsBox.classList.add("hidden");
-    }
-  });
-
-  // Update map location function
-  function updateMapLocation(address) {
-    const mapIframe = document.getElementById("dealerMap");
-    const encodedAddress = encodeURIComponent(address);
-    mapIframe.src = `https://maps.google.com/maps?q=${encodedAddress}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
-  }
-
-  // Set iframe source directly when an embed 'pin' URL is provided
-  function updateMapLocationByPin(pinUrl) {
-    const mapIframe = document.getElementById("dealerMap");
-    if (!mapIframe) return;
-    // If pinUrl already looks like an embed, use it directly; otherwise, set as query
-    if (pinUrl.includes("google.com/maps/embed")) {
-      mapIframe.src = pinUrl;
-    } else {
-      const encoded = encodeURIComponent(pinUrl);
-      mapIframe.src = `https://maps.google.com/maps?q=${encoded}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
-    }
-  }
-
-  // Scroll to search bar on desktop, map on mobile
-  function scrollToSearchBar() {
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    const mapIframe = document.getElementById("dealerMap");
-    const searchSection = document.querySelector(".max-w-7xl");
-
-    if (isMobile && mapIframe) {
-      mapIframe.scrollIntoView({ behavior: "smooth", block: "start" });
-      return;
-    }
-
-    if (searchSection) {
-      searchSection.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }
-
-  // Initial load
-  renderDealers(dealers);
+  search.addEventListener("input", render);
+  clear.addEventListener("click", function () { search.value = ""; render(); search.focus(); });
+  render();
 });

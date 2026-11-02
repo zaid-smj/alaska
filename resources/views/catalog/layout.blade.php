@@ -8,7 +8,7 @@
     <link rel="icon" href="/assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     @vite('resources/css/site.css')
-    <link rel="stylesheet" href="/css/site-custom.css">
+    <link rel="stylesheet" href="/css/legacy-product-shell.css">
     <link rel="stylesheet" href="/css/catalog.css">
     @yield('head')
 </head>

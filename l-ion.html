@@ -2,93 +2,103 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Lithium ion Battery</title>
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <style>
-        .card {
-            text-align: center;
-            padding: 3rem;
-            border-radius: 12px;
-            background: linear-gradient(180deg, #ffffffcc, #ffffffcc);
-            box-shadow: 0 6px 24px rgba(16, 24, 40, .08);
-            max-width: 720px
-        }
-
-        .brand {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #0f172a;
-            margin-bottom: .75rem
-        }
-
-        h1 {
-            font-size: 2rem;
-            margin: .25rem 0;
-            color: #0f172a
-        }
-
-        p {
-            margin: 0;
-            color: #475569
-        }
-
-        .dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #0ea5a4;
-            margin-left: .6rem;
-            vertical-align: middle
-        }
-
-        .pulse {
-            animation: pulse 1.6s infinite
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 1;
-                transform: scale(1)
-            }
-
-            50% {
-                opacity: .45;
-                transform: scale(.9)
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1)
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lithium-Ion Batteries | Alaska Batteries</title>
+  <meta name="description" content="Alaska Life Series LiFePO4 lithium batteries — 51.2V, 48V and 25.6V energy storage and 12.8V batteries from 60Ah to 200Ah, with full specifications and a 5-year warranty." />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://alaskabatteries.com/l-ion.html">
+  <meta name="theme-color" content="#c00d1e" />
+  <link rel="icon" href="/assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/ui.css" />
+  <link rel="stylesheet" href="/css/pages.css" />
+  <link rel="stylesheet" href="/css/products.css" />
+  <link rel="stylesheet" href="/css/footer.css" />
+  <link rel="stylesheet" href="/css/banner.css" />
+  <link rel="stylesheet" href="/css/theme.css" />
 </head>
 
-<body class="min-h-screen flex flex-col bg-gray-100 overflow-x-hidden">
+<body data-banner-page="/solutions/lithium-ion" class="bg-gray-50 text-black font-sans overflow-x-hidden">
+  <div id="header-placeholder"></div>
 
-    <div id="header-placeholder"></div>
+  <main class="sc pg">
+    <section class="page-banner sc-hero" aria-labelledby="page-title">
+      <picture>
+        <source srcset="/assets/mobile/solar-mob.webp" media="(max-width: 767px)">
+        <img src="/assets/solutions/solar.webp" alt="" fetchpriority="high" />
+      </picture>
+      <div class="sc-hero-box">
+        <h1 id="page-title">Lithium-Ion <span>Batteries</span></h1>
+      </div>
+    </section>
 
-    <main id="top" class="flex-1 flex items-center justify-center">
-        <section class="w-full flex items-center justify-center py-8">
-            <div class="card" role="status" aria-live="polite">
-                <div class="brand">Lithium ion Battery <span class="dot pulse" aria-hidden="true"></span></div>
-                <h1>Coming Soon</h1>
-                <p>We're working to bring this page online. Check back soon.</p>
-            </div>
-        </section>
-    </main>
+    <div class="sc-wrap">
+      <section class="pg-grid" style="grid-template-columns:1fr">
+        <div>
+          <h2 class="pg-title">Why choose <em>lithium</em> batteries?</h2>
+          <p class="pg-lead">Lithium-Ion Phosphate batteries represent a major breakthrough in modern battery technology. As a standout member of the lithium battery family, LiFePO4 batteries are globally recognized for their unmatched safety, extended lifespan, and superior performance. Their stable chemical structure reduces the risk of overheating and combustion, making them a safer alternative for both residential and industrial applications. With longer cycle life, higher thermal stability, and rapid charging capabilities, LiFePO4 batteries are revolutionizing energy storage solutions powering the future of Solar, EV, and backup power systems around the world.</p>
+          <div class="sc-actions">
+            <a class="sc-btn" href="/assets/docs/alaska-lithium-life-series-brochure.pdf" target="_blank" rel="noopener"><i class="fa-solid fa-file-pdf" aria-hidden="true"></i>Download brochure (PDF, 3.6 MB)</a>
+            <a class="sc-btn ghost" href="/warranty.html#lithium"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i>5-year Life Series warranty</a>
+          </div>
+        </div>
+      </section>
 
-    <div id="footer-placeholder"></div>
-    <script src="js/components.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
+      <section class="pg-section" aria-labelledby="li-range">
+        <div class="li-head">
+          <h3 id="li-range" class="li-brand"><img class="theme-light-only" src="/assets/brand/life-series-logo.png" alt="Life Series" width="165" height="32"><img class="theme-dark-only" src="/assets/brand/life-series-logo-inv.png" alt="Life Series" width="165" height="32"><span>range</span></h3>
+          <div class="sc-chips" role="group" aria-label="Filter models" id="li-filter">
+            <label><input type="radio" name="lif" value="all" checked><span>All models</span></label>
+            <label><input type="radio" name="lif" value="Energy storage (ESS)"><span>Wall &amp; rack energy storage</span></label>
+            <label><input type="radio" name="lif" value="Drop-in batteries"><span>12.8 V &amp; 25.6 V batteries</span></label>
+          </div>
+        </div>
+        <div class="li-grid" id="li-grid" aria-live="polite"></div>
+        <div class="li-comparebar" id="li-comparebar" hidden>
+          <span id="li-compare-count"></span>
+          <button type="button" class="sc-btn sm" id="li-compare-btn"><i class="fa-solid fa-table-columns" aria-hidden="true"></i>Compare</button>
+          <button type="button" class="sc-btn plain sm" id="li-compare-clear">Clear</button>
+        </div>
+        <div id="li-compare" class="pg-section" hidden></div>
+      </section>
 
+      <section class="pg-section" aria-labelledby="li-apps">
+        <h3 id="li-apps">Applications</h3>
+        <div class="sc-chips li-apps" id="li-apps-list"></div>
+        <p class="sc-help" style="margin-top:10px">Applications as listed in the Life Series brochure for every model.</p>
+      </section>
+
+      <div class="sc-modal" id="li-modal" hidden role="dialog" aria-modal="true" aria-labelledby="li-modal-title">
+        <div class="sc-card sc-modal-card" style="max-width:860px">
+          <div class="sc-modal-head">
+            <div><p class="sc-label" id="li-modal-code" style="margin:0 0 4px;color:var(--red)"></p><h4 id="li-modal-title"></h4></div>
+            <button type="button" class="sc-close" data-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+          </div>
+          <div id="li-modal-body"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/js/components.js"></script>
+  <script src="/js/lithium-data.js"></script>
+  <script src="/js/lithium.js"></script>
 </body>
 
 </html>

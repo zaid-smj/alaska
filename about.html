@@ -5,17 +5,93 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About Us | Alaska Batteries</title>
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/split-form.css" />
+  <style>
+    /* ---------- About page (site style: red labels, big two-tone headings, red ticks) ---------- */
+    .ab-wrap { max-width: 1280px; margin: 0 auto; padding: 48px 24px; }
+    @media (min-width: 768px) { .ab-wrap { padding: 72px 48px; } }
+    .ab-h2 { margin: 0 0 28px; font-size: 36px; line-height: 1.05; font-weight: 900; letter-spacing: -0.04em; text-transform: uppercase; }
+    .ab-h2 span { color: #c00d1e; }
+    .ab-label { display: block; margin: 0 0 12px; color: #c00d1e; font-size: 12px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
+    .ab-text, .ab-prose p { margin: 0; color: #4b5563; font-size: 16px; line-height: 1.7; }
+    .ab-prose p + p { margin-top: 14px; }
+    .ab-link { color: #c00d1e; font-weight: 700; white-space: nowrap; }
+    .ab-link:hover { text-decoration: underline; }
+    .ab-video { width: 100%; border-radius: 12px; background: #000; }
+    @media (min-width: 768px) and (max-width: 1023px) { #storyVideo .grid { grid-template-columns: minmax(0, 1fr) !important; } }
+    .ab-ticks { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 15px; color: #4b5563; }
+    .ab-ticks li { display: flex; gap: 12px; align-items: flex-start; }
+    .ab-ticks i { color: #c00d1e; margin-top: 4px; }
+    @media (min-width: 640px) { .ab-ticks-2 { grid-template-columns: 1fr 1fr; column-gap: 24px; } }
+    /* Core values: two columns at every width, right column dropped half a row (vertical W) */
+    .ab-ticks-w { grid-template-columns: 1fr 1fr; column-gap: 20px; row-gap: 14px; padding-bottom: 22px; }
+    .ab-ticks-w li:nth-child(even) { transform: translateY(calc(50% + 7px)); }
+    .ab-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 28px 24px; }
+    .ab-stats b { display: block; font-size: 44px; line-height: 1; font-weight: 900; letter-spacing: -0.03em; }
+    .ab-stats b span { color: #c00d1e; }
+    .ab-stats small { display: block; margin-top: 8px; color: #6b7280; font-size: 12px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; }
+    .ab-awards { display: grid; gap: 28px 16px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    @media (min-width: 900px) { .ab-awards { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 24px; } }
+    .ab-awards article strong { display: block; font-size: 16px; font-weight: 800; line-height: 1.3; }
+    .ab-awards article p { margin: 6px 0 0; color: #6b7280; font-size: 14px; line-height: 1.5; }
+    .ab-awards .ab-label { margin: 0 0 6px; }
+    .ab-award-img { aspect-ratio: 4 / 5; margin-bottom: 16px; border-radius: 12px; overflow: hidden; background: #f3f4f6; border-bottom: 3px solid #c00d1e; }
+    .ab-award-img img { width: 100%; height: 100%; object-fit: cover; }
+    .ab-logos { list-style: none; margin: 0; padding: 0; display: grid; gap: 28px 20px; }
+    .ab-logos li { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 12px; }
+    .ab-logos img { width: 100%; height: 96px; object-fit: contain; }
+    .ab-logos span { color: #6b7280; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; line-height: 1.35; }
+    .ab-logos-certs { grid-template-columns: repeat(2, 1fr); }
+    /* phones: certifications in a vertical zigzag ("W"), the right column half a step lower */
+    @media (max-width: 639px) {
+      .ab-logos-certs { padding-bottom: 80px; }
+      .ab-logos-certs li:nth-child(even) { transform: translateY(calc(50% + 14px)); }
+    }
+    @media (min-width: 640px) { .ab-logos-certs { grid-template-columns: repeat(4, 1fr); } }
+    @media (min-width: 1024px) { .ab-logos-certs { grid-template-columns: repeat(7, 1fr); } }
+    .ab-logos-clients { grid-template-columns: repeat(3, 1fr); }
+    @media (min-width: 768px) { .ab-logos-clients { grid-template-columns: repeat(6, 1fr); gap: 36px 28px; } }
+    .ab-logos-clients img { height: 84px; }
+    .ab-note { margin: 28px 0 0; color: #6b7280; font-size: 13px; line-height: 1.6; max-width: 760px; }
+    .ab-regions { list-style: none; margin: 0 0 20px; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+    .ab-regions li { padding: 8px 16px; border: 2px solid #c00d1e; border-radius: 999px; color: #c00d1e; font-size: 13px; font-weight: 800; }
+    /* dark mode: text tones, and logos sit on light tiles so dark marks stay visible */
+    html[data-theme="dark"] .ab-text,
+    html[data-theme="dark"] .ab-prose p,
+    html[data-theme="dark"] .ab-ticks { color: #d1d5db; }
+    html[data-theme="dark"] .ab-stats small,
+    html[data-theme="dark"] .ab-awards article p,
+    html[data-theme="dark"] .ab-logos span,
+    html[data-theme="dark"] .ab-note { color: #9ca3af; }
+    html[data-theme="dark"] .ab-award-img { background: #1e232c; }
+    html[data-theme="dark"] .ab-logos img { background: #f3f4f6; border-radius: 12px; padding: 10px; box-sizing: border-box; }
+  </style>
 </head>
 
 <body class="bg-white overflow-x-hidden">
   <div id="header-placeholder"></div>
   <main>
     <section
-      class="border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group hero-fold">
+      class="page-banner border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group hero-fold">
       <div class="relative md:h-full w-full flex flex-col banner-wrapper2">
         <picture>
           <source srcset="assets/mobile/mgmt-mobile.webp" media="(max-width: 767px)">
@@ -23,7 +99,7 @@
           <img id="hero-banner-img2" src="assets/mgmt.webp" alt="About Us" class="w-full h-[92vh]" />
         </picture>
         <div id="hero-text-box"
-          class="absolute top-20 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden banner-overlay-support">
+          class="absolute top-20 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden">
           <h1 id="hero-banner-title"
             class="text-3xl md:text-5xl text-left font-bold uppercase tracking-normal leading-tight text-white">
             About Us
@@ -32,43 +108,20 @@
       </div>
     </section>
 
-    <!-- Video Section with Text and Player -->
-    <section id="storyVideo" class="bg-gray-50 py-6 md:py-48">
-      <div class="container mx-auto px-8 sm:px-6 md:px-8 lg:px-8 xl:px-10 2xl:px-10">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-          <!-- Left: Text Content -->
-          <div class="flex flex-col justify-center">
-            <h2 class="text-3xl md:text-5xl font-black uppercase mb-6 leading-tight">
-              Our <span class="text-[#c00d1e]">Story</span>
-            </h2>
-            <p class="text-base md:text-lg text-black mb-4 leading-relaxed text-justify">
-              Alaska Batteries may be a new name in Pakistan’s energy sector, but it was not built from inexperience.
-              It was built
-              from observation, from years inside an industry that had grown comfortable with repetition. The same
-              claims. The same
-              promises. The same expectations.
-              We saw a category where inconsistency was tolerated and failure was normalized. Where reliability was
-              marketed more
-              often than it was engineered. That complacency became our starting point.
-            </p>
-            <p class="text-base md:text-lg text-black mb-4 leading-relaxed text-justify">
-              Alaska was established with a clear conviction: standards must rise. Reliability must be controlled.
-              Performance must be proven.
-            </p>
-            <p class="text-base md:text-lg text-black mb-6 leading-relaxed text-justify">
-              We deliver greater value without compromise. We test beyond minimum standards, because that is how the
-              real world is. We
-              listen, we refine, and we improve. Alaska exists to solve everyday power problems, so you can drive,
-              work, and live with
-              confidence.
-              Our story is not about entering the energy space.
-              It is about redefining what it should expect.
-            </p>
+    <!-- Our Story -->
+    <section id="storyVideo" class="bg-white">
+      <div class="ab-wrap">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-14 items-center">
+          <div>
+            <h2 class="ab-h2">Our <span>Story</span></h2>
+            <div class="ab-prose">
+              <p>Alaska Batteries may be a new name in Pakistan’s energy sector, but it was not built from inexperience. It was built from observation, from years inside an industry that had grown comfortable with repetition. The same claims. The same promises. The same expectations. We saw a category where inconsistency was tolerated and failure was normalized. Where reliability was marketed more often than it was engineered. That complacency became our starting point.</p>
+              <p>Alaska was established with a clear conviction: standards must rise. Reliability must be controlled. Performance must be proven.</p>
+              <p>We deliver greater value without compromise. We test beyond minimum standards, because that is how the real world is. We listen, we refine, and we improve. Alaska exists to solve everyday power problems, so you can drive, work, and live with confidence. Our story is not about entering the energy space. It is about redefining what it should expect.</p>
+            </div>
           </div>
-
-          <!-- Right: Video Player -->
-          <div class="flex justify-center">
-            <video width="100%" height="auto" controls class="rounded-xl shadow-2xl bg-black">
+          <div>
+            <video width="100%" height="auto" controls class="ab-video">
               <source src="assets/videos/about.mp4" type="video/mp4">
               Your browser does not support the video tag.
             </video>
@@ -76,206 +129,162 @@
         </div>
       </div>
     </section>
-    <!-- Section 1: The Future is Sustainable -->
-    <section
-      class="relative w-full h-auto md:h-screen bg-cover bg-center border-b border-gray-200 flex items-center justify-center px-4 py-12 md:py-0 future-sustainable">
 
-      <div class="w-full max-w-5xl px-4 md:px-0">
-        <div
-          class="bg-black/10 md:bg-black/10 backdrop-blur-md md:backdrop-blur-md rounded-2xl p-6 md:p-8 shadow-2xl border border-white/20">
-          <div class="text-center mb-6">
-            <h2
-              class="text-2xl md:text-5xl font-bold uppercase tracking-normal text-white md:text-white whitespace-normal break-words">
-              Our
-              <span class="text-[#c00d1e]">Future</span>
-            </h2>
+    <!-- Purpose (left) and Strengths (right) -->
+    <section class="sf-section flex flex-col md:flex-row border-t border-gray-100" id="purpose">
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider">
+        <h2 class="ab-h2">Our <span>Purpose</span></h2>
+        <div class="space-y-8">
+          <div id="mission">
+            <h4 class="ab-label">Our Mission</h4>
+            <p class="ab-text">To use state-of-the-art technologies in delivering innovative energy solutions and set new standards for the energy sector and become a trusted name in every household.</p>
           </div>
-          <div class="mb-2">
-            <p class="text-white md:text-white leading-relaxed text-sm md:text-lg text-justify mb-6">
-              We envision a future where energy is reliable, intelligent, and accessible to every home, vehicle, and
-              industry. A
-              future where power does not fail when it is needed most. A future striving for <span
-                class="text-white font-bold">
-                Excellence</span> knowing that success follows it. We see a world where power has uncompromising <span
-                class="text-white font-bold">
-                Integrity</span> and making sure it is no longer fragile or inconsistent is our responsibility. It will
-              elevate <span class="text-white font-bold">
-                Precision</span> as a non-negotiable standard, where performance is measurable, not assumed. It will be
-              shaped by
-              <span class="text-white font-bold">
-                Discipline</span>, transforming ambition into execution, that will become expected rather than
-              exceptional. It will
-              thrive on <span class="text-white font-bold">
-                Innovation</span> that energy solutions forward while anticipating the needs of a rapidly evolving
-              world. And above
-              all, it will depend on <span class="text-white font-bold">
-                Partnerships</span> to build energy systems strong enough to support long-term progress.
-
-            </p>
+          <div id="vision">
+            <h4 class="ab-label">Our Vision</h4>
+            <p class="ab-text">To resolve the needs of our people and improve their lives. By using innovation, to bring opportunities to the masses. Enable people, businesses &amp; communities to keep moving forward with confidence.</p>
           </div>
-          <!-- Separator -->
-          <div class="flex items-center justify-center my-4">
-            <div class="flex-1 border-t-2 border-white/30"></div>
-            <div class="px-4">
-              <i class="fas fa-bolt text-[#c00d1e] text-2xl"></i>
-            </div>
-            <div class="flex-1 border-t-2 border-white/30"></div>
+          <div id="values">
+            <h4 class="ab-label">Our Core Values</h4>
+            <ul class="ab-ticks ab-ticks-2 ab-ticks-w">
+              <li><i class="fas fa-check" aria-hidden="true"></i>Quality Without Compromise</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i>Integrity Always</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i>Better Everyday</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i>Innovation With Purpose</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i>Own The Results</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i>Pursuit Of Excellence</li>
+              <li><i class="fas fa-check" aria-hidden="true"></i>Customer Commitment</li>
+            </ul>
           </div>
-
-          <div class="text-center mb-6">
-            <h2 class="text-2xl md:text-5xl font-bold uppercase tracking-tighter text-white md:text-white">Our <span
-                class="text-[#c00d1e]">Foundation</span>
-            </h2>
+        </div>
+      </div>
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white" id="strengths">
+        <h2 class="ab-h2">Our <span>Strengths</span></h2>
+        <div class="ab-stats">
+          <div><b>2,000<span>+</span></b><small>Skilled employees</small></div>
+          <div><b>100<span>+</span></b><small>Engineers</small></div>
+          <div><b>100<span>+</span></b><small>Quality control team</small></div>
+          <div><b>5 <span>GWh</span></b><small>Annual production</small></div>
+        </div>
+        <div class="space-y-8" style="margin-top:40px">
+          <div>
+            <h4 class="ab-label">Where We Make It</h4>
+            <p class="ab-text">Manufactured at our plants in Hattar and Faisalabad, together spanning over 20 acres.</p>
           </div>
           <div>
-            <p class="text-white md:text-white leading-relaxed text-sm md:text-lg text-justify mb-6">
-              Achieving that future requires more than vision, it requires a framework grounded in principle. We pursue
-              <span class="text-white font-bold">
-                Excellence</span>, not as an outcome, but as a standard that governs every decision. We uphold <span
-                class="text-white font-bold">
-                Integrity</span> by operating transparently, holding ourselves accountable, and committing to ethical
-              sourcing and
-              responsible manufacturing. <span class="text-white font-bold">
-                Precision</span> in every stage of design, production, and testing, ensuring measurable performance and
-              repeatable
-              excellence. We practice <span class="text-white font-bold">
-                Discipline</span>, by refusing shortcuts and establishing control over every process and ensuring
-              consistency in every
-              outcome. We advance through <span class="text-white font-bold">
-                Innovation</span>, continuously refining technologies and processes. And we are sustained through
-              meaningful <span class="text-white font-bold">
-                Partnerships</span>, recognizing that lasting impact is built by the collective rather than the
-              individual.
-
-            </p>
+            <h4 class="ab-label">Where You Find It</h4>
+            <p class="ab-text">Supplied through 500+ authorised dealers and 100+ flagship model shops across Pakistan. <a href="dealers.html#partner-finder" class="ab-link">Find a partner</a></p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Awards & Certifications Section -->
-    <section class="py-20 bg-gradient-to-br from-purple-50 via-white to-purple-50 border-b border-gray-200">
-      <div class="container mx-auto px-6">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          <!-- Awards Column -->
-          <div class="bg-gray-100/50 shadow-lg rounded-xl border-t-4 border-t-[#c00d1e] p-8">
-            <div class="text-center mb-12">
-              <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tight text-[#c00d1e] mb-4">Awards</h2>
-
-              <p class="text-gray-600 text-base max-w-xl mx-auto">
-                Recognition of our excellence and commitment to innovation in the battery industry.
-              </p>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-1 gap-4">
-              <!-- Award 1 -->
-              <div
-                class="bg-white rounded-lg shadow-md overflow-hidden border border-gray-200 hover:shadow-lg transition-shadow duration-300 cursor-pointer group"
-                onclick="openImageModal('assets/gallery/awards/award-1.png', 'Brand of the Year Award 2025')">
-                <div class="w-full h-72 md:h-96 bg-gray-300 overflow-hidden relative">
-                  <div class="group relative w-full h-full">
-                    <picture>
-                      <!-- show the coin thumbnail by default on desktop -->
-                      <source media="(min-width: 641px)" srcset="assets/gallery/awards/award2.jpeg" />
-                      <img src="assets/gallery/awards/award.png" alt="Emerging Brand of the Year Award 2025"
-                        class="w-full h-full object-cover md:object-contain transition-transform duration-300 group-hover:scale-105 group-hover:brightness-90" />
-                    </picture>
-                    <span class="absolute inset-0 pointer-events-none">
-                      <i class="fa-solid fa-magnifying-glass text-white text-xl md:text-3xl drop-shadow-lg bg-black/50 rounded-full p-2 md:p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                        style="position: absolute; right: 1.5rem; bottom: 1.5rem;"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-
-          <!-- Certifications Column -->
-          <div class="bg-gray-100/50 shadow-lg rounded-xl border-t-4 border-t-[#c00d1e] p-8">
-            <div class="text-center mb-12">
-              <h2 class="text-4xl md:text-5xl font-bold uppercase tracking-tight text-[#c00d1e] mb-4">Certifications
-              </h2>
-
-              <p class="text-gray-600 text-base max-w-xl mx-auto">
-                Certified standards and compliance ensuring quality and reliability across all our products.
-              </p>
-            </div>
-
-            <!-- Carousel: center big, sides small (all screens) -->
-            <div>
-              <div class="relative h-[400px] flex items-center justify-between overflow-visible">
-                <div id="cert-left" class="w-[30%] h-40 rounded-lg overflow-hidden cursor-pointer opacity-60"
-                  onclick="scrollCertCarousel(-1)">
-                  <div class="group relative w-full h-full">
-                    <img id="cert-left-img" src="assets/gallery/certificates/ISO-9001-2015.jpeg" alt="Left"
-                      class="w-full h-full object-cover object-[80%_10%] transition-transform duration-300 group-hover:scale-105 group-hover:brightness-90" />
-                    <span class="absolute inset-0 pointer-events-none">
-                      <i class="fa-solid fa-magnifying-glass text-white text-xl drop-shadow-lg bg-black/50 rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                        style="position: absolute; right: 1rem; bottom: 1rem;"></i>
-                    </span>
-                  </div>
-                </div>
-                <div id="cert-center"
-                  class="absolute left-1/2 -translate-x-1/2 w-[85%] md:w-[72%] h-[350px] rounded-lg overflow-hidden cursor-pointer z-10 shadow-2xl"
-                  onclick="openImageModal(certifications[certIndex].src, certifications[certIndex].title)">
-                  <div class="group relative w-full h-full">
-                    <img id="cert-center-img" src="assets/gallery/certificates/ISO-9001-2015.jpeg" alt="Center"
-                      class="w-full h-full object-cover object-[80%_5%] transition-transform duration-300 group-hover:scale-105 group-hover:brightness-90" />
-                    <span class="absolute inset-0 pointer-events-none">
-                      <i class="fa-solid fa-magnifying-glass text-white text-3xl drop-shadow-lg bg-black/50 rounded-full p-3 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
-                        style="position: absolute; right: 1.5rem; bottom: 1.5rem;"></i>
-                    </span>
-                  </div>
-                </div>
-                <div id="cert-right" class="w-[30%] h-40 rounded-lg overflow-hidden cursor-pointer opacity-60"
-                  onclick="scrollCertCarousel(1)">
-                  <div class="group relative w-full h-full">
-                    <img id="cert-right-img" src="assets/gallery/certificates/ISO-14001-2015.jpeg" alt="Right"
-                      class="w-full h-full object-cover object-[80%_10%] transition-transform duration-300 group-hover:scale-105 group-hover:brightness-90" />
-                    <span
-                      class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                      <i
-                        class="fa-solid fa-magnifying-glass text-white text-2xl drop-shadow-lg bg-black/50 rounded-full p-2"></i>
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div class="flex items-center justify-center gap-4 mt-2">
-                <button onclick="scrollCertCarousel(-1)"
-                  class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all">
-                  <i class="fa-solid fa-chevron-left text-xs text-gray-600"></i>
-                </button>
-                <div id="cert-dots" class="flex items-center gap-2"></div>
-                <button onclick="scrollCertCarousel(1)"
-                  class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all">
-                  <i class="fa-solid fa-chevron-right text-xs text-gray-600"></i>
-                </button>
-              </div>
-            </div>
-          </div>
+    <!-- Awards -->
+    <section id="awards" class="bg-white border-t border-gray-100">
+      <div class="ab-wrap">
+        <h2 class="ab-h2">Our <span>Awards</span></h2>
+        <div class="ab-awards">
+          <article>
+            <div class="ab-award-img"><img src="assets/about/award-hcci-2026-best-batteries.webp" alt="Haripur Chamber of Commerce and Industry trophy (2026)" loading="lazy"></div>
+            <span class="ab-label">2026</span>
+            <strong>Haripur Chamber of Commerce and Industry</strong>
+            <p>In recognition of best batteries manufacturing</p>
+          </article>
+          <article>
+            <div class="ab-award-img"><img src="assets/about/award-hcci-2026-standard-excellence.webp" alt="Haripur Chamber of Commerce and Industry trophy (2026)" loading="lazy"></div>
+            <span class="ab-label">2026</span>
+            <strong>Haripur Chamber of Commerce and Industry</strong>
+            <p>For setting the standard of excellence in battery manufacturing</p>
+          </article>
+          <article>
+            <div class="ab-award-img"><img src="assets/about/award-emerging-brand-2025.webp" alt="Emerging Brand of the Year Award trophy (2025)" loading="lazy"></div>
+            <span class="ab-label">2025</span>
+            <strong>Emerging Brand of the Year Award</strong>
+            <p>In recognition of exceptional growth, market impact and the potential to lead the category</p>
+          </article>
+          <article>
+            <div class="ab-award-img"><img src="assets/about/award-environmental-excellence-2021.webp" alt="23rd Annual Environmental Excellence Award trophy (2021)" loading="lazy"></div>
+            <span class="ab-label">2021</span>
+            <strong>23rd Annual Environmental Excellence Award</strong>
+            <p>In recognition of excellence in environmental stewardship and sustainability</p>
+          </article>
         </div>
       </div>
     </section>
 
-    <!-- Image Modal (image-only with close) -->
-    <div id="imageModal" class="fixed inset-0 bg-black/80 z-50 hidden items-center justify-center p-4"
-      onclick="closeImageModal(event)">
-      <div
-        class="bg-white rounded-2xl w-full max-w-[90vw] md:max-w-[60vw] max-h-[90vh] overflow-y-auto relative flex flex-col"
-        style="box-shadow: 0 8px 40px 0 rgba(0,0,0,0.25);" onclick="event.stopPropagation()">
-        <!-- Close button (overlay) -->
-        <button id="modalCloseBtn"
-          class="absolute top-3 right-3 z-10 bg-black/40 hover:bg-black/60 text-white rounded-full w-9 h-9 flex items-center justify-center">&times;</button>
-        <div class="flex-1 flex flex-col items-center justify-center p-2 md:p-4 w-full overflow-auto">
-          <img id="modalImage" src="" alt="" class="max-w-full max-h-[60vh] object-contain rounded-lg mx-auto" />
-        </div>
-        <div id="modalCaption" class="mb-6 text-center w-full">
-          <!-- Caption will be set by JS -->
-        </div>
+    <!-- Certifications -->
+    <section id="certifications" class="bg-white border-t border-gray-100">
+      <div class="ab-wrap">
+        <h2 class="ab-h2">Our <span>Certifications</span></h2>
+        <ul class="ab-logos ab-logos-certs">
+          <li><img src="assets/about/certs/iso-9001.webp" alt="ISO 9001:2015" loading="lazy"><span>Quality management</span></li>
+          <li><img src="assets/about/certs/iso-14001.webp" alt="ISO 14001:2015" loading="lazy"><span>Environmental management</span></li>
+          <li><img src="assets/about/certs/iso-45001.webp" alt="ISO 45001:2018" loading="lazy"><span>Occupational health &amp; safety</span></li>
+          <li><img src="assets/about/certs/iec-60896-11.webp" alt="IEC 60896-11" loading="lazy"><span>Stationary lead-acid batteries</span></li>
+          <li><img src="assets/about/certs/iec-61427-1.webp" alt="IEC 61427-1" loading="lazy"><span>Solar energy storage batteries</span></li>
+          <li><img src="assets/about/certs/pss.webp" alt="Pakistan Standards PSS:206-I &amp; II-2012(R)" loading="lazy"><span>Pakistan Standards mark</span></li>
+          <li><img src="assets/about/certs/egac.webp" alt="EGAC, Egyptian Accreditation Council" loading="lazy"><span>Accreditation of our ISO certifier</span></li>
+        </ul>
+        <p class="ab-note">Our ISO certificates are issued by Infinity Cert International, a certification body accredited by EGAC (Egyptian Accreditation Council). Certificate copies are available on request.</p>
       </div>
-    </div>
+    </section>
+
+    <!-- Key Clients -->
+    <section id="key-clients" class="bg-white border-t border-gray-100">
+      <div class="ab-wrap">
+        <h2 class="ab-h2">Key <span>Clients</span></h2>
+        <ul class="ab-logos ab-logos-clients">
+          <li><img src="assets/about/clients/pakistan-army.webp" alt="" loading="lazy"><span>Pakistan Army</span></li>
+          <li><img src="assets/about/clients/pakistan-navy.webp" alt="" loading="lazy"><span>Pakistan Navy</span></li>
+          <li><img src="assets/about/clients/pakistan-air-force.webp" alt="" loading="lazy"><span>Pakistan Air Force</span></li>
+          <li><img src="assets/about/clients/pof.webp" alt="" loading="lazy"><span>Pakistan Ordnance Factories</span></li>
+          <li><img src="assets/about/clients/pac-kamra.webp" alt="" loading="lazy"><span>Pakistan Aeronautical Complex, Kamra</span></li>
+          <li><img src="assets/about/clients/hit.webp" alt="" loading="lazy"><span>Heavy Industries Taxila</span></li>
+          <li><img src="assets/about/clients/nrtc.webp" alt="" loading="lazy"><span>National Radio Telecom Corporation</span></li>
+          <li><img src="assets/about/clients/nlc.webp" alt="" loading="lazy"><span>National Logistics Corporation</span></li>
+          <li><img src="assets/about/clients/fwo.webp" alt="" loading="lazy"><span>Frontier Works Organization</span></li>
+          <li><img src="assets/about/clients/pakistan-rangers.webp" alt="" loading="lazy"><span>Pakistan Rangers</span></li>
+          <li><img src="assets/about/clients/ict-police.webp" alt="" loading="lazy"><span>Islamabad Capital Territory Police</span></li>
+          <li><img src="assets/about/clients/krl.webp" alt="" loading="lazy"><span>Khan Research Laboratories</span></li>
+          <li><img src="assets/about/clients/phf.webp" alt="" loading="lazy"><span>Pakistan Hockey Federation</span></li>
+          <li><img src="assets/about/clients/ssgc.webp" alt="" loading="lazy"><span>Sui Southern Gas Company</span></li>
+          <li><img src="assets/about/clients/sazgar.webp" alt="" loading="lazy"><span>Sazgar</span></li>
+          <li><img src="assets/about/clients/faw.webp" alt="" loading="lazy"><span>FAW</span></li>
+          <li><img src="assets/about/clients/pak-star.webp" alt="" loading="lazy"><span>Pak Star</span></li>
+          <li><img src="assets/about/clients/united.webp" alt="" loading="lazy"><span>United (4-Stroke Motorcycles)</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Sponsorship (left) and Global presence (right) -->
+    <section class="sf-section flex flex-col md:flex-row border-t border-gray-100">
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider" id="sponsorship">
+        <h2 class="ab-h2">Pakistan <span>Hockey</span></h2>
+        <h4 class="ab-label">Official Presenting Sponsor</h4>
+        <div class="ab-prose">
+          <p>Alaska Batteries is proud to serve as the Official Presenting Sponsor of Pakistan Hockey under a landmark agreement with the Pakistan Hockey Federation (PHF). This strategic partnership goes beyond conventional branding; it is a long-term investment in the revival, modernisation, and commercial sustainability of Pakistan's national sport.</p>
+          <p>As the exclusive Energy Partner, Alaska Batteries secures premium visibility across all PHF national teams, coaching clinics, talent hunt programs, and official broadcast and digital platforms, with player and coach appearances at dealer meetings, product launches and corporate campaigns.</p>
+        </div>
+        <ul class="ab-ticks" style="margin-top:22px">
+          <li><i class="fas fa-check" aria-hidden="true"></i>Official Presenting Sponsor of Pakistan Hockey</li>
+          <li><i class="fas fa-check" aria-hidden="true"></i>Exclusive Energy Partner of the PHF</li>
+          <li><i class="fas fa-check" aria-hidden="true"></i>All national teams, including U-21 and U-18 squads</li>
+          <li><i class="fas fa-check" aria-hidden="true"></i>Coaching clinics and talent hunt programmes</li>
+        </ul>
+      </div>
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white" id="global-presence">
+        <h2 class="ab-h2">Global <span>Presence</span></h2>
+        <h4 class="ab-label">Expanding Into</h4>
+        <ul class="ab-regions" aria-label="Regions of expansion"><li>Middle East</li><li>Africa</li><li>Central Asia</li></ul>
+        <div class="ab-prose">
+          <p>Alaska Batteries is expanding its international footprint, backed by our two manufacturing plants spanning over 20 acres, 5 GWh annual production capacity and a 2,000+ strong workforce. Our export approach is built on long-term partnerships with distributors, importers and strategic business partners, not one-time transactions.</p>
+        </div>
+        <h4 class="ab-label" style="margin-top:28px">Private Label / OEM</h4>
+        <div class="ab-prose">
+          <p>Partners can launch batteries under their own brand, with mutually agreed specifications, minimum order quantities, packaging and commercial terms.</p>
+        </div>
+        <a class="btn-primary" style="margin-top:24px" href="quote.html#quote-content">Export &amp; OEM Enquiries</a>
+      </div>
+    </section>
   </main>
 
   <div id="footer-placeholder"></div>
@@ -285,8 +294,7 @@
   <script src="js/animations.js"></script>
   <script src="js/main.js"></script>
 
-  <script>
 
-  </script>
+</body>
 
 </html>

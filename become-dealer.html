@@ -5,10 +5,27 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Become a Partner | Alaska Batteries</title>
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/split-form.css" />
+  <script src="/js/form-preview.js" defer></script>
 </head>
 
 <body class="bg-white overflow-x-hidden">
@@ -16,79 +33,119 @@
 
   <main class="bg-white">
     <section
-      class="border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group  hero-fold">
+      class="page-banner border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group  hero-fold">
       <div class="relative h-full md:h-full w-full flex flex-col banner-wrapper">
         <img src="assets/become-dealer.webp" alt="Become a Partner" class="w-full h-full transition-transform" />
         <div id="hero-text-box"
-          class="absolute top-0 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden banner-overlay-support">
+          class="absolute top-0 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden">
           <h1 class="text-2xl md:text-5xl font-bold uppercase text-left tracking-normal leading-tight text-white">
             Become
             a <br />Trusted Partner</h1>
         </div>
       </div>
     </section>
-    <section class="py-4 border-b border-gray-100">
-      <div class="container mx-auto px-6">
-        <div class="flex flex-col md:flex-row gap-16 items-center ">
-          <div class="w-full md:w-1/2">
-            <h1 class="text-3xl md:text-5xl font-bold uppercase tracking-normal  leading-none mb-4">
-              Grow with <br />
-              <span class="text-[#c00d1e]">Alaska Batteries</span>
-            </h1>
-            <p class="text-gray-500 text-lg leading-relaxed mb-4">
-              Join Pakistan's fastest-growing battery network. We provide our partners with Graphite-enhanced
-              technology,
-              national marketing support, and a transparent warranty claim system.
-            </p>
-            <div class="space-y-4">
-              <div class="flex items-center gap-4 border-b border-gray-50 pb-4">
-                <span class="bg-gray-100 text-black font-black p-2 text-xs">01</span>
-                <p class="uppercase font-black text-xs tracking-widest">Priority Stock Allocation</p>
-              </div>
-              <div class="flex items-center gap-4 border-b border-gray-50 pb-4">
-                <span class="bg-gray-100 text-black font-black p-2 text-xs">02</span>
-                <p class="uppercase font-black text-xs tracking-widest">Digital Partner Locator Listing</p>
-              </div>
-            </div>
+    <section id="partner-content" class="sf-section flex flex-col md:flex-row border-t border-gray-100">
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider">
+        <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">Join Our <span
+            class="text-[#c00d1e]">Network</span></h2>
+        <form data-preview-form id="contactForm" class="space-y-8">
+          <div class="sf-row">
+            <input type="text" name="from_name" id="fullName" placeholder="Full Name" required autocomplete="name"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+            <input type="text" name="from_company" id="companyName" placeholder="Company Name" required autocomplete="organization"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+          </div>
+          <div class="sf-row">
+            <input type="email" name="user_email" id="userEmail" placeholder="Email Address" required autocomplete="email"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+            <input type="tel" name="user_phone" id="userPhone" placeholder="Phone Number" required autocomplete="tel"
+              pattern="[0-9+\-() ]+" title="Please enter a valid phone number"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+          </div>
+          <div class="sf-row">
+            <input type="text" name="city" id="dealerCity" placeholder="City" required autocomplete="address-level2"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+            <input type="text" name="subject" id="Address" placeholder="Business Address" autocomplete="street-address"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
           </div>
 
-          <div class="w-full md:w-1/2 bg-white p-8 md:p-12 border-l">
-            <h3 class="text-4xl font-black uppercase mb-12 tracking-tighter">Join <span class="text-[#c00d1e]">Us</span>
-            </h3>
-            <form id="contactForm" class="space-y-8">
-              <input type="text" name="from_name" id="fullName" placeholder="Full Name" required
-                class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-              <input type="text" name="from_company" id="companyName" placeholder="Company Name" required
-                class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-              <input type="email" name="user_email" id="userEmail" placeholder="Email Address" required
-                class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-              <input type="tel" name="user_phone" id="userPhone" placeholder="Phone Number" required
-                pattern="[0-9+\-() ]+" title="Please enter a valid phone number"
-                class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-              <input type="text" name="subject" id="Address" placeholder="Current Address"
-                class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-              <div class="py-4">
-                <p class="text-base font-bold uppercase tracking-widest text-gray-400 mb-4">Primary Interest</p>
-                <div class="flex flex-wrap gap-3">
-                  <label class="flex items-center gap-1 cursor-pointer">
-                    <input type="checkbox" name="interests[]" value="Automotive" class="accent-[#c00d1e]" />
-                    <span class="text-xs font-normal uppercase whitespace-nowrap">Automotive</span>
-                  </label>
-                  <label class="flex items-center gap-1 cursor-pointer">
-                    <input type="checkbox" name="interests[]" value="Solar/UPS" class="accent-[#c00d1e]" />
-                    <span class="text-xs font-normal uppercase whitespace-nowrap">Solar/UPS</span>
-                  </label>
-                  <label class="flex items-center gap-1 cursor-pointer">
-                    <input type="checkbox" name="interests[]" value="Industrial/Commercial" class="accent-[#c00d1e]" />
-                    <span class="text-xs font-normal uppercase whitespace-nowrap">Industrial/Commercial</span>
-                  </label>
-                </div>
-              </div>
+          <fieldset>
+            <legend class="sf-label">Primary Interest</legend>
+            <div class="sf-chips">
+              <label class="sf-chip"><input type="checkbox" name="interests[]" value="Automotive" /><span>Automotive</span></label>
+              <label class="sf-chip"><input type="checkbox" name="interests[]" value="Solar/UPS" /><span>Solar / UPS</span></label>
+              <label class="sf-chip"><input type="checkbox" name="interests[]" value="Industrial/Commercial" /><span>Industrial / Commercial</span></label>
+              <label class="sf-chip"><input type="checkbox" name="interests[]" value="Inverters" /><span>Inverters</span></label>
+              <label class="sf-chip"><input type="checkbox" name="interests[]" value="Lithium (LiFePO4)" /><span>Lithium (LiFePO4)</span></label>
+              <label class="sf-chip"><input type="checkbox" name="interests[]" value="Other" /><span>Other</span></label>
+            </div>
+          </fieldset>
 
-              <button type="submit" id="submitBtn" class="btn-primary btn-lg">
-                Send Message
-              </button>
-            </form>
+          <textarea rows="3" id="dealerMessage" placeholder="Tell us about your business (optional)"
+            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest resize-none"></textarea>
+
+          <div class="sf-file">
+            <input type="file" id="dealerFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" aria-describedby="dealerFileName" />
+            <label for="dealerFile" class="sf-file-btn"><i class="fas fa-paperclip" aria-hidden="true"></i> <span class="sf-file-act">Attach File</span></label>
+            <span id="dealerFileName" class="sf-file-name">Optional: business profile, shop photo or registration (PDF, Word or image, up to 5 MB).</span>
+          </div>
+
+          <button type="submit" id="submitBtn" class="btn-primary btn-lg">
+            Apply to Become a Partner
+          </button>
+        </form>
+      </div>
+
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white flex flex-col justify-start">
+        <div class="space-y-8">
+          <div>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Why Partner with Alaska Batteries?</h4>
+            <p class="text-gray-600 text-base leading-relaxed">Join Pakistan's fastest-growing battery network. Alaska
+              partners sell Graphite Enhanced and Calcium Silver Enriched lead-acid batteries, LiFePO4 batteries and inverters,
+              backed by national marketing support and a transparent warranty claim system.</p>
+          </div>
+
+          <div>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">What Partners Get</h4>
+            <ul class="space-y-3 text-gray-600 text-sm">
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Priority stock allocation</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>A listing on our <a href="dealers.html#partner-finder" class="text-[#c00d1e] hover:underline">Find a Partner</a> locator</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>National marketing support</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>A transparent warranty claim system for your customers</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>One supplier for lead-acid, lithium and inverters</span>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">How It Works</h4>
+            <ol class="sf-steps">
+              <li><div><strong>Apply</strong><p>Send us your details using this form.</p></div></li>
+              <li><div><strong>We get in touch</strong><p>Our partnerships team reviews your application and contacts you.</p></div></li>
+              <li><div><strong>Start selling</strong><p>Agree terms, receive stock and get listed on our partner locator.</p></div></li>
+            </ol>
+          </div>
+
+          <div class="pt-8 border-t border-gray-200">
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Contact Partnerships</h4>
+            <ul class="space-y-3 text-gray-600 text-sm">
+              <li class="flex items-start gap-3"><i class="fas fa-envelope text-[#c00d1e] mt-1" aria-hidden="true"></i><span>Email us at <a href="mailto:info@alaskabatteries.com" class="text-[#c00d1e] font-semibold hover:underline">info@alaskabatteries.com</a></span></li>
+              <li class="flex items-start gap-3"><i class="fab fa-whatsapp text-[#c00d1e] mt-1" aria-hidden="true"></i><span>Phone or <a href="https://wa.me/923266660757" target="_blank" rel="noopener" class="text-[#c00d1e] font-semibold hover:underline">WhatsApp</a> on <a href="tel:+923266660757" class="text-[#c00d1e] font-semibold hover:underline">+92 326 666 0757</a></span></li>
+            </ul>
           </div>
         </div>
       </div>
@@ -114,8 +171,10 @@
         const email = document.getElementById("userEmail").value.trim();
         const phone = document.getElementById("userPhone").value.trim();
 
-        if (!name || !company || !email || !phone) {
-          alert("Please complete all required fields (Name, Company, Email, Phone).");
+        const city = document.getElementById("dealerCity").value.trim();
+        const notes = document.getElementById("dealerMessage").value.trim();
+        if (!name || !company || !email || !phone || !city) {
+          alert("Please complete all required fields (Name, Company, Email, Phone, City).");
           return;
         }
 
@@ -127,29 +186,39 @@
         const addressField = document.getElementById("Address");
         const address = addressField ? (addressField.value || "").trim() : "";
 
-        const payload = {
-          form: "dealer",
-          name,
-          company,
-          email,
-          phone,
-          subject: address,
-        };
-
-        if (selectedInterests.length) payload.interests = selectedInterests;
-
         // Build a simple message so auto-reply and admin email include useful details
         const msgParts = [];
+        if (city) msgParts.push("City: " + city);
         if (address) msgParts.push("Address: " + address);
         if (selectedInterests.length) msgParts.push("Primary Interest(s): " + selectedInterests.join(", "));
         if (company) msgParts.push("Company: " + company);
-        payload.message = msgParts.join("\n") || "No additional message provided.";
-
+        if (notes) msgParts.push("About the business: " + notes);
+        const message = msgParts.join("\n") || "No additional message provided.";
+        // multipart form data so an optional file can be attached
+        const payload = new FormData();
+        payload.append("form", "dealer");
+        payload.append("name", name);
+        payload.append("company", company);
+        payload.append("email", email);
+        payload.append("phone", phone);
+        payload.append("city", city);
+        payload.append("subject", address);
+        payload.append("message", message);
+        selectedInterests.forEach((v) => payload.append("interests[]", v));
+        const fileInput = document.getElementById("dealerFile");
+        if (fileInput && fileInput.files.length) {
+          if (fileInput.files[0].size > 5 * 1024 * 1024) {
+            alert("The attached file is larger than 5 MB. Please choose a smaller file.");
+            btn.disabled = false;
+            btn.innerHTML = original;
+            return;
+          }
+          payload.append("attachment", fileInput.files[0]);
+        }
         try {
           const res = await fetch(EMAIL_API_URL, {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload),
+            body: payload,
           });
           const result = await res.json();
           if (res.ok && result.success) {
@@ -176,6 +245,22 @@
         }
       });
     }
+    // Optional attachment: show the chosen file name next to the button
+    (function () {
+      const input = document.getElementById("dealerFile");
+      const box = input && input.closest(".sf-file");
+      const label = document.getElementById("dealerFileName");
+      if (!input || !box || !label) return;
+      const empty = label.textContent;
+      const show = () => {
+        const f = input.files && input.files[0];
+        box.classList.toggle("has-file", !!f);
+        label.textContent = f ? f.name : empty;
+        box.querySelector(".sf-file-act").textContent = f ? "Change File" : "Attach File";
+      };
+      input.addEventListener("change", show);
+      if (input.form) input.form.addEventListener("reset", () => setTimeout(show, 0));
+    })();
   </script>
 
 </body>

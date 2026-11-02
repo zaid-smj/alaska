@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
       title: "How to Choose the Best Battery for Your Vehicle or Solar System",
       category: "Guide",
       image: "",
-      content: ` 
+      content: `
         <p>
 Summer in Pakistan is hard on batteries. High temperatures accelerate chemical reactions inside the cell, increasing corrosion and electrolyte evaporation, which shortens battery life. Below are concise, actionable steps to protect your battery and keep your vehicle running through the hottest months.
 </p>
@@ -317,7 +317,7 @@ If you rely on your vehicle daily, small preventive steps today can save you fro
 
 <p>
 <div class="text-center">
-<a href="dry-charge.html" style="border-radius:12px;display:inline-block;padding:12px 28px;background:#cc001b;color:#ffffff;text-decoration:none;font-weight:bold;">
+<a href="dry-charge.html#search-section" style="border-radius:12px;display:inline-block;padding:12px 28px;background:#cc001b;color:#ffffff;text-decoration:none;font-weight:bold;">
 View Summer Ready Batteries
 </a>
 </div>
@@ -418,7 +418,7 @@ A small preventive effort today can help you avoid roadside breakdowns and costl
 
 <p>
 <div class="text-center">
-<a href="dry-charge.html" style="border-radius:12px;display:inline-block;padding:12px 28px;background:#cc001b;color:#ffffff;text-decoration:none;font-weight:bold;">
+<a href="dry-charge.html#search-section" style="border-radius:12px;display:inline-block;padding:12px 28px;background:#cc001b;color:#ffffff;text-decoration:none;font-weight:bold;">
 Explore Battery Options
 </a>
 </div>
@@ -461,7 +461,7 @@ Choose batteries designed for high-temperature performance. Graphite-based batte
 Small preventive steps taken today can prevent roadside trouble and extend battery life through peak summer months. When in doubt, have an authorized dealer perform a load and charging system test.
 </p>
 <div class="text-center">
-        <a href="dry-charge.html" style="color:#ffffff;text-decoration:none;" class="inline-block bg-[#cc001b] text-white px-8 py-3 rounded-full font-black uppercase tracking-tighter hover:scale-105 transition-transform">Find Heat Ready Batteries</a>
+        <a href="dry-charge.html#search-section" style="color:#ffffff;text-decoration:none;" class="inline-block bg-[#cc001b] text-white px-8 py-3 rounded-full font-black uppercase tracking-tighter hover:scale-105 transition-transform">Find Heat Ready Batteries</a>
       </div>
     `,
     },
@@ -507,7 +507,7 @@ With simple, scheduled checks and proper storage practices, your battery will re
 
 <p>
 <div class="text-center">
-<a href="vault.html#faqs" style="border-radius:12px;display:inline-block;padding:12px 28px;background:#cc001b;color:#ffffff;text-decoration:none;font-weight:bold;">
+<a href="faqs.html#faq-list" style="border-radius:12px;display:inline-block;padding:12px 28px;background:#cc001b;color:#ffffff;text-decoration:none;font-weight:bold;">
 Read for Battery Care
 </a>
 </div>
@@ -697,36 +697,37 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
     const heroPrimaryBtnLabel = document.getElementById("home-hero-btn-primary-label");
     const heroSecondaryBtnLabel = document.getElementById("home-hero-btn-secondary-label");
 
+    // Used when the site's content manager has no home banners set (window.ALASKA_CONTENT.homeBanners)
     const fallbackHeroSlides = [
       {
         desktop: "assets/slider-home/slide-1.webp",
-        mobile: "assets/solutions/mobile/automotive-mobile.webp",
-        alt: "Automotive banner",
-        kicker: "Placeholder",
-        title: "Placeholder Title",
-        subtitle: "Placeholder text for banner.",
-        primaryBtn: { text: "View More", href: "#" },
-        secondaryBtn: { text: "Get Support", href: "#" },
+        mobile: "assets/solutions/mobile/solutions-hero-mobile.webp",
+        alt: "Alaska batteries for cars, solar and industry",
+        kicker: "",
+        title: "Alaska Batteries",
+        subtitle: "",
+        primaryBtn: { text: "Find My Battery", href: "battery-finder.html#bf-root" },
+        secondaryBtn: { text: "Find a Partner", href: "dealers.html#partner-finder" },
       },
       {
         desktop: "assets/slider-home/slide-2.webp",
-        mobile: "assets/solutions/mobile/solar-mobile.webp",
-        alt: "Solar banner",
-        kicker: "Placeholder",
-        title: "Placeholder Title",
-        subtitle: "Placeholder text for banner.",
-        primaryBtn: { text: "Explore", href: "#" },
-        secondaryBtn: { text: "Find Partner", href: "#" },
+        mobile: "assets/solutions/mobile/automotive-mobile.webp",
+        alt: "Alaska car battery",
+        kicker: "",
+        title: "Car Batteries",
+        subtitle: "",
+        primaryBtn: { text: "Battery Finder", href: "battery-finder.html#bf-root" },
+        secondaryBtn: { text: "Lead-Acid Range", href: "dry-charge.html#search-section" },
       },
       {
         desktop: "assets/slider-home/slide-3.webp",
-        mobile: "assets/solutions/mobile/industrial-mobile.webp",
-        alt: "Industrial banner",
-        kicker: "Placeholder",
-        title: "Placeholder Title",
-        subtitle: "Placeholder text for banner.",
-        primaryBtn: { text: "View More", href: "#" },
-        secondaryBtn: { text: "Get Support", href: "#" },
+        mobile: "assets/solutions/mobile/solar-mobile.webp",
+        alt: "Alaska battery powering a home setup",
+        kicker: "",
+        title: "Backup Power",
+        subtitle: "",
+        primaryBtn: { text: "Solar Calculator", href: "solar-calculator.html#solar-calculator" },
+        secondaryBtn: { text: "LiFePO4 Batteries", href: "l-ion.html#li-range" },
       },
     ];
 
@@ -763,9 +764,9 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
       const slide = heroSlides[index % slideCount];
       if (!slide) return;
 
-      if (heroKicker) heroKicker.textContent = slide.kicker;
+      if (heroKicker) { heroKicker.textContent = slide.kicker || ""; heroKicker.hidden = !slide.kicker; }
       if (heroTitle) heroTitle.textContent = slide.title;
-      if (heroSubtitle) heroSubtitle.textContent = slide.subtitle;
+      if (heroSubtitle) { heroSubtitle.textContent = slide.subtitle || ""; heroSubtitle.hidden = !slide.subtitle; }
 
       if (heroPrimaryBtn) {
         heroPrimaryBtn.classList.toggle("hidden", !slide.primaryBtn);
@@ -814,13 +815,17 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
     const dotsContainer = document.getElementById("carouselDots");
     const prevBtn = document.getElementById("carouselPrev");
     const nextBtn = document.getElementById("carouselNext");
-    const cards = document.querySelectorAll(".product-card");
+    const cards = Array.from(document.querySelectorAll("#productsCarousel .product-card"));
     const cardCount = cards.length;
+    if (!carousel || !dotsContainer) return; // page has no product carousel
 
     // Create pagination dots
     for (let i = 0; i < cardCount; i++) {
       const dot = document.createElement("button");
+      dot.type = "button";
       dot.className = `carousel-dot ${i === 0 ? "active" : ""}`;
+      const title = cards[i].querySelector(".product-card-title");
+      dot.setAttribute("aria-label", "Show " + (title ? title.textContent.trim() : "card " + (i + 1)));
       dot.onclick = () => scrollToCard(i);
       dotsContainer.appendChild(dot);
     }
@@ -855,12 +860,38 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
       }
     }
 
-    // Scroll carousel by item count
+    // Cards have different widths (portrait and landscape), so positions are
+    // worked out from each card's real place in the row, not from the first card.
+    function cardLeft(card) {
+      const pad = parseFloat(window.getComputedStyle(carousel).paddingLeft) || 0;
+      return carousel.scrollLeft + card.getBoundingClientRect().left - carousel.getBoundingClientRect().left - pad;
+    }
+    function maxScroll() {
+      return carousel.scrollWidth - carousel.clientWidth;
+    }
+    // the card picked with a dot or an arrow stays highlighted until the visitor scrolls by hand
+    // (near the end of the row several cards share the same scroll position)
+    let pinned = null;
+    ["wheel", "touchstart", "pointerdown"].forEach((ev) => carousel.addEventListener(ev, () => (pinned = null), { passive: true }));
+    function currentIndex() {
+      if (pinned !== null) return pinned;
+      let best = 0;
+      let bestDist = Infinity;
+      cards.forEach((c, i) => {
+        const d = Math.abs(cardLeft(c) - carousel.scrollLeft);
+        if (d < bestDist) {
+          bestDist = d;
+          best = i;
+        }
+      });
+      return best;
+    }
+
+    // Arrows move one card at a time
     window.scrollCarousel = function (direction) {
       if (!carousel) return;
-      const cardWidth = cards[0].offsetWidth + parseInt(window.getComputedStyle(carousel).gap);
-      carousel.scrollBy({ left: cardWidth * direction, behavior: "smooth" });
-      setTimeout(updateButtonVisibility, 300);
+      const i = Math.max(0, Math.min(cardCount - 1, currentIndex() + direction));
+      scrollToCard(i);
     };
 
     // Update dots and buttons on carousel scroll
@@ -870,20 +901,18 @@ Sustainability is built one returned battery at a time. Recycling recovers valua
     });
 
     function updateActiveDot() {
-      const dots = document.querySelectorAll(".carousel-dot");
-      const scrollPos = carousel.scrollLeft;
-      const cardWidth = cards[0].offsetWidth + parseInt(window.getComputedStyle(carousel).gap);
-      const activeIndex = Math.round(scrollPos / cardWidth);
-
-      dots.forEach((dot, index) => {
+      const activeIndex = currentIndex();
+      document.querySelectorAll(".carousel-dot").forEach((dot, index) => {
         dot.classList.toggle("active", index === activeIndex);
+        dot.setAttribute("aria-current", index === activeIndex ? "true" : "false");
       });
     }
 
     function scrollToCard(index) {
       if (!carousel) return;
-      const cardWidth = cards[0].offsetWidth + parseInt(window.getComputedStyle(carousel).gap);
-      carousel.scrollTo({ left: cardWidth * index, behavior: "smooth" });
+      pinned = index;
+      updateActiveDot();
+      carousel.scrollTo({ left: Math.min(maxScroll(), Math.max(0, cardLeft(cards[index]))), behavior: "smooth" });
       setTimeout(updateButtonVisibility, 300);
     }
 
@@ -1026,94 +1055,83 @@ if (document.getElementById("cert-center-img")) {
 window.scrollCertCarousel = scrollCertCarousel;
 
 // Feature data - Only 3 items
-const featureData = [
+// Feature tabs (graphite.html by default; a page can supply its own, e.g. js/casilver-data.js)
+const featureData = window.FEATURE_DATA || [
   {
     id: 0,
     title: "ADVANCED PLATE COMPOSITION",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
-                <li>Traditional batteries use <b>lead - antimony or lead - calcium grids</b > that degrade faster due
-                    to
-                    sulfation.</li>
-            <li><b>Graphite Lead-Acid</b> batteries incorporate <b>Graphite</b>, reducing sulfation and
-              increasing
-              efficiency.</li>
-              <li>Longer battery life & improved energy flow.</li>
-                </ul >`,
-    image: "assets/technology/tech-1.webp",
+    <li>Graphite-infused lead plates help reduce sulfation compared to conventional lead-antimony grids, supporting improved battery performance.</li>
+    <li>Enhanced conductivity promotes efficient energy transfer while helping reduce internal resistance and unnecessary energy loss.</li>
+    <li>Improved plate stability helps minimize active material deterioration, supporting dependable power delivery throughout the battery’s service life.</li>
+  </ul>`,
   },
   {
     id: 1,
-    title: "ENERGY EFFICIENCY & HEAT",
+    title: "ENERGY EFFICIENCY",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
-                  <li>Traditional batteries generate <b>more heat and waste energy</b> due to high internal
-                    resistance.
-                  </li>
-                  <li>Graphite Lead-Acid models have <b>lower internal resistance</b>, keeping temperatures low and
-                    performance high.</li>
-                    <li>Improved reliability and efficiency.</li>
-                </ul>`,
-    image: "assets/technology/tech-2.webp",
+    <li>Lower internal resistance helps reduce heat buildup and energy loss, allowing the battery to deliver power more efficiently under demanding conditions.</li>
+    <li>Less energy is wasted as heat during charging and discharging, so more of the stored energy reaches the vehicle or system it powers.</li>
+    <li>Running cooler helps protect internal components and supports consistent performance in hot weather and under heavy loads.</li>
+  </ul>`,
   },
   {
     id: 2,
-    title: "CYCLE LIFE & LONGEVITY",
+    title: "EXTENDED BATTERY LIFE",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
-                  <li>Standard batteries last <b>300-500 cycles</b>, while graphite-enhanced versions last
-                    <b>600-1000+
-                      cycles</b>.
-                  </li>
-                  <li>Graphite slows down sulfate buildup, preserving battery health.</li>
-                  <li>Extended lifespan and lower costs.</li>
-                </ul>`,
-    image: "assets/technology/tech-3.webp",
+    <li>Reduced sulfation and plate deterioration help preserve battery performance over more charge-discharge cycles.</li>
+    <li>Durable construction supports reliable operation in environments with continuous vibration.</li>
+    <li>Extended service life can reduce replacement frequency and maintenance costs, providing greater long-term value.</li>
+  </ul>`,
   },
   {
     id: 3,
     title: "DEEP DISCHARGE RECOVERY",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
-                  <li>Normal batteries <b>suffer permanent</b> damage from deep discharges.</li>
-                  <li>Graphite Lead Acid batteries <b>recover better</b> from deep discharge cycles.</li>
-                  <li>Durability in demanding conditions.</li>
-                </ul>`,
-    image: "assets/technology/tech-4.webp",
+    <li>Designed to recover more effectively after deep discharge cycles, helping restore battery performance when power reserves have been significantly depleted.</li>
+    <li>Improved plate technology supports more dependable performance through repeated charging and discharging under demanding operating conditions.</li>
+    <li>Helps maintain reliable energy delivery for applications that experience frequent power demands and varying discharge levels.</li>
+  </ul>`,
   },
   {
     id: 4,
-    title: "IDEAL FOR MODERN APPLICATIONS",
+    title: "FAST CHARGE ACCEPTANCE",
     desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
-                  <li>Traditional Lead-Acid batteries are best for <b>low-drain uses</b> like motorcycles.</li>
-                  <li>Graphite batteries excel in: Stop-Start Vehicles, Solar Energy Storage, Hybrid System &
-                    Industrial
-                    Use.</li>
-                    <li>Versatility for the future of storage.</li>
-                </ul>`,
-    image: "assets/technology/tech-5.webp",
-  },
-  {
-    id: 5,
-    title: "CHARGE ACCEPTANCE & SPEED",
-    desc: `<ul class="space-y-2 list-disc pl-5 text-sm md:text-lg leading-relaxed">
-                  <li>Normal Lead Acid batteries charge <b>slower</b> and struggle in <b>partial state-of-charge
-                      (PSoC)
-                      conditions</b>.</li>
-                  <li>Graphite Lead Acid batteries <b>absorb current much faster</b>, ideal for <b>modern stop-start
-                      vehicle systems</b>.</li>
-                  <li>Faster charging and increased efficiency.</li>
-                </ul>`,
-    image: "assets/technology/tech-6.webp",
+    <li>Lower internal resistance helps the battery absorb charging current more efficiently, allowing it to replenish its reserve capacity in less time under suitable charging conditions.</li>
+    <li>Improved charge acceptance supports applications with limited charging periods, including short vehicle journeys and systems with intermittent solar charging.</li>
+    <li>Designed to perform more effectively under partial state-of-charge (PSoC) conditions, helping maintain battery readiness when a full recharge is not always possible.</li>
+  </ul>`,
   },
 ];
 
 function selectFeatureTab(index, scrollToSection = false) {
   const feature = featureData[index];
   const featureImage = document.getElementById("featureImage");
-  featureImage.classList.add("swiping");
-  setTimeout(() => {
-    featureImage.src = feature.image;
-    document.getElementById("featureTitle").textContent = feature.title;
-    document.getElementById("featureDesc").innerHTML = feature.desc;
-    featureImage.classList.remove("swiping");
-  }, 200);
+  const featureStage = document.getElementById("featureStage"); // graphite.html: animated diagrams
+  if (!featureImage && !featureStage) return; // page has no feature tabs
+  if (featureStage) {
+    // text fades out and back in while the graph morphs (css/graphite.css: .gt-text-swap)
+    const title = document.getElementById("featureTitle");
+    const desc = document.getElementById("featureDesc");
+    if (window.showGraphiteDiagram) window.showGraphiteDiagram(index);
+    title.classList.add("gt-text-swap");
+    desc.classList.add("gt-text-swap");
+    clearTimeout(selectFeatureTab._t);
+    selectFeatureTab._t = setTimeout(() => {
+      title.textContent = feature.title;
+      desc.innerHTML = feature.desc;
+      title.classList.remove("gt-text-swap");
+      desc.classList.remove("gt-text-swap");
+    }, title.textContent.trim() === "--" ? 0 : 300);
+  } else {
+    featureImage.classList.add("swiping");
+    setTimeout(() => {
+      featureImage.src = feature.image;
+      document.getElementById("featureTitle").textContent = feature.title;
+      document.getElementById("featureDesc").innerHTML = feature.desc;
+      featureImage.classList.remove("swiping");
+    }, 200);
+  }
 
   // Desktop tabs (horizontal bar)
   const desktopTabs = document.querySelectorAll("#tabsContainer .feature-tab");
@@ -1174,6 +1192,7 @@ function checkChevronVisibility() {
   const container = document.getElementById("tabsContainer");
   const leftBtn = document.getElementById("scrollLeftBtn");
   const rightBtn = document.getElementById("scrollRightBtn");
+  if (!container || !leftBtn || !rightBtn) return; // page has no tab strip
 
   // If content fits without scrolling, hide chevrons
   if (container.scrollWidth <= container.clientWidth) {
@@ -1224,7 +1243,7 @@ function openTechVideoModal() {
   }
 }
 
-closeTechModal.addEventListener("click", closeModal);
+if (closeTechModal) closeTechModal.addEventListener("click", closeModal);
 
 window.addEventListener("click", (e) => {
   if (e.target === techmodal) closeModal();

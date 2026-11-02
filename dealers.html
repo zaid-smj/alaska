@@ -5,18 +5,98 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Find a Partner | Alaska Batteries</title>
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <style>
+    /* Find a Partner */
+    .pf-wrap { max-width: 1280px; margin: 0 auto; padding: 40px 24px 56px; }
+    @media (min-width: 768px) { .pf-wrap { padding: 56px 48px 72px; } }
+    .pf-head { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 12px 24px; margin-bottom: 24px; }
+    .pf-count { margin: 0; color: #c00d1e; font-weight: 900; font-size: 13px; letter-spacing: .12em; text-transform: uppercase; }
+    .pf-search { position: relative; margin-bottom: 14px; }
+    .pf-search > i { position: absolute; left: 0; top: 50%; transform: translateY(-50%); color: #9ca3af; }
+    .pf-search input { width: 100%; padding: 14px 40px 14px 30px; border: 0; border-bottom: 2px solid #e5e7eb; background: transparent; color: inherit; outline: none; font-size: 16px; font-weight: 600; }
+    .pf-search input:focus { border-bottom-color: #c00d1e; }
+    .pf-search input::-webkit-search-cancel-button { display: none; }
+    .pf-search button { position: absolute; right: 0; top: 50%; transform: translateY(-50%); border: 0; background: none; color: #9ca3af; font-size: 18px; cursor: pointer; padding: 6px; }
+    .pf-search button:hover { color: #c00d1e; }
+    .loc-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .loc-chip { padding: 9px 14px; border-radius: 999px; border: 2px solid #e5e7eb; background: transparent; color: inherit; font-size: 13px; font-weight: 700; cursor: pointer; transition: border-color .15s, background-color .15s, color .15s; }
+    .loc-chip:hover { border-color: #c00d1e; }
+    .loc-chip[aria-pressed="true"] { background: #c00d1e; border-color: #c00d1e; color: #fff; }
+    .loc-chip:focus-visible { outline: 2px solid #c00d1e; outline-offset: 2px; }
+    .chip-n { opacity: .65; font-weight: 600; margin-left: 2px; }
+    .pf-chips { margin-bottom: 28px; }
+    .pf-grid { display: grid; gap: 24px; }
+    .pf-map { order: -1; }
+    @media (min-width: 900px) {
+      /* two equal halves of the same height: the list scrolls inside its half, the map fills the other */
+      .pf-grid { --pf-h: clamp(520px, calc(100vh - 160px), 780px); grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 0; align-items: stretch; }
+      /* red divider down the middle that fades at its ends (as on the form pages) */
+      .pf-list { padding-right: 40px; border-right: 2px solid transparent; border-image: linear-gradient(to bottom, transparent, #c00d1e 12%, #c00d1e 88%, transparent) 1; }
+      /* the list scrolls on its own; direction:rtl puts its scrollbar on the left */
+      .pf-list { height: var(--pf-h); max-height: none; overflow-y: auto; overscroll-behavior: contain; direction: rtl; padding-left: 12px; scrollbar-width: thin; scrollbar-color: #c00d1e transparent; }
+      .pf-list > * { direction: ltr; }
+      .pf-list::-webkit-scrollbar { width: 6px; }
+      .pf-list::-webkit-scrollbar-thumb { background: #c00d1e; border-radius: 3px; }
+      .pf-list::-webkit-scrollbar-track { background: transparent; }
+      .pf-map { order: 0; padding-left: 40px; height: var(--pf-h); display: flex; flex-direction: column; }
+      .pf-map .pf-map-frame { flex: 1; height: auto !important; min-height: 0 !important; max-height: none !important; }
+    }
+    .pf-map-title { margin: 0 0 10px; font-weight: 900; text-transform: uppercase; font-size: 15px; letter-spacing: -0.01em; min-height: 1.2em; }
+    .pf-map-frame { position: relative; height: 300px; border-radius: 12px; overflow: hidden; background: #e5e7eb; border-left: 4px solid #c00d1e; }
+    @media (min-width: 900px) { .pf-map-frame { height: calc(100vh - 220px); min-height: 420px; max-height: 640px; } }
+    .pf-map-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    .pf-note { margin: 12px 0 0; font-size: 13px; color: #6b7280; }
+    .pf-note a, .dealer-empty a { color: #c00d1e; font-weight: 700; }
+    .pf-list { display: grid; gap: 10px; align-content: start; }
+    .dealer-group { margin: 14px 0 2px; color: #c00d1e; font-size: 12px; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .dealer-group:first-child { margin-top: 0; }
+    .dealer-card { padding: 16px 18px; border: 2px solid #e5e7eb; border-radius: 12px; cursor: pointer; transition: border-color .15s, box-shadow .15s; }
+    .dealer-card:hover { border-color: #c00d1e; }
+    .dealer-card.is-active { border-color: #c00d1e; box-shadow: 0 0 0 1px #c00d1e inset; }
+    .dealer-card:focus-visible { outline: 2px solid #c00d1e; outline-offset: 2px; }
+    .d-name { margin: 0 0 6px; font-size: 16px; font-weight: 800; }
+    .d-addr { display: flex; gap: 8px; margin: 0; font-size: 14px; color: #4b5563; line-height: 1.5; }
+    .d-addr i { color: #c00d1e; margin-top: 4px; font-size: 12px; }
+    .d-place { margin: 2px 0 0 20px; font-size: 12px; color: #9ca3af; }
+    .d-actions { display: flex; flex-wrap: wrap; gap: 8px 18px; margin-top: 12px; padding-top: 10px; border-top: 1px solid #f3f4f6; }
+    .d-link { display: inline-flex; align-items: center; gap: 7px; font-size: 13px; font-weight: 700; color: #c00d1e; text-decoration: none; }
+    .d-link:hover { text-decoration: underline; }
+    .d-link.d-muted { color: #6b7280; font-weight: 600; }
+    .dealer-empty { padding: 28px; border: 2px dashed #e5e7eb; border-radius: 12px; text-align: center; color: #6b7280; font-size: 14px; }
+    html[data-theme="dark"] .dealer-card, html[data-theme="dark"] .loc-chip:not([aria-pressed="true"]), html[data-theme="dark"] .dealer-empty { border-color: #2b313b; }
+    html[data-theme="dark"] .dealer-card:hover, html[data-theme="dark"] .dealer-card.is-active { border-color: #c00d1e; }
+    html[data-theme="dark"] .d-addr { color: #9ca3af; }
+    html[data-theme="dark"] .d-actions { border-color: #1f2937; }
+    html[data-theme="dark"] .pf-search input { border-bottom-color: #2b313b; }
+    html[data-theme="dark"] .pf-map-frame { background: #1e232c; }
+  </style>
 </head>
 
 <body class="bg-white overflow-x-hidden">
   <div id="header-placeholder"></div>
 
-  <main class="bg-white min-h-screen">
+  <main class="bg-white">
     <section
-      class="border-b border-gray-10 flex items-center justify-center text-center bg-white overflow-hidden group  hero-fold">
+      class="page-banner border-b border-gray-10 flex items-center justify-center text-center bg-white overflow-hidden group  hero-fold">
       <div class="relative md:h-full w-full flex flex-col banner-wrapper">
         <picture>
           <source srcset="assets/mobile/dealer-locator-mobile.webp" media="(max-width: 767px)">
@@ -25,7 +105,7 @@
             class="w-full h-full transition-transform duration-1000">
         </picture>
         <div id="hero-text-box"
-          class="absolute top-20 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden banner-overlay-support">
+          class="absolute top-20 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden">
           <h1 class="text-2xl md:text-5xl font-bold uppercase text-left tracking-normal leading-tight text-white">
             Find a
             <br />
@@ -35,71 +115,35 @@
       </div>
     </section>
 
-    <section id="search-section" class="top-0 z-10 backdrop-blur-xs py-6 bg-white">
-      <div class="max-w-7xl mx-auto px-4 md:px-2 lg:px-2">
-        <div class="bg-white border-2 border-gray-200 p-6 md:p-4 rounded-xl shadow-lg mb-4">
-          <div class="flex flex-col md:flex-row gap-4 items-center">
-            <div class="relative w-full md:flex-1">
-              <i class="fa-solid fa-magnifying-glass absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"></i>
+    <section id="partner-finder" class="bg-white border-t border-gray-100">
+      <div class="pf-wrap">
+        <div class="pf-head">
+          <div>
+            <h2 class="text-4xl font-black uppercase tracking-tighter mb-0">Find a <span class="text-[#c00d1e]">Partner</span></h2>
+          </div>
+          <p class="pf-count" id="dealerCount" aria-live="polite">0 partners</p>
+        </div>
 
-              <input type="text" id="dealerSearch" autocomplete="off" placeholder="Search by name, city or province"
-                class="w-full pl-10 pr-12 py-3 rounded-lg bg-gray-100 border-none focus:ring-2 focus:ring-[#c00d1e] outline-none text-base tracking-normal" />
+        <div class="pf-search">
+          <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+          <label class="sr-only" for="dealerSearch">Search partners</label>
+          <input type="search" id="dealerSearch" autocomplete="off" placeholder="Search by shop, area or city" />
+          <button id="dealerClear" type="button" aria-label="Clear search" hidden><i class="fa-solid fa-circle-xmark" aria-hidden="true"></i></button>
+        </div>
+        <div class="loc-chips pf-chips" id="regionChips" role="group" aria-label="Region"></div>
 
-              <button id="dealerClear" type="button"
-                class="hidden absolute right-3 md:right-4 top-1/2 -translate-y-1/2 z-10 w-8 h-8 flex items-center justify-center rounded-full text-gray-500 hover:text-[#c00d1e] transition-colors">
-                <i class="fa-solid fa-circle-xmark text-lg"></i>
-              </button>
-
-              <div id="dealer-suggestions"
-                class="absolute top-full left-0 w-full bg-white shadow-2xl border border-gray-100 hidden mt-1 max-h-60 overflow-y-auto rounded-lg z-50">
-                <div class="p-3 text-gray-500 text-sm">No suggestions</div>
-              </div>
+        <div class="pf-grid">
+          <div class="pf-list" id="dealerList" aria-label="Partners"></div>
+          <div class="pf-map" id="dealerMapWrap">
+            <p class="pf-map-title" id="dealerMapTitle"></p>
+            <div class="pf-map-frame">
+              <iframe id="dealerMap" title="Partner location map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
             </div>
-
-            <select id="provinceFilter"
-              class="filter-btn border-2 border-gray-100 px-6 py-2 font-semibold text-lg uppercase tracking-widest rounded-md transition-all">
-              <option value="All">All Regions</option>
-              <option value="ICT">ICT</option>
-              <option value="Punjab">Punjab</option>
-              <option value="Sindh">Sindh</option>
-              <option value="KPK">KPK</option>
-              <option value="Balochistan">Balochistan</option>
-              <option value="Gilgit Baltistan">Gilgit Baltistan</option>
-              <option value="Azad Kashmir">Azad Kashmir</option>
-            </select>
-
-            <div
-              class="filter-btn active border-2 border-gray-100 px-6 py-2 text-m uppercase tracking-widest rounded-md transition-all">
-              <span id="dealerCount" class="mr-2">0</span> Partners Found
-            </div>
+            <p class="pf-note">Can't find a partner near you? <a href="support.html#support-content">Contact us</a> or <a href="become-dealer.html#partner-content">become a partner</a>.</p>
           </div>
         </div>
       </div>
     </section>
-
-    <div class="max-w-7xl mx-auto px-4 md:px-2 lg:px-2">
-      <div class="flex flex-col md:flex-row gap-8 mb-8">
-        <div class="w-full md:w-3/5">
-          <div class="bg-gray-50 rounded-xl p-6 border-t-4 border-[#c00d1e]">
-            <div class="flex items-center justify-between mb-5 pb-4 border-b border-gray-200">
-              <p class="text-sm font-black uppercase tracking-wider text-zinc-900">Search Results</p>
-              <span class="bg-[#c00d1e] text-white px-3 py-1 rounded-full text-xs font-bold"
-                id="dealerCountDisplay">0</span>
-            </div>
-            <div id="dealerList"
-              class="flex flex-col gap-3 max-h-[450px] md:max-h-[700px] overflow-y-auto pr-2 custom-scrollbar"></div>
-          </div>
-        </div>
-
-        <div
-          class="w-full md:w-2/5 h-[350px] md:h-[800px] rounded-xl overflow-hidden shadow-sm relative bg-zinc-50 border-l-4 border-[#c00d1e]">
-          <iframe id="dealerMap" width="100%" height="100%" frameborder="0" style="border: 0"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.674011205133!2d73.01977527376371!3d33.69150423669559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbfe1b6146989%3A0x12bad86d9a306ff7!2sAlaska%20Batteries!5e0!3m2!1sen!2s!4v1769365949757!5m2!1sen!2s"
-            allowfullscreen="">
-          </iframe>
-        </div>
-      </div>
-    </div>
   </main>
 
   <div id="footer-placeholder"></div>

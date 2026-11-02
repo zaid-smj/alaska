@@ -1,0 +1,478 @@
+/* Alaska Batteries — Lithium-Ion and Inverter product pages. Builds on ui.css + pages.css. */
+
+.li-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.li-head h3 {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+}
+.li-grid {
+  display: grid;
+  gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.li-card {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.li-media {
+  border: 0;
+  padding: 16px;
+  height: 220px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  cursor: pointer;
+}
+.li-media img {
+  max-height: 190px;
+  max-width: 100%;
+  object-fit: contain;
+  transition: transform 0.25s;
+}
+.li-media:hover img {
+  transform: scale(1.03);
+}
+.li-body {
+  padding: 16px 18px 18px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.li-code {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--red);
+}
+.li-body h4 {
+  margin: 4px 0 2px;
+  font-size: 19px;
+  font-weight: 800;
+}
+.li-group {
+  margin: 0;
+  font-size: 13px;
+  color: var(--muted);
+}
+.li-keys {
+  margin: 14px 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 14px;
+}
+.li-keys div {
+  margin: 0;
+}
+.li-keys dt {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+.li-keys dd {
+  margin: 2px 0 0;
+  font-weight: 800;
+  font-size: 15px;
+}
+.li-actions {
+  margin-top: auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+.li-cmp {
+  font-size: 14px;
+  margin-left: auto;
+}
+.li-comparebar {
+  position: sticky;
+  bottom: 16px;
+  z-index: 20;
+  margin-top: 16px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 10px 14px;
+  box-shadow: var(--shadow);
+  font-weight: 700;
+  font-size: 14px;
+}
+.li-comparebar[hidden] {
+  display: none;
+}
+.li-apps .li-app {
+  display: inline-flex;
+  padding: 9px 14px;
+  border-radius: 999px;
+  border: 1.5px solid var(--line);
+  background: var(--surface);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--ink-2);
+}
+.li-modal-grid {
+  display: grid;
+  gap: 18px;
+}
+@media (min-width: 720px) {
+  .li-modal-grid {
+    grid-template-columns: 240px 1fr;
+  }
+}
+.li-modal-img {
+  width: 100%;
+  max-height: 260px;
+  object-fit: contain;
+  background: var(--surface-2);
+  border-radius: 12px;
+  padding: 12px;
+}
+.sc-label + .ticks {
+  margin-top: 6px;
+}
+
+/* inverters */
+.inv-hero {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .inv-hero {
+    grid-template-columns: 300px 1fr;
+  }
+}
+.inv-hero > img {
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+}
+/* Brand logos used as headings */
+.inv-brand {
+  margin: 0 0 10px;
+  line-height: 0;
+}
+.inv-brand img {
+  height: 56px;
+  width: auto;
+}
+.li-brand {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+.li-brand img {
+  height: 30px;
+  width: auto;
+}
+.li-brand span {
+  font-size: 22px;
+  line-height: 1;
+}
+.inv-hl {
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 720px) {
+  .inv-hl {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.inv-hl h4 {
+  margin: 0 0 6px;
+  font-size: 16px;
+  font-weight: 800;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.inv-hl h4 i {
+  color: var(--red);
+}
+.inv-hl ul {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--ink-2);
+  font-size: 14px;
+  line-height: 1.55;
+}
+.tba {
+  color: var(--muted);
+  font-style: italic;
+}
+.inv-table td,
+.inv-table th {
+  white-space: nowrap;
+}
+.inv-table tr.pending td {
+  color: var(--muted);
+}
+
+/* about page additions */
+.ab-grid-3 {
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 820px) {
+  .ab-grid-3 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.ab-statement {
+  padding: 26px;
+}
+.ab-statement .k {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+.ab-statement p {
+  margin: 10px 0 0;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--ink);
+  font-weight: 600;
+}
+.ab-values {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+}
+.ab-value {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 16px;
+  font-weight: 800;
+  font-size: 15px;
+}
+.ab-value i {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: var(--red-soft);
+  color: var(--red);
+  flex: none;
+}
+.ab-stats {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+}
+@media (min-width: 900px) {
+  .ab-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+.ab-stat {
+  padding: 20px;
+}
+.ab-stat b {
+  display: block;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--red);
+}
+.ab-stat span {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.ab-awards {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+}
+.ab-award img {
+  width: 100%;
+  height: 210px;
+  object-fit: contain;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface));
+  border-radius: 14px 14px 0 0;
+}
+.ab-award div {
+  padding: 14px 16px 18px;
+}
+.ab-award strong {
+  display: block;
+  font-size: 15px;
+}
+.ab-award .yr {
+  display: inline-block;
+  margin-top: 4px;
+  font-size: 12px;
+  font-weight: 800;
+  color: var(--red);
+}
+.ab-award p {
+  margin: 8px 0 0;
+  font-size: 14px;
+  color: var(--ink-2);
+  line-height: 1.5;
+}
+.ab-certs {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.ab-cert {
+  padding: 16px;
+}
+.ab-cert strong {
+  display: block;
+  font-size: 16px;
+}
+.ab-cert span {
+  display: block;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--ink-2);
+  line-height: 1.45;
+}
+.ab-clients {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.ab-clients li {
+  padding: 14px 16px;
+  font-weight: 700;
+  font-size: 14.5px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.ab-clients li i {
+  color: var(--red);
+}
+.ab-split {
+  display: grid;
+  gap: 20px;
+}
+@media (min-width: 900px) {
+  .ab-split {
+    grid-template-columns: 1.2fr 1fr;
+    align-items: start;
+  }
+}
+.ab-regions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.ab-regions li {
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: var(--red-soft);
+  color: var(--red);
+  font-weight: 800;
+  font-size: 14px;
+}
+
+/* LiFePO4 technology page */
+.lf-quote {
+  margin-top: 4px;
+  border-left: 4px solid var(--red);
+}
+.lf-split {
+  display: grid;
+  gap: 14px;
+}
+@media (min-width: 900px) {
+  .lf-split {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.lf-h4 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  font-weight: 800;
+}
+.lf-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+.lf-card i {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  background: var(--red-soft);
+  color: var(--red);
+  font-size: 17px;
+}
+.lf-card h4 {
+  margin: 12px 0 6px;
+  font-size: 16px;
+  font-weight: 800;
+}
+.lf-card p {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 14.5px;
+  line-height: 1.6;
+}
+.lf-range {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+.lf-model {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 14px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: border-color 0.15s;
+}
+.lf-model:hover {
+  border-color: var(--red);
+}
+.lf-model img {
+  height: 110px;
+  object-fit: contain;
+  margin-bottom: 8px;
+}
+.lf-model .code {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  color: var(--red);
+}
+.lf-model strong {
+  font-size: 15px;
+}
+.lf-model .meta {
+  font-size: 13px;
+  color: var(--muted);
+}

@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Solar Calculator | Alaska Batteries Pakistan</title>
+  <meta name="description"
+    content="Enter your monthly electricity units and city to size a solar system in Pakistan: panels, inverter and Alaska battery backup." />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://alaskabatteries.com/solar-calculator.html">
+  <meta property="og:title" content="Solar Calculator | Alaska Batteries" />
+  <meta property="og:description" content="Size your solar system from your electricity units and get Alaska battery recommendations." />
+  <meta property="og:image" content="https://alaskabatteries.com/assets/solutions/solar.webp" />
+  <meta name="theme-color" content="#c00d1e" />
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/split-form.css" />
+  <style>
+    /* ---------- Solar calculator (split-form layout, site style) ---------- */
+    .sc-step + .sc-step { margin-top: 36px; }
+    .sc-step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
+    .sc-step-head b {
+      display: grid; place-items: center; width: 28px; height: 28px; flex: none; border-radius: 50%;
+      background: #c00d1e; color: #fff; font-size: 13px; font-weight: 800;
+    }
+    .sc-step-head h3 { margin: 0; color: #c00d1e; font-size: 12px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; }
+    .sc-help { margin: 8px 0 0; font-size: 13px; color: #6b7280; line-height: 1.5; }
+    .sc-help b { color: inherit; }
+    .sc-err { margin: 6px 0 0; font-size: 13px; font-weight: 600; color: #c00d1e; }
+    .sc-err:empty { display: none; }
+    .sc-field-input {
+      width: 100%; border: 0; border-bottom: 2px solid #f3f4f6; padding: 12px 0; outline: none; background: transparent;
+      font-size: 12px; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: inherit; transition: border-color 0.15s;
+    }
+    .sc-field-input:focus { border-bottom-color: #c00d1e; }
+    .sc-field-input[aria-invalid="true"] { border-bottom-color: #c00d1e; }
+    select.sc-field-input { cursor: pointer; }
+    /* single-choice chips: no "+" until chosen */
+    .sc-radio .sf-chip span::before { content: none; }
+    .sc-radio .sf-chip input:checked + span::before { content: "\2713"; }
+    .sc-off { margin: 0; font-size: 14px; color: #6b7280; }
+
+    /* result column */
+    .sc-big { font-size: 40px; line-height: 1; font-weight: 900; letter-spacing: -0.02em; text-transform: uppercase; }
+    .sc-big span { color: #c00d1e; text-transform: none; }
+    .sc-sub { margin-top: 10px; color: #6b7280; font-size: 15px; }
+    .sc-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; font-size: 14px; color: #4b5563; }
+    .sc-list li { display: flex; gap: 12px; align-items: flex-start; }
+    .sc-list i { color: #c00d1e; margin-top: 3px; }
+    .sc-list b { color: #111827; }
+    .sc-bat { display: grid; grid-template-columns: 88px 1fr; gap: 16px; align-items: center; }
+    .sc-bat img { width: 88px; height: 88px; object-fit: contain; }
+    .sc-bat .m { font-size: 20px; font-weight: 900; letter-spacing: -0.01em; }
+    .sc-bat .s { font-size: 14px; color: #6b7280; margin-top: 2px; }
+    .sc-bat a { display: inline-block; margin-top: 6px; color: #c00d1e; font-size: 13px; font-weight: 700; }
+    .sc-bat a:hover { text-decoration: underline; }
+    .sc-empty { color: #6b7280; font-size: 15px; line-height: 1.6; }
+    .sc-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .sc-wa { display: inline-flex !important; align-items: center; gap: 8px; }
+    .sc-note { font-size: 12px; color: #9ca3af; }
+    .sc-quote { display: grid; gap: 22px; }
+    .sc-status { font-size: 14px; font-weight: 600; }
+    .sc-status.ok { color: #157f3b; }
+    .sc-status.err { color: #c00d1e; }
+
+    /* desktop: the result follows you down the page */
+    @media (min-width: 1024px) { .sc-sticky { position: sticky; top: 100px; } }
+    /* lead-acid vs lithium comparison */
+    .sc-cmp { width: 100%; border-collapse: collapse; font-size: 14px; }
+    .sc-cmp th, .sc-cmp td { padding: 10px 8px; text-align: left; vertical-align: top; border-bottom: 1px solid #f3f4f6; }
+    .sc-cmp thead th { font-size: 12px; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: #c00d1e; border-bottom: 2px solid #c00d1e; }
+    .sc-cmp tbody th { color: #6b7280; font-weight: 600; width: 32%; }
+    .sc-cmp td { font-weight: 700; }
+    .sc-cmp .pic { display: flex; align-items: center; gap: 10px; }
+    .sc-cmp .pic img { width: 48px; height: 48px; object-fit: contain; flex: none; }
+    .sc-cmp a { color: #c00d1e; font-size: 12px; font-weight: 700; }
+    @media (max-width: 639px) { .sc-cmp .pic { flex-direction: column; align-items: flex-start; } .sc-cmp th, .sc-cmp td { padding: 9px 5px; } }
+    html[data-theme="dark"] .sc-cmp th, html[data-theme="dark"] .sc-cmp td { border-bottom-color: #2b313b; }
+    html[data-theme="dark"] .sc-cmp tbody th { color: #9ca3af; }
+    html[data-theme="dark"] .sc-field-input { border-bottom-color: #374151; }
+    html[data-theme="dark"] .sc-field-input:focus { border-bottom-color: #c00d1e; }
+    html[data-theme="dark"] select.sc-field-input option { background: #111; color: #d1d5db; }
+    html[data-theme="dark"] .sc-help,
+    html[data-theme="dark"] .sc-off,
+    html[data-theme="dark"] .sc-sub,
+    html[data-theme="dark"] .sc-bat .s,
+    html[data-theme="dark"] .sc-empty,
+    html[data-theme="dark"] .sc-list { color: #9ca3af; }
+    html[data-theme="dark"] .sc-list b { color: #d1d5db; }
+    html[data-theme="dark"] .sc-status.ok { color: #4ade80; }
+    @media (min-width: 768px) { .sc-big { font-size: 52px; } }
+    @media print {
+      #header-placeholder, #footer-placeholder, .page-banner, #sc-form-col, .sc-actions, #sc-quote { display: none !important; }
+    }
+  </style>
+  <script src="/js/form-preview.js" defer></script>
+</head>
+
+<body class="bg-white overflow-x-hidden">
+  <div id="header-placeholder"></div>
+
+  <main>
+    <section
+      class="page-banner border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group hero-fold">
+      <div class="relative h-full md:h-full w-full flex flex-col banner-wrapper">
+        <img id="hero-banner-img" src="assets/solutions/solar.webp" data-desktop="assets/solutions/solar.webp" data-mobile="assets/mobile/solar-mob.webp"
+          alt="Solar panels on a home roof with an Alaska solar battery" fetchpriority="high" class="w-full h-full object-cover" />
+        <div id="hero-text-box"
+          class="absolute bottom-1 left-0 right-0 md:bottom-auto md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden">
+          <h1 class="text-2xl md:text-5xl text-left font-bold uppercase tracking-normal leading-tight text-white">
+            Solar <span class="text-[#c00d1e]">Calculator</span></h1>
+        </div>
+      </div>
+    </section>
+
+    <section id="solar-calculator" class="sf-section flex flex-col md:flex-row border-t border-gray-100">
+      <!-- ============ LEFT: three steps ============ -->
+      <div id="sc-form-col" class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider">
+        <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">Size Your <span class="text-[#c00d1e]">System</span></h2>
+
+        <p class="tool-preview-note" role="note" style="padding:12px 18px;background:#fff7ed;color:#7c2d12;border:1px solid #fed7aa;border-radius:8px;margin:16px auto;max-width:1200px">Preview: recommendations use the supplied sample catalog. Browse our <a href="/lead-acid" style="text-decoration:underline">current Lead Acid catalog</a> for products managed by our team.</p>
+<form id="sc-form" novalidate autocomplete="off">
+          <!-- Step 1 -->
+          <div class="sc-step">
+            <div class="sc-step-head"><b>1</b><h3>Your Usage</h3></div>
+            <div class="sf-row">
+              <div>
+                <input class="sc-field-input" id="units" name="units" type="text" inputmode="decimal"
+                  placeholder="Units per month" aria-label="Units used per month" aria-describedby="units-help units-err" />
+                <p class="sc-err" id="units-err" role="alert"></p>
+              </div>
+              <select class="sc-field-input" id="city" name="city" aria-label="City"></select>
+            </div>
+            <p class="sc-help" id="units-help">Find <b>Units consumed</b> on your electricity bill. An average of summer and winter bills works best.</p>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="sc-step">
+            <div class="sc-step-head"><b>2</b><h3>Your System</h3></div>
+            <fieldset class="sf-chips sc-radio" aria-label="Type of solar system">
+              <label class="sf-chip"><input type="radio" name="systemType" value="on-grid" /><span>On-Grid</span></label>
+              <label class="sf-chip"><input type="radio" name="systemType" value="hybrid" checked /><span>Hybrid</span></label>
+              <label class="sf-chip"><input type="radio" name="systemType" value="off-grid" /><span>Off-Grid</span></label>
+            </fieldset>
+            <p class="sc-help" id="system-help"></p>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="sc-step">
+            <div class="sc-step-head"><b>3</b><h3>Your Backup</h3></div>
+            <div id="backup-fields">
+              <p class="sf-label">Hours of backup</p>
+              <fieldset class="sf-chips sc-radio" aria-label="Hours of backup">
+                <label class="sf-chip"><input type="radio" name="hours" value="2" /><span>2 Hours</span></label>
+                <label class="sf-chip"><input type="radio" name="hours" value="4" checked /><span>4 Hours</span></label>
+                <label class="sf-chip"><input type="radio" name="hours" value="6" /><span>6 Hours</span></label>
+                <label class="sf-chip"><input type="radio" name="hours" value="8" /><span>8 Hours</span></label>
+                <label class="sf-chip"><input type="radio" name="hours" value="12" /><span>12 Hours</span></label>
+              </fieldset>
+              <p class="sf-label" style="margin-top:22px">Battery type</p>
+              <fieldset class="sf-chips sc-radio" aria-label="Battery type">
+                <label class="sf-chip"><input type="radio" name="chemistry" value="compare" checked /><span>Compare Both</span></label>
+                <label class="sf-chip"><input type="radio" name="chemistry" value="lead-acid" /><span>Lead-Acid</span></label>
+                <label class="sf-chip"><input type="radio" name="chemistry" value="lithium" /><span>Lithium (LiFePO4)</span></label>
+              </fieldset>
+            </div>
+            <p class="sc-off" id="backup-off" hidden>On-grid systems switch off during load-shedding, so they don't use batteries. Choose <b>Hybrid</b> if you want backup.</p>
+          </div>
+
+        </form>
+      </div>
+
+      <!-- ============ RIGHT: result ============ -->
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white flex flex-col justify-start">
+        <div class="sc-sticky">
+        <div id="sc-result" class="space-y-8" aria-live="polite"></div>
+
+        <form data-preview-form id="sc-quote" class="sc-quote mt-10" novalidate hidden>
+          <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest">Request a Quote</h4>
+          <input type="text" id="q-name" placeholder="Full Name" required autocomplete="name"
+            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+          <div class="sf-row">
+            <input type="tel" id="q-phone" placeholder="Phone Number" required autocomplete="tel"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+            <input type="email" id="q-email" placeholder="Email Address" required autocomplete="email"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
+          </div>
+          <p class="sc-err" id="q-err" role="alert"></p>
+          <div class="sc-actions">
+            <button type="submit" class="btn-primary" id="q-submit">Send Request</button>
+          </div>
+          <p class="sc-status" id="q-status" role="status"></p>
+        </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/tools-catalog-data.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/forms.js"></script>
+  <script src="js/lithium-data.js"></script>
+  <script src="js/inverter-data.js"></script>
+  <script src="js/solar-engine.js"></script>
+  <script src="js/solar-calculator.js"></script>
+  <script>
+    // Swap the banner image to the mobile version on small screens
+    (function () {
+      function update() {
+        var img = document.getElementById("hero-banner-img");
+        if (!img) return;
+        var src = window.matchMedia("(max-width: 640px)").matches ? img.dataset.mobile : img.dataset.desktop;
+        if (src && img.getAttribute("src") !== src) img.src = src;
+      }
+      update();
+      window.addEventListener("resize", update);
+    })();
+  </script>
+</body>
+
+</html>

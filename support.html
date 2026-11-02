@@ -4,11 +4,53 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Support | Alaska Batteries</title>
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <title>Contact Us | Alaska Batteries</title>
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/split-form.css" />
+  <style>
+    /* contact page: location picker with map */
+    .loc-card { margin-bottom: 14px; }
+    .loc-title { margin: 0 0 6px; font-size: 20px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; }
+    .loc-address { margin: 0 0 12px; color: #6b7280; font-size: 14px; line-height: 1.6; }
+    .loc-actions { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+    .loc-link { display: inline-flex; align-items: center; gap: 8px; color: #c00d1e; font-weight: 700; font-size: 15px; text-decoration: none; }
+    .loc-link:hover span { text-decoration: underline; }
+    .loc-link[hidden] { display: none; }
+    .loc-map { position: relative; height: 340px; border-radius: 12px; overflow: hidden; background: #e5e7eb; border-left: 4px solid #c00d1e; }
+    .loc-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+    html[data-theme="dark"] .loc-map { background: #1e232c; }
+    html[data-theme="dark"] .loc-address { color: #9ca3af; }
+    #info-container { transition: opacity 0.25s; }
+    .loc-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .loc-chip {
+      padding: 9px 14px; border-radius: 999px; border: 2px solid #e5e7eb; background: transparent; color: inherit;
+      font-size: 13px; font-weight: 700; cursor: pointer; transition: border-color .15s, background-color .15s, color .15s;
+    }
+    .loc-chip:hover { border-color: #c00d1e; }
+    .loc-chip[aria-pressed="true"] { background: #c00d1e; border-color: #c00d1e; color: #fff; }
+    .loc-chip:focus-visible { outline: 2px solid #c00d1e; outline-offset: 2px; }
+    html[data-theme="dark"] .loc-chip:not([aria-pressed="true"]) { border-color: #2b313b; }
+    html[data-theme="dark"] .loc-chip:not([aria-pressed="true"]):hover { border-color: #c00d1e; }
+  </style>
+  <script src="/js/form-preview.js" defer></script>
 </head>
 
 <body class="bg-white overflow-x-hidden">
@@ -16,252 +58,110 @@
 
   <main>
     <section
-      class="border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group  hero-fold">
+      class="page-banner border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group  hero-fold">
       <div class="relative h-full md:h-full w-full flex flex-col banner-wrapper">
-        <img id="hero-banner-img" src="assets/support.webp" alt="Support" class="w-full h-full object-cover" />
+        <img id="hero-banner-img" src="assets/support.webp" alt="Contact Alaska Batteries" class="w-full h-full object-cover" />
         <div id="hero-text-box"
-          class="absolute bottom-1 left-0 right-0 md:bottom-auto  md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden banner-overlay-support">
+          class="absolute bottom-1 left-0 right-0 md:bottom-auto  md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden">
           <h1 id="hero-banner-title"
             class="text-2xl md:text-5xl text-left font-bold uppercase tracking-normal leading-tight text-white">
-            Support</h1>
+            Contact Us</h1>
         </div>
       </div>
     </section>
 
-    <!-- Toggle Buttons for Support/Careers -->
-    <section class="bg-white border-b border-gray-100">
-      <div class="container mx-auto px-6 py-6">
-        <div class="flex justify-center gap-4">
-          <button id="support-btn" onclick="switchTab('support')" class="btn-primary btn-lg active" data-active="true">
-            Support
-          </button>
-          <button id="careers-btn" onclick="switchTab('careers')" class="btn-secondary btn-lg" data-active="false">
-            Careers
-          </button>
-        </div>
-      </div>
-    </section>
-    <!-- SUPPORT SECTION -->
-    <section id="support-content" class="min-h-screen flex flex-col md:flex-row border-t border-gray-100">
-      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white border-r border-gray-100">
-        <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">Get in <span
-            class="text-[#c00d1e]">Touch</span></h2>
-        <form id="contactForm" class="space-y-8">
-          <input type="text" name="from_name" id="fullName" placeholder="Full Name" required
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-          <input type="email" name="user_email" id="userEmail" placeholder="Email Address" required
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-          <input type="tel" name="user_phone" id="userPhone" placeholder="Phone Number" required pattern="[0-9+\-\s()]+"
-            title="Please enter a valid phone number"
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-          <input type="text" name="subject" id="subject" placeholder="Subject"
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-          <textarea rows="4" name="message" id="message" placeholder="Your Message"
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest resize-none"></textarea>
-
-          <button type="submit" id="submitBtn" class="btn-primary btn-lg">
-            Send Message
-          </button>
-        </form>
-      </div>
-
-      <div class="w-full md:w-1/2 p-12 md:p-24 bg-gray-50 flex flex-col justify-between">
-        <div class="space-y-12">
-          <div>
-            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Contact Details</h4>
-
-            <div id="info-container" class="space-y-8">
-              <div class="min-h-[140px]">
-                <p id="dynamic-title" class="font-black uppercase text-xl mb-2 text-black">Head Office (HO)</p>
-                <p id="dynamic-address" class="text-gray-500 text-sm mb-4 leading-relaxed">7th Floor, B-3 Tower, Opp.
-                  F-9 Park, Sector F-9/G-9, Jinnah Avenue, New Blue Area, Islamabad</p>
-                <p id="dynamic-phone" class="font-black uppercase text-lg"><a href="tel:+92518740280"
-                    class="text-[#c00d1e] font-semibold hover:underline">+92 51 874 0280</a></p>
-                <p id="dynamic-email" class="mt-2">
-                  <a href="mailto:info@alaskabatteries.com"
-                    class="text-[#c00d1e] text-base font-semibold hover:underline"> info@alaskabatteries.com </a>
-                </p>
-              </div>
-
-              <div
-                class="map-wrapper relative w-full h-[400px] overflow-hidden bg-zinc-200 shadow-2xl rounded-xl border-l-4 border-[#c00d1e]">
-                <iframe id="regionMap"
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.674011205133!2d73.01977527376371!3d33.69150423669559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbfe1b6146989%3A0x12bad86d9a306ff7!2sAlaska%20Batteries!5e0!3m2!1sen!2s!4v1769365949757!5m2!1sen!2s"
-                  class="absolute inset-0 w-full h-full border-0" allowfullscreen="" loading="lazy"></iframe>
-              </div>
-            </div>
-            <div class="space-y-4 mt-12">
-              <p class="font-black uppercase text-sm text-black">Offices</p>
-              <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                <button type="button" class="region-tab w-full active-tab" data-title="Head Office (HO)"
-                  data-address="7th Floor, B-3 Tower, Opp. F-9 Park, Sector F-9/G-9 Jinnah Avenue, New Blue Area, Islamabad"
-                  data-phone="+92 51 874 0280"
-                  data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.674011205133!2d73.01977527376371!3d33.69150423669559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbfe1b6146989%3A0x12bad86d9a306ff7!2sAlaska%20Batteries!5e0!3m2!1sen!2s!4v1769365949757!5m2!1sen!2s">
-                  ISLAMABAD
-                </button>
-
-                <button type="button" class="region-tab w-full" data-title="Lahore Office"
-                  data-address="13-1, A/2, Town Ship, Near Hamdard Chowk, (Opposite to Cinema Cine Star), Lahore."
-                  data-phone="+92 326 6660776"
-                  data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3402.55!2d74.30!3d31.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDI3JzAwLjAiTiA3NMKwMTgnMDAuMCJF!5e0!3m2!1sen!2spk!4v1625000000001">
-                  LAHORE
-                </button>
-
-                <button type="button" class="region-tab w-full" data-title="Karachi Office"
-                  data-address="House No C-8, Block 6, Gulshan-e-Iqbal, Near NIPA Bridge, Monas Pharmacy, Karachi."
-                  data-phone="+92 326 6660581"
-                  data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3618.5!2d67.09!3d24.91!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjTCsDU0JzM2LjAiTiA2N8KwMDUnMjQuMCJF!5e0!3m2!1sen!2spk!4v1625000000002">
-                  KARACHI
-                </button>
-
-                <button type="button" class="region-tab w-full" data-title="Sukkur Office"
-                  data-address="Bangalow No B-306, Sindh Cooperative Society, Sukkur." data-phone="+92 326 6660774"
-                  data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3467.5!2d68.85!3d27.70!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjfCsDQyJzAwLjAiTiA2OMsWNTEnMDAuMCJF!5e0!3m2!1sen!2spk!4v1625000000003">
-                  SUKKUR
-                </button>
-
-                <button type="button" class="region-tab w-full" data-title="Multan Office"
-                  data-address="House No 21, Street No 02, Altaf Town, Multan." data-phone="+92 326 6660785"
-                  data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3448.5!2d71.45!3d30.18!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzDCsDExJzAwLjAiTiA3McKwMjcnMDAuMCJF!5e0!3m2!1sen!2spk!4v1625000000004">
-                  MULTAN
-                </button>
-
-                <button type="button" class="region-tab w-full" data-title="Peshawar Office"
-                  data-address="Near Peshawar Arcade, Kabootar Chowk, Ring Road, Peshawar." data-phone="+92 326 6660788"
-                  data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3307.5!2d71.55!3d33.98!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzPCsDU4JzAwLjAiTiA3McKwMzMnMDAuMCJF!5e0!3m2!1sen!2spk!4v1625000000005">
-                  PESHAWAR
-                </button>
-              </div>
-              <div class="space-y-4 mt-12">
-                <p class="font-black uppercase text-sm text-black">Factory</p>
-                <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                  <button type="button" class="region-tab w-full" data-title="Manufacturing Plant"
-                    data-address="Plot #19, Phase III, Industrial Estate, Hattar, Pakistan" data-phone="+92 995 639898"
-                    data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.5489766064106!2d72.8664052!3d33.9012679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfaf002468570b%3A0x6b2590373b491e18!2sSMJ%20International%20Industries%20Pvt%20Ltd!5e0!3m2!1sen!2s!4v1771251332778!5m2!1sen!2s">
-                    Hattar
-                  </button>
-                </div>
-              </div>
-
-            </div>
+    <section id="support-content" class="sf-section flex flex-col md:flex-row border-t border-gray-100">
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider">
+        <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">Get in <span class="text-[#c00d1e]">Touch</span></h2>
+        <form data-preview-form id="contactForm" class="space-y-8">
+          <div class="sf-row">
+            <div><label class="sr-only" for="fullName">Full Name</label><input type="text" name="from_name" id="fullName" placeholder="Full Name" required autocomplete="name"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+            <div><label class="sr-only" for="userEmail">Email Address</label><input type="email" name="user_email" id="userEmail" placeholder="Email Address" required autocomplete="email"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
           </div>
-        </div>
-    </section>
-
-    <!-- CAREERS SECTION (HIDDEN BY DEFAULT) -->
-    <section id="careers-content" class="hidden min-h-screen flex flex-col md:flex-row border-t border-gray-100">
-      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white border-r border-gray-100">
-        <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">Join Our <span
-            class="text-[#c00d1e]">Team</span></h2>
-        <form id="careersForm" class="space-y-8">
-          <input type="text" id="careers-fullName" placeholder="Full Name" required
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-          <input type="email" id="careers-email" placeholder="Email Address" required
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-          <input type="tel" id="careers-phone" placeholder="Phone Number" required
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-
-          <textarea rows="4" id="careers-message"
-            placeholder="Tell us about yourself and why you'd like to join Alaska Batteries"
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest resize-none"></textarea>
-          <input type="file" id="careers-resume" placeholder="Upload Resume (PDF)" accept=".pdf,.doc,.docx" required
-            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest" />
-
-          <button type="submit" id="careersSubmitBtn" class="btn-primary btn-lg">
-            Submit Application
-          </button>
+          <div class="sf-row">
+            <div><label class="sr-only" for="userPhone">Phone Number</label><input type="tel" name="user_phone" id="userPhone" placeholder="Phone Number" required autocomplete="tel" pattern="[0-9+\-\s()]+" title="Please enter a valid phone number"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+            <div><label class="sr-only" for="userCity">City</label><input type="text" name="city" id="userCity" placeholder="City" autocomplete="address-level2"
+              class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
+          </div>
+          <div><label class="sr-only" for="subject">Subject</label><select id="subject" name="subject" required class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent">
+            <option value="" disabled selected>What is it about?</option>
+            <option>Product question</option><option>Price or quotation</option><option>Warranty or claim</option><option>Becoming a partner</option><option>Feedback</option><option>Other</option>
+          </select></div>
+          <div><label class="sr-only" for="message">Your Message</label><textarea rows="4" name="message" id="message" placeholder="Your Message" required
+            class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest resize-none bg-transparent"></textarea></div>
+          <div class="sf-file">
+            <input type="file" id="contactFile" name="attachment" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" aria-describedby="contactFileName" />
+            <label for="contactFile" class="sf-file-btn"><i class="fas fa-paperclip" aria-hidden="true"></i> <span class="sf-file-act">Attach File</span></label>
+            <span id="contactFileName" class="sf-file-name">Optional: a photo of your battery, an invoice or a document (PDF, Word or image, up to 5 MB).</span>
+          </div>
+          <button type="submit" id="submitBtn" class="btn-primary btn-lg">Send Message</button>
         </form>
+            <div class="pt-8 mt-12 border-t border-gray-200">
+              <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Other Ways to Reach Us</h4>
+              <ul class="space-y-3 text-gray-600 text-sm">
+                <li class="flex items-start gap-3"><i class="fas fa-envelope text-[#c00d1e] mt-1" aria-hidden="true"></i><span>Email us at <a href="mailto:info@alaskabatteries.com" class="text-[#c00d1e] font-semibold hover:underline">info@alaskabatteries.com</a></span></li>
+                <li class="flex items-start gap-3"><i class="fab fa-whatsapp text-[#c00d1e] mt-1" aria-hidden="true"></i><span>Phone or <a href="https://wa.me/923266660757" target="_blank" rel="noopener" class="text-[#c00d1e] font-semibold hover:underline">WhatsApp</a> on <a href="tel:+923266660757" class="text-[#c00d1e] font-semibold hover:underline">+92 326 666 0757</a></span></li>
+                <li class="flex items-start gap-3"><i class="fas fa-store text-[#c00d1e] mt-1" aria-hidden="true"></i><span>Alaska batteries are sold through 500+ authorised dealers and 100+ flagship model shops. <a href="dealers.html#partner-finder" class="text-[#c00d1e] font-semibold hover:underline">Find a partner near you</a>.</span></li>
+              </ul>
+            </div>
       </div>
 
-      <div class="w-full md:w-1/2 p-12 md:p-24 bg-gray-50 flex flex-col justify-start">
+      <div class="w-full md:w-1/2 p-12 md:p-24 bg-white flex flex-col justify-start">
         <div class="space-y-8">
           <div>
-            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Why Join Alaska Batteries?</h4>
-            <p class="text-gray-600 text-base leading-relaxed mb-6">We are Pakistan's fastest-growing battery brand,
-              committed to powering reliable solutions across automotive, industrial, and solar sectors. Join a team
-              passionate about innovation, customer success, and sustainable growth.</p>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Visit Us</h4>
+            <div class="loc-card" id="info-container" aria-live="polite">
+              <p id="dynamic-title" class="loc-title">Head Office</p>
+              <p id="dynamic-address" class="loc-address">7th Floor, B-3 Tower, Opp. F-9 Park, Sector F-9/G-9, Jinnah Avenue, New Blue Area, Islamabad</p>
+              <div class="loc-actions">
+                <a id="dynamic-phone" class="loc-link" href="tel:+92518740280"><i class="fa-solid fa-phone" aria-hidden="true"></i><span>+92 51 874 0280</span></a>
+                <a id="dynamic-directions" class="loc-link" href="https://www.google.com/maps/search/?api=1&amp;query=7th+Floor%2C+B-3+Tower%2C+Opp.+F-9+Park%2C+Sector+F-9%2FG-9%2C+Jinnah+Avenue%2C+New+Blue+Area%2C+Islamabad%2C+Pakistan" target="_blank" rel="noopener"><i class="fa-solid fa-diamond-turn-right" aria-hidden="true"></i><span>Get directions</span></a>
+              </div>
+            </div>
+            <div class="loc-map">
+              <iframe id="regionMap" title="Map: Head Office" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.674011205133!2d73.01977527376371!3d33.69150423669559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbfe1b6146989%3A0x12bad86d9a306ff7!2sAlaska%20Batteries!5e0!3m2!1sen!2s!4v1769365949757!5m2!1sen!2s" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
+            </div>
           </div>
 
           <div>
-            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">What We Offer</h4>
-            <ul class="space-y-3 text-gray-600 text-sm">
-              <li class="flex items-start gap-3">
-                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
-                <span>Competitive salary and benefits package</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
-                <span>Professional development and training opportunities</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
-                <span>Work in a dynamic, fast-growing organization</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
-                <span>Collaborative and inclusive work environment</span>
-              </li>
-              <li class="flex items-start gap-3">
-                <i class="fas fa-check text-[#c00d1e] mt-1"></i>
-                <span>Opportunities to make a real impact</span>
-              </li>
-            </ul>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Offices</h4>
+            <div class="loc-chips" role="group" aria-label="Offices">
+              <button type="button" class="loc-chip" id="loc-islamabad" data-title="Head Office" data-address="7th Floor, B-3 Tower, Opp. F-9 Park, Sector F-9/G-9, Jinnah Avenue, New Blue Area, Islamabad" data-phone="+92 51 874 0280" data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3319.674011205133!2d73.01977527376371!3d33.69150423669559!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfbfe1b6146989%3A0x12bad86d9a306ff7!2sAlaska%20Batteries!5e0!3m2!1sen!2s!4v1769365949757!5m2!1sen!2s" data-query="7th Floor, B-3 Tower, Opp. F-9 Park, Sector F-9/G-9, Jinnah Avenue, New Blue Area, Islamabad, Pakistan" aria-pressed="true">Islamabad</button>
+              <button type="button" class="loc-chip" id="loc-rawalpindi" data-title="Rawalpindi Office" data-address="Office No CB 69/2 Ground Floor Bilal Colony Naseerabad Ward No 1 Peshawar Road, Rawalpindi, 46500" data-phone="+92 326 666 0770" data-map="https://maps.google.com/maps?q=33.617912,72.984840&amp;z=16&amp;output=embed" data-query="33.617912,72.984840" aria-pressed="false">Rawalpindi</button>
+              <button type="button" class="loc-chip" id="loc-lahore" data-title="Lahore Office" data-address="13-1 A/2, near Hamdard Chowk, opp. Cine Star Cinema, Township Block 1 Sector A 2 Lahore, 54770" data-phone="+92 326 666 0776" data-map="https://maps.google.com/maps?q=31.450941,74.312111&amp;z=16&amp;output=embed" data-query="31.450941,74.312111" aria-pressed="false">Lahore</button>
+              <button type="button" class="loc-chip" id="loc-faisalabad" data-title="Faisalabad Office" data-address="H# 25/4 Dawood Colony, Main Susan Road, Near Ideal Sweets, Faisalabad, 38860" data-phone="+92 326 666 0737" data-map="https://maps.google.com/maps?q=31.421825,73.116859&amp;z=16&amp;output=embed" data-query="31.421825,73.116859" aria-pressed="false">Faisalabad</button>
+              <button type="button" class="loc-chip" id="loc-multan" data-title="Multan Office" data-address="House # 21, Street # 02, Opp. Bait -ul- Mukkaram Mosque, Altaf Town, Tariq Road, Multan, 60000" data-phone="+92 326 666 0785" data-map="https://maps.google.com/maps?q=30.195429,71.446075&amp;z=16&amp;output=embed" data-query="30.195429,71.446075" aria-pressed="false">Multan</button>
+              <button type="button" class="loc-chip" id="loc-peshawar" data-title="Peshawar Office" data-address="Peshawar Arcade, Kabotar Chowk, Ring Road, Peshawar, 25000" data-phone="+92 326 666 0788" data-map="https://maps.google.com/maps?q=34.030739,71.609245&amp;z=16&amp;output=embed" data-query="34.030739,71.609245" aria-pressed="false">Peshawar</button>
+              <button type="button" class="loc-chip" id="loc-sukkur" data-title="Sukkur Office" data-address="Bungalow # B-306, Sindh Cooperative Housing Society, Imdad Ali Awan Road, Sukkur, 65200" data-phone="+92 326 666 0774" data-map="https://maps.google.com/maps?q=27.719366,68.824448&amp;z=16&amp;output=embed" data-query="27.719366,68.824448" aria-pressed="false">Sukkur</button>
+              <button type="button" class="loc-chip" id="loc-karachi" data-title="Karachi Office" data-address="House No C-8, Block 6, Near Ajmal dawa Khana, NIPA Bridge, Gulshan e Iqbal, Karachi, 75300" data-phone="+92 326 666 0581" data-map="https://maps.google.com/maps?q=24.922211,67.095734&amp;z=16&amp;output=embed" data-query="24.922211,67.095734" aria-pressed="false">Karachi</button>
+            </div>
           </div>
 
-          <div class="mt-12 pt-8 border-t border-gray-200">
-            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Contact HR</h4>
-            <p class="text-gray-600 text-sm mb-2">For questions about open positions:</p>
-            <p class="font-semibold text-gray-900"><a href="mailto:careers@alaskabatteries.com"
-                class="text-[#c00d1e] hover:underline">careers@alaskabatteries.com</a></p>
-            <p class="font-semibold text-gray-900 mt-2"><a href="tel:+92518740280"
-                class="text-[#c00d1e] hover:underline">+92 51 874 0280</a></p>
+          <div>
+            <h4 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Factories</h4>
+            <div class="loc-chips" role="group" aria-label="Factories">
+              <button type="button" class="loc-chip" id="loc-hattar" data-title="S.M.J International Industries Limited" data-address="Plot #19, Phase III, Industrial Estate, Hattar, Pakistan" data-phone="+92 995 639898" data-map="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3311.5489766064106!2d72.8664052!3d33.9012679!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38dfaf002468570b%3A0x6b2590373b491e18!2sSMJ%20International%20Industries%20Pvt%20Ltd!5e0!3m2!1sen!2s!4v1771251332778!5m2!1sen!2s" data-query="SMJ International Industries, Hattar Industrial Estate, Pakistan" aria-pressed="false">Hattar</button>
+              <button type="button" class="loc-chip" id="loc-h-power" data-title="H Power Technologies (Pvt) Ltd" data-address="Plot # 22-23, Allama Iqbal Industrial City, FIEDMC, SEZ, Sahianwala, Faisalabad, 37700" data-phone="" data-map="https://maps.google.com/maps?q=31.695333,73.204971&amp;z=16&amp;output=embed" data-query="31.695333,73.204971" aria-pressed="false">Faisalabad</button>
+            </div>
           </div>
+
         </div>
       </div>
     </section>
+
     <div id="footer-placeholder"></div>
 
     <script src="js/components.js"></script>
-    <script src="js/map.js"></script>
     <script src="js/animations.js"></script>
-
+    <script src="js/forms.js"></script>
     <script>
-      // Toggle Support/Careers Tabs
-      function switchTab(tab) {
-        const supportContent = document.getElementById('support-content');
-        const careersContent = document.getElementById('careers-content');
-        const supportBtn = document.getElementById('support-btn');
-        const careersBtn = document.getElementById('careers-btn');
-        const heroBannerImg = document.getElementById('hero-banner-img');
-        const heroBannerTitle = document.getElementById('hero-banner-title');
-
-        if (tab === 'support') {
-          // Show Support
-          supportContent.classList.remove('hidden');
-          careersContent.classList.add('hidden');
-          supportBtn.classList.add('btn-primary');
-          supportBtn.classList.remove('btn-secondary');
-          careersBtn.classList.add('btn-secondary');
-          careersBtn.classList.remove('btn-primary');
-          heroBannerImg.dataset.desktop = 'assets/support.webp';
-          heroBannerImg.alt = 'Support';
-          updateHeroImageForViewport();
-          heroBannerTitle.textContent = 'Support';
-        } else if (tab === 'careers') {
-          // Show Careers
-          supportContent.classList.add('hidden');
-          careersContent.classList.remove('hidden');
-          supportBtn.classList.add('btn-secondary');
-          supportBtn.classList.remove('btn-primary');
-          careersBtn.classList.add('btn-primary');
-          careersBtn.classList.remove('btn-secondary');
-          heroBannerImg.dataset.desktop = 'assets/careers.webp';
-          heroBannerImg.alt = 'Careers';
-          updateHeroImageForViewport();
-          heroBannerTitle.textContent = 'Careers';
-        }
-      }
+      // Attach File button: show the chosen file name, 5 MB limit (js/forms.js)
+      window.AlaskaForms && AlaskaForms.fileButton(document.getElementById('contactFile'), 5);
     </script>
+
     <script>
       // Swap hero image to mobile-specific source on small viewports
       function updateHeroImageForViewport() {
@@ -280,8 +180,8 @@
       window.addEventListener('resize', updateHeroImageForViewport);
     </script>
     <script>
-      // TODO: Replace with your actual Hostinger PHP script URL
-      const EMAIL_API_URL = 'https://alaskabatteries.com/send-email.php';
+      // Form endpoint (same site)
+      const EMAIL_API_URL = 'send-email.php';
 
       // Success modal element (check if it exists in components.js)
       function showSuccessModal() {
@@ -326,23 +226,22 @@
         submitBtn.textContent = 'Sending...';
         submitBtn.classList.add('opacity-50', 'cursor-not-allowed');
 
-        // Collect form data
-        const formData = {
-          form: 'support',
-          name: fullName.value,
-          email: userEmail.value,
-          phone: userPhone.value,
-          subject: document.getElementById('subject').value,
-          message: document.getElementById('message').value
-        };
+        // Collect form data (sent as FormData so an optional file can go with it)
+        const formData = new FormData();
+        formData.append('form', 'support');
+        formData.append('name', fullName.value);
+        formData.append('email', userEmail.value);
+        formData.append('phone', userPhone.value);
+        formData.append('city', document.getElementById('userCity').value.trim());
+        formData.append('subject', document.getElementById('subject').value);
+        formData.append('message', document.getElementById('message').value);
+        const file = document.getElementById('contactFile');
+        if (file.files && file.files[0]) formData.append('attachment', file.files[0]);
 
         try {
           const response = await fetch(EMAIL_API_URL, {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
+            body: formData
           });
 
           const result = await response.json();
@@ -367,57 +266,41 @@
         }
       });
 
-      // Careers form handler (handles file upload)
-      const careersForm = document.getElementById('careersForm');
-      if (careersForm) {
-        careersForm.addEventListener('submit', async function (event) {
-          event.preventDefault();
-          const btn = document.getElementById('careersSubmitBtn');
-          const originalText = btn.textContent;
-
-          const name = document.getElementById('careers-fullName').value.trim();
-          const email = document.getElementById('careers-email').value.trim();
-          const phone = document.getElementById('careers-phone').value.trim();
-          const resumeInput = document.getElementById('careers-resume');
-
-          if (!name || !email || !phone || !resumeInput.files.length) {
-            alert('Please complete all required fields and upload your resume.');
-            return;
-          }
-
-          btn.disabled = true;
-          btn.textContent = 'Sending...';
-
-          const payload = new FormData();
-          payload.append('form', 'careers');
-          payload.append('name', name);
-          payload.append('email', email);
-          payload.append('phone', phone);
-          payload.append('message', document.getElementById('careers-message').value || '');
-          payload.append('resume', resumeInput.files[0]);
-
-          try {
-            const response = await fetch(EMAIL_API_URL, {
-              method: 'POST',
-              body: payload
-            });
-            const result = await response.json();
-            if (response.ok && result.success) {
-              if (typeof showSuccessModal === 'function') showSuccessModal();
-              else alert('Application sent successfully.');
-              careersForm.reset();
-            } else {
-              alert(result.message || 'Failed to send application.');
-            }
-          } catch (err) {
-            console.error(err);
-            alert('Failed to send application. Try again later.');
-          } finally {
-            btn.disabled = false;
-            btn.textContent = originalText;
-          }
-        });
-      }
+    </script>
+    <script>
+      // Office and factory picker: swaps the details and the Google Map
+      (function () {
+        var chips = Array.prototype.slice.call(document.querySelectorAll(".loc-chip"));
+        var box = document.getElementById("info-container");
+        var map = document.getElementById("regionMap");
+        var title = document.getElementById("dynamic-title");
+        var address = document.getElementById("dynamic-address");
+        var phone = document.getElementById("dynamic-phone");
+        var dir = document.getElementById("dynamic-directions");
+        if (!chips.length || !map) return;
+        var show = function (chip) {
+          chips.forEach(function (c) { c.setAttribute("aria-pressed", c === chip ? "true" : "false"); });
+          box.style.opacity = "0";
+          setTimeout(function () {
+            title.textContent = chip.dataset.title;
+            address.textContent = chip.dataset.address;
+            var p = chip.dataset.phone || "";
+            phone.hidden = !p;
+            if (p) { phone.href = "tel:" + p.replace(/[^+\d]/g, ""); phone.querySelector("span").textContent = p; }
+            dir.href = "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(chip.dataset.query || chip.dataset.address);
+            if (map.getAttribute("src") !== chip.dataset.map) map.setAttribute("src", chip.dataset.map);
+            map.title = "Map: " + chip.dataset.title;
+            box.style.opacity = "1";
+          }, 200);
+          // on phones, bring the map into view
+          if (window.innerWidth < 768) box.scrollIntoView({ behavior: "smooth", block: "start" });
+        };
+        chips.forEach(function (c) { c.addEventListener("click", function () { show(c); }); });
+        // support.html#hattar or #h-power opens that location
+        var id = location.hash.slice(1);
+        var start = id && document.getElementById("loc-" + id);
+        if (start) show(start);
+      })();
     </script>
 </body>
 

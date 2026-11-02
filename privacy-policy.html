@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Alaska Batteries</title>
+  <meta name="description" content="How Alaska Batteries (S.M.J International Industries Ltd.) collects, uses and shares information when you use this website or deal with us." />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://alaskabatteries.com/privacy-policy.html">
+  <meta name="theme-color" content="#c00d1e" />
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/split-form.css" />
+  <style>
+    /* privacy policy: topics alternate between the two halves, split by a fading red line */
+    .pp-wrap { max-width: 1280px; margin: 0 auto; padding: 40px 24px; }
+    .pp-grid { position: relative; display: flex; flex-direction: column; }
+    .pp-col { display: contents; }
+    .pp-item { padding: 28px 0; border-bottom: 1px solid #e5e7eb; scroll-margin-top: 100px; }
+    .pp-col > .pp-item:last-child { border-bottom: 0; }
+    html[data-theme="dark"] .pp-item { border-color: #2b313b; }
+    @media (min-width: 768px) {
+      .pp-wrap { padding: 56px 48px; }
+      .pp-grid { display: grid; grid-template-columns: 1fr 1fr; column-gap: 96px; align-items: start; }
+      .pp-col { display: block; }
+      .pp-grid::before {
+        content: ""; position: absolute; top: 0; bottom: 0; left: 50%; width: 2px; margin-left: -1px;
+        background: linear-gradient(to bottom, transparent, #c00d1e 8%, #c00d1e 92%, transparent);
+      }
+    }
+    .pp-title { display: flex; align-items: center; gap: 12px; margin: 0 0 16px; font-size: 24px; font-weight: 900; letter-spacing: -0.02em; line-height: 1.15; }
+    .pp-title i { width: 38px; height: 38px; flex: none; display: grid; place-items: center; border-radius: 10px; background: #fdecee; color: #c00d1e; font-size: 16px; }
+    html[data-theme="dark"] .pp-title i { background: #3a1418; }
+    .pp-item p + p, .pp-item p + ul, .pp-item ul + p, .pp-item dl + p, .pp-item p + dl { margin-top: 14px; }
+    .pp-dl { margin: 0; display: grid; }
+    .pp-dl > div { display: grid; gap: 4px 16px; padding: 10px 0; border-bottom: 1px solid #e5e7eb; }
+    .pp-dl > div:last-child { border-bottom: 0; }
+    .pp-dl dt { font-weight: 800; font-size: 14px; }
+    .pp-dl dd { margin: 0; font-size: 14px; color: #4b5563; line-height: 1.55; }
+    html[data-theme="dark"] .pp-dl > div { border-color: #2b313b; }
+    html[data-theme="dark"] .pp-dl dd { color: #9ca3af; }
+    @media (min-width: 1100px) { .pp-dl > div { grid-template-columns: 160px 1fr; } }
+  </style>
+</head>
+
+<body class="bg-gray-50 text-black font-sans overflow-x-hidden">
+  <div id="header-placeholder"></div>
+
+  <main class="sc pg">
+    <section class="page-banner sc-hero" aria-labelledby="page-title">
+      <picture>
+        <source srcset="assets/vault/mobile/FAQs-mobile.webp" media="(max-width: 767px)">
+        <img src="assets/vault/faqs.webp" alt="" fetchpriority="high" />
+      </picture>
+      <div class="sc-hero-box">
+        <h1 id="page-title">Privacy <span>Policy</span></h1>
+      </div>
+    </section>
+
+    <section id="privacy-content" class="bg-white border-t border-gray-100">
+      <div class="pp-wrap">
+        <div class="pp-grid">
+          <div class="pp-col">
+          <header class="pp-item pp-intro" style="order:0">
+            <h2 class="text-4xl font-black uppercase mb-4 tracking-tighter">Your <span class="text-[#c00d1e]">Privacy</span></h2>
+            <p class="text-gray-500 text-sm mb-6">Last updated: 29 October 2026</p>
+            <p class="text-gray-600 text-base leading-relaxed">This policy explains how we collect, use and share information when you use this website or deal with Alaska Batteries.</p>
+          </header>
+        <section class="pp-item" style="order:2" id="who" aria-labelledby="who-h">
+          <h2 class="pp-title" id="who-h"><i class="fa-solid fa-building" aria-hidden="true"></i>Who we are</h2>
+          <p class="text-gray-600 text-base leading-relaxed">This website is operated by <strong>S.M.J International Industries Limited</strong>, the maker of Alaska Batteries ("we", "us" or "our"), 7th Floor, B-3 Tower, Opp. F-9 Park, Sector F-9/G-9, Jinnah Avenue, New Blue Area, Islamabad, Pakistan.</p>
+          <p class="text-gray-600 text-base leading-relaxed">References to "we" include our related companies and business partners, including H-Power Technologies (Pvt) Ltd., which issues the Life Series LiFePO4 warranty.</p>
+        </section>
+        <section class="pp-item" style="order:4" id="auto" aria-labelledby="auto-h">
+          <h2 class="pp-title" id="auto-h"><i class="fa-solid fa-server" aria-hidden="true"></i>Information collected automatically</h2>
+          <p class="text-gray-600 text-base leading-relaxed">When you visit or interact with this website, we and our service providers may automatically collect information about your device and how you use the website, such as your IP address, browser and device type, approximate location, pages viewed, links clicked, referring websites, and the date and time of your visit.</p>
+          <p class="text-gray-600 text-base leading-relaxed">We may use cookies, local storage and similar technologies to collect this information, remember your choices, understand how the website is used, and measure and improve our services and marketing.</p>
+        </section>
+        <section class="pp-item" style="order:6" id="use" aria-labelledby="use-h">
+          <h2 class="pp-title" id="use-h"><i class="fa-solid fa-list-check" aria-hidden="true"></i>How we use it</h2>
+          <p class="text-gray-600 text-base leading-relaxed">We may use the information we collect to:</p>
+          <ul class="space-y-3 text-gray-600 text-sm">
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Respond to enquiries and provide quotations, products, warranty and support</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Process registrations, claims and applications</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Operate, secure, analyse and improve our website, products and services</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Personalise your experience and understand our customers</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Send updates, offers and marketing about our products and services</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Carry out research, reporting and business planning</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Prevent fraud and misuse, and comply with legal obligations</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>Any other purpose we tell you about, or that is related to the purposes above</span>
+              </li>
+          </ul>
+        </section>
+        <section class="pp-item" style="order:9" id="third" aria-labelledby="third-h">
+          <h2 class="pp-title" id="third-h"><i class="fa-solid fa-globe" aria-hidden="true"></i>Third-party services</h2>
+          <p class="text-gray-600 text-base leading-relaxed">This website uses services from other companies, such as Google Maps, WhatsApp, social media links, content-delivery networks and analytics or advertising tools. These companies may collect information under their own privacy policies, which we do not control.</p>
+        </section>
+        <section class="pp-item" style="order:11" id="rights" aria-labelledby="rights-h">
+          <h2 class="pp-title" id="rights-h"><i class="fa-solid fa-user-shield" aria-hidden="true"></i>Your choices</h2>
+          <ul class="space-y-3 text-gray-600 text-sm">
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>You can choose not to give us information, although some services may then not be available</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>You can unsubscribe from marketing messages at any time using the link or instructions provided</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>You can block or delete cookies in your browser settings</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>You can contact us to ask about, update or correct your information</span>
+              </li>
+          </ul>
+          <p class="text-gray-600 text-base leading-relaxed">Email <a href="mailto:info@alaskabatteries.com" class="text-[#c00d1e] font-semibold hover:underline">info@alaskabatteries.com</a>. We may need to verify your identity before acting on a request, and some requests may be limited by law or our legitimate business needs.</p>
+        </section>
+        <section class="pp-item" style="order:7" id="children" aria-labelledby="children-h">
+          <h2 class="pp-title" id="children-h"><i class="fa-solid fa-user-check" aria-hidden="true"></i>Age requirement</h2>
+          <p class="text-gray-600 text-base leading-relaxed">This website is intended for users aged 18 and over. We do not knowingly collect information from anyone under 18.</p>
+        </section>
+        <section class="pp-item" style="order:14" id="changes" aria-labelledby="changes-h">
+          <h2 class="pp-title" id="changes-h"><i class="fa-solid fa-rotate" aria-hidden="true"></i>Changes to this policy</h2>
+          <p class="text-gray-600 text-base leading-relaxed">We may update this policy at any time. The latest version will always be on this page, and continuing to use the website after a change means you accept the updated policy.</p>
+        </section>
+          </div>
+          <div class="pp-col">
+          <div class="pp-item" style="order:1">
+          <h3 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">In Short</h3>
+          <ul class="space-y-3 text-gray-600 text-sm">
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>We collect information you give us and information about how you use our website</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>We use it to run our business, serve you and improve and promote our products</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>We share it with related companies, partners and service providers as described below</span>
+              </li>
+              <li class="flex items-start gap-3">
+                <i class="fas fa-check text-[#c00d1e] mt-1" aria-hidden="true"></i>
+                <span>You can contact us about your information at any time</span>
+              </li>
+          </ul>
+          </div>
+        <section class="pp-item" style="order:3" id="collect" aria-labelledby="collect-h">
+          <h2 class="pp-title" id="collect-h"><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i>Information you give us</h2>
+          <p class="text-gray-600 text-base leading-relaxed">We collect the information you provide when you use this website or deal with us, including through forms, quotations, warranty registrations and claims, partner and job applications, WhatsApp, email, phone and social media. This may include:</p>
+          <dl class="pp-dl">
+            <div><dt>Identity and contact</dt><dd>Your name, email address, phone number, city, address, company and job title.</dd></div>
+            <div><dt>Product and purchase</dt><dd>Products you are interested in or have bought, models, serial and warranty card numbers, dealers and purchase dates.</dd></div>
+            <div><dt>Content you send</dt><dd>Messages, notes, CVs, photos, documents and any other files or information you choose to share.</dd></div>
+            <div><dt>Preferences</dt><dd>Your interests, enquiries and communication preferences.</dd></div>
+          </dl>
+        </section>
+        <section class="pp-item" style="order:5" id="others" aria-labelledby="others-h">
+          <h2 class="pp-title" id="others-h"><i class="fa-solid fa-users" aria-hidden="true"></i>Information from others</h2>
+          <p class="text-gray-600 text-base leading-relaxed">We may also receive information about you from our dealers and partners, related companies, service providers, social media platforms and publicly available sources, and combine it with the information we already hold.</p>
+        </section>
+        <section class="pp-item" style="order:8" id="share" aria-labelledby="share-h">
+          <h2 class="pp-title" id="share-h"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i>Who we share it with</h2>
+          <p class="text-gray-600 text-base leading-relaxed">We may share information with:</p>
+          <dl class="pp-dl">
+            <div><dt>Related companies</dt><dd>Including H-Power Technologies (Pvt) Ltd.</dd></div>
+            <div><dt>Dealers and partners</dt><dd>Authorised dealers and business partners who help us provide products, quotations and warranty services.</dd></div>
+            <div><dt>Service providers</dt><dd>Companies that provide hosting, email, analytics, advertising, communications and other services for us.</dd></div>
+            <div><dt>Business transfers</dt><dd>Buyers, investors or successors in connection with a merger, sale or reorganisation of our business.</dd></div>
+            <div><dt>Authorities and advisers</dt><dd>Where required by law, or to protect our rights, customers and business.</dd></div>
+          </dl>
+        </section>
+        <section class="pp-item" style="order:10" id="keep" aria-labelledby="keep-h">
+          <h2 class="pp-title" id="keep-h"><i class="fa-solid fa-clock-rotate-left" aria-hidden="true"></i>How long we keep it</h2>
+          <p class="text-gray-600 text-base leading-relaxed">We keep information for as long as we need it for the purposes described in this policy, including to provide warranty and support, meet legal, accounting and reporting requirements, resolve disputes and enforce our agreements.</p>
+        </section>
+        <section class="pp-item" style="order:12" id="security" aria-labelledby="security-h">
+          <h2 class="pp-title" id="security-h"><i class="fa-solid fa-lock" aria-hidden="true"></i>Security</h2>
+          <p class="text-gray-600 text-base leading-relaxed">We take reasonable steps to protect information, but no website, transmission or storage system is completely secure, and we cannot guarantee the security of information you send to us. Please do not send bank or card details through our forms.</p>
+        </section>
+        <section class="pp-item" style="order:13" id="consent" aria-labelledby="consent-h">
+          <h2 class="pp-title" id="consent-h"><i class="fa-solid fa-handshake" aria-hidden="true"></i>Your consent</h2>
+          <p class="text-gray-600 text-base leading-relaxed">By using this website or giving us your information, you agree to the collection, use and sharing of information as described in this policy.</p>
+        </section>
+          <div class="pp-item pp-contact" style="order:15">
+            <h3 class="text-[#c00d1e] font-black uppercase text-xs tracking-widest mb-4">Questions About Your Privacy?</h3>
+            <p class="text-gray-600 text-sm mb-2">Write to us and we will get back to you:</p>
+            <p class="font-semibold"><a href="mailto:info@alaskabatteries.com" class="text-[#c00d1e] font-semibold hover:underline">info@alaskabatteries.com</a></p>
+          </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="js/components.js"></script>
+  <script>
+    // Privacy topics alternate between the two halves; on wide screens each topic
+    // goes to whichever half is shorter so both sides end at about the same point.
+    (function () {
+      var cols = document.querySelectorAll(".pp-col");
+      if (cols.length !== 2) return;
+      var items = Array.prototype.slice.call(document.querySelectorAll(".pp-item"))
+        .sort(function (a, b) { return parseInt(a.style.order, 10) - parseInt(b.style.order, 10); });
+      var balance = function () {
+        if (!window.matchMedia("(min-width: 768px)").matches) return;
+        // the intro opens the left half, "In short" the right, the contact box closes whichever half is shorter;
+        // every other topic is placed so both halves end as close together as possible (order is kept within each half)
+        var first = items.slice(0, 2), last = items[items.length - 1], mid = items.slice(2, -1);
+        var h = function (el) { return el.offsetHeight; };
+        var hm = mid.map(h), n = mid.length, best = null;
+        for (var mask = 0; mask < 1 << n; mask++) {
+          var L = h(first[0]), R = h(first[1]), alt = 0;
+          for (var i = 0; i < n; i++) {
+            if (mask & (1 << i)) R += hm[i]; else L += hm[i];
+            if (((mask >> i) & 1) === (i % 2 === 0 ? 0 : 1)) alt++;
+          }
+          var hl = h(last), diff = Math.abs(L - R) >= hl ? Math.abs(L - R) - hl : hl - Math.abs(L - R);
+          var score = diff * 100 - alt; // even length first, then as close to alternating as possible
+          if (!best || score < best.score) best = { score: score, mask: mask, left: L <= R };
+        }
+        cols[0].appendChild(first[0]);
+        cols[1].appendChild(first[1]);
+        mid.forEach(function (it, i) { cols[best.mask & (1 << i) ? 1 : 0].appendChild(it); });
+        cols[best.left ? 0 : 1].appendChild(last);
+      };
+      var t;
+      window.addEventListener("resize", function () { clearTimeout(t); t = setTimeout(balance, 150); });
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(balance);
+      window.addEventListener("load", balance);
+      balance();
+    })();
+  </script>
+</body>
+
+</html>

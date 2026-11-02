@@ -1,0 +1,219 @@
+/* =====================================================================
+   Split form pages (Careers, Become a Partner): a form on the left and
+   information on the right, divided by a red line that fades at its ends.
+   Self-contained (doesn't rely on Tailwind arbitrary classes).
+   ===================================================================== */
+/* compact spacing above and below the two columns */
+.sf-section > div {
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+}
+@media (min-width: 768px) {
+  .sf-section > div {
+    padding-top: 56px !important;
+    padding-bottom: 56px !important;
+  }
+}
+
+/* red divider: horizontal on phones, vertical on wider screens */
+.sf-divider {
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(to right, transparent, #c00d1e, transparent) 1;
+}
+@media (min-width: 768px) {
+  .sf-divider {
+    border-bottom: 0;
+    border-right: 2px solid transparent;
+    border-image: linear-gradient(to bottom, transparent, #c00d1e, transparent) 1;
+  }
+}
+
+/* two fields side by side on wider screens */
+.sf-row {
+  display: grid;
+  gap: 32px;
+}
+@media (min-width: 640px) {
+  .sf-row {
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+}
+
+/* file upload: the real input is hidden; its label works as the button */
+/* the hint sits to the right of the button when there is room for it (at least
+   220px), otherwise it drops below the button at full width (phones, narrow columns) */
+.sf-file { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; padding: 4px 0; }
+.sf-file-btn { flex: none; }
+.sf-file-name { flex: 1 1 220px; min-width: 0; line-height: 1.45; }
+.sf-file input[type="file"] { position: absolute; width: 1px; height: 1px; opacity: 0; overflow: hidden; }
+.sf-file-btn {
+  display: inline-flex; align-items: center; gap: 10px; cursor: pointer;
+  padding: 12px 20px; border: 2px solid #c00d1e; border-radius: 6px;
+  color: #c00d1e; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background-color 0.15s, color 0.15s;
+}
+.sf-file-btn:hover { background: #c00d1e; color: #fff; }
+.sf-file input:focus-visible + .sf-file-btn { outline: 2px solid #c00d1e; outline-offset: 3px; }
+.sf-file-name { font-size: 14px; color: #6b7280; overflow-wrap: anywhere; }
+.sf-file.has-file .sf-file-name { color: inherit; font-weight: 600; }
+.sf-file.has-file .sf-file-name::before { content: "\2713  "; color: #c00d1e; font-weight: 800; }
+
+/* choice chips (checkboxes that look like toggle buttons) */
+.sf-label {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #9ca3af;
+}
+.sf-chips { display: flex; flex-wrap: wrap; gap: 10px; border: 0; margin: 0; padding: 0; min-width: 0; }
+.sf-chip { position: relative; cursor: pointer; }
+.sf-chip input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.sf-chip span {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 16px; border: 2px solid #d1d5db; border-radius: 999px;
+  font-size: 13px; font-weight: 700; color: inherit;
+  transition: border-color 0.15s, background-color 0.15s, color 0.15s;
+}
+.sf-chip span::before { content: "+"; font-weight: 800; color: #c00d1e; }
+.sf-chip:hover span { border-color: #c00d1e; }
+.sf-chip input:checked + span { background: #c00d1e; border-color: #c00d1e; color: #fff; }
+.sf-chip input:checked + span::before { content: "\2713"; color: #fff; }
+.sf-chip input:focus-visible + span { outline: 2px solid #c00d1e; outline-offset: 3px; }
+html[data-theme="dark"] .sf-chip span { border-color: #374151; }
+
+/* numbered steps (a real sequence) */
+.sf-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; counter-reset: sf; }
+.sf-steps li { display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; counter-increment: sf; }
+.sf-steps li::before {
+  content: counter(sf);
+  display: grid; place-items: center; width: 28px; height: 28px; border-radius: 50%;
+  background: #c00d1e; color: #fff; font-size: 13px; font-weight: 800;
+}
+.sf-steps strong { display: block; font-size: 14px; }
+.sf-steps p { margin: 2px 0 0; font-size: 14px; color: #6b7280; line-height: 1.5; }
+html[data-theme="dark"] .sf-steps p { color: #9ca3af; }
+
+/* empty dropdowns and dates look like placeholders until filled in */
+.sf-section select:invalid,
+.sf-section input[type="date"]:invalid {
+  color: #9ca3af;
+}
+.sf-section select option {
+  color: initial;
+}
+
+/* ---------- Tablets ----------
+   Portrait (768–1023px): two half-width columns are too narrow for forms, so the
+   two sides stack like on phones, with the fading divider running across.
+   Landscape / small laptops (1024–1279px): keep the two columns, with less padding. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .sf-section { flex-direction: column !important; }
+  .sf-section > div { width: 100% !important; padding-left: 56px !important; padding-right: 56px !important; }
+  .sf-divider {
+    border-right: 0;
+    border-bottom: 2px solid transparent;
+    border-image: linear-gradient(to right, transparent, #c00d1e, transparent) 1;
+  }
+}
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .sf-section > div { padding-left: 48px !important; padding-right: 48px !important; }
+}
+
+/* ---------- Quote and cart pages ---------- */
+.sf-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; }
+.sf-wa {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 12px 20px; border: 2px solid #c00d1e; border-radius: 6px;
+  color: #c00d1e; font-size: 13px; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background-color 0.15s, color 0.15s;
+}
+.sf-wa:hover { background: #c00d1e; color: #fff; }
+.sf-wa:focus-visible, .sf-link:focus-visible, .sf-link-btn:focus-visible { outline: 2px solid #c00d1e; outline-offset: 3px; }
+.sf-link, .sf-link-btn {
+  color: #c00d1e; font-weight: 800; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase;
+  background: none; border: 0; padding: 0; cursor: pointer; font-family: inherit;
+}
+.sf-link:hover, .sf-link-btn:hover { text-decoration: underline; text-underline-offset: 3px; }
+.text-sm .sf-link, p .sf-link { font-size: inherit; letter-spacing: 0; text-transform: none; }
+
+/* cart summary on the quote page */
+.sf-mini { list-style: none; margin: 0 0 14px; padding: 0; }
+.sf-mini li {
+  display: flex; justify-content: space-between; align-items: baseline; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid #e5e7eb; font-size: 14px; font-weight: 700;
+}
+.sf-mini li:first-child { padding-top: 0; }
+.sf-mini small { display: block; font-weight: 500; color: #6b7280; font-size: 12px; }
+.sf-mini b { color: #c00d1e; white-space: nowrap; }
+
+/* cart rows on the checkout page */
+.sf-cart { list-style: none; margin: 0; padding: 0; }
+.sf-cart-row {
+  display: grid; grid-template-columns: 72px minmax(0, 1fr); gap: 16px; align-items: start;
+  padding: 18px 0; border-bottom: 1px solid #e5e7eb;
+}
+.sf-cart-row:first-child { padding-top: 0; }
+.sf-cart-row .img {
+  width: 72px; height: 72px; border-radius: 8px; background: #f3f4f6;
+  display: grid; place-items: center; overflow: hidden;
+}
+.sf-cart-row .img img { max-width: 85%; max-height: 85%; object-fit: contain; }
+.sf-cart-row .name { font-size: 16px; font-weight: 900; text-transform: uppercase; letter-spacing: -0.01em; }
+.sf-cart-row .meta { font-size: 13px; color: #6b7280; margin-top: 2px; }
+.sf-cart-row .note { font-size: 13px; color: #374151; margin-top: 4px; }
+.sf-cart-row .ctrl { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 14px; margin-top: 12px; }
+.sf-cart-row .qty button { width: 36px; height: 36px; }
+.sf-cart-row .qty input { width: 46px; height: 36px; }
+.sf-cart-more { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 18px; }
+.sf-cart-more .sf-link-btn { color: #6b7280; }
+.sf-cart-more .sf-link-btn:hover { color: #c00d1e; }
+.sf-cart-empty .sf-actions { margin-top: 24px; }
+
+/* order summary */
+.sf-sum { margin: 0 0 24px; padding: 0; }
+.sf-sum div { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 0; border-bottom: 1px solid #e5e7eb; }
+.sf-sum div:first-child { padding-top: 0; }
+.sf-sum dt { font-size: 14px; color: #6b7280; }
+.sf-sum dd { margin: 0; font-size: 20px; font-weight: 900; letter-spacing: -0.02em; }
+.sf-sum div:last-child dd { font-size: 14px; color: #c00d1e; text-transform: uppercase; letter-spacing: 0.06em; }
+
+html[data-theme="dark"] .sf-mini li,
+html[data-theme="dark"] .sf-cart-row,
+html[data-theme="dark"] .sf-sum div { border-color: #2a2f37; }
+html[data-theme="dark"] .sf-cart-row .img { background: #1c2027; }
+html[data-theme="dark"] .sf-mini small,
+html[data-theme="dark"] .sf-cart-row .meta,
+html[data-theme="dark"] .sf-sum dt { color: #9ca3af; }
+html[data-theme="dark"] .sf-cart-row .note { color: #d1d5db; }
+
+/* keep phone numbers on one line */
+.sf-section a[href^="tel:"] { white-space: nowrap; }
+
+/* editable quantities in the quote page cart list */
+.sf-mini li { align-items: center; }
+.sf-mini li > span { min-width: 0; }
+.sf-mini-ctrl { display: flex; align-items: center; gap: 6px; flex: none; }
+.sf-mini .qty button { width: 32px; height: 32px; }
+.sf-mini .qty input { width: 44px; height: 32px; font-size: 14px; }
+.sf-mini-remove {
+  width: 32px; height: 32px; border: 0; border-radius: 6px; background: none;
+  color: #9ca3af; cursor: pointer;
+}
+.sf-mini-remove:hover { color: #c00d1e; }
+.sf-mini-remove:focus-visible { outline: 2px solid #c00d1e; outline-offset: 2px; }
+
+/* quote page: product + quantity lines */
+.q-lines { display: grid; gap: 12px; }
+.q-line { display: grid; grid-template-columns: minmax(0, 1fr) 96px 32px; gap: 16px; align-items: end; }
+.q-line select option, .q-line select optgroup { text-transform: none; letter-spacing: 0; font-weight: 600; }
+.q-lines-foot { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px 16px; margin-top: 14px; }
+.q-total { margin: 0; font-size: 14px; color: #374151; }
+.q-total b { font-size: 18px; font-weight: 900; }
+.q-total span { color: #9ca3af; }
+.q-total span.ok { color: #c00d1e; font-weight: 800; }
+html[data-theme="dark"] .q-total { color: #d1d5db; }
+.q-from-cart { margin: 0 0 12px; font-size: 13px; color: #6b7280; }
+html[data-theme="dark"] .q-from-cart { color: #9ca3af; }

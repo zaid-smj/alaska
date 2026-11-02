@@ -1,0 +1,231 @@
+/* =====================================================================
+   Graphite page: the feature graph (markup: #featureStage in graphite.html;
+   script: js/graphite-diagrams.js). One graph serves all six tabs; its
+   curves morph from one tab to the next. Follows the site theme.
+   ===================================================================== */
+.gt-stage {
+  --gt-ink: #16171a;
+  --gt-muted: #61656d;
+  --gt-axis: #b4b8bf;
+  --gt-red: #c00d1e;
+  --gt-amber: #e07b24;
+  --gt-lead: #8d939b;
+  --gt-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  width: 100%;
+  max-width: 600px;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+}
+html[data-theme="dark"] .gt-stage {
+  --gt-ink: #d1d5db;
+  --gt-muted: #9ca3af;
+  --gt-axis: #3a3d44;
+  --gt-lead: #8a9098;
+}
+.gt-fig {
+  margin: 0;
+}
+.gt-fig svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.gt-fig figcaption {
+  margin-top: 12px;
+  color: var(--gt-muted);
+  font-size: 13px;
+}
+.gt-stage .d-label {
+  fill: var(--gt-ink);
+  font: 700 22px Inter, system-ui, sans-serif;
+}
+.gt-stage .d-label-red {
+  fill: var(--gt-red);
+}
+.gt-stage .d-note {
+  fill: var(--gt-muted);
+  font: 500 17px Inter, system-ui, sans-serif;
+}
+
+/* ---------- Key: which line is which ---------- */
+.gt-key {
+  list-style: none;
+  margin: 0 0 6px;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 22px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--gt-ink);
+}
+.gt-key li {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.gt-key li::before {
+  content: "";
+  width: 26px;
+  height: 5px;
+  border-radius: 3px;
+}
+.gt-key .k-std::before { background: var(--gt-lead); }
+.gt-key .k-gx { color: var(--gt-red); }
+.gt-key .k-gx::before { background: var(--gt-red); }
+
+/* ---------- Graph parts ---------- */
+.gt-graph .axis {
+  stroke: var(--gt-axis);
+  stroke-width: 2;
+}
+.gt-graph .c-std,
+.gt-graph .c-gx {
+  fill: none;
+  stroke-width: 6;
+  stroke-linecap: round;
+}
+.gt-graph .c-std { stroke: var(--gt-lead); }
+.gt-graph .c-gx { stroke: var(--gt-red); }
+
+/* parts only some tabs use: fade in and out as the tab changes */
+.gt-graph .area,
+.gt-graph .deep,
+.gt-graph .limit {
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+.gt-graph .area { fill: var(--gt-amber); }
+.gt-graph .deep { fill: var(--gt-red); }
+.gt-graph .limit {
+  stroke: var(--gt-muted);
+  stroke-width: 1.5;
+  stroke-dasharray: 6 6;
+}
+.gt-graph.has-area .area { opacity: 0.16; }
+.gt-graph.has-deep .deep { opacity: 0.1; }
+.gt-graph.has-limit .limit { opacity: 1; }
+.gt-graph .dot { opacity: 0; }
+.gt-graph.has-dots .dot { opacity: 1; }
+.gt-graph .dot-std { fill: var(--gt-lead); }
+.gt-graph .dot-gx { fill: var(--gt-red); }
+
+/* bar chart (LiFePO4 Usable Energy tab): the lines flatten into the bars, then the bars show */
+.gt-graph .bars {
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+.gt-graph.has-bars .bars {
+  opacity: 1;
+  transition-delay: 0.7s;
+}
+.gt-graph .c-std,
+.gt-graph .c-gx {
+  transition: opacity 0.4s ease 0.7s;
+}
+.gt-graph.has-bars .c-std,
+.gt-graph.has-bars .c-gx {
+  opacity: 0;
+}
+.gt-graph .bar-std { fill: var(--gt-lead); }
+.gt-graph .bar-gx { fill: var(--gt-red); }
+.gt-graph .bar-off { fill: url(#gt-hatch); stroke: var(--gt-lead); stroke-width: 1.5; stroke-dasharray: 5 4; }
+.gt-graph .hatch-line { stroke: var(--gt-axis); stroke-width: 4; }
+.gt-graph .bar-in { fill: #fff; font: 700 17px Inter, system-ui, sans-serif; }
+.gt-graph .bar-warn { fill: var(--gt-ink); font: 700 15px Inter, system-ui, sans-serif; }
+.gt-graph .bar-lbl { font-size: 18px; }
+.gt-graph.has-bars .bar { animation: gt-grow 0.8s var(--gt-ease) 0.7s both; transform-box: fill-box; transform-origin: left; }
+@keyframes gt-grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+/* labels fade out while the curves move, then the new ones fade in */
+.gt-graph .lbls {
+  transition: opacity 0.4s ease;
+}
+.gt-graph.swap .lbls {
+  opacity: 0;
+}
+.gt-text-swap {
+  opacity: 0;
+}
+#featureTitle,
+#featureDesc {
+  transition: opacity 0.3s ease;
+}
+
+/* first view: the curves draw themselves in */
+.gt-graph.drawn .c-std,
+.gt-graph.drawn .c-gx {
+  stroke-dasharray: 1;
+  animation: gt-draw 2.2s var(--gt-ease) both;
+}
+.gt-graph.drawn .c-gx { animation-delay: 0.25s; }
+.gt-graph.drawn .lbls { animation: gt-fade 0.6s ease 1.8s both; }
+@keyframes gt-draw {
+  from { stroke-dashoffset: 1; }
+  to { stroke-dashoffset: 0; }
+}
+@keyframes gt-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gt-stage *,
+  #featureTitle,
+  #featureDesc {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+@media (max-width: 767px) {
+  .gt-stage .d-label { font-size: 26px; }
+  .gt-stage .d-note { font-size: 20px; }
+}
+/* keep the section the same height as the text changes, so the page below doesn't jump */
+@media (max-width: 767px) {
+  .graphite-features #featureDesc { min-height: 12.5em; }
+}
+@media (min-width: 768px) {
+  .graphite-features #featureDesc { min-height: 9em; }
+}
+
+/* Phones: technology tabs as pill buttons in a vertical zigzag ("W"): first,
+   third and fifth on the left, second and fourth half a step lower on the right */
+@media (max-width: 767px) {
+  #tabsGrid {
+    grid-template-rows: none !important;
+    gap: 10px 12px !important;
+    padding-bottom: 34px !important;
+    margin-top: 8px;
+  }
+  #tabsGrid .feature-tab {
+    height: auto !important;
+    min-height: 44px;
+    padding: 10px 12px !important;
+    border: 2px solid #d1d5db !important;
+    border-radius: 999px;
+    background: transparent;
+  }
+  #tabsGrid .feature-tab h3 { color: inherit; }
+  #tabsGrid .feature-tab.border-\[\#c00d1e\] {
+    background: #c00d1e;
+    border-color: #c00d1e !important;
+  }
+  #tabsGrid .feature-tab.border-\[\#c00d1e\] h3 { color: #fff !important; }
+  html[data-theme="dark"] #tabsGrid .feature-tab:not(.border-\[\#c00d1e\]) { border-color: #374151 !important; }
+  #tabsGrid .feature-tab:nth-child(even) {
+    transform: translateY(calc(50% + 5px));
+  }
+}
+
+/* Tablets: the 600px graph and the text don't fit side by side, so stack them
+   (graph on top, centred; text below at a comfortable reading width) */
+@media (min-width: 768px) and (max-width: 1099px) {
+  .graphite-features > .container > .grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .graphite-features > .container > .grid > div:last-child { max-width: 680px; margin: 0 auto; align-items: flex-start; }
+}
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* the video section under the graph: text above, video below, at full width */
+  .graphite-features + section .grid { grid-template-columns: minmax(0, 1fr) !important; }
+  .graphite-features + section .grid p { text-align: left !important; }
+}

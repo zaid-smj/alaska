@@ -5,17 +5,33 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <title>Calcium Silver Technology</title>
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+    <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+    <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+    <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <link rel="stylesheet" href="css/graphite.css" />
 </head>
 
 <body class="bg-gray-100 overflow-x-hidden">
     <div id="header-placeholder"></div>
 
     <main id="top" class="bg-gray-100">
-        <section class="flex items-center justify-center text-center bg-gray-100 overflow-hidden group hero-fold">
+        <section class="page-banner flex items-center justify-center text-center bg-gray-100 overflow-hidden group hero-fold">
             <div class="relative h-full md:h-full w-full flex flex-col banner-wrapper3">
                 <picture>
                     <source srcset="assets/technology/mobile/tech-landing-mob.webp" media="(max-width: 767px)">
@@ -24,289 +40,161 @@
                         class="w-full h-full transition-transform duration-1000">
                 </picture>
                 <div id="hero-text-box"
-                    class="absolute top-20 left-0 right-0 md:bottom-auto md:top-28 md:left-8 md:w-[500px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden banner-overlay-graphite">
+                    class="absolute top-20 left-0 right-0 md:bottom-auto md:top-28 md:left-8 md:w-[640px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 overflow-hidden">
                     <h1
                         class="text-2xl md:text-5xl font-bold uppercase text-left tracking-normal leading-tight text-white">
-                        Calcium <span class="text-[#c00d1e]">Silver</span>
+                        Calcium Silver Enriched <span class="text-[#c00d1e]">Technology</span>
                     </h1>
                 </div>
             </div>
         </section>
-        <section class="bg-white py-6 md:py-6">
-            <div class="container mx-auto px-2 sm:px-6 md:px-8 lg:px-8 xl:px-10 2xl:px-10">
-                <div class="max-w-5xl mx-auto">
-                    <h2 class="mt-3 text-2xl md:text-3xl font-bold leading-tight text-gray-900">
-                        Calcium-Silver Maintenance-Free vs Normal Calcium Maintenance-Free
-                    </h2>
-                    <p class="mt-4 text-base md:text-lg text-gray-600 leading-relaxed text-justify">
-                        The primary difference between Calcium-Silver Maintenance-Free (Ca-Sn-Ag) batteries and
-                        Normal Calcium Maintenance-Free (Ca-Ca) batteries lies in the grid alloy composition and
-                        the resulting
-                        performance characteristics.
-                    </p>
-                </div>
-
-                <div class="mt-12 max-w-5xl mx-auto space-y-12">
-                    <section class="space-y-4">
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">1. Grid Alloy Composition</h3>
-                        <p class="text-base font-semibold text-gray-700">Comparison of Grid Materials</p>
-                        <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
-                            <table class="comparison-table w-full border-collapse text-left">
-                                <thead>
-                                    <tr class="bg-gray-50">
-                                        <th class="comparison-th">Component</th>
-                                        <th class="comparison-th">Normal Calcium Maintenance-Free</th>
-                                        <th class="comparison-th">Calcium-Silver Maintenance-Free</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Positive Grid</td>
-                                        <td class="comparison-td">Lead-Calcium Alloy</td>
-                                        <td class="comparison-td">Lead-Calcium-Silver Alloy</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Negative Grid</td>
-                                        <td class="comparison-td">Lead-Calcium Alloy</td>
-                                        <td class="comparison-td">Lead-Calcium Alloy (sometimes with a small amount of
-                                            silver)</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Primary Purpose</td>
-                                        <td class="comparison-td">Reduce water loss and maintenance</td>
-                                        <td class="comparison-td">Improve durability, corrosion resistance, and
-                                            high-temperature performance</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Silver Content</td>
-                                        <td class="comparison-td">None</td>
-                                        <td class="comparison-td">Typically, 0.015%–0.05%</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-
-                    <section class="space-y-4">
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">2. Performance Comparison</h3>
-                        <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
-                            <table class="comparison-table w-full border-collapse text-left">
-                                <thead>
-                                    <tr class="bg-gray-50">
-                                        <th class="comparison-th">Feature</th>
-                                        <th class="comparison-th">Normal Calcium MF</th>
-                                        <th class="comparison-th">Calcium-Silver MF</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Water Consumption</td>
-                                        <td class="comparison-td">Very Low</td>
-                                        <td class="comparison-td">Very Low</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Maintenance Requirement</td>
-                                        <td class="comparison-td">Maintenance-Free</td>
-                                        <td class="comparison-td">Maintenance-Free</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">High Temperature Resistance
-                                        </td>
-                                        <td class="comparison-td">Good</td>
-                                        <td class="comparison-td">Excellent</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Grid Corrosion Resistance</td>
-                                        <td class="comparison-td">Good</td>
-                                        <td class="comparison-td">Excellent</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Under-Hood Durability</td>
-                                        <td class="comparison-td">Good</td>
-                                        <td class="comparison-td">Excellent</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Service Life</td>
-                                        <td class="comparison-td">Standard</td>
-                                        <td class="comparison-td">15–30% Longer</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Charge Acceptance</td>
-                                        <td class="comparison-td">Good</td>
-                                        <td class="comparison-td">Better</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Deep Cycle Performance</td>
-                                        <td class="comparison-td">Moderate</td>
-                                        <td class="comparison-td">Better</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Start-Stop Compatibility</td>
-                                        <td class="comparison-td">Limited</td>
-                                        <td class="comparison-td">Better</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Cost</td>
-                                        <td class="comparison-td">Lower</td>
-                                        <td class="comparison-td">Higher</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </section>
-
-                    <section class="space-y-4">
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">3. Why Silver is Added</h3>
-                        <p class="text-base md:text-lg text-gray-600 leading-relaxed text-justify">
-                            The addition of silver enhances several critical battery characteristics:
-                        </p>
-                        <ul class="list-disc pl-6 space-y-2 text-base md:text-lg text-gray-700 leading-relaxed">
-                            <li>Improved grid corrosion resistance</li>
-                            <li>Increased mechanical strength of the positive grid</li>
-                            <li>Enhanced electrical conductivity of the grid alloy</li>
-                            <li>Greater stability at elevated operating temperatures</li>
-                        </ul>
-                        <p class="text-base md:text-lg text-gray-600 leading-relaxed text-justify">
-                            These benefits are particularly valuable in hot-climate markets such as:
-                        </p>
-                        <ul class="list-disc pl-6 space-y-2 text-base md:text-lg text-gray-700 leading-relaxed">
-                            <li>Pakistan</li>
-                            <li>Saudi Arabia</li>
-                            <li>UAE</li>
-                            <li>Other Gulf and Middle Eastern countries</li>
-                        </ul>
-                        <p class="text-base md:text-lg text-gray-600 leading-relaxed text-justify">
-                            where under-hood temperatures can exceed 70–80°C.
-                        </p>
-                    </section>
-
-                    <section class="space-y-4">
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">4. Effect on Battery Life</h3>
-                        <p class="text-base font-semibold text-gray-700">Battery Life in Hot Climates</p>
-                        <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
-                            <table class="comparison-table w-full border-collapse text-left">
-                                <thead>
-                                    <tr class="bg-gray-50">
-                                        <th class="comparison-th">Parameter</th>
-                                        <th class="comparison-th">Normal Calcium MF</th>
-                                        <th class="comparison-th">Calcium-Silver MF</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Typical Service Life</td>
-                                        <td class="comparison-td">2 to 4 Years</td>
-                                        <td class="comparison-td">3 to 5+ Years</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Resistance to Grid Growth</td>
-                                        <td class="comparison-td">Standard</td>
-                                        <td class="comparison-td">Superior</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Resistance to Active Material
-                                            Shedding</td>
-                                        <td class="comparison-td">Standard</td>
-                                        <td class="comparison-td">Superior</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <p class="text-base font-semibold text-gray-700">Benefits Are More Noticable In:</p>
-                        <ul class="list-disc pl-6 space-y-2 text-base md:text-lg text-gray-700 leading-relaxed">
-                            <li>Modern vehicles with high electrical loads</li>
-                            <li>Vehicles operating in extreme summer temperatures</li>
-                            <li>Long-distance commercial vehicles</li>
-                            <li>Fleet applications requiring higher reliability</li>
-                        </ul>
-                    </section>
-
-                    <section class="space-y-4">
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">5. Cold Cranking Performance</h3>
-                        <p class="text-base md:text-lg text-gray-600 leading-relaxed text-justify">
-                            Calcium-Silver batteries generally:
-                        </p>
-                        <ul class="list-disc pl-6 space-y-2 text-base md:text-lg text-gray-700 leading-relaxed">
-                            <li>Maintain lower internal resistance throughout their service life.</li>
-                            <li>Deliver more consistent cranking performance as they age.</li>
-                            <li>Retain starting power better over time.</li>
-                        </ul>
-                        <p class="text-base md:text-lg text-gray-600 leading-relaxed text-justify">
-                            Although the initial Cold Cranking Amps (CCA) difference may be small, after 2–3 years of
-                            operation, Calcium-Silver batteries typically maintain performance significantly better than
-                            standard Calcium batteries.
-                        </p>
-                    </section>
-
-                    <section class="space-y-4">
-                        <h3 class="text-xl md:text-2xl font-bold text-gray-900">6. Manufacturing Considerations for
-                            Alaska Batteries</h3>
-                        <p class="text-base font-semibold text-gray-700">Advantages</p>
-                        <div class="overflow-x-auto rounded-2xl border border-gray-200 bg-white shadow-sm">
-                            <table class="comparison-table w-full border-collapse text-left">
-                                <thead>
-                                    <tr class="bg-gray-50">
-                                        <th class="comparison-th">Benefit</th>
-                                        <th class="comparison-th">Description</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Premium Positioning</td>
-                                        <td class="comparison-td">Supports a premium product offering</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Extended Warranty Potential
-                                        </td>
-                                        <td class="comparison-td">Longer service life enables stronger warranty programs
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="comparison-td font-bold text-gray-900">Climate Suitability</td>
-                                        <td class="comparison-td">Ideal for Pakistan and Gulf markets</td>
-                                    </tr>
-                                    <tr class="bg-gray-50/60">
-                                        <td class="comparison-td font-bold text-gray-900">Competitive Advantage</td>
-                                        <td class="comparison-td">Enables competition with premium international brands
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-6 md:p-8">
-                            <h4 class="text-lg md:text-xl font-bold text-gray-900">Recommendation for Pakistan</h4>
-                            <p class="mt-4 text-base font-semibold text-gray-700">Premium Automotive Segment</p>
-                            <p class="mt-3 text-base md:text-lg text-gray-600 leading-relaxed text-justify">
-                                Calcium-silver Maintenance-Free batteries offer a genuine technological upgrade through:
-                            </p>
-                            <ul
-                                class="mt-4 list-disc pl-6 space-y-2 text-base md:text-lg text-gray-700 leading-relaxed">
-                                <li>Better heat resistance</li>
-                                <li>Longer service life</li>
-                                <li>Improved durability</li>
-                                <li>Enhanced cranking performance</li>
-                                <li>Potential for extended warranty coverage</li>
-                            </ul>
-                            <p class="mt-4 text-base md:text-lg text-gray-600 leading-relaxed text-justify">
-                                These benefits can justify a premium selling price.
-                            </p>
-                            <p
-                                class="mt-3 text-base md:text-lg font-semibold text-gray-900 italic leading-relaxed text-justify">
-                                “Silver-Reinforced Calcium Technology – Superior Heat Resistance, Longer Life, Stronger
-                                Starting Power.”
-                            </p>
-                        </div>
-                    </section>
-                </div>
+    <!-- Calcium Silver Features Section -->
+    <section id="tech-features" class="bg-gray-100 md:px-4 py-2 md:py-10 graphite-features">
+      <div class="container mx-auto px-2 sm:px-6 md:px-8 lg:px-8 xl:px-10 2xl:px-10">
+        <!-- Feature Headings/Tabs - Responsive: horizontal bar on desktop, 2x3 grid on mobile -->
+        <div class="w-full mb-6">
+          <!-- Desktop: horizontal scrollable bar -->
+          <div id="tabsContainer"
+            class="hidden md:flex gap-6 min-w-max md:min-w-0 md:flex-nowrap text-center overflow-x-auto scrollbar-hide pb-4">
+            <div class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all w-2/3 md:flex-1"
+              data-index="0" onclick="selectFeatureTab(0)">
+              <h3 class="text-base md:text-lg font-black uppercase text-gray-400 break-words">COMPOSITION</h3>
             </div>
-        </section>
+            <div class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all w-2/3 md:flex-1"
+              data-index="1" onclick="selectFeatureTab(1)">
+              <h3 class="text-base md:text-lg font-black uppercase text-gray-400 break-words">HEAT RESISTANCE</h3>
+            </div>
+            <div class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all w-2/3 md:flex-1"
+              data-index="2" onclick="selectFeatureTab(2)">
+              <h3 class="text-base md:text-lg font-black uppercase text-gray-400 break-words">LONGEVITY</h3>
+            </div>
+            <div class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all w-2/3 md:flex-1"
+              data-index="3" onclick="selectFeatureTab(3)">
+              <h3 class="text-base md:text-lg font-black uppercase text-gray-400 break-words">STARTING POWER</h3>
+            </div>
+            <div class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all w-2/3 md:flex-1"
+              data-index="4" onclick="selectFeatureTab(4)">
+              <h3 class="text-base md:text-lg font-black uppercase text-gray-400 break-words">CHARGE</h3>
+            </div>
+          </div>
+          <!-- Mobile: 2x3 grid -->
+          <div id="tabsGrid" class="grid grid-cols-2 grid-rows-3 gap-3 w-[80vw] max-w-xs mx-auto md:hidden pb-4">
+            <div
+              class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all flex items-center justify-center h-16"
+              data-index="0" onclick="selectFeatureTab(0)">
+              <h3 class="text-xs xs:text-sm sm:text-base font-black uppercase text-gray-400 break-words">COMPOSITION</h3>
+            </div>
+            <div
+              class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all flex items-center justify-center h-16"
+              data-index="1" onclick="selectFeatureTab(1)">
+              <h3 class="text-xs xs:text-sm sm:text-base font-black uppercase text-gray-400 break-words">HEAT RESISTANCE</h3>
+            </div>
+            <div
+              class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all flex items-center justify-center h-16"
+              data-index="2" onclick="selectFeatureTab(2)">
+              <h3 class="text-xs xs:text-sm sm:text-base font-black uppercase text-gray-400 break-words">LONGEVITY</h3>
+            </div>
+            <div
+              class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all flex items-center justify-center h-16"
+              data-index="3" onclick="selectFeatureTab(3)">
+              <h3 class="text-xs xs:text-sm sm:text-base font-black uppercase text-gray-400 break-words">STARTING POWER</h3>
+            </div>
+            <div
+              class="feature-tab cursor-pointer border-t-4 border-gray-300 pt-4 transition-all flex items-center justify-center h-16 col-span-2"
+              data-index="4" onclick="selectFeatureTab(4)">
+              <h3 class="text-xs xs:text-sm sm:text-base font-black uppercase text-gray-400 break-words">CHARGE</h3>
+            </div>
+          </div>
+        </div>
+
+        <!-- Feature Content: Image Left, Text Right -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-[600px_1fr] gap-6 md:gap-8 items-center p-2 md:pl-0 md:pb-4 rounded-lg mb-1">
+          <!-- Left: Vertical Image Tile (600px height) -->
+          <div class="flex justify-center">
+            <!-- Animated diagrams, one per tab (js/graphite-diagrams.js; styles in css/graphite.css) -->
+            <div id="featureStage" class="gt-stage">
+              <!-- One graph for all six tabs: the curves morph and the labels change (js/graphite-diagrams.js) -->
+              <figure class="gt-fig gt-graph is-active" role="img" id="gt-graph" aria-label="">
+                <ul class="gt-key" aria-hidden="true">
+                  <li class="k-std">Normal Calcium Maintenance-Free</li>
+                  <li class="k-gx">Calcium-Silver Maintenance-Free</li>
+                </ul>
+                <svg viewBox="0 0 600 420" aria-hidden="true">
+                  <rect class="deep" x="150" y="290" width="110" height="60" />
+                  <path class="area" />
+                  <line class="axis" x1="30" y1="350" x2="580" y2="350" />
+                  <line class="limit" x1="30" y1="270" x2="580" y2="270" />
+                  <path class="c-std" pathLength="1" />
+                  <path class="c-gx" pathLength="1" />
+                  <g class="lbls">
+                    <text class="d-note y-lbl" x="30" y="50"></text>
+                    <text class="d-note x-lbl" x="30" y="400"></text>
+                    <text class="d-note l-extra" text-anchor="middle"></text>
+                    <text class="d-note l-limit" x="580" text-anchor="end"></text>
+                    <g class="ticks"></g>
+                    <circle class="dot dot-std" r="8" cx="-20" cy="-20" />
+                    <circle class="dot dot-gx" r="8" cx="-20" cy="-20" />
+                  </g>
+                </svg>
+                <figcaption>Illustration, not measured data.</figcaption>
+              </figure>
+            </div>
+          </div>
+
+          <!-- Right: Text Content -->
+          <div class="flex flex-col justify-center items-center md:items-start">
+            <h2 id="featureTitle" class="text-2xl md:text-4xl font-semibold uppercase mb-4 text-[#c00d1e]">
+              --
+            </h2>
+            <div id="featureDesc" class="text-base md:text-lg text-gray-600 mb-2 leading-relaxed">
+              --
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Video Section with Text and Player -->
+    <section class="bg-white py-12 md:py-20">
+      <div class="container mx-auto px-2 sm:px-6 md:px-8 lg:px-8 xl:px-10 2xl:px-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <!-- Left: Text Content -->
+          <div class="flex flex-col justify-center">
+            <h2 class="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+              See <span class="text-[#c00d1e]">Calcium-Silver Technology</span> in Action
+            </h2>
+            <p class="text-base md:text-lg text-gray-600 mb-4 leading-relaxed text-justify">
+              Discover how our advanced calcium-silver technology enhances heat resistance, grid durability, and
+              reliable starting performance. Explore the benefits of choosing Alaska Batteries' silver-enhanced
+              maintenance-free solutions.
+            </p>
+            <p class="text-base md:text-lg text-gray-600 mb-6 leading-relaxed text-justify">
+              Designed for demanding automotive applications, calcium-silver technology helps withstand high operating
+              temperatures while supporting dependable starting power and long-lasting performance. Experience
+              maintenance-free convenience engineered for the challenges of everyday driving.
+            </p>
+          </div>
+
+          <!-- Right: Video Player -->
+          <div class="flex justify-center">
+            <video width="100%" height="auto" controls class="rounded-lg shadow-2xl bg-black">
+              <source src="assets/videos/tech.mp4" type="video/mp4">
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
+
     </main>
 
     <div id="footer-placeholder"></div>
     <script src="js/components.js"></script>
+    <script src="js/casilver-data.js"></script>
     <script src="js/main.js"></script>
     <script src="js/animations.js"></script>
+    <script src="js/graphite-diagrams.js"></script>
 
 </body>
 

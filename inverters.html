@@ -2,93 +2,110 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Inverters</title>
-    <link rel="icon" type="image/png" href="assets/favicon.png" />
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-    <link rel="stylesheet" href="css/style.css" />
-    <style>
-        .card {
-            text-align: center;
-            padding: 3rem;
-            border-radius: 12px;
-            background: linear-gradient(180deg, #ffffffcc, #ffffffcc);
-            box-shadow: 0 6px 24px rgba(16, 24, 40, .08);
-            max-width: 720px
-        }
-
-        .brand {
-            font-weight: 700;
-            font-size: 1rem;
-            color: #0f172a;
-            margin-bottom: .75rem
-        }
-
-        h1 {
-            font-size: 2rem;
-            margin: .25rem 0;
-            color: #0f172a
-        }
-
-        p {
-            margin: 0;
-            color: #475569
-        }
-
-        .dot {
-            display: inline-block;
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #0ea5a4;
-            margin-left: .6rem;
-            vertical-align: middle
-        }
-
-        .pulse {
-            animation: pulse 1.6s infinite
-        }
-
-        @keyframes pulse {
-            0% {
-                opacity: 1;
-                transform: scale(1)
-            }
-
-            50% {
-                opacity: .45;
-                transform: scale(.9)
-            }
-
-            100% {
-                opacity: 1;
-                transform: scale(1)
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inverters | Alaska Batteries</title>
+  <meta name="description" content="Alaska Hybrid Solar Inverters — dual output with optional grid feeding. Models from 2 kW to 15 kW with published specifications." />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://alaskabatteries.com/inverters.html">
+  <meta name="theme-color" content="#c00d1e" />
+  <link rel="icon" href="/assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="/assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="/assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="/css/style.css" />
+  <link rel="stylesheet" href="/css/nav.css" />
+  <link rel="stylesheet" href="/css/ui.css" />
+  <link rel="stylesheet" href="/css/pages.css" />
+  <link rel="stylesheet" href="/css/products.css" />
+  <link rel="stylesheet" href="/css/footer.css" />
+  <link rel="stylesheet" href="/css/banner.css" />
+  <link rel="stylesheet" href="/css/theme.css" />
 </head>
 
-<body class="min-h-screen flex flex-col bg-gray-100 overflow-x-hidden">
+<body data-banner-page="/solutions/inverters" class="bg-gray-50 text-black font-sans overflow-x-hidden">
+  <div id="header-placeholder"></div>
 
-    <div id="header-placeholder"></div>
+  <main class="sc pg">
+    <section class="page-banner sc-hero" aria-labelledby="page-title">
+      <picture>
+        <source srcset="/assets/mobile/solar-mob.webp" media="(max-width: 767px)">
+        <img src="/assets/solutions/solar.webp" alt="" fetchpriority="high" />
+      </picture>
+      <div class="sc-hero-box">
+        <h1 id="page-title">Hybrid Solar <span>Inverters</span></h1>
+      </div>
+    </section>
 
-    <main id="top" class="flex-1 flex items-center justify-center">
-        <section class="w-full flex items-center justify-center py-8">
-            <div class="card" role="status" aria-live="polite">
-                <div class="brand">Inverters <span class="dot pulse" aria-hidden="true"></span></div>
-                <h1>Coming Soon</h1>
-                <p>We're working to bring this page online. Check back soon.</p>
-            </div>
-        </section>
-    </main>
+    <div class="sc-wrap">
+      <section class="sc-card sc-pad inv-hero" aria-labelledby="inv-title">
+        <img src="/assets/inverters/inverter-hybrid.webp" alt="Alaska hybrid solar inverter" width="528" height="792">
+        <div>
+          <p class="inv-brand"><img class="theme-light-only" src="/assets/brand/alaska-inverters-logo.png" alt="Alaska Inverters" width="147" height="60"><img class="theme-dark-only" src="/assets/brand/alaska-inverters-logo-inv.png" alt="Alaska Inverters" width="147" height="62"></p>
+          <h2 class="pg-title" id="inv-title">Hybrid <em>Solar</em> Inverters</h2>
+          <p class="pg-lead" style="margin-bottom:16px">Dual Output | Grid Feeding (optional)</p>
+          <div class="inv-hl" id="inv-hl"></div>
+        </div>
+      </section>
 
-    <div id="footer-placeholder"></div>
-    <script src="js/components.js"></script>
-    <script src="js/main.js"></script>
-    <script src="js/animations.js"></script>
+      <section class="pg-section" aria-labelledby="inv-models">
+        <h3 id="inv-models">Models &amp; specifications</h3>
+        <p class="sc-help" style="margin:-4px 0 12px">Specifications as published in the Alaska Batteries company profile. Models marked "to be announced" are part of the range; their detailed specifications will be added when published.</p>
+        <div class="sc-card sc-table-wrap"><table class="sc-table inv-table"><caption class="sr-only">Alaska hybrid solar inverter models</caption>
+          <thead><tr><th scope="col">Rated capacity</th><th scope="col">Model No.</th><th scope="col">Operating voltage</th><th scope="col">Phase</th><th scope="col">PV</th><th scope="col">~Weight</th><th scope="col">Dimensions D × W × H (mm)</th><th scope="col">IP rating</th><th scope="col">MPPT voltage range</th><th scope="col">Communication interface</th><th scope="col"><span class="sr-only">Quote</span></th></tr></thead>
+          <tbody id="inv-rows"></tbody>
+        </table></div>
+      </section>
 
+      <section class="pg-section">
+        <div class="sc-card sc-pad">
+          <h3 style="margin:0 0 8px;font-size:18px;font-weight:800">Choosing an inverter</h3>
+          <p class="sc-help" style="margin:0 0 12px">Inverter sizing depends on your load, battery bank voltage and solar array. Use the Solar Calculator for a first estimate, then ask our team to confirm the model.</p>
+          <div class="sc-actions">
+            <a class="sc-btn" href="/solar-calculator.html#solar-calculator"><i class="fa-solid fa-solar-panel" aria-hidden="true"></i>Solar Calculator</a>
+            <a class="sc-btn ghost" href="/quote.html#quote-content">Request a quote</a>
+            <a class="sc-btn plain" href="/dealers.html#partner-finder">Find a partner</a>
+          </div>
+          <p class="sc-help" style="margin-top:12px">Alaska inverters carry a two-year warranty when bought through an authorised distributor. Keep your completed warranty card and invoice. <a href="/warranty.html#inverters" style="color:var(--red);font-weight:700">Read the inverter warranty terms</a>.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <div id="footer-placeholder"></div>
+
+  <script src="/js/components.js"></script>
+  <script src="/js/inverter-data.js"></script>
+  <script>
+    (function () {
+      var esc = function (s) { return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]; }); };
+      var tba = '<span class="tba">To be announced</span>';
+      var v = function (x, suf) { return x == null ? tba : esc(x) + (suf || ""); };
+      var icons = { "High Reliability": "fa-shield-halved", "More Convenient": "fa-bolt", "High Compatibility": "fa-plug-circle-check", "Cost-Effective": "fa-coins" };
+      document.getElementById("inv-hl").innerHTML = inverterRange.highlights.map(function (h) {
+        return '<div><h4><i class="fa-solid ' + (icons[h.title] || "fa-check") + '" aria-hidden="true"></i>' + esc(h.title) + '</h4><ul>' + h.points.map(function (p) { return "<li>" + esc(p) + "</li>"; }).join("") + "</ul></div>";
+      }).join("");
+      document.getElementById("inv-rows").innerHTML = inverterData.map(function (m) {
+        return '<tr class="' + (m.pending ? "pending" : "") + '"><th scope="row">' + m.ratedKw + ' kW</th><td><b>' + esc(m.model) + '</b></td><td>' + v(m.batteryV, " V") + '</td><td>' + esc(m.phase) +
+          '</td><td>' + v(m.pvW, " W") + '</td><td>' + v(m.weightKg, " kg") + '</td><td>' + (m.dims ? m.dims.d + " × " + m.dims.w + " × " + m.dims.h : tba) + '</td><td>' + v(m.ip) + '</td><td>' + v(m.mppt) + '</td><td>' + v(m.comms) +
+          '</td><td><button type="button" class="sc-btn ghost sm" data-quote="' + esc(m.id) + '"><i class="fa-solid fa-cart-plus" aria-hidden="true"></i>Add to Cart</button></td></tr>';
+      }).join("");
+      document.addEventListener("click", function (e) {
+        var b = e.target.closest("[data-quote]"); if (!b || !window.AlaskaCart) return;
+        var m = inverterData.find(function (x) { return x.id === b.dataset.quote; });
+        if (window.AlaskaCart.add({ id: m.id, model: "Alaska Hybrid Solar Inverter " + m.model, image: inverterRange.image }) && window.alaskaToast) window.alaskaToast(m.model + " added to your cart", { href: "#cart", label: "View cart" });
+      });
+    })();
+  </script>
 </body>
 
 </html>

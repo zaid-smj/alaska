@@ -10,14 +10,146 @@
     content="Alaska Batteries provides high-performance automotive, industrial, and backup power solutions engineered for durability, reliability, and long-lasting performance with advanced graphite-infused lead-acid battery technology." />
   <meta name="keywords"
     content="alaska batteries, graphite batteries, graphite lead acid battery, graphite technology batteries, automotive batteries Pakistan, industrial batteries Pakistan, car batteries, battery manufacturer Pakistan, battery supplier Pakistan, backup power solutions, lead acid batteries" />
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <link rel="shortcut icon" href="assets/favicon.png" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
   <link rel="stylesheet"
     href="https://cdnjs.cloudflare.com/ajax/libs/odometer.js/0.4.7/themes/odometer-theme-default.css"
     crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+  <style>
+    /* "Our Presence" on tablets: the large map would cover the heading, so
+       portrait tablets use the stacked phone layout and landscape tablets get a smaller map */
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .presence-map-lg { display: none !important; }
+      .presence-card { height: auto !important; }
+      .presence-map-sm { display: block !important; height: 380px; object-fit: contain; }
+      .presence-text { margin: 0 auto !important; text-align: center !important; }
+      .presence-text .partner-counter-value, .presence-text .flex { text-align: center !important; justify-content: center !important; }
+      .presence-text h2 { font-size: 3.5rem !important; }
+    }
+    @media (min-width: 1024px) and (max-width: 1279px) {
+      .presence-card { height: min(75svh, 640px) !important; }
+      .presence-map-lg { width: 54% !important; height: auto !important; top: 50% !important; transform: translateY(-50%); margin-top: 0 !important; right: 2% !important; }
+      .presence-text { position: absolute; z-index: 2; top: 50%; left: 32px; transform: translateY(-50%); max-width: 44% !important; margin-top: 0 !important; }
+      .presence-text h2 { font-size: 3.5rem !important; }
+    }
+    /* Technology card: a logo above each button */
+    .home-tech-links { display: flex; flex-wrap: wrap; gap: 12px; align-items: flex-end; }
+    /* Graphite and Calcium Silver logos in the card's upper right corner */
+    .home-tech-logos { position: absolute; z-index: 20; top: 24px; right: 24px; display: flex; flex-direction: row; align-items: center; gap: 18px; }
+    .home-tech-logos img { height: 40px; width: auto; filter: drop-shadow(0 2px 8px rgba(0,0,0,.55)); }
+    @media (max-width: 767px) { .home-tech-logos { top: auto; bottom: 84px; left: 24px; right: auto; } .home-tech-logos img { height: 34px; } }
+    @media (min-width: 768px) { .home-tech-logos { top: 32px; right: 32px; gap: 28px; } .home-tech-logos img { height: 60px; } }
+    /* rows of small cards: three across on tablets and computers, swipe on phones */
+    .home-cards { display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding-bottom: 6px; }
+    .home-cards::-webkit-scrollbar { display: none; }
+    .home-cards > .vault-card { flex: 0 0 85% !important; width: 85% !important; height: auto !important; scroll-snap-align: start; }
+    @media (min-width: 768px) {
+      .home-cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; overflow: visible; }
+      .home-cards > .vault-card { width: auto !important; }
+    }
+    @media (min-width: 768px) and (max-width: 1023px) {
+      .home-tech-card h3 { font-size: 2rem !important; }
+      .home-tech-logos img { height: 36px; }
+    }
+    /* Battery Finder and Solar Calculator cards use portrait pictures, so they are narrower */
+    /* Battery Finder and Solar Calculator cards: the same size as "A Tour of Our Factory"
+       (500 x 580 on computers); the other cards in the row share the 580px height */
+    @media (min-width: 1025px) {
+      .products-carousel .product-card img { max-height: 580px; }
+      .products-carousel .product-card-sm { flex: 0 0 500px; width: 500px; height: 580px; }
+      .products-carousel .product-card-sm picture, .products-carousel .product-card-sm img { width: 100% !important; height: 100% !important; max-width: none; max-height: none; object-fit: cover !important; }
+    }
+    /* tablets: same shape as the factory card, at the row's 400px height */
+    @media (min-width: 768px) and (max-width: 1024px) {
+      .products-carousel .product-card-sm { flex: 0 0 auto; width: 345px; }
+      .products-carousel .product-card-sm picture, .products-carousel .product-card-sm img { width: 100% !important; height: 100% !important; object-fit: cover !important; }
+    }
+    /* cards sized from the cards below them (see the script at the end of the page) */
+    .products-carousel .product-card.is-sized { flex: 0 0 auto !important; }
+    .products-carousel .product-card.is-sized picture,
+    .products-carousel .product-card.is-sized img { width: 100% !important; height: 100% !important; max-width: none !important; max-height: none !important; object-fit: cover !important; }
+
+    /* ===== Breathing-room sections between the picture-heavy blocks ===== */
+    .hm-wrap { max-width: 1240px; margin: 0 auto; padding: 0 24px; }
+    .hm-label { margin: 0 0 10px; color: #c00d1e; font-size: 12px; font-weight: 900; letter-spacing: 0.14em; text-transform: uppercase; }
+    .hm-label-lg { font-size: 16px; }
+    .hm-h2 { margin: 0; font-size: 34px; line-height: 1.05; font-weight: 900; letter-spacing: -0.03em; text-transform: uppercase; color: #111827; }
+    .hm-h2 span { color: #c00d1e; }
+    @media (min-width: 768px) { .hm-h2 { font-size: 44px; } }
+
+    /* 1. Stats bar: a low strip of numbers under the hero */
+    .hm-stats { background: #262427; color: #fff; border-bottom: 3px solid #c00d1e; }
+    .hm-stats ul { list-style: none; margin: 0 auto; padding: 18px 24px; max-width: 1240px; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px 12px; }
+    .hm-stats li { text-align: center; }
+    .hm-stats b { display: block; font-size: 28px; line-height: 1; font-weight: 900; letter-spacing: -0.02em; }
+    .hm-stats b span { color: #c00d1e; }
+    .hm-stats small { display: block; margin-top: 6px; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: #d1d5db; }
+    .hm-stats li:last-child { grid-column: 1 / -1; }
+    @media (min-width: 768px) {
+      .hm-stats ul { grid-template-columns: repeat(5, minmax(0, 1fr)); padding: 22px 24px; }
+      .hm-stats li:last-child { grid-column: auto; }
+      .hm-stats li + li { border-left: 1px solid rgba(255, 255, 255, 0.12); }
+      .hm-stats b { font-size: 36px; }
+    }
+
+    /* Request a Quote process band: heading + button, then three step boxes across the full width */
+    .hm-steps { background: #f3f4f6; border-top: 1px solid #e5e7eb; border-bottom: 1px solid #e5e7eb; margin: 0; }
+    .hm-steps-in { min-height: max(340px, calc((100svh - 80px) / 2)); padding: 48px 24px; display: flex; flex-direction: column; justify-content: center; gap: 28px; }
+    .hm-steps-head { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px 24px; }
+    .hm-steps-btn { white-space: nowrap; }
+    .hm-steps ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; counter-reset: none; }
+    @media (min-width: 768px) { .hm-steps ol { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 40px; } }
+    .hm-steps li { position: relative; display: flex; align-items: flex-start; gap: 18px; padding: 28px; background: #fff; border: 1px solid #e5e7eb; border-top: 3px solid #c00d1e; border-radius: 12px; box-shadow: 0 6px 18px rgba(17, 24, 39, 0.06); }
+    .hm-steps li i { flex: none; font-size: 36px; color: #374151; width: 44px; text-align: center; }
+    .hm-steps li strong { display: block; font-size: 20px; font-weight: 800; color: #111827; }
+    .hm-steps li p { margin: 6px 0 0; font-size: 15px; line-height: 1.5; color: #4b5563; }
+    /* arrows between the boxes */
+    @media (min-width: 768px) {
+      .hm-steps li + li::before { content: "\2192"; position: absolute; left: -32px; top: 50%; transform: translateY(-50%); font-size: 24px; color: #374151; }
+    }
+    @media (max-width: 767px) {
+      .hm-steps-in { min-height: 0; padding: 40px 16px; }
+      .hm-steps li { padding: 20px; }
+      .hm-steps li strong { font-size: 17px; }
+    }
+    html[data-theme="dark"] .hm-steps li { background: #15181d; border-color: #2a2f37; border-top-color: #c00d1e; box-shadow: none; }
+    html[data-theme="dark"] .hm-steps li strong { color: #d1d5db; }
+    html[data-theme="dark"] .hm-steps li p { color: #9ca3af; }
+    html[data-theme="dark"] .hm-steps li + li::before { color: #d1d5db; }
+    html[data-theme="dark"] .hm-steps { background: #1c2027; border-color: #2a2f37; }
+    html[data-theme="dark"] .hm-steps li i, html[data-theme="dark"] .hm-steps .hm-arrow, html[data-theme="dark"] .hm-steps li span { color: #d1d5db; }
+    /* Key clients logo row */
+    .hm-proof { padding: 40px 0 32px; }
+    .hm-proof-head { text-align: center; margin-bottom: 24px; }
+    .hm-marquee { overflow: hidden; -webkit-mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+    .hm-marquee ul { list-style: none; margin: 0; padding: 8px 0; display: flex; width: max-content; animation: hm-run 60s linear infinite; }
+    .hm-marquee:hover ul, .hm-marquee:focus-within ul { animation-play-state: paused; }
+    .hm-marquee li { flex: none; width: 168px; margin-right: 24px; display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
+    .hm-marquee img { height: 64px; width: auto; max-width: 140px; object-fit: contain; }
+    .hm-marquee span { font-size: 11px; font-weight: 700; line-height: 1.3; color: #6b7280; }
+    @keyframes hm-run { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+    @media (prefers-reduced-motion: reduce) { .hm-marquee ul { animation: none; } .hm-marquee { overflow-x: auto; } }
+    html[data-theme="dark"] .hm-marquee span { color: #9ca3af; }
+    html[data-theme="dark"] .hm-marquee img { background: #fff; border-radius: 8px; padding: 4px; }
+    html[data-theme="dark"] .hm-h2 { color: #d1d5db; }
+  </style>
 </head>
 
 <body class="bg-gray-50 text-black font-sans overflow-x-hidden">
@@ -36,7 +168,7 @@
     </section>
     -->
 
-    <section class="hero-section relative w-full h-440 md:h-440 aspect-video bg-white overflow-hidden hero-mobile">
+    <section class="hero-section home-banner relative w-full bg-white overflow-hidden hero-mobile">
       <div class="relative hero-carousel home-hero-carousel">
         <div class="hero-carousel-viewport">
           <div id="home-hero-carousel-track" class="hero-carousel-track"></div>
@@ -56,11 +188,11 @@
           </p>
 
           <div class="mt-5 flex flex-wrap gap-3">
-            <a id="home-hero-btn-primary" href="dry-charge.html" class="btn-primary inline-flex items-center gap-2">
+            <a id="home-hero-btn-primary" href="/lead-acid" class="btn-primary inline-flex items-center gap-2">
               <i class="fa-solid fa-arrow-right"></i>
               <span id="home-hero-btn-primary-label">Explore</span>
             </a>
-            <a id="home-hero-btn-secondary" href="support.html" class="btn-secondary inline-flex items-center gap-2">
+            <a id="home-hero-btn-secondary" href="support.html#support-content" class="btn-secondary inline-flex items-center gap-2">
               <i class="fa-solid fa-headset"></i>
               <span id="home-hero-btn-secondary-label">Contact</span>
             </a>
@@ -69,12 +201,42 @@
       </div>
     </section>
 
+    <!-- Stats bar -->
+    <section class="hm-stats" aria-label="Alaska Batteries in numbers">
+      <ul>
+        <li><b>5 <span>GWh</span></b><small>Annual Production</small></li>
+        <li><b>2,000<span>+</span></b><small>Skilled Employees</small></li>
+        <li><b>500<span>+</span></b><small>Authorized Sellers</small></li>
+        <li><b>100<span>+</span></b><small>Flagship Model Shops</small></li>
+        <li><b>20<span>+</span></b><small>Acres of Factories</small></li>
+      </ul>
+    </section>
+
     <!-- Products Showcase Section -->
     <section id="products-showcase" class="products-showcase bg-white md:py-8">
       <div class="products-carousel-wrapper relative">
         <div class="products-carousel" id="productsCarousel">
-          <!-- Automotive (Application) -->
-          <a href="dry-charge.html#Automotive"
+          <!-- Battery Finder -->
+          <a href="battery-finder.html#bf-root"
+            class="product-card product-card-sm group relative bg-white rounded-2xl overflow-hidden shadow-lg">
+            <picture>
+              <img src="assets/home/battery-finder-mobile.webp"
+                alt="Blue sports car on a coastal road behind an Alaska battery">
+            </picture>
+            <div class="product-card-content items-start text-left">
+              <div class="product-card-title-wrap">
+                <h3 class="product-card-title">Battery Finder</h3>
+              </div>
+              <div class="product-card-action flex items-start">
+                <button class="btn-secondary btn-lg">
+                  Find My Battery
+                </button>
+              </div>
+            </div>
+          </a>
+
+          <!-- Lead-Acid Batteries -->
+          <a href="/lead-acid"
             class="product-card group relative bg-white rounded-2xl overflow-hidden shadow-lg">
             <picture>
               <source srcset="assets/mobile/automotive-mob.webp" media="(max-width: 767px)">
@@ -84,7 +246,7 @@
             </picture>
             <div class="product-card-content items-start text-left">
               <div class="product-card-title-wrap">
-                <h3 class="product-card-title">Automotive</h3>
+                <h3 class="product-card-title">Lead-Acid Batteries</h3>
               </div>
               <div class="product-card-action flex items-start">
                 <button class="btn-secondary btn-lg">
@@ -94,8 +256,8 @@
             </div>
           </a>
 
-          <!-- Solar (Application) -->
-          <a href="dry-charge.html#Solar"
+          <!-- Lithium Batteries -->
+          <a href="/solutions/lithium-ion"
             class="product-card group relative bg-white rounded-2xl overflow-hidden shadow-lg">
             <picture>
               <source srcset="assets/mobile/solar-mob.webp" media="(max-width: 767px)">
@@ -104,7 +266,7 @@
             </picture>
             <div class="product-card-content">
               <div class="product-card-title-wrap">
-                <h3 class="product-card-title">Solar</h3>
+                <h3 class="product-card-title">Lithium Batteries</h3>
               </div>
               <div class="product-card-action">
                 <button class="btn-secondary btn-lg">
@@ -114,8 +276,8 @@
             </div>
           </a>
 
-          <!-- Industrial (Application) -->
-          <a href="dry-charge.html#Industrial"
+          <!-- Inverters -->
+          <a href="/solutions/inverters"
             class="product-card group relative bg-white rounded-2xl overflow-hidden shadow-lg">
             <picture>
               <source srcset="assets/mobile/industrial-mob.webp" media="(max-width: 767px)">
@@ -125,11 +287,30 @@
             </picture>
             <div class="product-card-content">
               <div class="product-card-title-wrap">
-                <h3 class="product-card-title">Industrial</h3>
+                <h3 class="product-card-title">Inverters</h3>
               </div>
               <div class="product-card-action">
                 <button class="btn-secondary btn-lg">
                   Learn More
+                </button>
+              </div>
+            </div>
+          </a>
+
+          <!-- Solar Calculator -->
+          <a href="solar-calculator.html#solar-calculator"
+            class="product-card product-card-sm group relative bg-white rounded-2xl overflow-hidden shadow-lg">
+            <picture>
+              <img src="assets/home/solar-calculator-card.webp"
+                alt="House with solar panels on the roof and an Alaska Solar 100 battery">
+            </picture>
+            <div class="product-card-content items-start text-left">
+              <div class="product-card-title-wrap">
+                <h3 class="product-card-title">Solar Calculator</h3>
+              </div>
+              <div class="product-card-action flex items-start">
+                <button class="btn-secondary btn-lg">
+                  Calculate
                 </button>
               </div>
             </div>
@@ -148,46 +329,53 @@
       <!-- Pagination Dots -->
       <div class="carousel-dots" id="carouselDots"></div>
 
-      <!-- CTA Button -->
-      <div class="flex justify-center mt-2 md:mt-8">
-        <div class="cta-shell">
-          <button onclick="openBatteryFinder()" class="btn-cta">
-            <i class="fa-solid fa-bolt"></i> Choose Your Ideal Solution
-          </button>
-        </div>
-      </div>
     </section>
     <!-- Quick Links Section -->
 
 
-    <!-- Graphite Technology Section - Two Image Flex Layout -->
+    <!-- Request a Quote: a light process band with three step boxes -->
+    <section class="hm-steps" aria-labelledby="hm-steps-h">
+      <div class="hm-steps-in">
+        <div class="hm-steps-head">
+          <h2 id="hm-steps-h" class="hm-h2">Ordering <span>Bulk?</span></h2>
+          <a class="btn-primary btn-lg hm-steps-btn" href="quote.html#quote-content">Request a Quote</a>
+        </div>
+        <ol>
+          <li><i class="fa-solid fa-boxes-stacked" aria-hidden="true"></i><div><strong>1. Choose Products</strong><p>Pick the models and quantities you need.</p></div></li>
+          <li><i class="fa-regular fa-file-lines" aria-hidden="true"></i><div><strong>2. Send Your Request</strong><p>Fill in the quote form, or message our sales team on WhatsApp.</p></div></li>
+          <li><i class="fa-solid fa-tags" aria-hidden="true"></i><div><strong>3. Get Prices &amp; Availability</strong><p>Our sales team replies with prices and availability.</p></div></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- Battery Finder + Factory Tour - Two Image Flex Layout -->
     <section class="bg-white">
       <div class=" mx-auto px-6 py-4 md:py-8">
         <!-- Two Image Flex Container -->
         <div class="flex flex-col md:flex-row gap-6 md:gap-8 items-stretch">
-          <!-- Image 1 - 75% width on desktop, 100% on mobile -->
-          <div class="w-full md:w-3/4 h-[500px] md:h-96 md:min-h-[580px] rounded-xl overflow-hidden shadow-lg relative">
-            <img src="assets/Tech-landing.webp" data-mobile="assets/technology/mobile/tech-landing-mob.webp"
-              alt="Graphite Technology Image 1"
-              class="w-full h-full object-cover object-[50%_25%] md:object-cover md:object-[55%_75%]" />
-            <!-- Text Overlay -->
+          <!-- Technology: Graphite Enhanced + Calcium Silver -->
+          <div class="home-tech-card w-full md:w-3/4 h-[500px] md:h-96 md:min-h-[580px] rounded-xl overflow-hidden shadow-lg relative">
+            <img src="assets/home/technology.webp"
+              alt="Battery production line with control panels at the Alaska Batteries factory"
+              class="w-full h-full object-cover object-[50%_50%]" />
+            <div class="home-tech-logos">
+              <a href="graphite.html#tech-features" aria-label="Graphite Enhanced Technology"><img src="assets/tech-inv.png" alt="" loading="lazy" /></a>
+              <a href="CaAg.html#tech-features" aria-label="Calcium Silver Technology"><img src="assets/calcium_silver_logo-inv.png" alt="" loading="lazy" /></a>
+            </div>
             <div class="absolute inset-0 flex flex-col items-start justify-end p-6 md:p-8">
               <div class="w-full relative h-full">
                 <span class="graphite-gradient absolute left-0 right-0 top-0 z-0"
                   style="background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.0) 100%);"></span>
                 <div class="graphite-content relative z-10 w-full h-full flex flex-col justify-between">
                   <div class="graphite-heading">
-                    <h3
-                      class="text-white font-normal text-2xl md:text-5xl text-left mb-2 leading-normal drop-shadow-xl">
-                      Experience the Power of <br /> <span class=" uppercase font-black">Graphite
-                        Technology</span>
+                    <h3 class="text-white font-normal text-2xl md:text-5xl text-left mb-2 leading-normal drop-shadow-xl">
+                      Innovation <br /> <span class="uppercase font-black">In Action</span>
                     </h3>
                   </div>
 
-                  <div class="graphite-cta self-start">
-                    <a href="graphite.html"
-                      class="px-6 bg-[#c00d1e] text-white font-bold rounded-lg shadow-md hover:bg-[#a00016] transition-colors duration-200 text-base md:text-lg whitespace-nowrap btn-secondary btn-sm md:btn-lg">Discover
-                      More</a>
+                  <div class="home-tech-links">
+                    <a href="graphite.html#tech-features" class="btn-secondary btn-sm md:btn-lg">Graphite Enhanced</a>
+                    <a href="CaAg.html#tech-features" class="btn-secondary btn-sm md:btn-lg">Calcium Silver</a>
                   </div>
                 </div>
               </div>
@@ -195,9 +383,9 @@
           </div>
 
           <!-- Image 2 - Remaining width on desktop, 100% on mobile -->
-          <div class=" w-full h-[350px] md:max-w-[500px] md:h-96 md:min-h-[580px] rounded-xl overflow-hidden shadow-lg
+          <div class="home-tour-card w-full h-[350px] md:max-w-[500px] md:h-96 md:min-h-[580px] rounded-xl overflow-hidden shadow-lg
                 relative">
-            <img src="assets/Tech-landing-2.webp" alt="Graphite Technology Image 2"
+            <img src="assets/Tech-landing-2.webp" alt="Inside the Alaska Batteries factory"
               class="w-full h-full object-cover object-[55%_50%]" />
             <div class="absolute inset-0 bg-black/10 flex flex-col justify-between items-start p-6 md:p-8">
               <span class="graphite-gradient absolute left-0 right-0 top-0 z-0"
@@ -215,12 +403,12 @@
       </div>
     </section>
 
-    <section class="bg-white border-t-2 border-gray-100 py-8">
+
+    <section class="bg-white py-6 md:py-8" aria-label="News, FAQs and gallery">
       <div class="mx-auto px-6">
-        <div
-          class="flex gap-4 w-full overflow-x-auto md:overflow-visible md:grid md:grid-cols-3 md:gap-6 no-scrollbar snap-x snap-mandatory md:snap-none">
+        <div class="home-cards">
           <!-- News Card -->
-          <a href="vault.html#blogs"
+          <a href="news.html#articles"
             class="vault-card h-[150px] md:h-full flex-shrink-0 w-[85%] md:flex-1 md:w-auto flex flex-col rounded-xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-transform transition-shadow duration-300 snap-start">
             <div class="relative h-48 overflow-hidden bg-gray-100">
               <img src="assets/vault/news.webp" data-mobile="assets/vault/mobile/news-mobile.webp" alt="News"
@@ -230,9 +418,8 @@
               <h3 class="text-xl md:text-2xl font-extrabold uppercase text-center text-[#c00d1e]">News</h3>
             </div>
           </a>
-
           <!-- FAQs Card -->
-          <a href="vault.html#faqs"
+          <a href="faqs.html#faq-list"
             class="vault-card h-[150px] md:h-full flex-shrink-0 w-[85%] md:flex-1 md:w-auto flex flex-col rounded-xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-transform transition-shadow duration-300 snap-start">
             <div class="relative h-48 overflow-hidden bg-gray-100">
               <img src="assets/vault/faqs.webp" alt="FAQs" class="w-full h-full object-cover object-[90%_45%]">
@@ -241,9 +428,8 @@
               <h3 class="text-xl md:text-2xl font-extrabold  text-center text-[#c00d1e]">FAQs</h3>
             </div>
           </a>
-
           <!-- Gallery Card -->
-          <a href="vault.html#gallery"
+          <a href="vault.html#gallery-content"
             class="vault-card h-[150px] md:h-full flex-shrink-0 w-[85%] md:flex-1 md:w-auto flex flex-col rounded-xl overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl hover:-translate-y-1 transition-transform transition-shadow duration-300 snap-start">
             <div class="relative h-48 overflow-hidden bg-gray-100">
               <img src="assets/vault/gallery.webp" alt="Gallery" class="w-full h-full object-cover object-[75%_45%]">
@@ -258,18 +444,18 @@
 
     <section class="bg-white">
       <div
-        class="relative overflow-hidden rounded-xl h-auto md:h-[75svh] mx-6 md:px-6 bg-gray-100 shadow-xl border-t-2 border-gray-200 mb-4">
+        class="presence-card relative overflow-hidden rounded-xl h-auto md:h-[75svh] mx-6 md:px-6 bg-gray-100 shadow-xl border-t-2 border-gray-200 mb-4">
         <div class="absolute inset-0">
           <img src="assets/dealer-map-bg.webp" data-mobile="assets/dealer-map-bg.webp" alt="Alaska Dealer Map"
             class="w-full h-full object-cover object-top md:object-center blur-sm" />
-          <div class="absolute inset-0"></div>
+          <div class="absolute inset-0 map-shade"></div>
         </div>
 
         <div class="relative z-10 mx-auto px-2 md:px-6 pb-5 md:py-8 h-full">
           <div class="flex flex-col md:block">
             <img src="assets/dealer-map.webp" alt="Dealer Map Mobile"
-              class="block md:hidden w-full h-72 sm:h-80 object-cover mx-auto" />
-            <div class="w-full max-w-[320px] md:max-w-xl mx-auto md:mx-0 text-center md:text-left md:mt-32">
+              class="presence-map-sm block md:hidden w-full h-72 sm:h-80 object-cover mx-auto" />
+            <div class="presence-text w-full max-w-[320px] md:max-w-xl mx-auto md:mx-0 text-center md:text-left md:mt-32">
               <div>
                 <h2 class="font-black text-black text-5xl md:text-7xl tracking-tight leading-tight pb-2 md:pb-6">
                   Our <span class="text-[#c00d1e]">Presence</span>
@@ -287,21 +473,51 @@
 
               <!-- CTA Buttons -->
               <div class="flex md:flex-row flex-col gap-2 md:gap-3 justify-center md:justify-start pb-4 md:pt-4">
-                <a href="dealers.html" class="btn-cta btn-compact flex items-center justify-center mb-1 md:mb-0">
+                <a href="dealers.html#partner-finder" class="btn-cta btn-compact flex items-center justify-center mb-1 md:mb-0">
                   <i class="fa-solid fa-map-location-dot"></i> Find A Partner
                 </a>
-                <a href="support.html" class="btn-cta-alt btn-compact flex items-center justify-center">
+                <a href="support.html#support-content" class="btn-cta-alt btn-compact flex items-center justify-center">
                   <i class="fa-solid fa-headset"></i> Get Support
                 </a>
               </div>
             </div>
             <!-- Decorative map image shown only on md+ screens, hidden on mobile/tablet -->
             <img src="assets/dealer-map.webp" alt="Dealer Map"
-              class="hidden md:block absolute right-2 md:right-6 lg:right-12 h-[450px] w-[320px] top-[-100px] md:w-[800px] md:h-[850px] md:top-[-160px] md:mt-6">
+              class="presence-map-lg hidden md:block absolute right-2 md:right-6 lg:right-12 h-[450px] w-[320px] top-[-100px] md:w-[800px] md:h-[850px] md:top-[-160px] md:mt-6">
           </div>
         </div>
     </section>
 
+
+
+    <!-- Key clients: a slowly moving row of logos (pauses on hover) -->
+    <section class="hm-proof bg-white" aria-labelledby="hm-clients">
+      <div class="hm-proof-head hm-wrap">
+        <h2 id="hm-clients" class="hm-label hm-label-lg">Key Clients</h2>
+      </div>
+      <div class="hm-marquee">
+        <ul id="hmLogos">
+          <li><img src="assets/about/clients/pakistan-army.webp" alt="" loading="lazy"><span>Pakistan Army</span></li>
+          <li><img src="assets/about/clients/pakistan-navy.webp" alt="" loading="lazy"><span>Pakistan Navy</span></li>
+          <li><img src="assets/about/clients/pakistan-air-force.webp" alt="" loading="lazy"><span>Pakistan Air Force</span></li>
+          <li><img src="assets/about/clients/pof.webp" alt="" loading="lazy"><span>Pakistan Ordnance Factories</span></li>
+          <li><img src="assets/about/clients/pac-kamra.webp" alt="" loading="lazy"><span>Pakistan Aeronautical Complex, Kamra</span></li>
+          <li><img src="assets/about/clients/hit.webp" alt="" loading="lazy"><span>Heavy Industries Taxila</span></li>
+          <li><img src="assets/about/clients/nrtc.webp" alt="" loading="lazy"><span>National Radio Telecom Corporation</span></li>
+          <li><img src="assets/about/clients/nlc.webp" alt="" loading="lazy"><span>National Logistics Corporation</span></li>
+          <li><img src="assets/about/clients/fwo.webp" alt="" loading="lazy"><span>Frontier Works Organization</span></li>
+          <li><img src="assets/about/clients/pakistan-rangers.webp" alt="" loading="lazy"><span>Pakistan Rangers</span></li>
+          <li><img src="assets/about/clients/ict-police.webp" alt="" loading="lazy"><span>Islamabad Capital Territory Police</span></li>
+          <li><img src="assets/about/clients/krl.webp" alt="" loading="lazy"><span>Khan Research Laboratories</span></li>
+          <li><img src="assets/about/clients/phf.webp" alt="" loading="lazy"><span>Pakistan Hockey Federation</span></li>
+          <li><img src="assets/about/clients/ssgc.webp" alt="" loading="lazy"><span>Sui Southern Gas Company</span></li>
+          <li><img src="assets/about/clients/sazgar.webp" alt="" loading="lazy"><span>Sazgar</span></li>
+          <li><img src="assets/about/clients/faw.webp" alt="" loading="lazy"><span>FAW</span></li>
+          <li><img src="assets/about/clients/pak-star.webp" alt="" loading="lazy"><span>Pak Star</span></li>
+          <li><img src="assets/about/clients/united.webp" alt="" loading="lazy"><span>United (4-Stroke Motorcycles)</span></li>
+        </ul>
+      </div>
+    </section>
 
   </main>
 
@@ -392,6 +608,36 @@
   "inLanguage":"en-PK"
 }
 </script>
+  <script>
+    // Home carousel: Lead-Acid, Lithium and Inverters cards match the "Our Technology" card;
+    // Battery Finder and Solar Calculator match "A Tour of Our Factory" (tablets and computers).
+    (function () {
+      var tech = document.querySelector(".home-tech-card");
+      var tour = document.querySelector(".home-tour-card");
+      var cards = document.querySelectorAll("#productsCarousel .product-card");
+      if (!tech || !tour || !cards.length) return;
+      function size() {
+        var wide = window.matchMedia("(min-width: 768px)").matches;
+        var t = tech.getBoundingClientRect(), f = tour.getBoundingClientRect();
+        cards.forEach(function (c) {
+          var r = c.classList.contains("product-card-sm") ? f : t;
+          c.classList.toggle("is-sized", wide);
+          c.style.width = wide ? Math.round(r.width) + "px" : "";
+          c.style.height = wide ? Math.round(r.height) + "px" : "";
+        });
+      }
+      size();
+      window.addEventListener("resize", size);
+      window.addEventListener("load", size);
+    })();
+  </script>
+  <script>
+    // Key clients: append a hidden copy of the logos so the moving row loops seamlessly
+    (function () {
+      var ul = document.getElementById("hmLogos");
+      if (ul) Array.prototype.slice.call(ul.children).forEach(function (li) { var c = li.cloneNode(true); c.setAttribute("aria-hidden", "true"); ul.appendChild(c); });
+    })();
+  </script>
   <script src="js/components.js"></script>
   <script src="js/main.js"></script>
   <script src="js/animations.js"></script>

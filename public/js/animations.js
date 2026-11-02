@@ -39,7 +39,7 @@ function openBatteryFinder() {
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
-      
+
       <div class="space-y-6">
         <div>
           <label class="block text-sm font-black uppercase mb-3 text-gray-700">What's Your Primary Use?</label>
@@ -65,15 +65,15 @@ function openBatteryFinder() {
                 <p class="text-base text-gray-500">UPS, Backup Systems</p>
               </div>
             </button>
-            
+
           </div>
         </div>
 
         <div class="pt-6 border-t border-gray-200">
-          
+
           <div class="flex gap-4">
             <button onclick="closeBatteryFinder()" class="flex-1 px-6 py-3 border-2 border-gray-200 font-bold uppercase text-sm rounded-lg hover:border-[#c00d1e] transition-all">Cancel</button>
-            <a href="dry-charge.html" class="flex-1 px-6 py-3 bg-[#c00d1e] text-white font-bold uppercase text-sm rounded-lg hover:bg-black transition-all text-center">View All Batteries</a>
+            <a href="dry-charge.html#search-section" class="flex-1 px-6 py-3 bg-[#c00d1e] text-white font-bold uppercase text-sm rounded-lg hover:bg-black transition-all text-center">View All Batteries</a>
           </div>
         </div>
       </div>

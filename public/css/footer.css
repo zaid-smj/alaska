@@ -1,0 +1,533 @@
+/* =====================================================================
+   Alaska Batteries — site footer (markup: footerHTML in js/components.js)
+   Follows the site theme (html[data-theme]): light grey in Light mode,
+   dark charcoal in Dark mode. Brand red (#c00d1e) and the standard text
+   white (#d1d5db) match the rest of the site.
+   ===================================================================== */
+
+/* Light theme (default) */
+.afoot {
+  --f-bg: #f9fafb;
+  --f-bg-2: #eef0f3;
+  /* one text colour for everything in the footer (same as the phone numbers / email) */
+  --f-ink: #374151;
+  --f-ink-2: #374151;
+  --f-muted: #374151;
+  --f-line: #e5e7eb;
+  --f-red: #c00d1e; /* brand red: fills and rules */
+  --f-red-text: #c00d1e; /* brand red as text on light grey (5.6:1) */
+  --f-focus: #c00d1e;
+  --f-pressed-bg: #111827;
+  --f-pressed-ink: #ffffff;
+  background: var(--f-bg);
+  color: var(--f-ink-2);
+  border-top: 3px solid var(--f-red);
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+}
+/* Dark theme */
+html[data-theme="dark"] .afoot {
+  --f-bg: #15181d;
+  --f-bg-2: #1c2027;
+  --f-ink: #d1d5db;
+  --f-ink-2: #d1d5db;
+  --f-muted: #d1d5db;
+  --f-line: #2a2f37;
+  --f-red-text: #c00d1e; /* same brand red as light mode */
+  --f-focus: #c00d1e;
+  --f-pressed-bg: #d1d5db;
+  --f-pressed-ink: #111827;
+}
+.afoot a {
+  color: inherit;
+  text-decoration: none;
+  transition:
+    color 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+}
+.afoot a:focus-visible,
+.afoot button:focus-visible,
+.afoot .theme-auto:focus-visible {
+  outline: 2px solid var(--f-focus);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.afoot-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 44px 24px 0;
+}
+
+/* ---------- main area ---------- */
+.afoot-main {
+  display: grid;
+  gap: 36px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 768px) {
+  .afoot-main {
+    grid-template-columns: minmax(240px, 1fr) minmax(220px, auto);
+    grid-template-areas: "brand social" "nav nav";
+    column-gap: 48px;
+  }
+  .afoot-brand {
+    grid-area: brand;
+  }
+  .afoot-social {
+    grid-area: social;
+  }
+  .afoot-nav {
+    grid-area: nav;
+  }
+}
+@media (min-width: 1200px) {
+  .afoot-main {
+    grid-template-columns: 290px minmax(0, 1fr) auto;
+    grid-template-areas: "brand nav social";
+    column-gap: 48px;
+    align-items: start;
+  }
+}
+
+/* ---------- branding + contact ---------- */
+.afoot-tagline {
+  margin: 0 0 22px;
+  text-align: center;
+  color: var(--f-ink); /* red on hover (see "Hover" rule at the end) */
+  line-height: 0;
+}
+/* Urdu tagline artwork, painted in the footer text colour so it follows the theme and hover */
+.afoot-tagline-img {
+  display: inline-block;
+  width: 200px;
+  aspect-ratio: 640 / 171;
+  background-color: currentColor;
+  -webkit-mask: url("../assets/brand/urdu-tagline.png") center / contain no-repeat;
+  mask: url("../assets/brand/urdu-tagline.png") center / contain no-repeat;
+}
+.afoot-contact {
+  font-style: normal; /* <address> */
+  display: grid;
+  gap: 10px;
+  text-align: center;
+}
+.afoot-contact p {
+  margin: 0;
+  color: var(--f-muted);
+  overflow-wrap: anywhere;
+}
+.afoot-contact .row {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: center;
+}
+.afoot-contact .row i {
+  margin-top: 5px;
+  width: 14px;
+  color: var(--f-muted);
+  font-size: 13px;
+  flex: none;
+}
+.afoot-phones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 14px;
+  justify-content: center;
+}
+/* Phone numbers and email: normal text, red on hover / keyboard focus */
+.afoot-phones a,
+.afoot-email {
+  color: var(--f-ink-2);
+  font-weight: 400;
+  white-space: nowrap;
+}
+.afoot-email {
+  overflow-wrap: anywhere;
+  white-space: normal;
+}
+@media (min-width: 768px) {
+  .afoot-contact,
+  .afoot-contact .row,
+  .afoot-phones {
+    text-align: left;
+    justify-content: flex-start;
+  }
+  .afoot-tagline {
+    text-align: center;
+  }
+}
+
+/* ---------- navigation groups (same groups and order as the main menu) ---------- */
+.afoot-nav {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px 20px;
+}
+@media (min-width: 640px) {
+  .afoot-nav {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1200px) {
+  .afoot-nav {
+    grid-template-columns: repeat(6, minmax(0, auto));
+    justify-content: space-between;
+    gap: 28px 28px;
+  }
+}
+@media (max-width: 339px) {
+  .afoot-nav {
+    grid-template-columns: 1fr;
+  }
+}
+.afoot-group h2 {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--f-ink);
+}
+.afoot-group ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 2px;
+}
+.afoot-group a {
+  display: inline-block;
+  padding: 5px 0; /* comfortable tap target */
+  color: var(--f-muted);
+}
+.afoot-group a[aria-current="page"] {
+  color: var(--f-ink);
+}
+.afoot-group a[aria-current="page"] {
+  box-shadow: inset 0 -2px 0 var(--f-red);
+}
+
+/* ---------- social icons: vertical W — a column of 4 beside an offset column of 3 ---------- */
+.afoot-social h2 {
+  margin: 0 0 12px;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--f-ink);
+  text-align: center;
+}
+.afoot-social {
+  --soc: 44px; /* icon tap size */
+  --soc-gap: 8px;
+}
+.afoot-social-cols {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 6px;
+}
+.afoot-social-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--soc-gap);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* second column sits half a step lower, between the icons of the first */
+.afoot-social-col.is-offset {
+  margin-top: calc((var(--soc) + var(--soc-gap)) / 2);
+}
+.afoot-social a {
+  display: grid;
+  place-items: center;
+  width: var(--soc);
+  height: var(--soc);
+  border-radius: 999px;
+  color: var(--f-ink-2);
+  font-size: 21px;
+}
+
+@media (max-width: 359px) {
+  .afoot-social {
+    --soc: 40px;
+  }
+  .afoot-social a {
+    font-size: 19px;
+  }
+}
+
+/* ---------- bottom bar ---------- */
+.afoot-bottom {
+  margin-top: 40px;
+  padding: 18px 0 22px;
+  border-top: 1px solid var(--f-line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  text-align: center;
+}
+.afoot-bottom-left {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 6px 18px;
+}
+.afoot-copy {
+  margin: 0;
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--f-muted);
+}
+@media (min-width: 900px) {
+  .afoot-bottom {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .afoot-bottom-left {
+    justify-content: flex-start;
+  }
+}
+
+/* ---------- theme selector: "Auto" text + small day/night slider ---------- */
+.footer-theme {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+/* "Auto" is plain clickable text, not a button */
+.theme-auto {
+  font-size: 13px;
+  user-select: none;
+  color: var(--f-ink-2);
+  cursor: pointer;
+  padding: 4px 0;
+}
+.theme-auto[aria-pressed="true"] {
+  color: var(--f-red-text);
+}
+/* day / night slider */
+.theme-slider {
+  position: relative;
+  width: 46px;
+  height: 24px;
+  padding: 0;
+  border: 1px solid var(--f-line);
+  border-radius: 999px;
+  background: #e8edf3;
+  cursor: pointer;
+  flex: none;
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+.theme-slider i {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 10px;
+  pointer-events: none;
+}
+.theme-slider .fa-sun {
+  left: 6px;
+  color: #f59e0b;
+}
+.theme-slider .fa-moon {
+  right: 6px;
+  color: #9ca3af;
+}
+.theme-slider .knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  transition: transform 0.25s ease;
+}
+/* day: knob covers the moon side, sun visible on the left */
+.theme-slider[aria-checked="false"] .knob {
+  transform: translateX(22px);
+}
+/* night */
+.theme-slider[aria-checked="true"] {
+  background: #2b313b;
+  border-color: #3a414c;
+}
+.theme-slider[aria-checked="true"] .knob {
+  transform: translateX(0);
+  background: #d1d5db;
+}
+.theme-slider[aria-checked="true"] .fa-moon {
+  color: #d1d5db;
+}
+.theme-slider:hover {
+  border-color: var(--f-red);
+}
+
+/* Tagline links to the home page */
+.afoot-tagline a {
+  color: inherit;
+  display: inline-block;
+}
+
+
+/* ---------- Hover: every link and control in the footer turns red (no bold) ---------- */
+.afoot a:hover,
+.afoot a:focus-visible,
+.afoot-group a[aria-current="page"]:hover,
+.theme-auto:hover,
+.theme-auto:focus-visible {
+  color: var(--f-red-text);
+  text-decoration: none;
+}
+
+/* =====================================================================
+   Mobile (< 768px) — everything centred; desktop/tablet unchanged
+   ===================================================================== */
+@media (max-width: 767px) {
+  /* icon sits right next to its text (no gap from a centred block) */
+  .afoot-contact .row {
+    display: block;
+    text-align: center;
+  }
+  .afoot-contact .row i {
+    display: inline-block;
+    width: auto;
+    margin: 0 6px 0 0;
+    vertical-align: 0;
+  }
+  .afoot-contact .row > p,
+  .afoot-contact .row > .afoot-phones {
+    display: inline;
+  }
+  .afoot-phones a + a {
+    margin-left: 12px;
+  }
+
+  /* link groups: centred */
+  .afoot-group {
+    text-align: center;
+  }
+
+  /* Follow us: horizontal W — 4 icons on top, 3 centred below */
+  .afoot-social-cols {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--soc-gap);
+  }
+  .afoot-social-col {
+    flex-direction: row;
+  }
+  .afoot-social-col.is-offset {
+    margin-top: 0;
+  }
+}
+
+/* ---------- Cookie notice (injected by components.js) ----------
+   A translucent bar across the full width of the screen, along the bottom. */
+.acookie {
+  position: fixed;
+  z-index: 60;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.82);
+  -webkit-backdrop-filter: saturate(160%) blur(12px);
+  backdrop-filter: saturate(160%) blur(12px);
+  border-top: 1px solid rgba(17, 24, 39, 0.1);
+  box-shadow: 0 -6px 24px rgba(17, 24, 39, 0.08);
+  color: #374151;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  padding-bottom: env(safe-area-inset-bottom);
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+.acookie.is-in {
+  opacity: 1;
+  transform: none;
+}
+.acookie-in {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px 24px;
+}
+.acookie p {
+  margin: 0;
+  flex: 1;
+}
+.acookie a {
+  color: #c00d1e;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.acookie-btns {
+  display: flex;
+  gap: 10px;
+  flex: none;
+}
+.acookie-btn {
+  padding: 9px 16px;
+  border: 1.5px solid #c00d1e;
+  border-radius: 8px;
+  background: transparent;
+  color: #c00d1e;
+  font: inherit;
+  font-weight: 800;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.acookie-btn.is-primary {
+  background: #c00d1e;
+  color: #ffffff;
+}
+.acookie-btn:hover {
+  filter: brightness(1.08);
+}
+.acookie-btn:focus-visible,
+.acookie a:focus-visible {
+  outline: 2px solid #c00d1e;
+  outline-offset: 2px;
+}
+@media (max-width: 767px) {
+  .acookie-in {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+  }
+  .acookie-btns .acookie-btn {
+    flex: 1;
+  }
+}
+html[data-theme="dark"] .acookie {
+  background: rgba(21, 24, 29, 0.82);
+  border-top-color: rgba(255, 255, 255, 0.08);
+  color: #d1d5db;
+  box-shadow: 0 -6px 24px rgba(0, 0, 0, 0.35);
+}
+html[data-theme="dark"] .acookie-btn:not(.is-primary) {
+  color: #d1d5db;
+  border-color: #6b7280;
+}
+@media (prefers-reduced-motion: reduce) {
+  .acookie {
+    transition: none;
+  }
+}

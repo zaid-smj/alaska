@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>News | Alaska Batteries Pakistan</title>
+  <meta name="description"
+    content="News, stories and battery advice from Alaska Batteries: choosing the right battery, travel checklists, power saving, summer care, charging, storage and recycling.">
+  <meta name="keywords"
+    content="Alaska Batteries news, battery blog Pakistan, battery tips, battery maintenance, solar battery advice">
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
+  <link rel="canonical" href="https://alaskabatteries.com/news.html">
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
+</head>
+
+<body class="bg-white overflow-x-hidden">
+  <div id="header-placeholder"></div>
+
+  <main class="bg-white">
+    <section id="blogs"
+      class="page-banner border-b border-gray-10 flex items-center justify-center text-center bg-white overflow-hidden group">
+      <div class="relative md:h-[400px] w-full flex flex-col banner-wrapper">
+        <img src="assets/vault/news.webp" alt="News"
+          class="w-full h-full object-cover object-[65%_10%] transition-transform duration-1000 group-hover:scale-105" />
+        <div id="hero-text-box"
+          class="absolute bottom-1 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[450px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80">
+          <h1 class="text-3xl md:text-5xl font-bold uppercase text-left tracking-normal leading-tight text-white">News
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <section id="articles" class="py-4 md:py-8 border-b border-gray-100 bg-white overflow-hidden" style="scroll-margin-top:100px">
+      <div class="container mx-auto px-[2px] md:px-6">
+        <div class="flex flex-col md:flex-row justify-start items-start md:items-start mb-6 gap-2">
+          <div class="text-left w-full">
+            <div class="relative w-full lg:w-[calc((100%-40px)/3)] h-12">
+              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-30">
+                <i class="fa-solid fa-magnifying-glass text-gray-400 text-sm"></i>
+              </div>
+              <input id="blog-search" onkeyup="filterBlogs()" type="text" placeholder="Search articles..."
+                class="block w-full h-full pl-12 pr-4 bg-gray-50 border border-gray-100 rounded-xl text-sm outline-none focus:border-[#c00d1e] transition-all" />
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop Blog View - Horizontal Scroll -->
+        <div id="blog-scroll-container" class="hidden md:block no-scrollbar">
+          <div class="blog-item original" onclick="openBlogModal('choosing-guide')">
+            <img src="assets/vault/blogs/best-battery-blog-1.webp" alt="Guide" loading="lazy" />
+            <div class="wash-layer"></div>
+            <div class="text-protection"></div>
+            <div class="blog-content">
+              <p class="category-tag text-white">Guide</p>
+              <h4 class="blog-title text-white">Best Battery for Vehicle or Solar</h4>
+            </div>
+          </div>
+          <div class="blog-item original" onclick="openBlogModal('eid-checklist')">
+            <img src="assets/vault/blogs/eid-blog-2.webp" alt="Travel" loading="lazy" />
+            <div class="wash-layer"></div>
+            <div class="text-protection"></div>
+            <div class="blog-content">
+              <p class="category-tag">Travel</p>
+              <h4 class="blog-title">Eid Travel Readiness Checklist</h4>
+            </div>
+          </div>
+          <div class="blog-item original" onclick="openBlogModal('power-saving')">
+            <img src="assets/vault/blogs/power-blog-3.webp" alt="Maintenance" loading="lazy" />
+            <div class="wash-layer"></div>
+            <div class="text-protection"></div>
+            <div class="blog-content">
+              <p class="category-tag">Maintenance</p>
+              <h4 class="blog-title">5 Power-Saving Secrets</h4>
+            </div>
+          </div>
+          <div class="blog-item original" onclick="openBlogModal('ebike-accessories')">
+            <img src="assets/vault/blogs/summer-blog-6.webp" alt="E-Bike Guide" loading="lazy" />
+            <div class="wash-layer"></div>
+            <div class="text-protection"></div>
+            <div class="blog-content">
+              <p class="category-tag">E-Bike Guide</p>
+              <h4 class="blog-title">Battery Survival Guide for Pakistani Summers</h4>
+            </div>
+          </div>
+          <div class="blog-item original" onclick="openBlogModal('ebike-repairs')">
+            <img src="assets/vault/blogs/storing-blog-4.webp" alt="E-Bike Repair" loading="lazy" />
+            <div class="wash-layer"></div>
+            <div class="text-protection"></div>
+            <div class="blog-content">
+              <p class="category-tag">E-Bike Repair</p>
+              <h4 class="blog-title">Maximize Battery Life: Charging & Storage Guide</h4>
+            </div>
+          </div>
+          <div class="blog-item original" onclick="openBlogModal('ebike-charging')">
+            <img src="assets/vault/blogs/recycle-blog-5.webp" alt="E-Bike Tips" loading="lazy" />
+            <div class="wash-layer"></div>
+            <div class="text-protection"></div>
+            <div class="blog-content">
+              <p class="category-tag">Eco-friendly</p>
+              <h4 class="blog-title">Battery Lifespan: Recycling & Responsible Disposal</h4>
+            </div>
+          </div>
+        </div>
+
+        <!-- Desktop scroll buttons -->
+        <div class="hidden md:flex justify-center gap-4 mt-6">
+          <button onclick="scrollBlogs(-1)"
+            class="h-12 w-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-all">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <button onclick="scrollBlogs(1)"
+            class="h-12 w-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-all">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Blog View - Carousel Style -->
+        <div id="mobile-blog-container" class="block md:hidden px-6">
+          <div class="relative h-[70svh]">
+            <div class="w-full relative overflow-hidden h-full">
+              <div id="mobile-left-blog"
+                class="absolute left-0 w-[18%] h-[70%] top-1/2 -translate-y-1/2 rounded-lg overflow-hidden cursor-pointer opacity-50"
+                onclick="handleMobileBlogClick(-1)">
+                <img id="mobile-left-blog-img" src="" alt="Previous" class="w-full h-full object-cover mobile-side-img">
+              </div>
+
+              <div id="mobile-feature-blog"
+                class="absolute left-1/2 -translate-x-1/2 w-[80%] h-full rounded-xl overflow-hidden cursor-pointer z-10 shadow-2xl"
+                onclick="handleMobileBlogClick(0)">
+                <img id="mobile-feature-blog-img" src="" alt="Featured"
+                  class="w-full h-full object-cover object-center mobile-feature-img">
+                <div class="absolute inset-0"></div>
+                <div class="absolute top-4 left-0 right-0 p-2">
+                  <h3 id="mobile-feature-title" class="text-white text-center font-bold text-base leading-tight">
+                    Blog Title</h4>
+                </div>
+              </div>
+
+              <div id="mobile-right-blog"
+                class="absolute right-0 w-[18%] h-[70%] top-1/2 -translate-y-1/2 rounded-lg overflow-hidden cursor-pointer opacity-50"
+                onclick="handleMobileBlogClick(1)">
+                <img id="mobile-right-blog-img" src="" alt="Next" class="w-full h-full object-cover mobile-side-img">
+              </div>
+            </div>
+          </div>
+
+          <!-- Dot Pagination with Navigation -->
+          <div class="flex items-center justify-center gap-4 mt-2">
+            <button onclick="mobilePrevBlog()"
+              class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all">
+              <i class="fa-solid fa-chevron-left text-xs text-gray-600"></i>
+            </button>
+
+            <div id="mobile-blog-dots" class="flex items-center gap-2">
+              <!-- Dots will be generated by JavaScript -->
+            </div>
+
+            <button onclick="mobileNextBlog()"
+              class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all">
+              <i class="fa-solid fa-chevron-right text-xs text-gray-600"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div id="blog-modal"
+    class="fixed inset-0 z-[1000] hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-3 md:p-6 lg:p-10 overflow-hidden">
+    <div id="modal-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div
+      class="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-2xl md:rounded-3xl shadow-2xl transform transition-transform duration-300 scale-95">
+      <button onclick="closeBlogModal()"
+        class="sticky top-3 md:top-4 float-right mr-3 md:mr-4 z-50 bg-zinc-100 w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-[#c00d1e] hover:text-white transition-all shadow-md hover:shadow-lg">
+        &times;
+      </button>
+      <div id="modal-body" class="p-6 md:p-10 lg:p-12 clear-both overflow-x-hidden"></div>
+    </div>
+  </div>
+
+  <div id="footer-placeholder"></div>
+
+  <script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"WebPage",
+  "@id":"https://alaskabatteries.com/news.html",
+  "url":"https://alaskabatteries.com/news.html",
+  "name":"News | Alaska Batteries Pakistan",
+  "description":"News, stories and battery advice from Alaska Batteries: choosing the right battery, travel checklists, power saving, summer care, charging, storage and recycling.",
+  "isPartOf":{"@id":"https://alaskabatteries.com/#website"},
+  "about":{"@id":"https://alaskabatteries.com/#organization"},
+  "inLanguage":"en-PK"
+}
+</script>
+
+  <script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"BreadcrumbList",
+  "itemListElement":[
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://alaskabatteries.com/"},
+    {"@type":"ListItem","position":2,"name":"News","item":"https://alaskabatteries.com/news.html"}
+  ]
+}
+</script>
+
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/blog.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+
+</html>

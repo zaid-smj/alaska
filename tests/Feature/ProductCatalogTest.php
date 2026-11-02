@@ -90,8 +90,8 @@ class ProductCatalogTest extends TestCase
         $product->sections()->detach();
         $this->get('/products/'.$product->slug)->assertNotFound();
         $this->get('/products/not-found')->assertNotFound();
-        $this->get('/solutions/lithium-ion')->assertOk()->assertSee('Coming soon');
-        $this->get('/solutions/inverters')->assertOk()->assertSee('Coming soon');
+        $this->get('/solutions/lithium-ion')->assertOk()->assertSee('Lithium-Ion Batteries');
+        $this->get('/solutions/inverters')->assertOk()->assertSee('Hybrid Solar Inverters');
         $this->get('/dry-charge.html')->assertOk();
     }
 

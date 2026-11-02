@@ -4,472 +4,51 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Battery Guides, FAQs & Gallery | Alaska Batteries Pakistan</title>
+  <title>Gallery | Alaska Batteries Pakistan</title>
   <meta name="description"
-    content="Explore Alaska Batteries' knowledge vault featuring battery buying guides, maintenance tips, frequently asked questions, company news, and product galleries for automotive, industrial, and solar batteries in Pakistan.">
+    content="Photos of Alaska Batteries: our corporate events, partner network and awards.">
   <meta name="keywords"
-    content="battery guide Pakistan, battery FAQs, battery maintenance tips, Alaska Batteries blog, automotive battery guide, solar battery guide, industrial battery guide, battery news Pakistan">
+    content="Alaska Batteries gallery, Alaska Batteries awards, Alaska Batteries partners, Alaska Batteries events">
+  <script>
+    // Site theme (light / dark / system), applied before first paint. See js/components.js → AlaskaTheme.
+    (function () {
+      var p = "light";
+      try { p = localStorage.getItem("alaska-theme") || "light"; } catch (e) {}
+      if (p === "system") p = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      document.documentElement.setAttribute("data-theme", p === "dark" ? "dark" : "light");
+    })();
+  </script>
   <link rel="canonical" href="https://alaskabatteries.com/vault.html">
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="icon" href="assets/brand/favicon.ico?v=3" sizes="any" />
+  <link rel="icon" type="image/png" href="assets/brand/favicon-512.png?v=3" />
+  <link rel="apple-touch-icon" href="assets/brand/apple-touch-icon.png?v=3" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/nav.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <link rel="stylesheet" href="css/banner.css" />
+  <link rel="stylesheet" href="css/theme.css" />
 </head>
 
 <body class="bg-white overflow-x-hidden">
   <div id="header-placeholder"></div>
 
   <main class="bg-white">
-    <section id="blogs"
-      class="border-b border-gray-10 flex items-center justify-center text-center bg-white overflow-hidden group">
-      <div class="relative md:h-[400px] w-full flex flex-col banner-wrapper">
-        <img src="assets/vault/news.webp" alt="News"
-          class="w-full h-full object-cover object-[65%_10%] transition-transform duration-1000 group-hover:scale-105" />
-        <div id="hero-text-box"
-          class="absolute bottom-1 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[450px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 banner-overlay-vault">
-          <h1 class="text-3xl md:text-5xl font-bold uppercase text-left tracking-normal leading-tight text-white">News
-          </h1>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-4 md:py-8 border-b border-gray-100 bg-white overflow-hidden">
-      <div class="container mx-auto px-[2px] md:px-6">
-        <div class="flex flex-col md:flex-row justify-start items-start md:items-start mb-6 gap-2">
-          <div class="text-left w-full">
-            <div class="relative w-full lg:w-[calc((100%-40px)/3)] h-12">
-              <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-30">
-                <i class="fa-solid fa-magnifying-glass text-gray-400 text-sm"></i>
-              </div>
-              <input id="blog-search" onkeyup="filterBlogs()" type="text" placeholder="Search articles..."
-                class="block w-full h-full pl-12 pr-4 bg-gray-50 border border-gray-100 rounded-xl text-sm outline-none focus:border-[#c00d1e] transition-all" />
-            </div>
-          </div>
-        </div>
-
-        <!-- Desktop Blog View - Horizontal Scroll -->
-        <div id="blog-scroll-container" class="hidden md:block no-scrollbar">
-          <div class="blog-item original" onclick="openBlogModal('choosing-guide')">
-            <img src="assets/vault/blogs/best-battery-blog-1.webp" alt="Guide" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag text-white">Guide</p>
-              <h4 class="blog-title text-white">Best Battery for Vehicle or Solar</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('eid-checklist')">
-            <img src="assets/vault/blogs/eid-blog-2.webp" alt="Travel" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">Travel</p>
-              <h4 class="blog-title">Eid Travel Readiness Checklist</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('power-saving')">
-            <img src="assets/vault/blogs/power-blog-3.webp" alt="Maintenance" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">Maintenance</p>
-              <h4 class="blog-title">5 Power-Saving Secrets</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('ebike-accessories')">
-            <img src="assets/vault/blogs/summer-blog-6.webp" alt="E-Bike Guide" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">E-Bike Guide</p>
-              <h4 class="blog-title">Battery Survival Guide for Pakistani Summers</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('ebike-repairs')">
-            <img src="assets/vault/blogs/storing-blog-4.webp" alt="E-Bike Repair" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">E-Bike Repair</p>
-              <h4 class="blog-title">Maximize Battery Life: Charging & Storage Guide</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('ebike-charging')">
-            <img src="assets/vault/blogs/recycle-blog-5.webp" alt="E-Bike Tips" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">Eco-friendly</p>
-              <h4 class="blog-title">Battery Lifespan: Recycling & Responsible Disposal</h4>
-            </div>
-          </div>
-        </div>
-
-        <!-- Desktop scroll buttons -->
-        <div class="hidden md:flex justify-center gap-4 mt-6">
-          <button onclick="scrollBlogs(-1)"
-            class="h-12 w-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-all">
-            <i class="fa-solid fa-arrow-left"></i>
-          </button>
-          <button onclick="scrollBlogs(1)"
-            class="h-12 w-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-all">
-            <i class="fa-solid fa-arrow-right"></i>
-          </button>
-        </div>
-
-        <!-- Mobile Blog View - Carousel Style -->
-        <div id="mobile-blog-container" class="block md:hidden px-6">
-          <div class="relative h-[70svh]">
-            <div class="w-full relative overflow-hidden h-full">
-              <div id="mobile-left-blog"
-                class="absolute left-0 w-[18%] h-[70%] top-1/2 -translate-y-1/2 rounded-lg overflow-hidden cursor-pointer opacity-50"
-                onclick="handleMobileBlogClick(-1)">
-                <img id="mobile-left-blog-img" src="" alt="Previous" class="w-full h-full object-cover mobile-side-img">
-              </div>
-
-              <div id="mobile-feature-blog"
-                class="absolute left-1/2 -translate-x-1/2 w-[80%] h-full rounded-xl overflow-hidden cursor-pointer z-10 shadow-2xl"
-                onclick="handleMobileBlogClick(0)">
-                <img id="mobile-feature-blog-img" src="" alt="Featured"
-                  class="w-full h-full object-cover object-center mobile-feature-img">
-                <div class="absolute inset-0"></div>
-                <div class="absolute top-4 left-0 right-0 p-2">
-                  <h3 id="mobile-feature-title" class="text-white text-center font-bold text-base leading-tight">
-                    Blog Title</h4>
-                </div>
-              </div>
-
-              <div id="mobile-right-blog"
-                class="absolute right-0 w-[18%] h-[70%] top-1/2 -translate-y-1/2 rounded-lg overflow-hidden cursor-pointer opacity-50"
-                onclick="handleMobileBlogClick(1)">
-                <img id="mobile-right-blog-img" src="" alt="Next" class="w-full h-full object-cover mobile-side-img">
-              </div>
-            </div>
-          </div>
-
-          <!-- Dot Pagination with Navigation -->
-          <div class="flex items-center justify-center gap-4 mt-2">
-            <button onclick="mobilePrevBlog()"
-              class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all">
-              <i class="fa-solid fa-chevron-left text-xs text-gray-600"></i>
-            </button>
-
-            <div id="mobile-blog-dots" class="flex items-center gap-2">
-              <!-- Dots will be generated by JavaScript -->
-            </div>
-
-            <button onclick="mobileNextBlog()"
-              class="w-8 h-8 rounded-full border border-gray-300 flex items-center justify-center hover:bg-gray-100 transition-all">
-              <i class="fa-solid fa-chevron-right text-xs text-gray-600"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section id="faqs"
-      class="border-b border-gray-10 flex items-center justify-start text-center bg-white overflow-hidden group">
-      <div class="relative md:h-[400px] w-full flex flex-col banner-wrapper">
-        <img src="assets/vault/faqs.webp" alt="FAQs" class="w-full h-full" />
-        <div id="hero-text-box"
-          class="absolute bottom-1 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[450px] bg-black/75 px-4 py-2 md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 max-h-[150px] md:max-h-none overflow-hidden banner-overlay-vault">
-          <h1 class="text-3xl md:text-5xl font-bold text-left tracking-normal leading-tight text-white">FAQs
-          </h1>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-10 bg-white">
-      <div class="container mx-auto px-6 width:100%">
-        <div class="flex flex-col md:flex-row justify-center items-center md:items-center gap-4 mb-6">
-          <!-- Horizontal scroll on small screens, regular centered row on md+ -->
-          <div
-            class="faq-filters flex gap-2 md:gap-4 w-full max-w-none md:max-w-xl mx-0 px-0 md:px-0 overflow-x-auto no-scrollbar py-2">
-            <button
-              class="faq-filter-btn filter-btn btn-secondary active bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight"
-              data-category="battery-selection">
-              Battery Selection
-            </button>
-            <button
-              class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight"
-              data-category="battery-care">
-              Battery Care
-            </button>
-            <button
-              class="faq-filter-btn filter-btn btn-secondary bg-gray-100 text-zinc-900 px-0 py-2 text-sm md:px-2 md:py-2 md:text-sm rounded-lg font-bold uppercase hover:bg-gray-200 transition-all leading-tight"
-              data-category="warranty-support">
-              Warranty & Support
-            </button>
-          </div>
-        </div>
-
-        <div class="space-y-4 max-w-full">
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">Which Alaska Batteries model is right for my
-                vehicle?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Choose based on recommended capacity (Ah), terminal layout, and physical size for your vehicle. If you
-                share your vehicle, make/model and engine type, an authorized dealer can recommend the correct fit. You
-                can also visit our Solutions page to view the batteries we offer along with their specifications.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">How do I choose the right battery for UPS or
-                backup use?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Select by required backup time, load (watts), and charging compatibility. Higher Ah can increase backup
-                time, but the charging setup must support it properly.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">How do I choose the right battery for solar
-                backup?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Choose based on daily usage, charge controller settings, and depth-of-discharge needs. Correct sizing
-                improves backup reliability and extends battery life.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">What does AH (Ampere-hour) mean on a battery?
-              </h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                AH indicates energy storage capacity. In general: higher AH = longer backup, but correct sizing and
-                charging matter more than just going bigger.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">Can I install a higher AH battery than
-                recommended?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Sometimes yes, if space, wiring, and charging output support it. Oversizing without proper charging can
-                lead to undercharging and shorter life.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-selection">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">How do I confirm battery size and terminal type
-                before buying?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Check your existing battery’s size code/dimensions, terminal position, and hold-down type. If unsure,
-                ask dealer for confirmation.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">How can I increase battery life in Pakistan’s
-                heat and driving conditions?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Keep terminals clean, ensure strong connections, avoid deep discharge, and confirm the charging system
-                is healthy, heat and heavy use require disciplined charging.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">What are the warning signs of a weak battery?
-              </h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Slow starting, dim lights, low backup time, or frequent jump-start needs. Get it tested early to avoid
-                sudden failure.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">Is it harmful to fully discharge a battery?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Yes. Deep discharge reduces capacity and life. Recharge as soon as possible and avoid repeated “complete
-                drain” situations.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">Why does my battery lose performance in extreme
-                weather?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Heat accelerates internal wear; cold reduces available power temporarily. Correct sizing and proper
-                charging reduce seasonal performance drops.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">How often should I charge if usage is low or
-                irregular?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Don’t let it sit weak for long. If usage is low, charge periodically to maintain a healthy
-                state-of-charge and prevent early damage.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="battery-care">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">What should I avoid to prevent battery failure?
-              </h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Avoid loose terminals, low charge for long periods, overloaded backup setups, and using a faulty
-                charger/alternator. These are common causes of early failure.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">How do I claim warranty for Alaska Batteries in
-                Pakistan?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Visit an authorized dealer with the battery, warranty card and proof of purchase. The battery will be
-                tested and the warranty process will be guided accordingly.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">Why is filling the warranty card at purchase
-                important?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Because it documents purchase date, dealer stamp, battery serial/ID, and customer details, which helps
-                validate warranty quickly and prevents claim delays.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">What should be filled on the warranty card at
-                the time of purchase?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                At minimum: purchase date, dealer name + stamp, battery model, serial/ID, and customer name/contact.
-                Ensure the dealer completes it before you leave.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">What is usually not covered under warranty?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Misuse, physical damage, tampering, incorrect installation, and problems caused by faulty charging
-                systems (over/undercharging) are commonly excluded.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">How can I check if my Alaska Battery is genuine?
-              </h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Buy only from authorized channels, keep the invoice, and ensure warranty documentation is properly
-                completed. If unsure, ask the dealer to verify the battery identification details.
-              </p>
-            </div>
-          </div>
-
-          <div class="faq-item rounded-lg bg-gray border border-b-4 overflow-hidden" data-category="warranty-support">
-            <button class="faq-trigger w-full p-6 flex justify-between items-center cursor-pointer outline-none">
-              <h4 class="font-bold text-base tracking-normal text-left">What should I do with my old battery?</h4>
-              <i class="fa-solid fa-plus text-[#c00d1e] transition-transform duration-300"></i>
-            </button>
-            <div class="faq-content max-h-0 opacity-0 transition-all duration-300 ease-in-out px-6">
-              <p class="pb-6 text-gray-500 text-sm leading-relaxed">
-                Return it to an authorized dealer for safe handling and responsible recovery. This supports proper
-                recycling and safer disposal.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
     <section id="gallery"
-      class="flex items-center justify-center text-center bg-white overflow-hidden group border-t border-gray-100">
+      class="page-banner flex items-center justify-center text-center bg-white overflow-hidden group">
       <div class="relative md:h-[400px] w-full flex flex-col banner-wrapper">
         <img src="assets/vault/gallery.webp" alt="Gallery"
           class="w-full h-full object-cover object-center transition-transform duration-1000" />
         <div id="hero-text-box"
-          class="absolute bottom-1 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[450px] bg-black/75 px-4 py-2 rounded-lg md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 max-h-[150px] md:max-h-none overflow-hidden banner-overlay-vault">
+          class="absolute bottom-1 left-0 right-0 md:bottom-auto md:top-20 md:left-8 md:w-[450px] bg-black/75 px-4 py-2 rounded-lg md:px-8 md:py-8 md:rounded-lg md:border md:border-white/20 md:bg-black/80 max-h-[150px] md:max-h-none overflow-hidden">
           <h1
             class="text-3xl md:text-5xl font-bold uppercase text-left md:pt-0 tracking-normal leading-tight text-white">
             Gallery</h1>
         </div>
       </div>
     </section>
-    <section class="px-4 py-8 bg-white text-zinc-900 overflow-hidden border-t border-gray-100">
+    <section id="gallery-content" class="px-4 py-8 bg-white text-zinc-900 overflow-hidden border-t border-gray-100">
       <div class="container mx-auto px-[-8px] md:px-6 mb-2">
         <div class="flex flex-col md:flex-row justify-center items-center md:items-center gap-4 mb-6">
           <div
@@ -584,19 +163,6 @@
     </div>
   </main>
 
-  <div id="blog-modal"
-    class="fixed inset-0 z-[1000] hidden opacity-0 transition-opacity duration-300 flex items-center justify-center p-3 md:p-6 lg:p-10 overflow-hidden">
-    <div id="modal-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
-    <div
-      class="relative bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto overflow-x-hidden rounded-2xl md:rounded-3xl shadow-2xl transform transition-transform duration-300 scale-95">
-      <button onclick="closeBlogModal()"
-        class="sticky top-3 md:top-4 float-right mr-3 md:mr-4 z-50 bg-zinc-100 w-9 h-9 md:w-10 md:h-10 rounded-full flex items-center justify-center text-2xl font-bold hover:bg-[#c00d1e] hover:text-white transition-all shadow-md hover:shadow-lg">
-        &times;
-      </button>
-      <div id="modal-body" class="p-6 md:p-10 lg:p-12 clear-both overflow-x-hidden"></div>
-    </div>
-  </div>
-
   <div id="footer-placeholder"></div>
 
   <script type="application/ld+json">
@@ -605,168 +171,11 @@
   "@type":"WebPage",
   "@id":"https://alaskabatteries.com/vault.html",
   "url":"https://alaskabatteries.com/vault.html",
-  "name":"Battery Guides, FAQs & Gallery | Alaska Batteries Pakistan",
-  "description":"Explore Alaska Batteries' knowledge vault featuring battery buying guides, maintenance tips, FAQs, company news, and product galleries.",
-  "isPartOf":{
-    "@id":"https://alaskabatteries.com/#website"
-  },
-  "about":{
-    "@id":"https://alaskabatteries.com/#organization"
-  },
+  "name":"Gallery | Alaska Batteries Pakistan",
+  "description":"Photos of Alaska Batteries: our corporate events, partner network and awards.",
+  "isPartOf":{"@id":"https://alaskabatteries.com/#website"},
+  "about":{"@id":"https://alaskabatteries.com/#organization"},
   "inLanguage":"en-PK"
-}
-</script>
-
-  <script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@type":"FAQPage",
-  "mainEntity":[
-    {
-      "@type":"Question",
-      "name":"Which Alaska Batteries model is right for my vehicle?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Choose based on recommended capacity (Ah), terminal layout, and physical size for your vehicle. If you share your vehicle, make/model and engine type, an authorized dealer can recommend the correct fit. You can also visit our Solutions page to view the batteries we offer along with their specifications."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"How do I choose the right battery for UPS or backup use?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Select by required backup time, load (watts), and charging compatibility. Higher Ah can increase backup time, but the charging setup must support it properly."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"How do I choose the right battery for solar backup?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Choose based on daily usage, charge controller settings, and depth-of-discharge needs. Correct sizing improves backup reliability and extends battery life."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"What does AH (Ampere-hour) mean on a battery?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"AH indicates energy storage capacity. In general: higher AH = longer backup, but correct sizing and charging matter more than just going bigger."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Can I install a higher AH battery than recommended?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Sometimes yes, if space, wiring, and charging output support it. Oversizing without proper charging can lead to undercharging and shorter life."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"How do I confirm battery size and terminal type before buying?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Check your existing battery’s size code or dimensions, terminal position, and hold-down type. If unsure, ask a dealer for confirmation."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"How can I increase battery life in Pakistan’s heat and driving conditions?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Keep terminals clean, ensure strong connections, avoid deep discharge, and confirm the charging system is healthy. Heat and heavy use require disciplined charging."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"What are the warning signs of a weak battery?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Slow starting, dim lights, low backup time, or frequent jump-start needs. Get it tested early to avoid sudden failure."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Is it harmful to fully discharge a battery?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Yes. Deep discharge reduces capacity and battery life. Recharge as soon as possible and avoid repeated complete drain situations."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Why does my battery lose performance in extreme weather?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Heat accelerates internal wear while cold reduces available power temporarily. Correct sizing and proper charging reduce seasonal performance drops."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"How often should I charge if usage is low or irregular?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Do not let the battery remain weak for long periods. If usage is low, charge it periodically to maintain a healthy state of charge and prevent early damage."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"What should I avoid to prevent battery failure?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Avoid loose terminals, low charge for long periods, overloaded backup setups, and faulty chargers or alternators. These are common causes of early battery failure."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"How do I claim warranty for Alaska Batteries in Pakistan?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Visit an authorized dealer with the battery, warranty card, and proof of purchase. The battery will be tested and the warranty process will be guided accordingly."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"Why is filling the warranty card at purchase important?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"It documents the purchase date, dealer stamp, battery serial or ID, and customer details, helping validate warranty claims quickly and preventing delays."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"What should be filled on the warranty card at the time of purchase?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"At minimum: purchase date, dealer name and stamp, battery model, serial or ID, and customer name and contact information. Ensure the dealer completes it before you leave."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"What is usually not covered under warranty?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Misuse, physical damage, tampering, incorrect installation, and problems caused by faulty charging systems such as overcharging or undercharging are commonly excluded."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"How can I check if my Alaska Battery is genuine?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Buy only from authorized dealers, keep your invoice, and ensure the warranty documentation is properly completed. If unsure, ask the dealer to verify the battery identification details."
-      }
-    },
-    {
-      "@type":"Question",
-      "name":"What should I do with my old battery?",
-      "acceptedAnswer":{
-        "@type":"Answer",
-        "text":"Return it to an authorized dealer for safe handling and responsible recovery. This supports proper recycling and safer disposal."
-      }
-    }
-  ]
 }
 </script>
 
@@ -775,18 +184,8 @@
   "@context":"https://schema.org",
   "@type":"BreadcrumbList",
   "itemListElement":[
-    {
-      "@type":"ListItem",
-      "position":1,
-      "name":"Home",
-      "item":"https://alaskabatteries.com/"
-    },
-    {
-      "@type":"ListItem",
-      "position":2,
-      "name":"Vault",
-      "item":"https://alaskabatteries.com/vault.html"
-    }
+    {"@type":"ListItem","position":1,"name":"Home","item":"https://alaskabatteries.com/"},
+    {"@type":"ListItem","position":2,"name":"Gallery","item":"https://alaskabatteries.com/vault.html"}
   ]
 }
 </script>
@@ -794,7 +193,6 @@
   <script src="js/components.js"></script>
   <script src="js/main.js"></script>
   <script src="js/gallery.js"></script>
-  <script src="js/blog.js"></script>
   <script src="js/animations.js"></script>
 </body>
 
