@@ -22,11 +22,11 @@ class UserResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
 
-    protected static ?string $navigationLabel = 'Admin Accounts';
+    protected static ?string $navigationLabel = 'Staff Accounts';
 
-    protected static ?string $modelLabel = 'Admin Account';
+    protected static ?string $modelLabel = 'Staff Account';
 
-    protected static ?string $pluralModelLabel = 'Admin Accounts';
+    protected static ?string $pluralModelLabel = 'Staff Accounts';
 
     public static function canViewAny(): bool
     {

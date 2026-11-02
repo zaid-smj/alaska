@@ -2,7 +2,6 @@
 
 namespace App\Filament\Clusters;
 
-use App\Enums\AdminRole;
 use BackedEnum;
 use Filament\Clusters\Cluster;
 use Filament\Support\Icons\Heroicon;
@@ -23,6 +22,6 @@ class LeadAcid extends Cluster
 
     public static function canAccess(): bool
     {
-        return in_array(Auth::user()?->role, [AdminRole::SuperAdmin, AdminRole::Admin], true);
+        return Auth::user()?->role?->canManageContent() ?? false;
     }
 }

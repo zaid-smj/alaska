@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\AdminRole;
 use App\Models\User;
 use App\Notifications\AdminInvitationNotification;
 use App\Services\AdminInvitationService;
@@ -17,7 +18,8 @@ class AdminInvitationServiceTest extends TestCase
     public function test_issuing_an_invitation_stores_only_the_token_hash_and_sends_email(): void
     {
         Notification::fake();
-        $inviter = User::factory()->create();
+        $inviter = User::factory()->create(['role' => AdminRole::SuperAdmin]);
+        $this->actingAs($inviter);
 
         $issued = app(AdminInvitationService::class)->issue(' NewAdmin@Example.com ', $inviter);
 
@@ -60,7 +62,8 @@ class AdminInvitationServiceTest extends TestCase
     public function test_renewing_an_invitation_rotates_the_token_and_restores_pending_state(): void
     {
         Notification::fake();
-        $inviter = User::factory()->create();
+        $inviter = User::factory()->create(['role' => AdminRole::SuperAdmin]);
+        $this->actingAs($inviter);
         $issued = app(AdminInvitationService::class)->issue('invited@example.com', $inviter);
         $invitation = $issued['invitation'];
         $originalToken = $issued['token'];

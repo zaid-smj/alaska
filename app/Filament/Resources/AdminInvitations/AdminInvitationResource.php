@@ -18,11 +18,11 @@ class AdminInvitationResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedEnvelope;
 
-    protected static ?string $navigationLabel = 'Admin Invitations';
+    protected static ?string $navigationLabel = 'Staff Invitations';
 
-    protected static ?string $modelLabel = 'Admin Invitation';
+    protected static ?string $modelLabel = 'Staff Invitation';
 
-    protected static ?string $pluralModelLabel = 'Admin Invitations';
+    protected static ?string $pluralModelLabel = 'Staff Invitations';
 
     public static function canViewAny(): bool
     {

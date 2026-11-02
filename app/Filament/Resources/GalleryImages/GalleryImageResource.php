@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\GalleryImages;
 
-use App\Enums\AdminRole;
 use App\Filament\Resources\GalleryImages\Pages\CreateGalleryImage;
 use App\Filament\Resources\GalleryImages\Pages\EditGalleryImage;
 use App\Filament\Resources\GalleryImages\Pages\ListGalleryImages;
@@ -80,6 +79,6 @@ class GalleryImageResource extends Resource
 
     private static function canManageContent(): bool
     {
-        return in_array(Auth::user()?->role, [AdminRole::SuperAdmin, AdminRole::Admin], true);
+        return Auth::user()?->role?->canManageContent() ?? false;
     }
 }

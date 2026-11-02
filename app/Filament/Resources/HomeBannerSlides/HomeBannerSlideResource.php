@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\HomeBannerSlides;
 
-use App\Enums\AdminRole;
 use App\Filament\Resources\HomeBannerSlides\Pages\CreateHomeBannerSlide;
 use App\Filament\Resources\HomeBannerSlides\Pages\EditHomeBannerSlide;
 use App\Filament\Resources\HomeBannerSlides\Pages\ListHomeBannerSlides;
@@ -80,6 +79,6 @@ class HomeBannerSlideResource extends Resource
 
     private static function canManageContent(): bool
     {
-        return in_array(Auth::user()?->role, [AdminRole::SuperAdmin, AdminRole::Admin], true);
+        return Auth::user()?->role?->canManageContent() ?? false;
     }
 }

@@ -22,6 +22,8 @@ class AdminInvitationsTable
                     ->searchable()
                     ->sortable(),
 
+                TextColumn::make('role')->badge(),
+
                 TextColumn::make('inviter.name')
                     ->label('Invited by')
                     ->sortable(),

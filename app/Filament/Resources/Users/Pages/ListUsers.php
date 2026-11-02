@@ -2,11 +2,13 @@
 
 namespace App\Filament\Resources\Users\Pages;
 
+use App\Enums\AdminRole;
 use App\Filament\Resources\Users\UserResource;
 use App\Models\AdminInvitation;
 use App\Models\User;
 use App\Services\AdminInvitationService;
 use Filament\Actions\Action;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Notifications\Notification;
 use Filament\Resources\Pages\ListRecords;
@@ -20,11 +22,15 @@ class ListUsers extends ListRecords
     {
         return [
             Action::make('inviteAdmin')
-                ->label('Invite Admin')
+                ->label('Invite Staff')
                 ->form([
                     TextInput::make('email')
                         ->label('Email address')
                         ->email()
+                        ->required(),
+                    Select::make('role')
+                        ->options(AdminRole::assignableOptions())
+                        ->default(AdminRole::ContentManager->value)
                         ->required(),
                 ])
                 ->action(function (array $data): void {
@@ -60,14 +66,14 @@ class ListUsers extends ListRecords
 
                     abort_unless($inviter instanceof User, 403);
 
-                    $issued = app(AdminInvitationService::class)->issue($email, $inviter);
+                    $issued = app(AdminInvitationService::class)->issue($email, $inviter, AdminRole::from($data['role']));
 
                     $message = app()->isLocal()
                         ? 'Local invitation URL: '.route('admin.invitations.accept', ['token' => $issued['token']])
                         : 'The invitation email has been sent.';
 
                     Notification::make()
-                        ->title('Admin invitation created')
+                        ->title('Staff invitation created')
                         ->body($message)
                         ->success()
                         ->persistent()

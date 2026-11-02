@@ -124,6 +124,7 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
             && in_array($this->role, [
                 AdminRole::SuperAdmin,
                 AdminRole::Admin,
+                AdminRole::ContentManager,
             ], true);
     }
 }

@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources;
 
-use App\Enums\AdminRole;
 use App\Filament\Clusters\LeadAcid;
 use Filament\Resources\Resource;
 use Illuminate\Database\Eloquent\Model;
@@ -17,7 +16,7 @@ abstract class CatalogResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return in_array(Auth::user()?->role, [AdminRole::SuperAdmin, AdminRole::Admin], true);
+        return Auth::user()?->role?->canManageContent() ?? false;
     }
 
     public static function canCreate(): bool

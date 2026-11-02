@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\AdminRole;
 use App\Models\AdminInvitation;
 use App\Models\User;
 use App\Notifications\AdminInvitationNotification;
@@ -16,13 +17,17 @@ class AdminInvitationService
     /**
      * @return array{invitation: AdminInvitation, token: string}
      */
-    public function issue(string $email, User $inviter): array
+    public function issue(string $email, User $inviter, AdminRole $role = AdminRole::Admin): array
     {
+        abort_unless($inviter->is_active && $inviter->role->canManageUsers(), 403);
+        abort_unless(array_key_exists($role->value, AdminRole::assignableOptions()), 422);
+
         $token = Str::random(64);
         $expiresAt = now()->addHours(24);
 
         $invitation = AdminInvitation::create([
             'email' => strtolower(trim($email)),
+            'role' => $role,
             'token_hash' => hash('sha256', $token),
             'invited_by' => $inviter->id,
             'expires_at' => $expiresAt,
@@ -48,6 +53,8 @@ class AdminInvitationService
      */
     public function renew(AdminInvitation $invitation): array
     {
+        abort_unless(auth()->user()?->is_active && auth()->user()?->role?->canManageUsers(), 403);
+
         if ($invitation->accepted_at !== null || User::where('email', $invitation->email)->exists()) {
             throw ValidationException::withMessages([
                 'email' => 'This invitation cannot be resent because an account already exists.',

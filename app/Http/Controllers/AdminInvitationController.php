@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Enums\AdminRole;
 use App\Models\AdminInvitation;
 use App\Models\User;
 use App\Services\AuditLogger;
@@ -67,7 +66,7 @@ class AdminInvitationController extends Controller
                 'email' => $invitation->email,
                 'email_verified_at' => now(),
                 'password' => $validated['password'],
-                'role' => AdminRole::Admin,
+                'role' => $invitation->role,
                 'is_active' => true,
             ]);
 
@@ -84,7 +83,7 @@ class AdminInvitationController extends Controller
         });
 
         return redirect('/admin')
-            ->with('status', 'Admin account created successfully. You can now log in.');
+            ->with('status', 'Staff account created successfully. You can now log in.');
     }
 
     private function getValidInvitation(string $token): ?AdminInvitation

@@ -107,7 +107,7 @@ class ProductCatalogTest extends TestCase
     public function test_catalog_admin_screens_render_and_roles_are_enforced(): void
     {
         $product = $this->product();
-        foreach ([AdminRole::Admin, AdminRole::SuperAdmin] as $role) {
+        foreach ([AdminRole::Admin, AdminRole::SuperAdmin, AdminRole::ContentManager] as $role) {
             $this->actingAs(User::factory()->create(['role' => $role]));
             foreach ([ProductResource::class, ProductSectionResource::class, CatalogBannerResource::class] as $resource) {
                 $this->assertTrue($resource::canViewAny());
@@ -125,10 +125,10 @@ class ProductCatalogTest extends TestCase
         $this->get(ProductResource::getUrl('create'))->assertRedirect('/admin/login');
     }
 
-    public function test_admin_can_create_product_with_image_sections_and_unique_stable_slug(): void
+    public function test_content_manager_can_create_product_with_image_sections_and_unique_stable_slug(): void
     {
         Storage::fake('public');
-        $this->actingAs(User::factory()->create(['role' => AdminRole::Admin]));
+        $this->actingAs(User::factory()->create(['role' => AdminRole::ContentManager]));
         Livewire::test(CreateProduct::class)->fillForm([
             'name' => 'New 60L', 'alt_text' => 'New battery', 'image' => UploadedFile::fake()->image('battery.png'),
             'status' => 'published', 'sections' => [ProductSection::first()->id], 'tags' => ['Automotive', 'Backup'],
@@ -147,9 +147,9 @@ class ProductCatalogTest extends TestCase
         Storage::disk('public')->assertMissing($image);
     }
 
-    public function test_admin_must_assign_section_before_publishing_and_can_edit_banner(): void
+    public function test_content_manager_must_assign_section_before_publishing_and_can_edit_banner(): void
     {
-        $this->actingAs(User::factory()->create(['role' => AdminRole::Admin]));
+        $this->actingAs(User::factory()->create(['role' => AdminRole::ContentManager]));
         $product = $this->product(['status' => 'draft']);
         Livewire::test(EditProduct::class, ['record' => $product->id])->fillForm(['status' => 'published', 'sections' => []])->call('save')->assertHasFormErrors(['sections' => 'required']);
         $banner = CatalogBanner::firstOrFail();

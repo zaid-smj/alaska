@@ -4,6 +4,7 @@ namespace App\Filament\Resources\Users\Schemas;
 
 use App\Enums\AdminRole;
 use App\Models\User;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Schema;
@@ -24,6 +25,13 @@ class UserForm
                     ->disabled(
                         fn (?User $record): bool => $record?->role === AdminRole::SuperAdmin
                     ),
+
+                Select::make('role')
+                    ->options(fn (?User $record): array => $record?->role === AdminRole::SuperAdmin
+                        ? [AdminRole::SuperAdmin->value => AdminRole::SuperAdmin->getLabel()]
+                        : AdminRole::assignableOptions())
+                    ->required()
+                    ->disabled(fn (?User $record): bool => $record?->role === AdminRole::SuperAdmin),
 
                 Toggle::make('is_active')
                     ->label('Active')

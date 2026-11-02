@@ -2,7 +2,6 @@
 
 namespace App\Filament\Pages;
 
-use App\Enums\AdminRole;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Auth;
 use UnitEnum;
@@ -19,6 +18,6 @@ class LithiumProducts extends Page
 
     public static function canAccess(): bool
     {
-        return in_array(Auth::user()?->role, [AdminRole::SuperAdmin, AdminRole::Admin], true);
+        return Auth::user()?->role?->canManageContent() ?? false;
     }
 }

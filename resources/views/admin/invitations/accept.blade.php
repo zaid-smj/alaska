@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Accept Admin Invitation</title>
+    <title>Accept Staff Invitation</title>
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -24,7 +24,7 @@
                 </h1>
 
                 <p class="mt-3 text-sm leading-6 text-zinc-600">
-                    Create your administrator account for
+                    Create your {{ $invitation->role->getLabel() }} account for
                     <strong class="font-semibold text-zinc-900">{{ $invitation->email }}</strong>.
                 </p>
 
@@ -119,7 +119,7 @@
                         type="submit"
                         class="flex w-full items-center justify-center rounded-lg bg-[#c00d1e] px-4 py-3 font-bold text-white transition hover:bg-[#a40b19] focus:outline-none focus:ring-4 focus:ring-red-200"
                     >
-                        Create Admin Account
+                        Create Staff Account
                     </button>
                 </form>
             </div>
