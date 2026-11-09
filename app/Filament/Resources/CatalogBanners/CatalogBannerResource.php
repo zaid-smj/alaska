@@ -11,6 +11,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class CatalogBannerResource extends CatalogResource
@@ -19,7 +20,14 @@ class CatalogBannerResource extends CatalogResource
 
     protected static ?string $navigationLabel = 'Page banner';
 
-    protected static ?int $navigationSort = 3;
+    protected static ?int $navigationSort = 5;
+
+    public static string $family = 'lead-acid';
+
+    public static function getEloquentQuery(): Builder
+    {
+        return parent::getEloquentQuery()->where('family', static::$family);
+    }
 
     public static function canCreate(): bool
     {
@@ -37,7 +45,7 @@ class CatalogBannerResource extends CatalogResource
             TextInput::make('title')->required()->maxLength(255),
             Textarea::make('subtitle')->maxLength(1000),
             TextInput::make('alt_text')->label('Image description')->required()->maxLength(255),
-            ...collect(['image' => 'Banner image', 'mobile_image' => 'Mobile image (optional)'])->map(fn ($label, $field) => FileUpload::make($field)->label($label)->image()->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])->disk('public')->directory('content/catalog')->visibility('public')->maxSize(10240)->helperText('Up to 10 MB. Mobile falls back to the main banner; an empty main image uses the default banner.'))->values()->all(),
+            ...collect(['image' => 'Banner image', 'mobile_image' => 'Mobile image (optional)'])->map(fn ($label, $field) => FileUpload::make($field)->label($label)->image()->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])->disk('public')->directory('content/catalog')->visibility('public')->maxSize(10240)->helperText('Up to 10 MB. Mobile falls back to the main banner. Lead Acid retains its existing bundled defaults.'))->values()->all(),
         ]);
     }
 

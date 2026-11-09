@@ -14,16 +14,13 @@
             <form id="catalog-filter-form" method="get" action="{{ route('catalog.lead-acid') }}">
                 <div class="catalog-filter-block">
                     <label for="catalog-search">Search batteries</label>
-                    <div class="catalog-search-wrap"><input id="catalog-search" type="search" name="q" value="{{ $search }}" maxlength="200" placeholder="Name, specifications, uses…" aria-describedby="search-hint"><button type="submit" aria-label="Search batteries">⌕</button></div>
-                    <p id="search-hint">Search name, plates, voltage, capacity (Ah), warranty, weight, box size, dimensions, tags and uses.</p>
+                    <div class="catalog-search-wrap"><input id="catalog-search" type="search" name="q" value="{{ $search }}" maxlength="200" placeholder="Name, specifications, uses…"><button type="submit" aria-label="Search batteries">⌕</button></div>
                 </div>
                 <fieldset class="catalog-filter-block"><legend>Automotive Battery</legend>
-                    <p>Vehicle matching is coming soon.</p>
                     @foreach (['Make', 'Model', 'Year'] as $field)
                     <label for="vehicle-{{ strtolower($field) }}">{{ $field }}</label>
-                    <select id="vehicle-{{ strtolower($field) }}" aria-describedby="vehicle-hint"><option>Coming soon</option></select>
+                    <select id="vehicle-{{ strtolower($field) }}"><option>Coming soon</option></select>
                     @endforeach
-                    <p id="vehicle-hint">Vehicle selections will be available when compatibility data is added.</p>
                 </fieldset>
                 <fieldset class="catalog-filter-block"><legend>Tags</legend><p>Choose multiple to match every selected tag.</p>
                     <div class="catalog-tags">
@@ -34,7 +31,7 @@
                 </fieldset>
                 <div class="catalog-filter-actions"><button type="submit" class="catalog-button">Apply filters</button><a href="{{ route('catalog.lead-acid') }}" id="catalog-reset">Reset filters</a></div>
             </form>
-            <div class="catalog-filter-block catalog-compare-block"><h2>Compare batteries</h2><p>See two batteries side by side.</p><button type="button" class="catalog-button catalog-button-outline" id="compare-open">Compare two batteries <span aria-hidden="true">↔</span></button></div>
+            <div class="catalog-filter-block catalog-compare-block"><button type="button" class="catalog-button catalog-button-outline" id="compare-open">Compare two batteries <span aria-hidden="true">↔</span></button></div>
         </details>
     </aside>
     <div class="catalog-results" id="catalog-results" aria-live="polite" aria-atomic="false">

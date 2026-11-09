@@ -21,7 +21,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
-#[Fillable(['name', 'email', 'email_verified_at', 'password', 'role', 'is_active'])]
+#[Fillable(['name', 'email', 'email_verified_at', 'password', 'role', 'is_active', 'can_manage_warranties'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery
 {
@@ -40,6 +40,7 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
             'password' => 'hashed',
             'role' => AdminRole::class,
             'is_active' => 'boolean',
+            'can_manage_warranties' => 'boolean',
         ];
     }
 
@@ -89,7 +90,7 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
                 app(WorkSessionService::class)->end($user, 'deactivated');
             }
 
-            $changes = collect(['name', 'email', 'role', 'is_active'])
+            $changes = collect(['name', 'email', 'role', 'is_active', 'can_manage_warranties'])
                 ->filter(fn (string $field): bool => $user->wasChanged($field))
                 ->mapWithKeys(fn (string $field): array => [$field => [
                     'from' => $user->getRawOriginal($field),

@@ -1,0 +1,44 @@
+/* Alaska branding with Filament's original dark-mode backgrounds. */
+:root:not(.dark) .fi-body {
+    --alaska-page: #fff;
+    --alaska-surface: #fff;
+    --alaska-header: #fff;
+    --alaska-ink: #111827;
+    --alaska-line: #e5e7eb;
+    background-color: var(--alaska-page);
+    color: var(--alaska-ink);
+}
+
+:root:not(.dark) .fi-topbar, :root:not(.dark) .fi-sidebar-header {
+    background-color: var(--alaska-header);
+    border-color: var(--alaska-line);
+}
+:root:not(.dark) .fi-sidebar {
+    background-color: var(--alaska-header);
+}
+:root:not(.dark) .fi-simple-main, :root:not(.dark) .fi-section:not(.fi-section-not-contained):not(.fi-aside),
+:root:not(.dark) .fi-ta-ctn, :root:not(.dark) .fi-modal-window, :root:not(.dark) .fi-dropdown-panel {
+    background-color: var(--alaska-surface);
+    border-color: var(--alaska-line);
+}
+:root:not(.dark) .fi-header-heading, :root:not(.dark) .fi-simple-header-heading, :root:not(.dark) .fi-section-header-heading,
+:root:not(.dark) .fi-sidebar-item-label, :root:not(.dark) .fi-sidebar-group-label, :root:not(.dark) .fi-modal-heading {
+    color: var(--alaska-ink);
+}
+:root .fi-sidebar-item.fi-active .fi-sidebar-item-label,
+.fi-sidebar-item.fi-active .fi-sidebar-item-icon {
+    color: #c00d1e;
+}
+/* Filament chooses contrasting shades automatically; keep solid brand actions
+   at the same exact red in both modes, as on the public website. */
+.fi-btn.fi-color-primary:not(.fi-outlined) {
+    background-color: #c00d1e;
+    color: #fff;
+}
+.fi-btn.fi-color-primary:not(.fi-outlined) > .fi-icon {
+    color: #fff;
+}
+.fi-btn.fi-color-primary:not(.fi-outlined):not([disabled]):hover {
+    background-color: #a00a18;
+    color: #fff;
+}

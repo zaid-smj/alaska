@@ -56,7 +56,7 @@
               <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none z-30">
                 <i class="fa-solid fa-magnifying-glass text-gray-400 text-sm"></i>
               </div>
-              <input id="blog-search" onkeyup="filterBlogs()" type="text" placeholder="Search articles..."
+              <input id="blog-search" oninput="filterBlogs()" type="text" placeholder="Search articles..."
                 class="block w-full h-full pl-12 pr-4 bg-gray-50 border border-gray-100 rounded-xl text-sm outline-none focus:border-[#c00d1e] transition-all" />
             </div>
           </div>
@@ -64,64 +64,12 @@
 
         <!-- Desktop Blog View - Horizontal Scroll -->
         <div id="blog-scroll-container" class="hidden md:block no-scrollbar">
-          <div class="blog-item original" onclick="openBlogModal('choosing-guide')">
-            <img src="assets/vault/blogs/best-battery-blog-1.webp" alt="Guide" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag text-white">Guide</p>
-              <h4 class="blog-title text-white">Best Battery for Vehicle or Solar</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('eid-checklist')">
-            <img src="assets/vault/blogs/eid-blog-2.webp" alt="Travel" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">Travel</p>
-              <h4 class="blog-title">Eid Travel Readiness Checklist</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('power-saving')">
-            <img src="assets/vault/blogs/power-blog-3.webp" alt="Maintenance" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">Maintenance</p>
-              <h4 class="blog-title">5 Power-Saving Secrets</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('ebike-accessories')">
-            <img src="assets/vault/blogs/summer-blog-6.webp" alt="E-Bike Guide" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">E-Bike Guide</p>
-              <h4 class="blog-title">Battery Survival Guide for Pakistani Summers</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('ebike-repairs')">
-            <img src="assets/vault/blogs/storing-blog-4.webp" alt="E-Bike Repair" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">E-Bike Repair</p>
-              <h4 class="blog-title">Maximize Battery Life: Charging & Storage Guide</h4>
-            </div>
-          </div>
-          <div class="blog-item original" onclick="openBlogModal('ebike-charging')">
-            <img src="assets/vault/blogs/recycle-blog-5.webp" alt="E-Bike Tips" loading="lazy" />
-            <div class="wash-layer"></div>
-            <div class="text-protection"></div>
-            <div class="blog-content">
-              <p class="category-tag">Eco-friendly</p>
-              <h4 class="blog-title">Battery Lifespan: Recycling & Responsible Disposal</h4>
-            </div>
-          </div>
+          <!-- CMS_ARTICLE_CARDS -->
         </div>
 
+        <p id="articles-empty" class="text-center py-8" role="status" hidden>No articles found.</p>
         <!-- Desktop scroll buttons -->
-        <div class="hidden md:flex justify-center gap-4 mt-6">
+        <div id="blog-scroll-controls" class="hidden md:flex justify-center gap-4 mt-6">
           <button onclick="scrollBlogs(-1)"
             class="h-12 w-12 rounded-full border border-gray-200 flex items-center justify-center hover:bg-black hover:text-white transition-all">
             <i class="fa-solid fa-arrow-left"></i>

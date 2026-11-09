@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminInvitationController;
 use App\Http\Controllers\ProductCatalogController;
+use App\Http\Controllers\Warranty\WarrantySubmissionController;
+use App\Http\Controllers\Warranty\WarrantyUploadController;
 use App\Http\Controllers\WebsiteController;
 use App\Http\Controllers\WorkSessionHeartbeatController;
 use Illuminate\Support\Facades\Route;
@@ -37,3 +39,7 @@ Route::post('/admin/invitations/accept/{token}', [AdminInvitationController::cla
 Route::post('/admin/work-session/heartbeat', WorkSessionHeartbeatController::class)
     ->middleware(['auth', 'throttle:60,1'])
     ->name('admin.work-session.heartbeat');
+
+Route::post('/warranty/uploads', [WarrantyUploadController::class, 'store'])->middleware('throttle:5,1')->name('warranty.uploads');
+Route::post('/warranty/registrations', [WarrantySubmissionController::class, 'registration'])->middleware('throttle:10,1')->name('warranty.registrations');
+Route::post('/warranty/claims', [WarrantySubmissionController::class, 'claim'])->middleware('throttle:10,1')->name('warranty.claims');

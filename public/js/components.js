@@ -70,6 +70,22 @@ const NAV = [
   },
 ];
 
+// CMS replacements are shared by desktop panels, mobile drawer and logo buttons.
+const navImages = window.ALASKA_CONTENT?.navigationImages || {};
+const navImage = (slot, fallback) => navImages[slot]?.url || fallback;
+const navImageAlt = (slot, fallback = '') => navImages[slot]?.alt || fallback;
+for (const item of NAV) {
+  item.feature.image = navImage(item.id, item.feature.image);
+  item.feature.imageAlt = navImageAlt(item.id);
+}
+NAV.find(item => item.id === 'technology').logos.forEach((logo, index) => {
+  const key = ['graphite', 'calcium', 'lifepo4'][index];
+  logo.light = navImage(`${key}-light`, logo.light);
+  logo.dark = navImage(`${key}-dark`, logo.dark);
+  logo.lightAlt = navImageAlt(`${key}-light`);
+  logo.darkAlt = navImageAlt(`${key}-dark`);
+});
+
 /* =====================================================================
    Site-wide light / dark theme. One setting for the whole site, stored in
    this browser and chosen with the switch in the footer. The inline script
@@ -179,8 +195,8 @@ function navLinkHTML(l) {
 
 function navLogoHTML(l) {
   return `<li><a class="anav-link anav-logo-btn" href="${navEsc(l.href)}" aria-label="${navEsc(l.label)}">
-      <img class="theme-light-only" src="${navEsc(l.light)}" alt="" loading="lazy" />
-      <img class="theme-dark-only" src="${navEsc(l.dark)}" alt="" loading="lazy" />
+      <img class="theme-light-only" src="${navEsc(l.light)}" alt="${navEsc(l.lightAlt)}" loading="lazy" />
+      <img class="theme-dark-only" src="${navEsc(l.dark)}" alt="${navEsc(l.darkAlt)}" loading="lazy" />
     </a></li>`;
 }
 
@@ -193,7 +209,7 @@ function navPanelHTML(item) {
   return `<div class="anav-panel" id="anav-panel-${item.id}" aria-label="${navEsc(item.label)}">
     <div class="anav-mega">
       <div class="anav-groups">${body}</div>
-      <a class="anav-feature" href="${navEsc(f.href)}" style="--feature-img:url('${navEsc(navAbs(f.image))}')">
+      <a class="anav-feature" href="${navEsc(f.href)}" title="${navEsc(f.imageAlt)}" style="--feature-img:url('${navEsc(navAbs(f.image))}')">
         <span class="k">${navEsc(f.kicker)}</span>
         <span class="anav-feature-bottom"><strong>${navEsc(f.title)}</strong><span class="go">${navEsc(f.cta)}</span></span>
       </a>
@@ -205,8 +221,8 @@ const headerHTML = /* HTML */ `
   <header class="anav" id="anav">
     <div class="anav-inner">
       <a class="anav-logo" href="/index.html" aria-label="Alaska Batteries — home">
-        <img class="theme-light-only" src="/assets/brand/alaska-logo.png" alt="Alaska Batteries" width="142" height="58" />
-        <img class="theme-dark-only" src="/assets/brand/alaska-logo-inv.png" alt="Alaska Batteries" width="142" height="58" />
+        <img class="theme-light-only" src="${navEsc(navImage('brand-light', '/assets/brand/alaska-logo.png'))}" alt="${navEsc(navImageAlt('brand-light', 'Alaska Batteries'))}" width="142" height="58" />
+        <img class="theme-dark-only" src="${navEsc(navImage('brand-dark', '/assets/brand/alaska-logo-inv.png'))}" alt="${navEsc(navImageAlt('brand-dark', 'Alaska Batteries'))}" width="142" height="58" />
       </a>
 
       <nav class="anav-primary" aria-label="Main">
@@ -238,7 +254,7 @@ const headerHTML = /* HTML */ `
 `;
 
 function drawerHTML() {
-  const logoImgs = '<img class="theme-light-only" src="/assets/brand/alaska-logo.png" alt="Alaska Batteries" width="117" height="48" /><img class="theme-dark-only" src="/assets/brand/alaska-logo-inv.png" alt="Alaska Batteries" width="117" height="48" />';
+  const logoImgs = `<img class="theme-light-only" src="${navEsc(navImage('brand-light', '/assets/brand/alaska-logo.png'))}" alt="${navEsc(navImageAlt('brand-light', 'Alaska Batteries'))}" width="117" height="48" /><img class="theme-dark-only" src="${navEsc(navImage('brand-dark', '/assets/brand/alaska-logo-inv.png'))}" alt="${navEsc(navImageAlt('brand-dark', 'Alaska Batteries'))}" width="117" height="48" />`;
   // Root view: Cart + Request a Quote on top, then the six sections
   const root = `<div class="anav-view is-root is-active" data-view="root">
       <div class="anav-drawer-actions">
@@ -264,7 +280,7 @@ function drawerHTML() {
           <button type="button" class="anav-back" data-back><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Back</button>
         </div>
         ${links}
-        <a class="anav-feature anav-m-feature" href="${navEsc(f.href)}" style="--feature-img:url('${navEsc(navAbs(f.image))}')">
+        <a class="anav-feature anav-m-feature" href="${navEsc(f.href)}" title="${navEsc(f.imageAlt)}" style="--feature-img:url('${navEsc(navAbs(f.image))}')">
           <span class="k">${navEsc(f.kicker)}</span>
           <span class="anav-feature-bottom"><strong>${navEsc(f.title)}</strong><span class="go">${navEsc(f.cta)}</span></span>
         </a>

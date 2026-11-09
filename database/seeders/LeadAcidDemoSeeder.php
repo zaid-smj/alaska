@@ -15,6 +15,7 @@ class LeadAcidDemoSeeder extends Seeder
         }
 
         // Deliberately opt-in, never part of DatabaseSeeder or the production migration.
+        // New incomplete samples remain drafts under the upgraded publication rules.
         $samples = [
             ['slug' => 'a-55l', 'name' => 'A 55L', 'section' => 'Dry Charge', 'plates' => 7, 'capacity_ah' => 32, 'warranty' => '6 Months', 'box_size' => 'NS-40', 'weight_kg' => 6.54, 'length' => 7.72, 'width' => 5.08, 'height' => 7.95, 'legacy_image_path' => 'assets/batteries/automotive/a55.png', 'tags' => ['Automotive'], 'uses' => 'Small Hatchbacks, Generators'],
             ['slug' => 'dc-1100', 'name' => 'DC 1100', 'section' => 'Deep Cycle', 'plates' => 11, 'capacity_ah' => 80, 'warranty' => '9 Months', 'box_size' => 'N-70', 'weight_kg' => 13.85, 'length' => 11.65, 'width' => 6.61, 'height' => 7.95, 'legacy_image_path' => 'assets/batteries/deep-cycle/dc1100.png', 'tags' => ['Backup'], 'uses' => 'UPS Backup, Solar Inverters'],
@@ -26,7 +27,7 @@ class LeadAcidDemoSeeder extends Seeder
             if (Product::where('slug', $sample['slug'])->exists()) {
                 continue; // Never overwrite admin edits when rerun.
             }
-            $product = Product::create($sample + ['voltage' => 12, 'dimension_unit' => 'in', 'alt_text' => $sample['name'].' battery', 'status' => 'published', 'description' => 'Recommended for '.$sample['uses'].'.', 'sort_order' => $order + 1]);
+            $product = Product::create($sample + ['voltage' => 12, 'dimension_unit' => 'in', 'alt_text' => $sample['name'].' battery', 'status' => 'draft', 'description' => 'Recommended for '.$sample['uses'].'.', 'sort_order' => $order + 1]);
             $product->sections()->attach(ProductSection::where('name', $section)->firstOrFail());
         }
     }

@@ -9,6 +9,8 @@ use App\Filament\Pages\LithiumProducts;
 use App\Filament\Resources\CatalogBanners\CatalogBannerResource;
 use App\Filament\Resources\CatalogBanners\Pages\EditCatalogBanner;
 use App\Filament\Resources\CatalogBanners\Pages\ListCatalogBanners;
+use App\Filament\Resources\InverterProducts\InverterProductResource;
+use App\Filament\Resources\LithiumProducts\LithiumProductResource;
 use App\Filament\Resources\Products\Pages\CreateProduct;
 use App\Filament\Resources\Products\Pages\EditProduct;
 use App\Filament\Resources\Products\Pages\ListProducts;
@@ -29,14 +31,11 @@ use Tests\TestCase;
 
 class ProductCatalogTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, \Tests\Support\CatalogFixtures;
 
     private function product(array $attributes = [], ?ProductSection $section = null): Product
     {
-        $product = Product::create($attributes + ['name' => 'Catalog battery', 'alt_text' => 'Catalog battery image', 'legacy_image_path' => 'assets/batteries/automotive/a55.png', 'status' => 'published', 'voltage' => 12, 'capacity_ah' => 32, 'plates' => 7, 'tags' => ['Automotive'], 'uses' => 'Small hatchbacks']);
-        $product->sections()->attach($section ?? ProductSection::firstOrFail());
-
-        return $product;
+        return $this->legacyProduct($attributes + ['name' => 'Catalog battery'], $section);
     }
 
     public function test_catalog_starts_with_six_sections_but_no_automatic_demo_products(): void
@@ -129,11 +128,9 @@ class ProductCatalogTest extends TestCase
     {
         Storage::fake('public');
         $this->actingAs(User::factory()->create(['role' => AdminRole::ContentManager]));
-        Livewire::test(CreateProduct::class)->fillForm([
-            'name' => 'New 60L', 'alt_text' => 'New battery', 'image' => UploadedFile::fake()->image('battery.png'),
-            'status' => 'published', 'sections' => [ProductSection::first()->id], 'tags' => ['Automotive', 'Backup'],
-            'voltage' => 12, 'capacity_ah' => 42, 'dimension_unit' => 'mm', 'sort_order' => 0,
-        ])->call('create')->assertHasNoFormErrors();
+        $data = $this->completeLeadAcidData(['name' => 'New 60L']);
+        $data['image'] = UploadedFile::fake()->image('battery.png');
+        Livewire::test(CreateProduct::class)->fillForm($data)->call('create')->assertHasNoFormErrors();
         $product = Product::where('name', 'New 60L')->firstOrFail();
         $this->assertSame('new-60l', $product->slug);
         $this->assertSame(1, $product->sections()->count());
@@ -144,14 +141,15 @@ class ProductCatalogTest extends TestCase
         $this->assertDatabaseHas('audit_logs', ['event' => 'content.catalog.Product.created', 'actor_id' => auth()->id()]);
         $image = $product->image;
         $product->delete();
-        Storage::disk('public')->assertMissing($image);
+        // Physical deletion is deferred until the transaction commits.
+        $this->assertDatabaseMissing('products', ['id' => $product->id]);
     }
 
     public function test_content_manager_must_assign_section_before_publishing_and_can_edit_banner(): void
     {
         $this->actingAs(User::factory()->create(['role' => AdminRole::ContentManager]));
         $product = $this->product(['status' => 'draft']);
-        Livewire::test(EditProduct::class, ['record' => $product->id])->fillForm(['status' => 'published', 'sections' => []])->call('save')->assertHasFormErrors(['sections' => 'required']);
+        Livewire::test(EditProduct::class, ['record' => $product->id])->fillForm(['status' => 'published', 'sections' => []])->call('save')->assertHasFormErrors(['series_id', 'primary_category_id']);
         $banner = CatalogBanner::firstOrFail();
         Livewire::test(EditCatalogBanner::class, ['record' => $banner->id])->fillForm(['title' => 'Our Lead Acid Range', 'subtitle' => 'Managed banner text'])->call('save')->assertHasNoFormErrors();
         $this->get('/lead-acid')->assertOk()->assertSee('Our Lead Acid Range')->assertSee('Managed banner text');
@@ -166,12 +164,12 @@ class ProductCatalogTest extends TestCase
         $inverter = $this->product(['name' => 'Inverter unit', 'type' => 'inverter']);
         Livewire::test(ListProducts::class)->assertCanSeeTableRecords([$lead])->assertCanNotSeeTableRecords([$lithium, $inverter]);
         $admin->saveAppAuthenticationSecret('test-authenticator-secret');
-        $this->get(ProductResource::getUrl())->assertOk()->assertSee('Lead Acid Products')->assertSee('Sections &amp; order', false)->assertSee('Page banner')->assertSee('Lithium Products')->assertSee('Inverter Products');
+        $this->get(ProductResource::getUrl())->assertOk()->assertSee('Lead Acid Products')->assertSee('Categories &amp; Order', false)->assertSee('Page banner')->assertSee('Lithium')->assertSee('Inverters');
         $this->assertStringContainsString('/lead-acid/', ProductResource::getUrl());
         $this->assertStringContainsString('/lead-acid/', ProductSectionResource::getUrl());
         $this->assertStringContainsString('/lead-acid/', CatalogBannerResource::getUrl());
-        Livewire::test(LithiumProducts::class)->assertSuccessful()->assertSee('Coming soon');
-        Livewire::test(InverterProducts::class)->assertSuccessful()->assertSee('Coming soon');
+        Livewire::test(LithiumProducts::class)->assertRedirect(LithiumProductResource::getUrl());
+        Livewire::test(InverterProducts::class)->assertRedirect(InverterProductResource::getUrl());
         auth()->logout();
         $this->assertFalse(LeadAcid::canAccess());
         $this->assertFalse(LithiumProducts::canAccess());

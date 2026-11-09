@@ -22,6 +22,6 @@ class LeadAcid extends Cluster
 
     public static function canAccess(): bool
     {
-        return Auth::user()?->role?->canManageContent() ?? false;
+        return (bool) (Auth::user()?->is_active && Auth::user()?->role?->canManageContent());
     }
 }

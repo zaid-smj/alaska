@@ -13,3 +13,5 @@ Schedule::call(fn () => app(WorkSessionService::class)->closeStale())
     ->name('close-stale-work-sessions')
     ->everyMinute()
     ->withoutOverlapping();
+
+Schedule::command('warranty:prune-uploads')->hourly();

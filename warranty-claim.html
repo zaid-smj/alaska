@@ -30,7 +30,8 @@
   <link rel="stylesheet" href="css/banner.css" />
   <link rel="stylesheet" href="css/theme.css" />
   <link rel="stylesheet" href="css/split-form.css" />
-  <script src="/js/form-preview.js" defer></script>
+  <link rel="stylesheet" href="/css/warranty-workflow.css">
+  <script src="/js/warranty-workflow.js" defer></script>
 </head>
 
 <body class="bg-gray-50 text-black font-sans overflow-x-hidden">
@@ -50,7 +51,13 @@
     <section id="claim-content" class="sf-section flex flex-col md:flex-row border-t border-gray-100">
       <div class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider" id="claim-content-left">
         <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">File a <span class="text-[#c00d1e]">Claim</span></h2>
-        <form data-preview-form id="claim-form" class="space-y-8" novalidate>
+        <form id="claim-form" method="post" action="/warranty/claims" class="space-y-8" novalidate>
+          <p class="warranty-help">Normally, register before a problem happens. During the transition, you may still file a claim without an earlier online registration; staff will verify the documents.</p>
+          <div><label for="c-reference">Warranty registration reference (if available)</label><input id="c-reference" type="text" placeholder="WR-…" maxlength="80" class="warranty-extra-input"></div>
+          <div><label for="c-type">Product type</label><select id="c-type" required class="warranty-extra-input"><option value="">Select product type</option></select></div>
+          <div><label for="c-card">Warranty card number (if available)</label><input id="c-card" type="text" maxlength="255" class="warranty-extra-input"></div>
+          <div><label for="c-problem-date">When did the problem start?</label><input id="c-problem-date" type="date" required class="warranty-extra-input"></div>
+
           <div class="sf-row">
             <div><label class="sr-only" for="c-name">Full Name</label><input type="text" id="c-name" placeholder="Full Name" required autocomplete="name"
               class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
@@ -64,8 +71,8 @@
               class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
           </div>
           <div class="sf-row">
-            <div><label class="sr-only" for="c-model">Product model</label><select id="c-model" required class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent"><option value="" disabled selected>Battery model</option></select></div>
-            <div><label class="sr-only" for="c-serial">Serial / Warranty Card No.</label><input type="text" id="c-serial" placeholder="Serial / Warranty Card No." required
+            <div><label class="sr-only" for="c-model">Product model</label><input type="text" id="c-model" list="c-models" placeholder="Product model" required class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent"><datalist id="c-models"></datalist></div>
+            <div><label class="sr-only" for="c-serial">Product Serial Number</label><input type="text" id="c-serial" placeholder="Product Serial Number" required
               class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
           </div>
           <div class="sf-row">
@@ -83,15 +90,15 @@
             class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest resize-none bg-transparent"></textarea></div>
 
           <div class="sf-file">
-            <input type="file" id="c-file" accept=".pdf,.jpg,.jpeg,.png" aria-describedby="c-file-name" />
-            <label for="c-file" class="sf-file-btn"><i class="fas fa-paperclip" aria-hidden="true"></i> <span class="sf-file-act">Attach Photo</span></label>
-            <span id="c-file-name" class="sf-file-name">Optional: photo of the battery, warranty card or invoice (PDF or image, up to 5 MB).</span>
+            <input type="file" id="c-file" accept=".pdf,.docx,.txt,.jpg,.jpeg,.png,.webp" aria-describedby="c-file-name" />
+            <label for="c-file" class="sf-file-btn"><i class="fas fa-paperclip" aria-hidden="true"></i> <span class="sf-file-act">Attach Document or Image</span></label>
+            <span id="c-file-name" class="sf-file-name">Optional: PDF, DOCX, text, JPEG, PNG or WebP, up to 5 MB. Readable printed text can help fill this form.</span>
           </div>
 
           <label class="sc-check"><input type="checkbox" id="c-consent" required> <span>I confirm the details are correct and agree to Alaska Batteries contacting me about this claim, as described in the <a href="privacy-policy.html#privacy-content" class="text-[#c00d1e] font-bold">privacy policy</a>.</span></label>
           <p class="sc-error" id="c-err" role="alert"></p>
-          <button type="submit" id="c-submit" class="btn-primary btn-lg">Submit Claim</button>
-        </form>
+          <button type="submit" id="c-submit" class="btn-primary btn-lg">Review Claim</button>
+        <noscript>JavaScript is required to review and submit this form. Please enable it or contact support.</noscript></form>
       </div>
 
       <div class="w-full md:w-1/2 p-12 md:p-24 bg-white flex flex-col justify-start">
@@ -149,71 +156,7 @@
   <script src="js/inverter-data.js"></script>
   <script src="js/components.js"></script>
   <script src="js/forms.js"></script>
-  <script>
-    (function () {
-      var F = window.AlaskaForms;
-      var $ = function (id) { return document.getElementById(id); };
-      // Battery models from the catalogue
-      var models = (typeof batteryData !== "undefined" ? batteryData : []).map(function (b) { return b.model; });
-      $("c-model").innerHTML = '<option value="" disabled selected>Product model</option>' +
-        models.map(function (m) { return '<option>' + F.esc(m) + '</option>'; }).join("") + '<option>Life Series (lithium)</option>' +
-        (typeof inverterData !== "undefined" ? inverterData : []).map(function (m) { return '<option>Inverter ' + F.esc(m.model) + '</option>'; }).join("") + '<option>Other / not sure</option>';
-      $("c-date").max = new Date().toISOString().slice(0, 10);
-      F.fileButton($("c-file"));
 
-      $("claim-form").addEventListener("submit", async function (e) {
-        e.preventDefault();
-        var bad = F.validate([
-          { el: $("c-name"), msg: "name" },
-          { el: $("c-phone"), test: F.isPhone, msg: "phone number" },
-          { el: $("c-email"), test: F.isEmail, msg: "email" },
-          { el: $("c-city"), msg: "city" },
-          { el: $("c-model"), msg: "product model" },
-          { el: $("c-serial"), msg: "serial / warranty card number" },
-          { el: $("c-date"), test: function (v) { return v && v <= new Date().toISOString().slice(0, 10); }, msg: "purchase date" },
-          { el: $("c-dealer"), msg: "where you bought it" },
-          { el: $("c-issue"), msg: "problem" },
-          { el: $("c-desc"), msg: "description" },
-        ], $("c-err"));
-        if (bad) return;
-        if (!$("c-consent").checked) { $("c-err").textContent = "Please tick the confirmation box."; $("c-consent").focus(); return; }
-
-        var ref = F.reference("WC");
-        var lines = [
-          "WARRANTY CLAIM " + ref,
-          "City: " + $("c-city").value.trim(),
-          "Product: " + $("c-model").value,
-          "Serial / card no.: " + $("c-serial").value.trim(),
-          "Purchased: " + $("c-date").value + " from " + $("c-dealer").value.trim(),
-          "Used in: " + ($("c-use").value.trim() || "-"),
-          "Problem: " + $("c-issue").value,
-          "",
-          $("c-desc").value.trim(),
-        ];
-        var btn = $("c-submit");
-        btn.disabled = true; btn.textContent = "Sending…";
-        var res = await F.send(F.withFile({
-          form: "warranty-claim",
-          name: $("c-name").value.trim(),
-          email: $("c-email").value.trim(),
-          phone: $("c-phone").value.trim(),
-          city: $("c-city").value.trim(),
-          subject: "Warranty claim " + ref + " — " + $("c-model").value,
-          message: lines.join("\n"),
-        }, $("c-file")));
-        btn.disabled = false; btn.textContent = "Submit Claim";
-        var card = $("claim-content-left");
-        if (res.ok) {
-          card.innerHTML = '<div class="pg-success" role="status"><div class="ok"><i class="fa-solid fa-check" aria-hidden="true"></i></div><h3>Claim received</h3>' +
-            '<p>Thank you. Our service team will contact you within two working days. Please quote this reference:</p><div class="pg-ref">' + ref + '</div>' +
-            '<div class="sc-actions" style="justify-content:center"><a class="sc-btn ghost" href="warranty.html#terms">Warranty terms</a><a class="sc-btn plain" href="index.html">Back to home</a></div></div>';
-          card.focus && card.setAttribute("tabindex", "-1"); card.focus();
-        } else {
-          $("c-err").innerHTML = F.esc(res.message) + ' You can send the same details on <a href="' + F.waLink(lines.join("\n") + "\nName: " + $("c-name").value + "\nPhone: " + $("c-phone").value) + '" target="_blank" rel="noopener" style="color:var(--red);font-weight:800">WhatsApp</a> instead.';
-        }
-      });
-    })();
-  </script>
 </body>
 
 </html>

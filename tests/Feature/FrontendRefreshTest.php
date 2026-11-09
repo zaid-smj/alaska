@@ -26,7 +26,7 @@ class FrontendRefreshTest extends TestCase
 
     public function test_public_forms_are_explicit_previews_and_cannot_submit_to_a_legacy_handler(): void
     {
-        foreach (['checkout', 'quote', 'warranty', 'warranty-claim', 'support', 'careers', 'become-dealer', 'solar-calculator'] as $page) {
+        foreach (['checkout', 'quote', 'support', 'careers', 'become-dealer', 'solar-calculator'] as $page) {
             $this->get("/{$page}.html")->assertOk()
                 ->assertSee('data-preview-form', false)
                 ->assertSee('/js/form-preview.js', false);

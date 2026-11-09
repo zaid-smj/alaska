@@ -1,0 +1,7 @@
+# First build the base image using compose.yaml, then use both compose files.
+services:
+    laravel.test:
+        build:
+            context: .
+            dockerfile: docker/warranty/Dockerfile
+        image: alaska-warranty-8.5/app

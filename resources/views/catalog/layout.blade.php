@@ -16,6 +16,7 @@
     <div id="header-placeholder"></div>
     <main>@yield('content')</main>
     <div id="footer-placeholder"></div>
+    <script>window.ALASKA_CONTENT = { navigationImages: {{ Illuminate\Support\Js::from(App\Models\NavbarImage::forNavigation()) }} };</script>
     <script src="/js/components.js" defer></script>
     @yield('scripts')
 </body>

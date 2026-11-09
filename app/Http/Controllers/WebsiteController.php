@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Article;
 use App\Models\GalleryImage;
 use App\Models\HomeBannerSlide;
+use App\Models\NavbarImage;
+use App\Models\Product;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Vite;
@@ -116,6 +119,17 @@ class WebsiteController extends Controller
     private function htmlWithContent(string $filename, array $content): Response
     {
         $html = File::get(base_path($filename));
+        if ($filename === 'news.html') {
+            $articles = Article::published()->get();
+            $content['articles'] = $articles->map(fn ($article) => $article->publicData())->values()->all();
+            $html = str_replace('<!-- CMS_ARTICLE_CARDS -->', view('articles.cards', compact('articles'))->render(), $html);
+        }
+        $content['navigationImages'] = NavbarImage::forNavigation();
+        if (in_array($filename, ['warranty.html', 'warranty-claim.html'], true)) {
+            $html = str_replace('</head>', '<meta name="csrf-token" content="'.e(csrf_token()).'">'.'</head>', $html);
+            $content['warrantyModels'] = Product::forPublicUse()->orderBy('name')->get(['id', 'name', 'type'])->map(fn ($product) => ['id' => $product->id, 'name' => $product->name, 'family' => $product->type])->all();
+            $content['warrantyTypes'] = config('warranty.types');
+        }
         $tailwind = '<link rel="stylesheet" href="'.Vite::asset('resources/css/site.css').'">';
         $html = str_replace(
             '<script src="https://cdn.tailwindcss.com"></script>',
@@ -135,8 +149,12 @@ class WebsiteController extends Controller
         );
         $script = "<script>window.ALASKA_CONTENT = {$json};</script>";
 
-        return response(str_replace('</head>', "{$script}\n</head>", $html))
-            ->header('Content-Type', 'text/html; charset=UTF-8');
+        $response = response(str_replace('</head>', "{$script}\n</head>", $html))->header('Content-Type', 'text/html; charset=UTF-8');
+        if (in_array($filename, ['warranty.html', 'warranty-claim.html'], true)) {
+            $response->header('Cache-Control', 'private, no-store');
+        }
+
+        return $response;
     }
 
     private function safeFile(string $root, string $path): BinaryFileResponse

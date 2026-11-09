@@ -33,6 +33,8 @@ class UserForm
                     ->required()
                     ->disabled(fn (?User $record): bool => $record?->role === AdminRole::SuperAdmin),
 
+                Toggle::make('can_manage_warranties')->label('Warranty management access')->helperText('Grants access to customer warranties, claims and private attachments. Super Admin and Admin already have this access.'),
+
                 Toggle::make('is_active')
                     ->label('Active')
                     ->disabled(

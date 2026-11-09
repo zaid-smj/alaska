@@ -50,7 +50,8 @@
     .wt-panel .sc-card > h4:first-child { margin-top: 0; }
     .wt-models-card .wt-model-list { margin: 0; }
   </style>
-  <script src="/js/form-preview.js" defer></script>
+  <link rel="stylesheet" href="/css/warranty-workflow.css">
+  <script src="/js/warranty-workflow.js" defer></script>
 </head>
 
 <body class="bg-gray-50 text-black font-sans overflow-x-hidden">
@@ -70,7 +71,7 @@
     <section id="reg-content" class="sf-section flex flex-col md:flex-row border-t border-gray-100">
       <div class="w-full md:w-1/2 p-12 md:p-24 bg-white sf-divider" id="reg-content-left">
         <h2 class="text-4xl font-black uppercase mb-12 tracking-tighter">Register Your <span class="text-[#c00d1e]">Warranty</span></h2>
-        <form data-preview-form id="reg-form" class="space-y-8" novalidate>
+        <form id="reg-form" method="post" action="/warranty/registrations" class="space-y-8" novalidate>
           <div class="sf-row">
             <div><label class="sr-only" for="r-name">Full Name</label><input type="text" id="r-name" placeholder="Full Name" required autocomplete="name"
               class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent" /></div>
@@ -85,7 +86,7 @@
           </div>
           <div class="sf-row">
             <div><label class="sr-only" for="r-type">Product type</label><select id="r-type" required class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent"><option value="" disabled selected>Product type</option><option>Dry-charge lead-acid</option><option>Maintenance-free (MF) lead-acid</option><option>Lithium (Life Series)</option><option>Inverter</option></select></div>
-            <div><label class="sr-only" for="r-model">Model</label><select id="r-model" required class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent"><option value="" disabled selected>Model</option></select></div>
+            <div><label class="sr-only" for="r-model">Model</label><input type="text" id="r-model" list="r-models" placeholder="Product model" required class="w-full border-b-2 border-gray-100 py-3 outline-none focus:border-[#c00d1e] transition-colors uppercase text-xs font-black tracking-widest bg-transparent"><datalist id="r-models"></datalist></div>
           </div>
           <div class="sf-row">
             <div><label class="sr-only" for="r-serial">Battery Code / Serial No.</label><input type="text" id="r-serial" placeholder="Battery Code / Serial No." required
@@ -101,15 +102,15 @@
           </div>
 
           <div class="sf-file">
-            <input type="file" id="r-file" accept=".pdf,.jpg,.jpeg,.png" aria-describedby="r-file-name" />
-            <label for="r-file" class="sf-file-btn"><i class="fas fa-paperclip" aria-hidden="true"></i> <span class="sf-file-act">Attach Warranty Card</span></label>
-            <span id="r-file-name" class="sf-file-name">Optional: photo of your stamped warranty card or invoice (PDF or image, up to 5 MB).</span>
+            <input type="file" id="r-file" accept=".pdf,.docx,.txt,.jpg,.jpeg,.png,.webp" aria-describedby="r-file-name" />
+            <label for="r-file" class="sf-file-btn"><i class="fas fa-paperclip" aria-hidden="true"></i> <span class="sf-file-act">Attach Document or Image</span></label>
+            <span id="r-file-name" class="sf-file-name">Optional: PDF, DOCX, text, JPEG, PNG or WebP, up to 5 MB. Readable printed text can help fill this form.</span>
           </div>
 
           <label class="sc-check"><input type="checkbox" id="r-consent" required> <span>I confirm the details are correct and agree to the <a href="privacy-policy.html#privacy-content" class="text-[#c00d1e] font-bold">privacy policy</a>.</span></label>
           <p class="sc-error" id="r-err" role="alert"></p>
-          <button type="submit" id="r-submit" class="btn-primary btn-lg">Register Warranty</button>
-        </form>
+          <button type="submit" id="r-submit" class="btn-primary btn-lg">Review Registration</button>
+        <noscript>JavaScript is required to review and submit this form. Please enable it or contact support.</noscript></form>
       </div>
 
       <div class="w-full md:w-1/2 p-12 md:p-24 bg-white flex flex-col justify-start">
@@ -319,82 +320,7 @@
       openFromHash();
     })();
   </script>
-  <script>
-    // Warranty registration form
-    (function () {
-      var F = window.AlaskaForms;
-      var $ = function (id) { return document.getElementById(id); };
-      if (!F || !$("reg-form")) return;
-      var data = typeof batteryData !== "undefined" ? batteryData : [];
-      var lithium = typeof lithiumData !== "undefined" ? lithiumData.map(function (m) { return m.code || m.title; }) : [];
-      // Model list follows the chosen product type
-      var modelsFor = function (type) {
-        if (/MF/.test(type)) return data.filter(function (b) { return b.series === "mf"; }).map(function (b) { return b.model; });
-        if (/Dry/.test(type)) return data.filter(function (b) { return b.series !== "mf"; }).map(function (b) { return b.model; });
-        if (/Lithium/.test(type)) return lithium;
-        if (/Inverter/.test(type)) return typeof inverterData !== "undefined" ? inverterData.map(function (m) { return m.model; }) : [];
-        return [];
-      };
-      var fillModels = function () {
-        var list = modelsFor($("r-type").value);
-        $("r-model").innerHTML = '<option value="" disabled selected>Model</option>' +
-          list.map(function (m) { return "<option>" + F.esc(m) + "</option>"; }).join("") + "<option>Other / not sure</option>";
-      };
-      $("r-type").addEventListener("change", fillModels);
-      fillModels();
-      $("r-date").max = new Date().toISOString().slice(0, 10);
-      F.fileButton($("r-file"));
 
-      $("reg-form").addEventListener("submit", async function (e) {
-        e.preventDefault();
-        var bad = F.validate([
-          { el: $("r-name"), msg: "name" },
-          { el: $("r-phone"), test: F.isPhone, msg: "phone number" },
-          { el: $("r-email"), test: F.isEmail, msg: "email" },
-          { el: $("r-city"), msg: "city" },
-          { el: $("r-type"), msg: "product type" },
-          { el: $("r-model"), msg: "model" },
-          { el: $("r-serial"), msg: "battery code / serial number" },
-          { el: $("r-card"), msg: "warranty card number" },
-          { el: $("r-date"), test: function (v) { return v && v <= new Date().toISOString().slice(0, 10); }, msg: "purchase date" },
-          { el: $("r-dealer"), msg: "where you bought it" },
-        ], $("r-err"));
-        if (bad) return;
-        if (!$("r-consent").checked) { $("r-err").textContent = "Please tick the confirmation box."; $("r-consent").focus(); return; }
-
-        var ref = F.reference("WR");
-        var lines = [
-          "WARRANTY REGISTRATION " + ref,
-          "City: " + $("r-city").value.trim(),
-          "Product: " + $("r-type").value + " — " + $("r-model").value,
-          "Battery code / serial no.: " + $("r-serial").value.trim(),
-          "Warranty card no.: " + $("r-card").value.trim(),
-          "Purchased: " + $("r-date").value + " from " + $("r-dealer").value.trim(),
-        ];
-        var btn = $("r-submit");
-        btn.disabled = true; btn.textContent = "Sending…";
-        var res = await F.send(F.withFile({
-          form: "warranty-registration",
-          name: $("r-name").value.trim(),
-          email: $("r-email").value.trim(),
-          phone: $("r-phone").value.trim(),
-          city: $("r-city").value.trim(),
-          subject: "Warranty registration " + ref + " — " + $("r-model").value,
-          message: lines.join("\n"),
-        }, $("r-file")));
-        btn.disabled = false; btn.textContent = "Register Warranty";
-        if (res.ok) {
-          var box = $("reg-content-left");
-          box.innerHTML = '<div class="pg-success" role="status"><div class="ok"><i class="fa-solid fa-check" aria-hidden="true"></i></div><h3>Warranty registered</h3>' +
-            '<p>Thank you. Your registration has been sent. Please keep this reference with your stamped warranty card:</p><div class="pg-ref">' + ref + '</div>' +
-            '<div class="sc-actions" style="justify-content:center"><a class="sc-btn ghost" href="#terms">Warranty terms</a><a class="sc-btn plain" href="index.html">Back to home</a></div></div>';
-          box.setAttribute("tabindex", "-1"); box.focus();
-        } else {
-          $("r-err").innerHTML = F.esc(res.message) + ' You can send the same details on <a href="' + F.waLink(lines.join("\n") + "\nName: " + $("r-name").value + "\nPhone: " + $("r-phone").value) + '" target="_blank" rel="noopener" style="color:var(--red);font-weight:800">WhatsApp</a> instead.';
-        }
-      });
-    })();
-  </script>
 </body>
 
 </html>

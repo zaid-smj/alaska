@@ -1,0 +1,11 @@
+<?php
+
+namespace App\Filament\Resources\VehicleMakes\Pages;
+
+use App\Filament\Resources\VehicleMakes\VehicleMakeResource;
+use Filament\Resources\Pages\EditRecord;
+
+class EditItem extends EditRecord
+{
+    protected static string $resource = VehicleMakeResource::class;
+}

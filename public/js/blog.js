@@ -1,48 +1,5 @@
 // Blog data structure
-const blogs = [
-  {
-    id: "choosing-guide",
-    img: "assets/vault/blogs/best-battery-blog-1.webp",
-    mobileImg: "assets/vault/blogs/mobile/best-battery-blog-1-mobile.webp",
-    category: "Guide",
-    title: "Best Battery for Vehicle or Solar",
-  },
-  {
-    id: "eid-checklist",
-    img: "assets/vault/blogs/eid-blog-2.webp",
-    mobileImg: "assets/vault/blogs/mobile/eid-blog-2-mobile.webp",
-    category: "Travel",
-    title: "Eid Travel Readiness Checklist",
-  },
-  {
-    id: "power-saving",
-    img: "assets/vault/blogs/power-blog-3.webp",
-    mobileImg: "assets/vault/blogs/mobile/power-blog-3-mobile.webp",
-    category: "Maintenance",
-    title: "5 Power-Saving Secrets",
-  },
-  {
-    id: "ebike-accessories",
-    img: "assets/vault/blogs/summer-blog-6.webp",
-    mobileImg: "assets/vault/blogs/mobile/summer-blog-6-mobile.webp",
-    category: "E-Bike Guide",
-    title: "Battery Survival Guide for Pakistani Summers",
-  },
-  {
-    id: "ebike-repairs",
-    img: "assets/vault/blogs/storing-blog-4.webp",
-    mobileImg: "assets/vault/blogs/mobile/storing-blog-4-mobile.webp",
-    category: "E-Bike Repair",
-    title: "Maximize Battery Life: Charging & Storage Guide",
-  },
-  {
-    id: "ebike-charging",
-    img: "assets/vault/blogs/recycle-blog-5.webp",
-    mobileImg: "assets/vault/blogs/mobile/recycle-blog-5-mobile.webp",
-    category: "Eco-friendly",
-    title: "Battery Lifespan: Recycling & Responsible Disposal",
-  },
-];
+const blogs = Array.isArray(window.ALASKA_CONTENT?.articles) ? window.ALASKA_CONTENT.articles : [];
 
 let currentMobileBlogIndex = 0;
 let filteredBlogs = [...blogs]; // Track filtered results
@@ -57,13 +14,20 @@ function updateMobileBlog() {
 
   const totalCount = filteredBlogs.length;
 
+  const mobile = document.getElementById("mobile-blog-container");
+  if (mobile) mobile.style.display = totalCount === 0 ? "none" : "";
+  const empty = document.getElementById("articles-empty");
+  if (empty) empty.hidden = totalCount !== 0;
+  const controls = document.getElementById("blog-scroll-controls");
+  if (controls) controls.style.display = totalCount === 0 ? "none" : "";
   if (!featureImg || !leftImg || !rightImg || totalCount === 0) return;
 
   // Set feature image with smooth fade
+  const featureBlog = filteredBlogs[currentMobileBlogIndex];
   featureImg.classList.add("is-fading");
   requestAnimationFrame(() => {
-    const featureBlog = filteredBlogs[currentMobileBlogIndex];
     featureImg.src = featureBlog.mobileImg || featureBlog.img;
+    featureImg.alt = featureBlog.alt || featureBlog.title;
     featureImg.onerror = () => (featureImg.src = "https://placehold.co/600x800/111/fff?text=Image");
     featureImg.onload = () => featureImg.classList.remove("is-fading");
   });
@@ -73,6 +37,8 @@ function updateMobileBlog() {
     featureTitle.textContent = filteredBlogs[currentMobileBlogIndex].title;
   }
 
+  if (featureCategory) featureCategory.textContent = filteredBlogs[currentMobileBlogIndex].category;
+
   // Set left/right images
   const prevIndex = (currentMobileBlogIndex - 1 + totalCount) % totalCount;
   const nextIndex = (currentMobileBlogIndex + 1) % totalCount;
@@ -80,11 +46,13 @@ function updateMobileBlog() {
   leftImg.classList.add("is-fading");
   rightImg.classList.add("is-fading");
 
+  const prevBlog = filteredBlogs[prevIndex];
+  const nextBlog = filteredBlogs[nextIndex];
   requestAnimationFrame(() => {
-    const prevBlog = filteredBlogs[prevIndex];
-    const nextBlog = filteredBlogs[nextIndex];
     leftImg.src = prevBlog.mobileImg || prevBlog.img;
+    leftImg.alt = prevBlog.alt || prevBlog.title;
     rightImg.src = nextBlog.mobileImg || nextBlog.img;
+    rightImg.alt = nextBlog.alt || nextBlog.title;
 
     leftImg.onerror = () => (leftImg.src = "https://placehold.co/400x600/111/fff?text=Image");
     rightImg.onerror = () => (rightImg.src = "https://placehold.co/400x600/111/fff?text=Image");
@@ -183,6 +151,7 @@ function filterBlogs() {
     currentMobileBlogIndex = 0;
     updateMobileBlog();
   } else {
+    updateMobileBlog();
     // Clear dots if no results
     const dotsContainer = document.getElementById("mobile-blog-dots");
     if (dotsContainer) dotsContainer.innerHTML = "";
