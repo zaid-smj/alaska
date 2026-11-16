@@ -11,6 +11,13 @@
             <h1 id="product-title">{{ $product->name }}</h1>
             <p class="catalog-detail-technology">Lead Acid Battery</p>
             @if ($product->price_pkr !== null)<p class="catalog-price">PKR {{ number_format((float) $product->price_pkr, 2) }}</p>@endif
+            <div class="catalog-sales-actions">
+            @if ($product->price_pkr !== null)
+                <button type="button" class="btn-primary" data-add-sales-product data-id="cms-{{ $product->id }}" data-model="{{ $product->name }}" data-image="{{ $product->image_url }}">Add to enquiry cart</button>
+            @else
+                <a class="btn-primary" href="{{ url('/quote.html').'?product='.rawurlencode($product->name) }}">Request a quote</a>
+            @endif
+            </div>
             <dl class="catalog-key-specs">
                 @foreach (['Plates' => 'Plates', 'Voltage' => 'Voltage', 'Capacity (Ah)' => 'Ampere'] as $field => $label)
                 <div><dt>{{ $label }}</dt><dd>{{ $specifications[$field] }}</dd></div>
@@ -33,4 +40,8 @@
     </article>
     <a class="catalog-detail-back" href="{{ route('catalog.lead-acid') }}">← Back to Lead Acid batteries</a>
 </div>
+@endsection
+
+@section('scripts')
+<script src="/js/sales-product.js" defer></script>
 @endsection

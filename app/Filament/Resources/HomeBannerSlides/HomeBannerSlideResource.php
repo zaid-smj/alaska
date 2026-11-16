@@ -79,6 +79,6 @@ class HomeBannerSlideResource extends Resource
 
     private static function canManageContent(): bool
     {
-        return Auth::user()?->role?->canManageContent() ?? false;
+        return Auth::user()?->canManageContent() ?? false;
     }
 }

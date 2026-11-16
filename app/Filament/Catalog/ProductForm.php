@@ -93,6 +93,7 @@ class ProductForm
         }
         $sections[] = Section::make('Publication Settings')->schema([
             Select::make('status')->options(['draft' => 'Draft', 'published' => 'Published', 'hidden' => 'Hidden'])->default('draft')->required()->helperText('Incomplete drafts can be saved. All required specifications and content are checked on the server before publication.'),
+            TextInput::make('tax_retail_price_pkr')->label('Taxable printed retail price, excluding sales tax (PKR)')->numeric()->minValue(0)->maxValue(9999999999.99)->helperText('Only enter an accounts-confirmed retail-price tax basis when applicable. Leave unknown values empty; this does not replace the selling price.'),
             TextInput::make('price_pkr')->label('Price (PKR)')->numeric()->minValue(0)->maxValue(9999999999.99)->prefix('PKR')->helperText('Leave empty for Request a Quote.'),
             TextInput::make('sort_order')->label('Display order')->integer()->minValue(0)->default(0)->required(),
         ])->columns(3);

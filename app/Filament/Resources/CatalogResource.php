@@ -16,7 +16,7 @@ abstract class CatalogResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return (bool) (Auth::user()?->is_active && Auth::user()?->role?->canManageContent());
+        return (bool) (Auth::user()?->is_active && Auth::user()?->canManageContent());
     }
 
     public static function canCreate(): bool

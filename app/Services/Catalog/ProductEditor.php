@@ -24,7 +24,7 @@ class ProductEditor
                 throw ValidationException::withMessages(['type' => 'This product belongs to another family.']);
             }
             $status = $data['status'] ?? $product->status ?? 'draft';
-            $fields = ['name', 'slug', 'technology', 'series_id', 'primary_category_id', 'image', 'alt_text', 'price_pkr', 'description', 'sort_order', 'short_warranty_months', 'certifications', 'certifications_visible', 'specification_visibility', 'plates', 'voltage', 'capacity_ah', 'box_size', 'warranty', 'weight_kg', 'length', 'width', 'height', 'dimension_unit'];
+            $fields = ['name', 'slug', 'technology', 'series_id', 'primary_category_id', 'image', 'alt_text', 'tax_retail_price_pkr', 'price_pkr', 'description', 'sort_order', 'short_warranty_months', 'certifications', 'certifications_visible', 'specification_visibility', 'plates', 'voltage', 'capacity_ah', 'box_size', 'warranty', 'weight_kg', 'length', 'width', 'height', 'dimension_unit'];
             if ($family !== 'lead-acid') {
                 $fields = array_diff($fields, ['plates', 'voltage', 'capacity_ah', 'box_size', 'warranty', 'weight_kg', 'length', 'width', 'height', 'dimension_unit']);
             }

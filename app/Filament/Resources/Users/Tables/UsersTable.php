@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Users\Tables;
 use App\Models\LoginEvent;
 use App\Models\User;
 use App\Services\AuditLogger;
+use App\Services\StaffManagement;
 use App\Services\WorkSessionService;
 use Filament\Actions\Action;
 use Filament\Actions\EditAction;
@@ -52,9 +53,10 @@ class UsersTable
                     ->label('Sign out everywhere')
                     ->color('danger')
                     ->requiresConfirmation()
-                    ->visible(fn (User $record): bool => $record->id !== Auth::id()
+                    ->visible(fn (User $record): bool => StaffManagement::allows(Auth::user(), $record) && $record->id !== Auth::id()
                         && DB::table('sessions')->where('user_id', $record->id)->exists())
                     ->action(function (User $record): void {
+                        abort_unless(StaffManagement::allows(Auth::user(), $record), 403);
                         $revokedCount = DB::table('sessions')->where('user_id', $record->id)->delete();
 
                         LoginEvent::create([

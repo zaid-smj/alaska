@@ -2,6 +2,9 @@
 
 use App\Http\Controllers\AdminInvitationController;
 use App\Http\Controllers\ProductCatalogController;
+use App\Http\Controllers\Sales\CheckoutController;
+use App\Http\Controllers\Sales\SalesAttachmentController;
+use App\Http\Controllers\Sales\SalesRequestController;
 use App\Http\Controllers\Warranty\WarrantySubmissionController;
 use App\Http\Controllers\Warranty\WarrantyUploadController;
 use App\Http\Controllers\WebsiteController;
@@ -43,3 +46,12 @@ Route::post('/admin/work-session/heartbeat', WorkSessionHeartbeatController::cla
 Route::post('/warranty/uploads', [WarrantyUploadController::class, 'store'])->middleware('throttle:5,1')->name('warranty.uploads');
 Route::post('/warranty/registrations', [WarrantySubmissionController::class, 'registration'])->middleware('throttle:10,1')->name('warranty.registrations');
 Route::post('/warranty/claims', [WarrantySubmissionController::class, 'claim'])->middleware('throttle:10,1')->name('warranty.claims');
+
+Route::post('/sales/requests', SalesRequestController::class)->middleware('throttle:10,1')->name('sales.requests');
+
+Route::post('/sales/attachments', [SalesAttachmentController::class, 'store'])->middleware('throttle:5,1')->name('sales.attachments');
+
+Route::post('/sales/checkout/preview', [CheckoutController::class, 'preview'])->middleware('throttle:20,1')->name('sales.checkout.preview');
+Route::post('/sales/checkout/confirm', [CheckoutController::class, 'confirm'])->middleware('throttle:10,1')->name('sales.checkout.confirm');
+
+Route::get('/sales/checkout/options', [CheckoutController::class, 'options'])->middleware('throttle:30,1')->name('sales.checkout.options');

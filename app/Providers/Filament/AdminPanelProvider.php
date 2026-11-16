@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Http\Controllers\Sales\SalesAttachmentController;
 use App\Http\Controllers\Warranty\WarrantyFileController;
 use App\Http\Middleware\TrackWorkSessionActivity;
 use Filament\Auth\MultiFactor\App\AppAuthentication;
@@ -38,6 +39,7 @@ class AdminPanelProvider extends PanelProvider
             ->darkModeBrandLogo(asset('assets/brand/alaska-logo-inv.png'))
             ->brandLogoHeight('2.5rem')
             ->authenticatedRoutes(function () {
+                Route::get('/sales-attachments/{attachment}', [SalesAttachmentController::class, 'download'])->middleware(EnsureMultiFactorAuthenticationIsEnabled::class)->name('sales-attachment');
                 Route::get('/warranty-files/{upload}', WarrantyFileController::class)
                     ->middleware(EnsureMultiFactorAuthenticationIsEnabled::class)
                     ->name('warranty-files');

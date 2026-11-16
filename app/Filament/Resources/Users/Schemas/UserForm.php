@@ -33,7 +33,9 @@ class UserForm
                     ->required()
                     ->disabled(fn (?User $record): bool => $record?->role === AdminRole::SuperAdmin),
 
-                Toggle::make('can_manage_warranties')->label('Warranty management access')->helperText('Grants access to customer warranties, claims and private attachments. Super Admin and Admin already have this access.'),
+                Toggle::make('can_manage_content')->label('Content management access')->visible(fn () => auth()->user()?->role === AdminRole::SuperAdmin)->dehydrated(fn () => auth()->user()?->role === AdminRole::SuperAdmin),
+                Toggle::make('can_manage_sales')->label('Sales management access')->visible(fn () => auth()->user()?->role === AdminRole::SuperAdmin)->dehydrated(fn () => auth()->user()?->role === AdminRole::SuperAdmin),
+                Toggle::make('can_manage_warranties')->visible(fn () => auth()->user()?->role === AdminRole::SuperAdmin)->dehydrated(fn () => auth()->user()?->role === AdminRole::SuperAdmin)->label('Warranty management access')->helperText('Grants access to customer warranties, claims and private attachments. Super Admin and Admin already have this access.'),
 
                 Toggle::make('is_active')
                     ->label('Active')

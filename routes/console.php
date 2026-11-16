@@ -15,3 +15,7 @@ Schedule::call(fn () => app(WorkSessionService::class)->closeStale())
     ->withoutOverlapping();
 
 Schedule::command('warranty:prune-uploads')->hourly();
+
+Schedule::command('sales:prune-attachments')->hourly();
+
+Schedule::command('sales:prune-checkout-previews')->hourly();

@@ -10,10 +10,13 @@ use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 
 class WorkSessionResource extends Resource
 {
+    protected static string|\UnitEnum|null $navigationGroup = 'Admin Section';
+
     protected static ?string $model = WorkSession::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedBriefcase;
@@ -26,7 +29,14 @@ class WorkSessionResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return Auth::user()?->role === AdminRole::SuperAdmin;
+        return (bool) (Auth::user()?->is_active && in_array(Auth::user()?->role, [AdminRole::SuperAdmin, AdminRole::Admin], true));
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        return Auth::user()?->role === AdminRole::Admin ? $query->whereHas('user', fn ($q) => $q->whereIn('role', ['marketing', 'sales'])->orWhere('id', Auth::id())) : $query;
     }
 
     public static function canCreate(): bool

@@ -8,16 +8,20 @@ use App\Filament\Resources\Users\Pages\ListUsers;
 use App\Filament\Resources\Users\Schemas\UserForm;
 use App\Filament\Resources\Users\Tables\UsersTable;
 use App\Models\User;
+use App\Services\StaffManagement;
 use BackedEnum;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
 class UserResource extends Resource
 {
+    protected static string|\UnitEnum|null $navigationGroup = 'Admin Section';
+
     protected static ?string $model = User::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedUsers;
@@ -30,7 +34,14 @@ class UserResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return Auth::user()?->role === AdminRole::SuperAdmin;
+        return (bool) (Auth::user()?->is_active && Auth::user()?->role?->canManageUsers());
+    }
+
+    public static function getEloquentQuery(): Builder
+    {
+        $query = parent::getEloquentQuery();
+
+        return Auth::user()?->role === AdminRole::Admin ? $query->whereIn('role', ['marketing', 'sales']) : $query;
     }
 
     public static function canCreate(): bool
@@ -40,7 +51,7 @@ class UserResource extends Resource
 
     public static function canEdit(Model $record): bool
     {
-        return Auth::user()?->role === AdminRole::SuperAdmin;
+        return StaffManagement::allows(Auth::user(), $record);
     }
 
     public static function canDelete(Model $record): bool

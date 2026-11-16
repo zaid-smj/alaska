@@ -125,10 +125,13 @@ class WebsiteController extends Controller
             $html = str_replace('<!-- CMS_ARTICLE_CARDS -->', view('articles.cards', compact('articles'))->render(), $html);
         }
         $content['navigationImages'] = NavbarImage::forNavigation();
-        if (in_array($filename, ['warranty.html', 'warranty-claim.html'], true)) {
+        if (in_array($filename, ['warranty.html', 'warranty-claim.html', 'checkout.html', 'quote.html'], true)) {
             $html = str_replace('</head>', '<meta name="csrf-token" content="'.e(csrf_token()).'">'.'</head>', $html);
             $content['warrantyModels'] = Product::forPublicUse()->orderBy('name')->get(['id', 'name', 'type'])->map(fn ($product) => ['id' => $product->id, 'name' => $product->name, 'family' => $product->type])->all();
             $content['warrantyTypes'] = config('warranty.types');
+        }
+        if (in_array($filename, ['checkout.html', 'quote.html'], true)) {
+            $content['salesProducts'] = Product::forPublicUse()->orderBy('name')->get()->map(fn ($p) => ['id' => $p->id, 'slug' => $p->slug, 'name' => $p->name, 'price' => $p->price_pkr, 'image' => $p->image_url])->values()->all();
         }
         $tailwind = '<link rel="stylesheet" href="'.Vite::asset('resources/css/site.css').'">';
         $html = str_replace(
@@ -150,7 +153,7 @@ class WebsiteController extends Controller
         $script = "<script>window.ALASKA_CONTENT = {$json};</script>";
 
         $response = response(str_replace('</head>', "{$script}\n</head>", $html))->header('Content-Type', 'text/html; charset=UTF-8');
-        if (in_array($filename, ['warranty.html', 'warranty-claim.html'], true)) {
+        if (in_array($filename, ['warranty.html', 'warranty-claim.html', 'checkout.html', 'quote.html'], true)) {
             $response->header('Cache-Control', 'private, no-store');
         }
 

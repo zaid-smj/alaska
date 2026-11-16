@@ -26,6 +26,6 @@ class InverterProducts extends Page
 
     public static function canAccess(): bool
     {
-        return Auth::user()?->role?->canManageContent() ?? false;
+        return Auth::user()?->canManageContent() ?? false;
     }
 }

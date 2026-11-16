@@ -1,0 +1,1 @@
+document.addEventListener('click',event=>{const button=event.target.closest('[data-add-sales-product]');if(!button||!window.AlaskaCart)return;const added=window.AlaskaCart.add({id:button.dataset.id,model:button.dataset.model,image:button.dataset.image,qty:1});if(added)window.alaskaToast?.('Added to enquiry cart',{href:'/checkout.html',label:'Review enquiry'});});

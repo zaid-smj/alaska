@@ -17,7 +17,7 @@ class AuditLoggingTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_only_the_super_admin_can_view_the_audit_log(): void
+    public function test_admins_can_view_audit_logs_but_operational_roles_cannot(): void
     {
         $superAdmin = User::factory()->create(['role' => AdminRole::SuperAdmin]);
         $admin = User::factory()->create(['role' => AdminRole::Admin]);
@@ -26,7 +26,11 @@ class AuditLoggingTest extends TestCase
         $this->assertTrue(AuditLogResource::canViewAny());
 
         $this->actingAs($admin);
-        $this->assertFalse(AuditLogResource::canViewAny());
+        $this->assertTrue(AuditLogResource::canViewAny());
+        foreach ([AdminRole::Marketing, AdminRole::Sales] as $role) {
+            $this->actingAs(User::factory()->create(['role' => $role]));
+            $this->assertFalse(AuditLogResource::canViewAny());
+        }
     }
 
     public function test_sign_in_and_failed_sign_in_attempts_are_kept_out_of_the_audit_log(): void

@@ -5,6 +5,7 @@ namespace App\Filament\Resources\AdminInvitations\Tables;
 use App\Models\AdminInvitation;
 use App\Services\AdminInvitationService;
 use App\Services\AuditLogger;
+use App\Services\StaffManagement;
 use Filament\Actions\Action;
 use Filament\Notifications\Notification;
 use Filament\Tables\Columns\TextColumn;
@@ -74,6 +75,7 @@ class AdminInvitationsTable
                     ->requiresConfirmation()
                     ->visible(fn (AdminInvitation $record): bool => $record->accepted_at === null && $record->revoked_at === null)
                     ->action(function (AdminInvitation $record): void {
+                        abort_unless(StaffManagement::invite(auth()->user(), $record->role), 403);
                         $record->update(['revoked_at' => now()]);
 
                         app(AuditLogger::class)->record(

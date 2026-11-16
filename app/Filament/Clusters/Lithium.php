@@ -19,6 +19,6 @@ class Lithium extends Cluster
 
     public static function canAccess(): bool
     {
-        return (bool) (auth()->user()?->is_active && auth()->user()?->role?->canManageContent());
+        return (bool) (auth()->user()?->is_active && auth()->user()?->canManageContent());
     }
 }

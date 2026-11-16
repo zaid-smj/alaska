@@ -102,7 +102,7 @@ class ArticlesTest extends TestCase
         $second = $this->published(['title' => 'Second Article', 'sort_order' => 1]);
         $this->assertSame([$second->id, $first->id], Article::published()->whereIn('id', [$first->id, $second->id])->pluck('id')->all());
         $this->assertSame($first->image_url, $first->mobile_image_url);
-        foreach (AdminRole::cases() as $role) {
+        foreach ([AdminRole::SuperAdmin, AdminRole::Admin, AdminRole::Marketing] as $role) {
             $this->actingAs(User::factory()->create(['role' => $role]));
             Livewire::test(ListArticles::class)->assertSuccessful();
         }

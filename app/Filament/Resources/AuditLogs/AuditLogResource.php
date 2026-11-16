@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 class AuditLogResource extends Resource
 {
+    protected static string|\UnitEnum|null $navigationGroup = 'Admin Section';
+
     protected static ?string $model = AuditLog::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedClipboardDocumentList;
@@ -26,7 +28,7 @@ class AuditLogResource extends Resource
 
     public static function canViewAny(): bool
     {
-        return Auth::user()?->role === AdminRole::SuperAdmin;
+        return (bool) (Auth::user()?->is_active && in_array(Auth::user()?->role, [AdminRole::SuperAdmin, AdminRole::Admin], true));
     }
 
     public static function canCreate(): bool

@@ -38,13 +38,13 @@ class Product extends Model
 
     protected function casts(): array
     {
-        return ['features' => 'array', 'recommended_uses' => 'array', 'warranty_details' => 'array', 'installation_instructions' => 'array', 'specification_visibility' => 'array', 'certifications_visible' => 'boolean', 'legacy_publication_exempt' => 'boolean', 'short_warranty_months' => 'integer', 'tags' => 'array', 'plates' => 'integer', 'sort_order' => 'integer', 'price_pkr' => 'decimal:2'];
+        return ['features' => 'array', 'recommended_uses' => 'array', 'warranty_details' => 'array', 'installation_instructions' => 'array', 'specification_visibility' => 'array', 'certifications_visible' => 'boolean', 'legacy_publication_exempt' => 'boolean', 'short_warranty_months' => 'integer', 'tags' => 'array', 'plates' => 'integer', 'sort_order' => 'integer', 'tax_retail_price_pkr' => 'decimal:2', 'price_pkr' => 'decimal:2'];
     }
 
     protected static function booted(): void
     {
         static::saving(function (Product $product): void {
-            foreach (['price_pkr', 'short_warranty_months', 'plates', 'voltage', 'capacity_ah', 'weight_kg', 'length', 'width', 'height', 'series_id', 'primary_category_id'] as $field) {
+            foreach (['price_pkr', 'tax_retail_price_pkr', 'short_warranty_months', 'plates', 'voltage', 'capacity_ah', 'weight_kg', 'length', 'width', 'height', 'series_id', 'primary_category_id'] as $field) {
                 if (($product->getAttributes()[$field] ?? null) === '') {
                     $product->$field = null;
                 }

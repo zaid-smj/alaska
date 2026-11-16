@@ -19,8 +19,7 @@ class AdminInvitationService
      */
     public function issue(string $email, User $inviter, AdminRole $role = AdminRole::Admin): array
     {
-        abort_unless($inviter->is_active && $inviter->role->canManageUsers(), 403);
-        abort_unless(array_key_exists($role->value, AdminRole::assignableOptions()), 422);
+        abort_unless(StaffManagement::invite($inviter, $role), 403);
 
         $token = Str::random(64);
         $expiresAt = now()->addHours(24);
@@ -53,7 +52,7 @@ class AdminInvitationService
      */
     public function renew(AdminInvitation $invitation): array
     {
-        abort_unless(auth()->user()?->is_active && auth()->user()?->role?->canManageUsers(), 403);
+        abort_unless(StaffManagement::invite(auth()->user(), $invitation->role), 403);
 
         if ($invitation->accepted_at !== null || User::where('email', $invitation->email)->exists()) {
             throw ValidationException::withMessages([

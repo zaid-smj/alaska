@@ -22,7 +22,7 @@ class NavbarImagesTest extends TestCase
     public function test_all_slots_retain_originals_and_are_editable_by_cms_roles(): void
     {
         $this->assertSame(14, NavbarImage::count());
-        foreach (AdminRole::cases() as $role) {
+        foreach ([AdminRole::SuperAdmin, AdminRole::Admin, AdminRole::Marketing] as $role) {
             $this->actingAs(User::factory()->create(['role' => $role]));
             Livewire::test(ListNavbarImages::class)->assertSuccessful();
         }

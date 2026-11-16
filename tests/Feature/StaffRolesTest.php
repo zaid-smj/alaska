@@ -24,16 +24,17 @@ class StaffRolesTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_all_staff_roles_can_access_content_but_only_super_admin_manages_staff(): void
+    public function test_roles_have_separate_cms_sales_and_staff_permissions(): void
     {
         foreach (AdminRole::cases() as $role) {
             $user = User::factory()->create(['role' => $role]);
             $this->actingAs($user);
             $this->assertTrue($user->canAccessPanel(Filament::getPanel('admin')));
-            $this->assertTrue(HomeBannerSlideResource::canCreate());
-            $this->assertTrue(GalleryImageResource::canCreate());
+            $this->assertSame($role !== AdminRole::Sales, HomeBannerSlideResource::canCreate());
+            $this->assertSame($role !== AdminRole::Sales, GalleryImageResource::canCreate());
             foreach ([UserResource::class, AdminInvitationResource::class, AuditLogResource::class, WorkSessionResource::class] as $resource) {
-                $this->assertSame($role === AdminRole::SuperAdmin, $resource::canViewAny());
+                $allowed = in_array($role, [AdminRole::SuperAdmin, AdminRole::Admin], true);
+                $this->assertSame($allowed, $resource::canViewAny());
             }
         }
     }
@@ -44,9 +45,9 @@ class StaffRolesTest extends TestCase
         $super = User::factory()->create(['role' => AdminRole::SuperAdmin]);
         $this->actingAs($super);
         Livewire::test(ListUsers::class)
-            ->callAction('inviteAdmin', data: ['email' => 'editor@example.com', 'role' => 'content_manager'])
+            ->callAction('inviteAdmin', data: ['email' => 'editor@example.com', 'role' => 'marketing'])
             ->assertHasNoActionErrors();
-        $this->assertDatabaseHas('admin_invitations', ['email' => 'editor@example.com', 'role' => 'content_manager']);
+        $this->assertDatabaseHas('admin_invitations', ['email' => 'editor@example.com', 'role' => 'marketing']);
 
         $issued = app(AdminInvitationService::class)->issue('another-editor@example.com', $super, AdminRole::ContentManager);
         auth()->logout();
@@ -57,10 +58,10 @@ class StaffRolesTest extends TestCase
         $this->assertSame(AdminRole::ContentManager, User::where('email', 'another-editor@example.com')->firstOrFail()->role);
     }
 
-    public function test_admin_and_content_manager_cannot_issue_invitations_even_through_service(): void
+    public function test_marketing_and_sales_cannot_issue_invitations_even_through_service(): void
     {
         Notification::fake();
-        foreach ([AdminRole::Admin, AdminRole::ContentManager] as $role) {
+        foreach ([AdminRole::Marketing, AdminRole::Sales] as $role) {
             $user = User::factory()->create(['role' => $role]);
             $this->actingAs($user);
             Livewire::test(ListUsers::class)->assertForbidden();
@@ -84,7 +85,7 @@ class StaffRolesTest extends TestCase
             ->fillForm(['role' => 'admin'])->call('save')->assertHasNoFormErrors();
         $this->assertSame(AdminRole::Admin, $editor->fresh()->role);
         Livewire::test(EditUser::class, ['record' => $editor->getRouteKey()])
-            ->fillForm(['role' => 'content_manager'])->call('save')->assertHasNoFormErrors();
+            ->fillForm(['role' => 'marketing'])->call('save')->assertHasNoFormErrors();
         $this->assertSame(AdminRole::ContentManager, $editor->fresh()->role);
         $this->actingAs($editor->fresh());
         Livewire::test(EditUser::class, ['record' => $super->getRouteKey()])->assertForbidden();

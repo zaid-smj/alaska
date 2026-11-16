@@ -1,0 +1,6 @@
+#quote-form, #order-form { min-width: 0; }
+#quote-form input[type="file"], #order-form input[type="file"] { width: 100%; max-width: 100%; min-width: 0; }
+#quote-form .q-line > label { min-width: 0; }
+#quote-form .q-line input { width: 100%; max-width: 100%; min-width: 0; }
+#quote-form .q-line { grid-template-columns: minmax(0, 1fr) minmax(60px, 80px) auto; }
+.sales-review { overflow-wrap: anywhere; }

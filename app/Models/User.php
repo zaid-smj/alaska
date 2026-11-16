@@ -21,7 +21,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
-#[Fillable(['name', 'email', 'email_verified_at', 'password', 'role', 'is_active', 'can_manage_warranties'])]
+#[Fillable(['name', 'email', 'email_verified_at', 'password', 'role', 'is_active', 'can_manage_warranties', 'can_manage_sales', 'can_manage_content'])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable implements FilamentUser, HasAppAuthentication, HasAppAuthenticationRecovery
 {
@@ -41,6 +41,8 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
             'role' => AdminRole::class,
             'is_active' => 'boolean',
             'can_manage_warranties' => 'boolean',
+            'can_manage_sales' => 'boolean',
+            'can_manage_content' => 'boolean',
         ];
     }
 
@@ -90,7 +92,7 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
                 app(WorkSessionService::class)->end($user, 'deactivated');
             }
 
-            $changes = collect(['name', 'email', 'role', 'is_active', 'can_manage_warranties'])
+            $changes = collect(['name', 'email', 'role', 'is_active', 'can_manage_warranties', 'can_manage_sales', 'can_manage_content'])
                 ->filter(fn (string $field): bool => $user->wasChanged($field))
                 ->mapWithKeys(fn (string $field): array => [$field => [
                     'from' => $user->getRawOriginal($field),
@@ -118,6 +120,11 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
         });
     }
 
+    public function canManageContent(): bool
+    {
+        return $this->is_active && ($this->role->canManageContent() || $this->can_manage_content);
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return $panel->getId() === 'admin'
@@ -125,7 +132,8 @@ class User extends Authenticatable implements FilamentUser, HasAppAuthentication
             && in_array($this->role, [
                 AdminRole::SuperAdmin,
                 AdminRole::Admin,
-                AdminRole::ContentManager,
+                AdminRole::Marketing,
+                AdminRole::Sales,
             ], true);
     }
 }

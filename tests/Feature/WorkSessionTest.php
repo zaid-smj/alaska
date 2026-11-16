@@ -33,7 +33,7 @@ class WorkSessionTest extends TestCase
         $superAdmin = User::factory()->create(['role' => AdminRole::SuperAdmin]);
 
         $this->actingAs($admin);
-        $this->assertFalse(WorkSessionResource::canViewAny());
+        $this->assertTrue(WorkSessionResource::canViewAny());
 
         $this->actingAs($superAdmin);
         $this->assertTrue(WorkSessionResource::canViewAny());
